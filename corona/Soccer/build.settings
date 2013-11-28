@@ -1,0 +1,28 @@
+settings = 
+{
+	orientation =
+    {
+        default = "landscapeRight",  --initial launch orientation
+        content = "",  --locked orientation of the Corona stage, independent of Native UI elements (iOS only)
+        supported = { landscapeRight, landscapeLeft},  --table of allowed options for auto-orientation
+    },
+    android =
+    {
+        versionCode = "11",
+        usesPermissions =
+        {
+            "android.permission.INTERNET",
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            "android.permission.ACCESS_FINE_LOCATION",
+            "android.permission.ACCESS_COURSE_LOCATION",
+        },
+         usesFeatures =
+        {
+            { name = "android.hardware.camera", required = true },
+            { name = "android.hardware.location", required = false },
+            { name = "android.hardware.location.gps", required = false },
+        }
+
+    },
+
+}
