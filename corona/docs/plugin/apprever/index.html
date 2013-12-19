@@ -1,0 +1,1689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > apprever </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > apprever " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#apprever.">apprever.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#sign-up">Sign Up</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#apprever.initapprever"><a href="initAppRever.html">apprever.initAppRever()</a></a></li>
+<li><a href="#apprever.requestinterstitial"><a href="requestInterstitial.html">apprever.requestInterstitial()</a></a></li>
+<li><a href="#apprever.requestbannerads"><a href="requestBannerAds.html">apprever.requestBannerAds()</a></a></li>
+</ul></li>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#sdk">SDK</a></li>
+</ul></li>
+<li><a href="#sample-code">Sample Code</a><ul>
+<li><a href="#interstitials">Interstitials</a></li>
+<li><a href="#basic-banner-ads">Basic banner ads</a></li>
+<li><a href="#scaling-banner-ads">Scaling banner ads</a></li>
+<li><a href="#bottom-banner-ads">Bottom banner ads</a></li>
+</ul></li>
+<li><a href="#support">Support</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">apprever</a>
+</div>
+<div class="section level1" id="apprever.">
+<h1><a href="#TOC">apprever.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Library.html">library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">apprever, ads</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Availability</strong></td>
+<td align="left">Starter, Basic, Pro, Enterprise</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The AppRever plugin enables free app cross-promotion through banner ads and interstitial ads. We focus on app cross-promotion with an easy to use and a high performance system. Ads are served in order, every user sees every ad, none are favored. Ads are auto automatically pre-cached, ensuring that your app is never stalled while waiting for an ad.</p>
+<p>Our core philosphy is to build your user base first, through cross-promotion. Monetization should come after you have grown your user base. We will soon feature unique monetization options as well.</p>
+<p>Features include:<br /> * <strong>Easy sign up.</strong> Once you register, you can upload an ad immediately. After approval, your ad will be served to our worldwide network. All you need is one ad size and the URLs to your app.<br /> * <strong>Easy integration.</strong> Only 3 lines of code are needed to serve ads.<br /> * <strong>Fast ad serving.</strong> Due to our caching, your app will never look bad, waiting for an ad to show up.<br /> * <strong>Robust.</strong> If your user's internet goes down (or our server does), we will never crash your app and an ad will still be served.<br /> * <strong>Animated ads.</strong> The animation of our banner ads increase click through rates to higher than industry standards.<br /> * <strong>Interstitials with a message.</strong> The interstital version of your ad includes a marketing message.<br /> * <strong>No redirects.</strong> When someone clicks on your ad, we take them straight to the URLs you provide. No redirects to annoy your user base.<br /> * <strong>Install tracking.</strong> When someone clicks on your ad and later installs and uses your app, we track it.<br /> * <strong>Real-time stats.</strong> Including gelocation (for WiFi users), time stamping, an optional message which can be used to track progress in your app, and much more to come. All in real-time.</p>
+<p>Future enhancements as our network grows:<br /> * <strong>Monetization.</strong> We are currently testing a variety of unique ideas for monetizing your app!<br /> * <strong>Tiers.</strong> We will soon address the 'fairness' issue of some apps servng more than they receive by grouping like-performing apps together in smaller ad groups<br /> * <strong>Enhanced analytics.</strong> We collect enough real-time data to soon offer very valuable analytics of your app's performance.<br /> * <strong>Partnerships.</strong> We are creating partnerships with industry-leading companies that can get you more downloads!</p>
+<p>We will offer premium services in the near future but all of our basic services will always be FREE!</p>
+</div>
+<div class="section level2" id="sign-up">
+<h2><a href="#TOC">Sign Up</a></h2>
+<p>To use AppRever, please <a href="http://www.apprever.com">sign up</a> for an account. We will gladly serve your ads at no charge but we do expect you to serve ads for others by integrating our plugin.</p>
+</div>
+<div class="section level2" id="platforms">
+<h2><a href="#TOC">Platforms</a></h2>
+<ul>
+<li>Android: Yes</li>
+<li>iOS: Yes</li>
+<li>Mac: Yes</li>
+<li>Win: Yes</li>
+<li>Kindle: Yes</li>
+<li>NOOK: Yes</li>
+</ul>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua">
+    <span class="kw">local</span> <span class="kw">apprever</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;plugin.apprever&quot;</span>
+
+    <span class="kw">apprever</span><span class="ot">.</span>initAppRever<span class="ot">(</span><span class="st">&quot;YOUR_APPUID&quot;</span><span class="ot">)</span>    
+        <span class="kw">YOUR_APPUID</span> <span class="kw">will</span> <span class="kw">be</span> <span class="kw">emailed</span> <span class="kw">upon</span> <span class="kw">site</span> <span class="kw">registration</span>
+
+    <span class="kw">apprever</span><span class="ot">.</span>requestInterstitial<span class="ot">(</span> <span class="ot">[</span> <span class="ot">{</span><span class="kw">f</span><span class="ot">=</span><span class="kw">yourFunctionAfterClick</span><span class="ot">}</span> <span class="ot">])</span>  
+        <span class="kw">Optional</span> <span class="kw">table</span>, <span class="kw">where</span> <span class="kw">yourFunctionAfterClick</span> <span class="kw">will</span> <span class="kw">be</span> <span class="kw">called</span> <span class="kw">after</span> <span class="kw">the</span> <span class="kw">ad</span> <span class="kw">is</span> <span class="kw">clicked</span><span class="ot">.</span>
+
+    <span class="kw">apprever</span><span class="ot">.</span>requestBannerAds<span class="ot">({</span><span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span> <span class="ot">[</span>, <span class="kw">w</span><span class="ot">=</span><span class="kw">width</span> ,<span class="kw">h</span><span class="ot">=</span><span class="kw">height</span>,  <span class="kw">m</span><span class="ot">=</span><span class="st">&quot;yourMessage&quot;</span>, <span class="kw">a</span><span class="ot">=</span><span class="dv">1</span><span class="ot">]</span> <span class="ot">})</span> 
+        <span class="kw">The</span> <span class="kw">table</span> <span class="kw">is</span> <span class="kw">required</span>, <span class="kw">with</span>:
+            <span class="kw">x</span> <span class="kw">is</span> <span class="kw">the</span> <span class="kw">x</span> <span class="kw">location</span> <span class="kw">of</span> <span class="kw">the</span> <span class="kw">banner</span> <span class="kw">ad</span> 
+            <span class="kw">y</span> <span class="kw">is</span> <span class="kw">the</span> <span class="kw">x</span> <span class="kw">location</span> <span class="kw">of</span> <span class="kw">the</span> <span class="kw">banner</span> <span class="kw">ad</span> 
+            <span class="kw">w</span> <span class="kw">is</span> <span class="kw">the</span> <span class="kw">width</span> <span class="kw">of</span> <span class="kw">the</span> <span class="kw">banner</span> <span class="kw">ad</span> 
+            <span class="kw">h</span> <span class="kw">is</span> <span class="kw">the</span> <span class="kw">height</span> <span class="kw">of</span> <span class="kw">the</span> <span class="kw">banner</span> <span class="kw">ad</span> 
+        <span class="kw">Optionally</span>:
+            <span class="kw">m</span> <span class="kw">is</span> <span class="kw">a</span> <span class="kw">message</span>, <span class="kw">such</span> <span class="kw">as</span> <span class="kw">which</span> <span class="kw">level</span> <span class="kw">generated</span> <span class="kw">the</span> <span class="kw">ad</span>, <span class="kw">to</span> <span class="kw">be</span> <span class="kw">shown</span> <span class="kw">in</span> <span class="kw">upcoming</span> <span class="kw">tables</span> <span class="kw">available</span> <span class="kw">to</span> <span class="kw">you</span> <span class="kw">on</span> <span class="kw">our</span> <span class="kw">site</span>
+            <span class="kw">a</span> <span class="ot">=</span> <span class="dv">1</span> <span class="kw">for</span> <span class="kw">animated</span> <span class="kw">ads</span>, <span class="kw">a</span> <span class="ot">=</span> <span class="dv">0</span> <span class="kw">for</span> <span class="kw">no</span> <span class="kw">animation</span></code></pre>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<div class="section level4" id="apprever.initapprever">
+<h4><a href="#TOC"><a href="initAppRever.html">apprever.initAppRever()</a></a></h4>
+</div>
+<div class="section level4" id="apprever.requestinterstitial">
+<h4><a href="#TOC"><a href="requestInterstitial.html">apprever.requestInterstitial()</a></a></h4>
+</div>
+<div class="section level4" id="apprever.requestbannerads">
+<h4><a href="#TOC"><a href="requestBannerAds.html">apprever.requestBannerAds()</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>When you build using the Corona Simulator, the server automatically takes care of integrating the plugin into your project.</p>
+<p>All you need to do is add an entry into a <code>plugins</code> table of your <code>build.settings</code>. The following is an example of a minimal <code>build.settings</code> file:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua">    <span class="kw">settings</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;plugin.apprever&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.apprever&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,      
+   <span class="ot">}</span></code></pre>
+</div>
+</div>
+<div class="section level2" id="sample-code">
+<h2><a href="#TOC">Sample Code</a></h2>
+<p>You can access sample code <a href="http://www.apprever.com/coronaSample.zip">here</a>.</p>
+<div class="section level3" id="interstitials">
+<h3><a href="#TOC">Interstitials</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua">
+    <span class="co">-- Call initAppRever in your main.lua</span>
+    <span class="kw">apprever</span><span class="ot">.</span>initAppRever<span class="ot">(</span><span class="st">&quot;xxxxyyyyzzzz&quot;</span><span class="ot">)</span>  <span class="co">-- use the APPUID you received when you registered</span>
+
+    <span class="co">-- do some other app things, then whenever you want a full screen ad:</span>
+    <span class="kw">apprever</span><span class="ot">.</span>requestInterstitial<span class="ot">()</span></code></pre>
+</div>
+<div class="section level3" id="basic-banner-ads">
+<h3><a href="#TOC">Basic banner ads</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua">
+    <span class="co">-- Call initAppRever in your main.lua</span>
+    <span class="kw">apprever</span><span class="ot">.</span>initAppRever<span class="ot">(</span><span class="st">&quot;xxxxyyyyzzzz&quot;</span><span class="ot">)</span>  <span class="co">-- use the APPUID you received when you registered</span>
+
+    <span class="co">-- So, do some other app things, then whenever you want a banner ad, set your width and height and:</span>
+    <span class="kw">apprever</span><span class="ot">.</span>requestBannerAds<span class="ot">(</span> <span class="ot">{</span><span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>,  <span class="kw">w</span><span class="ot">=</span><span class="kw">width</span>, <span class="kw">h</span><span class="ot">=</span><span class="kw">height</span>, <span class="kw">m</span><span class="ot">=</span><span class="st">&quot;beat level 10&quot;</span>, <span class="kw">a</span><span class="ot">=</span><span class="dv">1</span><span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="scaling-banner-ads">
+<h3><a href="#TOC">Scaling banner ads</a></h3>
+<p>Banner ads should be scaled up or down from 960x100 in landscape mode. They are automatically scaled down proprtionally for portrait mode on each ad request. So for a perfect fit on any device:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua">
+    <span class="kw">local</span> <span class="kw">width</span> <span class="ot">=</span> <span class="kw">math</span><span class="ot">.</span>round<span class="ot">((</span><span class="kw">display</span><span class="ot">.</span><span class="kw">contentWidth</span><span class="ot">-</span><span class="dv">2</span><span class="ot">*</span><span class="kw">display</span><span class="ot">.</span><span class="kw">screenOriginX</span><span class="ot">)</span> <span class="ot">/</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentScaleX</span><span class="ot">)</span>    
+    <span class="co">-- this scales proportionally to the 960x100 ad units currently used by AppRever</span>
+    <span class="kw">local</span> <span class="kw">height</span> <span class="ot">=</span> <span class="ot">(</span><span class="kw">width</span><span class="ot">/</span><span class="dv">960</span><span class="ot">)*</span><span class="dv">100</span>     
+
+    <span class="kw">apprever</span><span class="ot">.</span>requestBannerAds<span class="ot">(</span> <span class="ot">{</span><span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="kw">w</span><span class="ot">=</span><span class="kw">width</span>, <span class="kw">h</span><span class="ot">=</span><span class="kw">height</span>, <span class="kw">m</span><span class="ot">=</span><span class="st">&quot;beat level 10&quot;</span>, <span class="kw">a</span><span class="ot">=</span><span class="dv">1</span><span class="ot">}</span> <span class="ot">)</span>    </code></pre>
+</div>
+<div class="section level3" id="bottom-banner-ads">
+<h3><a href="#TOC">Bottom banner ads</a></h3>
+<p>To place a banner ad at the bottom of your screen, simply calculate your actual screen height and set the y location in the function call as follows: ``````lua</p>
+<pre><code>local width = math.round((display.contentWidth-2*display.screenOriginX) / display.contentScaleX)
+
+-- this scales proportionally to the 960x100 ad units currently used by AppRever
+local height = (width/960)*100     
+
+local actualScreenHeight = math.round((display.contentHeight-2*display.screenOriginY) / display.contentScaleY)
+
+apprever.requestBannerAds( {x=0, y = actualScreenHeight-height,  w=width, h=height, m=&quot;beat level 10&quot;, a=1} )   </code></pre>
+<p>``````</p>
+</div>
+</div>
+<div class="section level2" id="support">
+<h2><a href="#TOC">Support</a></h2>
+<p>More support is available from the AppRever team:</p>
+<ul>
+<li><script type="text/javascript">
+<!--
+h='&#x61;&#112;&#112;&#114;&#x65;&#118;&#x65;&#114;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x69;&#110;&#102;&#x6f;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'E-mail'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x2d;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x69;&#110;&#102;&#x6f;&#32;&#x61;&#116;&#32;&#x61;&#112;&#112;&#114;&#x65;&#118;&#x65;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="http://forums.coronalabs.com/forum/610-apprever/">Forum</a></li>
+<li><a href="http://www.apprever.com">Plugin Publisher</a></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.apprever.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.apprever.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.apprever.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

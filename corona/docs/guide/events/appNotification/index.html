@@ -1,0 +1,1874 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > Eventss > appNotification </title>
+  <meta name="revised" content="02-Jul-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > Eventss > appNotification " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#localpush-notifications">Local/Push Notifications</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#usage-notes-push">Usage Notes (Push)</a></li>
+<li><a href="#app-interaction">App Interaction</a></li>
+<li><a href="#ios-setup-push">iOS Setup (Push)</a></li>
+<li><a href="#android-setup-push">Android Setup (Push)</a><ul>
+<li><a href="#android-icons">Android Icons</a></li>
+</ul></li>
+<li><a href="#managing-local-notifications">Managing Local Notifications</a></li>
+<li><a href="#handling-notification-events">Handling Notification Events</a><ul>
+<li><a href="#notification-data">Notification Data</a></li>
+<li><a href="#launchargs">launchArgs</a></li>
+<li><a href="#notification-badges-ios">Notification Badges (iOS)</a></li>
+<li><a href="#notification-sounds">Notification Sounds</a></li>
+</ul></li>
+<li><a href="#remote-registration-push">Remote Registration (Push)</a></li>
+<li><a href="#enterprise-and-android-icons">Enterprise and Android Icons</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [events][guide.events]  ▸  <a href="index.html">appNotification</a>
+</div>
+<div class="section level1" id="localpush-notifications">
+<h1><a href="#TOC">Local/Push Notifications</a></h1>
+<p>This guide discusses how to implement <strong>local</strong> and <strong>push</strong> notifications in Corona.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#usage">Usage Notes (Push)</a></li>
+<li><a href="#interact">App Interaction</a></li>
+<li><a href="#ios">iOS Setup (Push)</a></li>
+<li><a href="#android">Android Setup (Push)</a></li>
+<li><a href="#localnot">Managing Local Notifications</a></li>
+<li><a href="#events">Handling Notification Events</a></li>
+<li><a href="#remotereg">Remote Registration (Push)</a></li>
+<li><a href="#enterprise">Enterprise and Android Icons</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Corona SDK supports two types of notifications: <strong>local</strong> and <strong>push</strong>. The purpose of both notification types is to notify the user about something — a message or an upcoming appointment, for example — when the application isn't running in the foreground. The essential difference between local notifications and push notifications is simple:</p>
+<ul>
+<li><p><strong>Local notifications</strong> are scheduled by an app locally and are delivered by the same device.</p></li>
+<li><p><strong>Push notifications</strong> are sent by a remote server (its provider) which sends these notifications to devices on which the app is installed.</p></li>
+</ul>
+<a id="usage"></a>
+</div>
+<div class="section level2" id="usage-notes-push">
+<h2><a href="#TOC">Usage Notes (Push)</a></h2>
+<p>To use <strong>push</strong> notifications, remember the following points:</p>
+<ol style="list-style-type: decimal">
+<li><p>The app has to support a registration process and it must support incoming messages.</p></li>
+<li><p>You must configure your app and devices so that Apple and/or Google recognizes them. Apple/Google will send the actual messages out to devices.</p></li>
+<li><p>If using iOS/Apple, your app cannot send push requests directly to their servers.</p></li>
+<li><p>We recommend that you use a web service to send push requests to Apple or Google, who in turn sends them onward to devices. That web service can be a company like <a href="http://www.pushwoosh.com">PushWoosh</a>, <a href="http://urbanairship.com">Urban Airship</a>, or <a href="http://www.parse.com">Parse</a> that specializes in push notifications.</p></li>
+<li><p>Another option to handle push notifications on iOS is <strong>EasyAPNS</strong>. This is a PHP/MySQL setup that registers devices in your own database and allows you to send push notifications from your own server. Please visit <a href="http://www.easyapns.com">www.easyapns.com</a> for more information.</p></li>
+<li><p>Google's Cloud Messaging system is REST-based, so a Corona app can technically send push notifications to another app. Please refer to the sample app located in the Corona SDK application directory: <strong>CoronaSDK</strong> → <strong>SampleCode</strong> → <strong>Notifications</strong> → <strong>GooglePushNotifications</strong></p></li>
+</ol>
+<a id="interact"></a>
+</div>
+<div class="section level2" id="app-interaction">
+<h2><a href="#TOC">App Interaction</a></h2>
+<p>How an app reacts to notifications depends on its state:</p>
+<ul>
+<li><p><strong>Not running</strong> — the app has exited by design, user decision, reboot, etc. In this state, if the user interacts with the notification, the operating system will launch the app. Information about the notification event will be passed to the app using &quot;launch args&quot;. The app should watch for these and react accordingly, for example, show a &quot;snooze&quot; button for an alarm or open a <a href="../../../api/library/native/newWebView.html">native.newWebView()</a> if it has a URL. Note, however, that if the user starts the app by tapping directly on its icon, the notification will not be presented.</p></li>
+<li><p><strong>Backgrounded</strong> — the app is running but it's not the active app. In this state, if the user interacts with the notification by swiping on the unlock screen while the notification is showing or tapping on it in the notification center, the operating system will bring the app to the foreground and make it active. At this time, the app will receive the notification event but <strong>not</strong> receive launch args.</p></li>
+<li><p><strong>Foregrounded</strong> — the app is active and the user is currently interacting with it. In this state, the app will receive the notification event.</p></li>
+</ul>
+<a id="ios"></a>
+</div>
+<div class="section level2" id="ios-setup-push">
+<h2><a href="#TOC">iOS Setup (Push)</a></h2>
+<p>Much of the iOS configuration for push notifications is done within the app <strong>provisioning profile</strong> in the <a href="https://developer.apple.com/devcenter/ios/">iOS Dev Center</a>. Please refer to the <a href="../../distribution/iOSBuild/index.html">guide</a> for details.</p>
+<p>In addition, you must include a <code>notification</code> table in the <code>config.lua</code> file (<a href="../../basics/configSettings/index.html">reference</a>) to enable various features for push notifications. This tells the system which of the alert types you plan to use.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">640</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">960</span>,
+        <span class="kw">scale</span> <span class="ot">=</span> <span class="st">&quot;letterbox&quot;</span>,
+        <span class="kw">xAlign</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>,
+        <span class="kw">yAlign</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>
+    <span class="ot">}</span>,
+
+    <span class="kw">notification</span> <span class="ot">=</span> 
+    <span class="ot">{</span>
+        <span class="kw">iphone</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">types</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;badge&quot;</span>, <span class="st">&quot;sound&quot;</span>, <span class="st">&quot;alert&quot;</span> <span class="ot">}</span>
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<a id="android"></a>
+</div>
+<div class="section level2" id="android-setup-push">
+<h2><a href="#TOC">Android Setup (Push)</a></h2>
+<p>Android also requires some additional configuration for push notifications. In the <code>config.lua</code> file (<a href="../../basics/configSettings/index.html">reference</a>), add a <code>notification</code> table as follows. When you register with the Google GCM service, you'll get the <code>projectNumber</code> value needed for the <code>google</code> table.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">320</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">570</span>,
+        <span class="kw">scale</span> <span class="ot">=</span> <span class="st">&quot;letterbox&quot;</span>,
+        <span class="kw">xAlign</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>,
+        <span class="kw">yAlign</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>
+    <span class="ot">}</span>,
+
+    <span class="kw">notification</span> <span class="ot">=</span> 
+    <span class="ot">{</span>
+        <span class="kw">google</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">projectNumber</span> <span class="ot">=</span> <span class="st">&quot;3982849975315&quot;</span>
+        <span class="ot">}</span>,
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<p>In addition, you must include the following permissions in the <code>build.settings</code> file (<a href="../../distribution/buildSettings/index.html">reference</a>). Failure to include these entries will cause your push notifications to fail.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">permissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="ot">{</span> <span class="kw">name</span> <span class="ot">=</span> <span class="st">&quot;.permission.C2D_MESSAGE&quot;</span>, <span class="kw">protectionLevel</span> <span class="ot">=</span> <span class="st">&quot;signature&quot;</span> <span class="ot">}</span>,
+        <span class="ot">}</span>,
+        <span class="kw">usesPermissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;android.permission.INTERNET&quot;</span>,
+            <span class="st">&quot;android.permission.GET_ACCOUNTS&quot;</span>,
+            <span class="st">&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;</span>,
+            <span class="st">&quot;com.google.android.c2dm.permission.RECEIVE&quot;</span>,
+            <span class="st">&quot;.permission.C2D_MESSAGE&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<a id="androidicons"></a>
+<div class="section level3" id="android-icons">
+<h3><a href="#TOC">Android Icons</a></h3>
+<p>You can set custom notification icons in a Corona project by adding the following files to the root of the project directory, just like custom application icons. Please note that different Android OS versions support different notification icon themes. You must support all of them or the app may get rejected in the review process. Please see Google's official <a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design_status_bar.html">documentation</a> for details on icon sizes and theming.</p>
+<table cellpadding="0" cellspacing="0" border="0" width="95%">
+<tr>
+<th class="width35 headerrow notebox-title"></th>
+<th class="headerrow notebox-title"></th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>IconNotificationDefault-ldpi-v11.png</code><br><code>IconNotificationDefault-mdpi-v11.png</code><br><code>IconNotificationDefault-hdpi-v11.png</code><br><code>IconNotificationDefault-xhdpi-v11.png</code>
+</th>
+<th class="itemrow">
+The <code>-v11</code> set is for Android 3.0 or higher. These icons are expected to be white.
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>IconNotificationDefault-ldpi-v9.png</code><br><code>IconNotificationDefault-mdpi-v9.png</code><br><code>IconNotificationDefault-hdpi-v9.png</code><br><code>IconNotificationDefault-xhdpi-v9.png</code>
+</th>
+<th class="itemrow">
+The <code>-v9</code> set is for Android 2.3. These icons are expected to be grey.
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>IconNotificationDefault-ldpi.png</code><br><code>IconNotificationDefault-mdpi.png</code><br><code>IconNotificationDefault-hdpi.png</code><br><code>IconNotificationDefault-xhdpi.png</code>
+</th>
+<th class="itemrow">
+This set, without the postfix <code>-v</code>, is for Android 2.2. These icons are expected to be black.
+</th>
+</tr>
+</table><div style="clear:both;">
+ 
+</div>
+
+<p>If you're a <a href="http://www.coronalabs.com/products/enterprise/">Corona Enterprise</a> developer, please refer to the <a href="#enterprise">Enterprise and Android Icons</a> notes below.</p>
+<a id="localnot"></a>
+</div>
+</div>
+<div class="section level2" id="managing-local-notifications">
+<h2><a href="#TOC">Managing Local Notifications</a></h2>
+<p>To schedule a local notification, use the <a href="../../../api/library/system/scheduleNotification.html">system.scheduleNotification()</a> function and specify the <strong>time</strong> of the future event in one of two formats:</p>
+<ul>
+<li>Number of seconds from the call time when the notification should be delivered.</li>
+<li>Time specified in UTC (Coordinated Universal Time).</li>
+</ul>
+<p>The UTC option should be a time table as returned by <code>os.date(&quot;!*t&quot;)</code>. A common pitfall is to forget the exclamation point and pass <code>&quot;*t&quot;</code> instead of <code>&quot;!*t&quot;</code> — this will return the time structure in local time (your timezone) instead of UTC.</p>
+<p>You should also pass an <strong>options</strong> table containing the following optional parameters:</p>
+<ul>
+<li><p><code>alert</code> — string value representing the notification message to be displayed to the user. If the application is not currently running, a system alert will display this message.</p></li>
+<li><p><code>badge</code> (iOS feature) — the badge number to be displayed on the application icon when the scheduled notification triggers. This replaces the last badge number that was applied. Set to <code>0</code> to not show a badge number.</p></li>
+<li><p><code>sound</code> — string value representing the sound file in <a href="../../../api/library/system/ResourceDirectory.html">system.ResourceDirectory</a> that will be played when the scheduled notification triggers. This sound is only played if the app is <strong>not</strong> in the foreground. On iOS, there are limitations on the sounds that can be played (consult Apple's <a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1">documentation</a> for details).</p></li>
+<li><p><code>custom</code> — a table of custom information that will be delivered with the notification event.</p></li>
+</ul>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">futureTime</span> <span class="ot">=</span> <span class="dv">9</span> <span class="ot">*</span> <span class="dv">60</span>  <span class="co">--9 minute alarm &quot;snooze&quot;</span>
+<span class="co">--OR:</span>
+<span class="kw">local</span> <span class="kw">futureTime</span> <span class="ot">=</span> <span class="fu">os.date</span><span class="ot">(</span> <span class="st">&quot;!*t&quot;</span>, <span class="fu">os.time</span><span class="ot">()</span> <span class="ot">+</span> <span class="ot">(</span><span class="dv">9</span> <span class="ot">*</span> <span class="dv">60</span><span class="ot">)</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">alert</span> <span class="ot">=</span> <span class="st">&quot;Wake up!&quot;</span>,
+    <span class="kw">badge</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>getProperty<span class="ot">(</span> <span class="st">&quot;applicationIconBadgeNumber&quot;</span> <span class="ot">)</span> <span class="ot">+</span> <span class="dv">1</span>,
+    <span class="kw">sound</span> <span class="ot">=</span> <span class="st">&quot;alarm.caf&quot;</span>,
+    <span class="kw">custom</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">msg</span> <span class="ot">=</span> <span class="st">&quot;Alarm&quot;</span> <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">notificationID</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>scheduleNotification<span class="ot">(</span> <span class="kw">futureTime</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>To cancel a local notification before it triggers, use the <a href="../../../api/library/system/cancelNotification.html">system.cancelNotification()</a> function and pass the ID returned by <code>system.scheduleNotification()</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">system</span><span class="ot">.</span>cancelNotification<span class="ot">(</span> <span class="kw">notificationID</span> <span class="ot">)</span></code></pre>
+</div>
+
+
+
+
+<a id="events"></a>
+</div>
+<div class="section level2" id="handling-notification-events">
+<h2><a href="#TOC">Handling Notification Events</a></h2>
+<p>In accordance with the Corona event/listener model, if your app is running in either the foreground or background and a notification arrives, you'll receive a <strong>notification event</strong>. It's your responsibility to initialize the system and set up a listener function to handle these events. Please review the following framework and then read the detailed subsections below.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> notificationListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;remote&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--handle the push notification</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;local&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--handle the local notification</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;notification&quot;</span>, <span class="kw">notificationListener</span> <span class="ot">)</span></code></pre>
+<div class="section level3" id="notification-data">
+<h3><a href="#TOC">Notification Data</a></h3>
+<p>A notification event returns a table of information which you can use to manage the specific notification. This table includes the following:</p>
+<ul>
+<li><code>event.badge</code> — number representing the badge count (iOS only).</li>
+<li><code>event.type</code> — string value of <code>&quot;local&quot;</code> for local notifications or <code>&quot;remote&quot;</code> for push notifications. <!--- * `type` — string value of `"local"`, `"remote"` or `"remoteRegistration"`. --></li>
+<li><code>event.name</code> — string value of <code>&quot;notification&quot;</code>.</li>
+<li><code>event.custom</code> — if this table exists, there may be data from the push service that helps your app react to the data. This is known as <strong>deep linking</strong>.</li>
+<li><code>event.sound</code> — string value representing a sound file, i.e. <code>&quot;alarm.caf&quot;</code>.</li>
+<li><code>event.alert</code> — string value consisting of the message to display.</li>
+<li><code>event.applicationState</code> — string value of either <code>&quot;active&quot;</code> or <code>&quot;inactive&quot;</code>.</li>
+</ul>
+</div>
+<div class="section level3" id="launchargs">
+<h3><a href="#TOC">launchArgs</a></h3>
+<p>When the operating system, as the result of an incoming notification, &quot;cold starts&quot; your app from an inactive (not running) state, the app receives the data as part of <code>launchArgs</code> instead of triggering a notification event. You can use your <code>notificationListener</code> function to process the launch args.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">launchArgs</span> <span class="ot">=</span> <span class="ot">...</span>
+
+<span class="kw">if</span> <span class="ot">(</span> <span class="kw">launchArgs</span> <span class="kw">and</span> <span class="kw">launchArgs</span><span class="ot">.</span><span class="kw">notification</span> <span class="ot">)</span> <span class="kw">then</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;event via launchArgs&quot;</span> <span class="ot">)</span>
+    notificationListener<span class="ot">(</span> <span class="kw">launchArgs</span><span class="ot">.</span><span class="kw">notification</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<p>The <code>launchArgs</code> processing has to be in your <code>main.lua</code> since it's the code that receives the data.</p>
+</div>
+<div class="section level3" id="notification-badges-ios">
+<h3><a href="#TOC">Notification Badges (iOS)</a></h3>
+<p>Badges are easily recognized by a small circle/number overlaying the app icon. They are available only on iOS. If a notification passes a <code>badge</code> value, a badge equal to that value will appear over the app icon.</p>
+<p>For <strong>push</strong> notifications, the service can send the string <code>&quot;+1&quot;</code> as the <code>badge</code> value. In this case, the badge count will be incremented by 1. The operating system manages this automatically and when the app launches, the badge number will equal the total number of badges that have been set. For example, if you begin with a badge value of <strong>5</strong> and a new push notification comes in with the <code>&quot;+1&quot;</code> string, the badge number will increment to <strong>6</strong> and the value of <code>event.badge</code> will likewise be <strong>6</strong>.</p>
+<p>For <strong>local</strong> notifications, it's your responsibility to read and set the badge number depending on its previous value. This is accomplished with the <a href="../../../api/library/native/getProperty.html">native.getProperty()</a> and <a href="../../../api/library/native/setProperty.html">native.setProperty()</a> functions.</p>
+<p>In both cases — local or push — when the user opens/handles the notification, you should decrement the badge number by 1 or clear it entirely.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--decrement the badge number by 1</span>
+<span class="kw">local</span> <span class="kw">function</span> notificationListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;local&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--handle the local notification</span>
+        <span class="kw">local</span> <span class="kw">badge_num</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>getProperty<span class="ot">(</span> <span class="st">&quot;applicationIconBadgeNumber&quot;</span> <span class="ot">)</span>
+        <span class="kw">badge_num</span> <span class="ot">=</span> <span class="kw">badge_num</span> <span class="ot">-</span> <span class="dv">1</span>
+        <span class="kw">native</span><span class="ot">.</span>setProperty<span class="ot">(</span> <span class="st">&quot;applicationIconBadgeNumber&quot;</span>, <span class="kw">badge_num</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;remote&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--handle the push notification</span>
+        <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">badge</span> <span class="kw">and</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">badge</span> <span class="ot">&gt;</span> <span class="dv">0</span> <span class="ot">)</span> <span class="kw">then</span> 
+            <span class="kw">native</span><span class="ot">.</span>setProperty<span class="ot">(</span> <span class="st">&quot;applicationIconBadgeNumber&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">badge</span> <span class="ot">-</span> <span class="dv">1</span> <span class="ot">)</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">--or clear the badge entirely</span>
+<span class="kw">native</span><span class="ot">.</span>setProperty<span class="ot">(</span> <span class="st">&quot;applicationIconBadgeNumber&quot;</span>, <span class="dv">0</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="notification-sounds">
+<h3><a href="#TOC">Notification Sounds</a></h3>
+<p>By default, the device will play a sound when a notification comes in. You can specify a custom sound file in your project to play instead of the default sound. For instance, if you have the file <code>notification.wav</code> inside your app bundle, you can specify the string <code>&quot;notification.wav&quot;</code> as part of the push bundle (if the sending service supports it) and the operating system will play that custom sound instead of the default. In this case, the <code>event.sound</code> entry in the event listener will equal this string.</p>
+<a id="remotereg"></a>
+</div>
+</div>
+<div class="section level2" id="remote-registration-push">
+<h2><a href="#TOC">Remote Registration (Push)</a></h2>
+<p>For <strong>push</strong> notifications, your app must register with the push provider's servers (Apple and Google). Corona handles the registration process for you in the background. Because you'll typically use a service to send push requests to the Apple and Google servers, that service needs to know about your app and device. Once registered, Corona will trigger the <code>&quot;remoteRegistration&quot;</code> notification event.</p>
+<p>To accommodate this, add an additional condition to your notification listener:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> notificationListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;remote&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--handle the push notification</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;remoteRegistration&quot;</span> <span class="ot">)</span> <span class="kw">then</span> 
+        <span class="co">--code to register your device with the service</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;notification&quot;</span>, <span class="kw">notificationListener</span> <span class="ot">)</span></code></pre>
+<p>The code required to register your device varies on the service. The following example illustrates <a href="http://www.pushwoosh.com">PushWoosh</a> remote registration. PushWoosh is one of several push notification providers and is not necessarily endorsed by Corona Labs. This code is tested as of June 2013 but it is subject to change by PushWoosh and may not be maintained by Corona Labs. Other providers will be different, so please consult your preferred provider's documentation or seek assistance in the Corona <a href="http://forums.coronalabs.com">Developer Forums</a>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> notificationListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;remote&quot;</span> <span class="kw">or</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;local&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--handle the push or local notification</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;remoteRegistration&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="kw">local</span> <span class="kw">deviceToken</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">token</span>
+        <span class="kw">local</span> <span class="kw">deviceType</span> <span class="ot">=</span> <span class="dv">1</span>  <span class="co">--default to iOS</span>
+
+        <span class="kw">if</span> <span class="ot">(</span> <span class="kw">system</span><span class="ot">.</span>getInfo<span class="ot">(</span><span class="st">&quot;platformName&quot;</span><span class="ot">)</span> <span class="ot">==</span> <span class="st">&quot;Android&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+            <span class="kw">deviceType</span> <span class="ot">=</span> <span class="dv">3</span>
+        <span class="kw">end</span>
+
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Setting up with PushWoosh&quot;</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">DeviceID</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">token</span>
+        <span class="kw">local</span> <span class="kw">PW_APPLICATION</span> <span class="ot">=</span> <span class="st">&quot;B8312-C3DE4&quot;</span>  <span class="co">--use your app ID in PushWoosh</span>
+        <span class="kw">local</span> <span class="kw">PW_URL</span> <span class="ot">=</span> <span class="st">&quot;https://cp.pushwoosh.com/json/1.1/registerDevice&quot;</span>
+
+        <span class="kw">local</span> <span class="kw">function</span> networkListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+            <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">isError</span> <span class="ot">)</span> <span class="kw">then</span>
+                <span class="co">--error occurred</span>
+                <span class="kw">native</span><span class="ot">.</span>showAlert<span class="ot">(</span> <span class="st">&quot;Notification Registration Failed&quot;</span>, <span class="st">&quot;An Error Contacting the Server has Occurred.&quot;</span>, <span class="ot">{</span> <span class="st">&quot;OK&quot;</span> <span class="ot">}</span> <span class="ot">)</span>
+            <span class="kw">else</span>
+                <span class="co">--registration successful!</span>
+                <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;PushWoosh registration successful&quot;</span>, <span class="kw">system</span><span class="ot">.</span>getInfo<span class="ot">(</span><span class="st">&quot;deviceID&quot;</span><span class="ot">)</span> <span class="ot">)</span>
+            <span class="kw">end</span>
+        <span class="kw">end</span>    
+
+        <span class="kw">local</span> <span class="kw">commands_json</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="ot">[</span><span class="st">&quot;request&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{</span>
+                <span class="ot">[</span><span class="st">&quot;application&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">PW_APPLICATION</span>,
+                <span class="ot">[</span><span class="st">&quot;device_id&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">DeviceID</span>,
+                <span class="ot">[</span><span class="st">&quot;language&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="st">&quot;en&quot;</span>,  <span class="co">--OR: system.getPreference( &quot;ui&quot;, &quot;language&quot; ),</span>
+                <span class="ot">[</span><span class="st">&quot;hw_id&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>getInfo<span class="ot">(</span><span class="st">&quot;deviceID&quot;</span><span class="ot">)</span>,
+                <span class="ot">[</span><span class="st">&quot;timezone&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">-</span><span class="dv">3600</span>,  <span class="co">--offset in seconds</span>
+                <span class="ot">[</span><span class="st">&quot;device_type&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">deviceType</span>
+            <span class="ot">}</span>
+        <span class="ot">}</span>
+
+        <span class="kw">local</span> <span class="kw">post_body</span> <span class="ot">=</span> <span class="kw">json</span><span class="ot">.</span>encode<span class="ot">(</span> <span class="kw">commands_json</span> <span class="ot">)</span>
+
+        <span class="kw">local</span> <span class="kw">headers</span> <span class="ot">=</span> <span class="ot">{}</span>
+        <span class="kw">headers</span><span class="ot">[</span><span class="st">&quot;Content-Type&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="st">&quot;application/json&quot;</span>
+        <span class="kw">headers</span><span class="ot">[</span><span class="st">&quot;Accept-Language&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="st">&quot;en-US&quot;</span>
+
+        <span class="kw">local</span> <span class="kw">params</span> <span class="ot">=</span> <span class="ot">{}</span>
+        <span class="kw">params</span><span class="ot">.</span><span class="kw">headers</span> <span class="ot">=</span> <span class="kw">headers</span>
+        <span class="kw">params</span><span class="ot">.</span><span class="kw">body</span> <span class="ot">=</span> <span class="kw">post_body</span>
+
+        <span class="kw">network</span><span class="ot">.</span>request <span class="ot">(</span> <span class="kw">PW_URL</span>, <span class="st">&quot;POST&quot;</span>, <span class="kw">networkListener</span>, <span class="kw">params</span> <span class="ot">)</span>
+
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;notification&quot;</span>, <span class="kw">notificationListener</span> <span class="ot">)</span></code></pre>
+<a id="enterprise"></a>
+</div>
+<div class="section level2" id="enterprise-and-android-icons">
+<h2><a href="#TOC">Enterprise and Android Icons</a></h2>
+<p>When developing natively for Android, Google wants all icons in the project's <code>res</code> directory. This is important because Google's Android build process generates code, creating a <code>R.java</code> file containing unique integer IDs to every resource that your project and its libraries contain. The IDs are needed to access these resources, including the notification icons.</p>
+<p>First, you should become familiar with how Android handles resources by reading Google's official <a href="http://developer.android.com/guide/topics/resources/overview.html">documentation</a>.</p>
+<p>When developing with <a href="http://www.coronalabs.com/products/enterprise/">Corona Enterprise</a>, you need to override Corona's notification icon resources with your own. Before proceeding, inspect the Corona library's resource directory:</p>
+<pre><code>./CoronaEnterprise/Corona/android/lib/Corona/res</code></pre>
+<p>In this directory, every <code>drawable</code> directory contains a file named <code>corona_statusbar_icon_default.png</code>. This is the image file to override. Note that this action should be an &quot;override&quot; and <strong>not</strong> a replacement. You should <strong>not</strong> modify the contents of the Corona library directory!</p>
+<p>To override these notification image files with your own, you need to set up the Android project with the same <code>drawable</code> directories under your <code>res</code> directory. Add each <code>IconNotification*.png</code> icon to its respective <code>drawable</code> directory by resolution and version (see <a href="#androidicons">Android Icons</a> above). You also <strong>must</strong> rename these files to <code>corona_statusbar_icon_default.png</code>.</p>
+<p>How this works is as follows: when you do an Android build, it builds the app's libraries first, then it builds the app. If the Android build process finds resources files named identically between your app and its libraries, the app's resource files always take precedence and will be used instead of the library's resources. This is why most 3rd-party libraries prefix their resource file names using the library's name to help avoid conflicts.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 02-Jul-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.events.appNotification.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.events.appNotification.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.events.appNotification.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

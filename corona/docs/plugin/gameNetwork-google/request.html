@@ -1,0 +1,1824 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > gameNetwork-google > request</title>
+  <meta name="revised" content="01-Aug-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > gameNetwork-google > request" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#gamenetwork.request">gameNetwork.request()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#command-required">command <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#params-optional">params <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#google-play-game-services">Google Play game services:</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">gameNetwork-google</a>  ▸  <a href="request.html">request</a>
+</div>
+<div class="section level1" id="gamenetwork.request">
+<h1><a href="#TOC">gameNetwork.request()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="../../api/library/gameNetwork/index.html">gameNetwork.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left">none</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">gameNetwork, request, gamecenter</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/GameNetwork/GameCenter</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="init.html">gameNetwork.init()</a><br/><a href="show.html">gameNetwork.show()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Send or request information to/from the game network provider.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>gameNetwork.request( command [, params ...] )</code></pre>
+<div class="section level5" id="command-required">
+<h5><a href="#TOC">command <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em> The following commands are supported for the corresponding game networks:</p>
+<p><strong>Google Play game services:</strong></p>
+<ul>
+<li>setHighScore</li>
+<li>loadScores</li>
+<li>loadLocalPlayer</li>
+<li>loadPlayers</li>
+<li>loadFriends</li>
+<li>loadAchievements</li>
+<li>unlockAchievement</li>
+<li>loadAchievementDescriptions</li>
+<li>loadLeaderboardCategories</li>
+<li>isConnected</li>
+<li>login</li>
+<li>logout</li>
+<li>createRoom</li>
+<li>joinRoom</li>
+<li>leaveRoom</li>
+<li>setRoomListener</li>
+<li>sendMessage</li>
+<li>setMessageReceivedListener</li>
+<li>setInvitationRecievedListener</li>
+</ul>
+</div>
+<div class="section level5" id="params-optional">
+<h5><a href="#TOC">params <sub><sup>(optional)</sup></sub></a></h5>
+<p>The following parameters are supported for the corresponding game networks:</p>
+</div>
+<div class="section level4" id="google-play-game-services">
+<h4><a href="#TOC">Google Play game services:</a></h4>
+<p><strong>setHighScore:</strong> Sets a high score for the currently logged in user for the specified leaderboard (category). If the high score is not higher than the one currently on the server, the server will keep the highest value.</p>
+<p>event.data in callback listener is an array of items (tables) that have the following properties: * playerID (string) * category (string) * value (number) * formattedValue (string)</p>
+<p>Example &quot;setHighScore&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;setHighScore&quot;,
+{
+    localPlayerScore = { category=&quot;Cy_sd893DEewf3&quot;, value=25 },
+    listener = requestCallback
+})</code></pre>
+<p>'localPlayerScore' is a required table..</p>
+<p>In the localPlayerScore table:</p>
+<p>'category' must be a string that matches the ID of the leaderboard you want to register the score with as generated on Google's developers console.</p>
+<p>'value' must be a number representing your score.</p>
+<p><strong>loadScores:</strong> event.data in callback listener is an array of items (tables) that have the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>category (string)</li>
+<li>value (number)</li>
+<li>date (string)</li>
+<li>formattedValue (string)</li>
+<li>rank (integer)</li>
+<li>unixTime (integer)</li>
+</ul>
+<p>example: event.data[5].formattedValue -- #event.data == 2nd value specified in range table</p>
+<p>Example &quot;loadScores&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadScores&quot;,
+{
+    leaderboard =
+    {
+        category = &quot;Cy_SLDWING4334h&quot;,
+        playerScope = &quot;Global&quot;,   -- Global, FriendsOnly
+        timeScope = &quot;AllTime&quot;,    -- AllTime, Week, Today
+        range = {1,5},
+        playerCentered = true,
+    },
+    listener = requestCallback
+})</code></pre>
+<p>'leaderboard' is a required table.</p>
+<p>In the leaderboard table:</p>
+<p>'category' (required) must be a string that matches the name of the board you want to fetch the scores with generated on the Google Play developers console.</p>
+<p>'playerScope' (optional) is a string of either &quot;Global&quot; or &quot;FriendsOnly&quot;. The latter setting will restrict the fetched scores to only people in the player's circles.</p>
+<p>'timeScope' (optional) is a string of either &quot;AllTime&quot;, &quot;Week&quot;, &quot;Today&quot; which limits the fetched scores to the specified time range.</p>
+<p>'range' (optional) is an array of two values. The first value is ignored. The second value is the number of players to retrieve. Google says this number must be less than 25. The default number is 25.</p>
+<p>'playerCentered' (optional) is a boolean value. If true this then value will return the scores that are centered around the currently logged in player. If false then this will return the top scores.</p>
+<p><strong>loadLocalPlayer:</strong> Requests information for the currently logged-in user.</p>
+<p>event.data in callback listener includes the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>alias (string)</li>
+</ul>
+<p>example: event.data.playerID</p>
+<p>Example &quot;loadLocalPlayer&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadLocalPlayer&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>loadPlayers:</strong> Requests a list of players with the specified player IDs, and returns an array of items (tables) for each requested player in the callback listener.</p>
+<p>event.data in callback listener is an array of items that have the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>alias (string)</li>
+</ul>
+<p>example: event.data[3].alias</p>
+<p>Example &quot;loadPlayers&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadPlayers&quot;,
+{
+    playerIDs =
+    {
+        &quot;45987354897345345&quot;,
+        &quot;32238975789573445&quot;,
+        &quot;17891241248435990&quot;
+    },
+    listener = requestCallback
+})</code></pre>
+<p><strong>loadFriends:</strong> Requests a list of players the logged in player can invite to a game.</p>
+<p>event.data in callback listener is an array of items that have the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>alias (string)</li>
+</ul>
+<p>example: event.data[3].alias</p>
+<p>Example &quot;loadFriends&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadFriends&quot;,
+{
+    listener = requestCallback
+})</code></pre>
+<p><strong>loadAchievements:</strong> Loads a list of the user's available achievements for the app and returns an array of items (tables) representing each achievement in the callback listener. This call returns the same thing as loadAchievementDescriptions.</p>
+<p>event.data in callback listener is an array of items that have the following properties (each representing an achievement):</p>
+<ul>
+<li>identifier (string)</li>
+<li>title (string)</li>
+<li>description (string)</li>
+<li>isCompleted (boolean)</li>
+<li>isHidden (boolean)</li>
+<li>lastReportedDate (number)</li>
+</ul>
+<p>example: event.data[4].identifier</p>
+<p>Example &quot;loadAchievements&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadAchievements&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>unlockAchievement:</strong> Unlocks the specified achievement (identifier).</p>
+<p>Example &quot;unlockAchievement&quot; request.</p>
+<pre><code>gameNetwork.request( &quot;unlockAchievement&quot;,
+{
+    achievement =
+    {
+        identifier = &quot;CY_w895w9w55w454&quot;,
+    },
+    listener=requestCallback
+})</code></pre>
+<p>In the &quot;achievement&quot; table:</p>
+<p>'identifier' (required) must be a string that matches the name of the achievement you want to unlock/report as generated on the Google Play developers console.</p>
+<p>The listener callback will fill event.data with a table that contains the following information:</p>
+<ul>
+<li>achievementId (string)</li>
+</ul>
+<p><strong>loadAchievementDescriptions:</strong> Requests a list of all descriptions associated with the achievements for the app and returns an array of items (tables) representing each achievement description object in the callback listener. This call returns the same thing as loadAchievements.</p>
+<p>event.data in callback listener is an array of items which are the descriptions of your achievements.</p>
+<ul>
+<li>identifier (string)</li>
+<li>title (string)</li>
+<li>description (string)</li>
+<li>isCompleted (boolean)</li>
+<li>isHidden (boolean)</li>
+<li>lastReportedDate (number)</li>
+</ul>
+<p>Example &quot;loadAchievementDescriptions&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadAchievementDescriptions&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>loadLeaderboardCategories:</strong> Requests a list of leaderboard categories for the app and returns an array of tables with each table containing description information of a leaderboard in the callback listener.</p>
+<p>event.data in callback listener is an array of items (tables) where each table contains the keys 'category' and 'title', both of which are strings.</p>
+<p>Example &quot;loadLeaderboardCategories&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadLeaderboardCategories&quot;, { listener=requestCallback } )
+
+-- example of what an event.data table returned via callback listener looks like
+event.data =
+{
+    [1] = {
+        category = &quot;CY_a49t8h4t43t43t&quot;,
+        title = &quot;Easy&quot;
+    },
+    [2] = {
+        category = &quot;CY_egr983ygEF4sed&quot;,
+        title = &quot;Hard&quot;
+    },
+    [3] = {
+        category = &quot;CY_w4aERG4843EFEF&quot;,
+        title = &quot;Awesome&quot;
+    },
+}</code></pre>
+<p><strong>isConnected:</strong> Checks to see if the user is currently logged into Google Play game services. This function returns immediately with the result so there is no need to supply it with a callback. Returns true if the current user is currently logged in and false if the user isn't.</p>
+<p><strong>login:</strong> Tries to log the user into Google Play game services. The table takes a parameter called userInitated. This parameter defaults to true. If this parameter is set to true then it will try to resolve any problems with the login process so for example it will show the login popup. If it is set to false then it will just try to connect without trying to resolve any errors. Setting this to false is useful for automatically logging in at the start of the app without annoying the user to log in every time. Example &quot;login&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;login&quot;,
+{
+    userInitiated = true,
+    listener = requestCallback
+})</code></pre>
+<p>event in callback listener is a boolean flag that states if there with an error with the sign in process.</p>
+<ul>
+<li>isError(boolean)</li>
+</ul>
+<p><strong>logout:</strong> Logs the user out of Google Play game services. This function does not accept a callback.</p>
+<p><strong>createRoom:</strong> Invites players to a real time multiplayer game. Setting a listener when calling this will override any previously set room listener. Example &quot;createRoom&quot; request:</p>
+<pre><code>local function requestCallback(event)
+    print(event.data.roomID) -- This is the id of the room that was created
+end
+
+gameNetwork.request( &quot;createRoom&quot;,
+{
+    listener = requestCallback, -- Including this will override what is set in setRoomListener
+    playerIDs = -- array of players to invite
+    {
+        &quot;45987354897345345&quot;,
+        &quot;32238975789573445&quot;,
+        &quot;17891241248435990&quot;
+    },
+    maxAutoMatchPlayers = 3, -- Optional, defaults to 0
+    minAutoMatchPlayers = 1, -- Optional, defaults to 0
+})</code></pre>
+<p><strong>joinRoom:</strong> Joins a room that has already been created. Setting a listener when calling this will override any previously set room listener. Example &quot;joinRoom&quot; request:</p>
+<pre><code>local function requestCallback(event)
+    print(event.data.roomID) -- This is the id of the room that was created
+end
+
+gameNetwork.request( &quot;joinRoom&quot;,
+{
+    listener = requestCallback, -- Including this will override what is set in setRoomListener
+    roomID = &quot;o345t9348th&quot; -- Id of the room you want to join
+})</code></pre>
+<p><strong>leaveRoom:</strong> Leave the room that the player is already in and close any connections. Setting a listener when calling this will override any previously set room listener. Example &quot;leaveRoom&quot; request:</p>
+<pre><code>local function requestCallback(event)
+    print(event.data.roomID) -- This is the id of the room that was created
+end
+
+gameNetwork.request( &quot;leaveRoom&quot;,
+{
+    listener = requestCallback, -- Including this will override what is set in setRoomListener
+    roomID = &quot;o345t9348th&quot; -- Id of the room you want to leave
+})</code></pre>
+<p><strong>setRoomListener:</strong> Sets the listener that will be called when an event for a room happens. Setting this will override any listener set from createRoom, joinRoom, and leaveRoom. This callback can be called multiple times, for example if one player declines an invitaiton and then another person declines it after that.</p>
+<p>The event for this listener is structured at follows</p>
+<ul>
+<li>event.type</li>
+<li>event.data : array which contains the list of players affected eg. event.data[1].alias, event.data[2].playerID</li>
+<li>event.data.roomID : String for the room which this event happened</li>
+<li>event.data.isError : boolean indicating if there was an error</li>
+</ul>
+<p>event.type include:</p>
+<ul>
+<li>createRoom -- The logged in player created a room</li>
+<li>joinRoom -- The logged in player joined a room</li>
+<li>leaveRoom -- The logged in player left the room</li>
+<li>connectedRoom -- All the players that were invited have accepted and all the auto match making has been completed</li>
+<li>peerAcceptedInvitation -- The list of players who accepted an invitation to join a room</li>
+<li>peerDeclinedInvitation -- The list of players who declined an invitation to join a room</li>
+<li>peerLeftRoom -- The list of players who left a room</li>
+<li>peerDisconnectedFromRoom -- The list of players who disconnected from a room</li>
+</ul>
+<p>Example &quot;setRoomListener&quot; request:</p>
+<pre><code>local function requestCallback(event)
+    print(event.data.roomID)
+    -- print(event.data[1]) -- if there are players involved in this event this will be populated.
+end
+
+gameNetwork.request( &quot;setRoomListener&quot;,
+{
+    listener = requestCallback,
+})</code></pre>
+<p><strong>sendMessage:</strong> Sends a String to another player Example &quot;sendMessage&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;sendMessage&quot;,
+{
+    listener = requestCallback,
+    roomID = &quot;o345t9348th&quot;, -- Id of the room the other player is in
+    playerIDs = -- array of players in the room to send the message to
+    {
+        &quot;45987354897345345&quot;,
+        &quot;32238975789573445&quot;,
+        &quot;17891241248435990&quot;
+    },
+    message = &quot;String you want to send&quot;, -- The string you want to send to the other players
+    reliable = true, -- Optional parameter, default true, sends a reliable message or not, messages can be dropped if not reliable but it will reach the other players faster
+})</code></pre>
+<p><strong>setMessageReceivedListener:</strong> Sets the listener that will be called when a message has been received. This will only receieve messages from the room the current player is connected to. Example &quot;setMessageReceivedListener&quot; request:</p>
+<pre><code>local function requestCallback(event)
+    print(event.data.message) -- This is the message that was send from the participant
+    print(event.data.participantID) -- This is the id of the participant who send the message
+end
+
+gameNetwork.request( &quot;setMessageReceivedListener&quot;,
+{
+    listener = requestCallback,
+})</code></pre>
+<p><strong>setInvitationReceivedListener:</strong> Sets the listener that will be called when an invitation has been received. Example &quot;setInvitationReceivedListener&quot; request:</p>
+<pre><code>local function requestCallback(event)
+    print(event.data.roomID) -- This is the room that the invitation was from
+    print(event.data.alias) -- This is the name of the person who send the invitation
+    print(event.data.playerID) -- This is the player id of the person who invited you
+end
+
+gameNetwork.request( &quot;setInvitationReceivedListener&quot;,
+{
+    listener = requestCallback,
+})</code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 01-Aug-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.gameNetwork-google.request&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.gameNetwork-google.request&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.gameNetwork-google.request&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

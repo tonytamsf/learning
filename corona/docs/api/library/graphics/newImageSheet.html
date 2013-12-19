@@ -1,0 +1,1762 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > graphics > newImageSheet</title>
+  <meta name="revised" content="28-Oct-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > graphics > newImageSheet" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#graphics.newimagesheet">graphics.newImageSheet()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#texture-sampling">Texture sampling</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#filename-required">filename <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#basedir-optional">baseDir <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#options-required">options <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#formats-for-options">Formats for <code>options</code></a><ul>
+<li><a href="#simple">Simple</a><ul>
+<li><a href="#width-required">width <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#height-required">height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#numframes-required">numFrames <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#border-optional">border <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sheetcontentwidth-sheetcontentheight-optional">sheetContentWidth / sheetContentHeight <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#complex">Complex</a><ul>
+<li><a href="#x-required">x <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#y-required">y <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#width-required-1">width <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#height-required-1">height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#sourcewidth-optional">sourceWidth <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourceheight-optional">sourceHeight <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourcex-optional">sourceX <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourcey-optional">sourceY <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#border-optional-1">border <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sheetcontentwidth-sheetcontentheight-optional-1">sheetContentWidth / sheetContentHeight <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#simple-1">Simple</a></li>
+<li><a href="#complex-1">Complex</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">graphics</a>  ▸  <a href="newImageSheet.html">newImageSheet</a>
+</div>
+
+<div class="section level1" id="graphics.newimagesheet">
+<h1><a href="#TOC">graphics.newImageSheet()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">graphics.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/ImageSheet/index.html">ImageSheet</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">sprite sheet, texture atlas, texture memory, images</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../../guide/media/imageSheets/index.html">Image Sheets (Sprite Sheets)</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p><a href="../../type/ImageSheet/index.html">ImageSheet</a> objects allow you to load multiple graphics from a single image file (also known as a spritesheet). Image sheets can be used for static images (useful for preloading many static images) and <a href="../display/newSprite.html">animated sprites</a>.</p>
+</div>
+<div class="section level2" id="texture-sampling">
+<h2><a href="#TOC">Texture sampling</a></h2>
+<p>By default, new image sheets will use a linear sampling filter, so that the image will look smooth when the actual rendered region is larger or smaller than the pixel dimensions of the loaded texture.</p>
+<p>You can change the default texture filter by calling <a href="../display/setDefault.html">display.setDefault()</a>. Once an image is loaded the first time, the same sampling filter will be applied for any subsequent loads of the same file. This is because textures are loaded once per file.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>Image sheet packing tools such as <a href="http://www.codeandweb.com/texturepacker/">Texture Packer</a> will output the <code>sourceX</code>, <code>sourceY</code>, <code>sourceWidth</code>, and <code>sourceHeight</code> parameters for <strong>trimmed</strong> frames. When displaying these frames on the screen, the image will be positioned in respect to the <strong>center</strong> point of the untrimmed frame size.</p>
+<p>If you want to use dynamically-selected image sheets — chosen automatically depending on the screen resolution — you <strong>must</strong> include the <code>sheetContentWidth</code> and <code>sheetContentHeight</code> parameters. See below for details.</p>
+<p>On Android, images are limited (downsized) to 2048×2048, even though the maximum texture memory size is higher on the device. The reason is most Android devices don't have enough heap memory to load the image. We recommend that you don't load image files larger than 2048×2048.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>graphics.newImageSheet( filename, [baseDir, ] options )</code></pre>
+<div class="section level5" id="filename-required">
+<h5><a href="#TOC">filename <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This is the filename of the image file that includes all frames of the image sheet. This file is also called a &quot;sprite sheet&quot; image.</p>
+</div>
+<div class="section level5" id="basedir-optional">
+<h5><a href="#TOC">baseDir <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Constant.html">Constant</a>.</em> Specifies the base directory where filename is located. Options include <code>system.ResourceDirectory</code>, <code>system.DocumentsDirectory</code>, <code>system.TemporaryDirectory</code> and <code>system.CachesDirectory</code>. Default is <code>system.ResourceDirectory</code>.</p>
+</div>
+<div class="section level5" id="options-required">
+<h5><a href="#TOC">options <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table with keys that represent specific options related to the resulting image sheet. See <strong>Formats for options</strong> below.</p>
+</div>
+</div>
+<div class="section level2" id="formats-for-options">
+<h2><a href="#TOC">Formats for <code>options</code></a></h2>
+<div class="section level3" id="simple">
+<h3><a href="#TOC">Simple</a></h3>
+<p>This configuration assumes all frames in the image sheet texture share identical properties.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="co">--required parameters</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">3</span>,
+
+    <span class="co">--optional parameters; used for dynamic resolution support</span>
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">150</span>,  <span class="co">-- width of original 1x size of entire sheet</span>
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">50</span>   <span class="co">-- height of original 1x size of entire sheet</span>
+<span class="ot">}</span></code></pre>
+<div class="section level5" id="width-required">
+<h5><a href="#TOC">width <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Width of all images (frames) in the image sheet texture.</p>
+</div>
+<div class="section level5" id="height-required">
+<h5><a href="#TOC">height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Height of all images (frames) in the image sheet texture.</p>
+</div>
+<div class="section level5" id="numframes-required">
+<h5><a href="#TOC">numFrames <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Total number of images (frames) in the image sheet.</p>
+</div>
+<div class="section level5" id="border-optional">
+<h5><a href="#TOC">border <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The border around each frame, typically used for tiles whose edges are extruded to eliminate seam artifacts. Default is 0. When &gt; 0, this overrides the trimming options for cropping the frame.</p>
+</div>
+<div class="section level5" id="sheetcontentwidth-sheetcontentheight-optional">
+<h5><a href="#TOC">sheetContentWidth / sheetContentHeight <sub><sup>(optional)</sup></sub></a></h5>
+<p>These values tell Corona the size of the original 1x image sheet. For example, if you're developing for both iPad and iPad Retina, and you're using an image sheet of 1000×1000 for the regular iPad, you should specify <code>1000</code> for both of these values and then design your Retina image sheet at 2000×2000.</p>
+</div>
+</div>
+<div class="section level3" id="complex">
+<h3><a href="#TOC">Complex</a></h3>
+<p>This configuration is required if the image sheet has frames of varying sizes. In this configuration, <code>options</code> consists of an array of tables within a parent <code>frames</code> table. Each table in the array represents a single frame in the image sheet.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="co">--array of tables representing each frame (required)</span>
+    <span class="kw">frames</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- FRAME 1:</span>
+        <span class="ot">{</span>
+            <span class="co">--all parameters below are required for each frame</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">2</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">70</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">50</span>
+        <span class="ot">}</span>,
+
+        <span class="co">-- FRAME 2:</span>
+        <span class="ot">{</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">2</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">242</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">52</span>
+        <span class="ot">}</span>,
+
+        <span class="co">-- FRAME 3 and so on...</span>
+    <span class="ot">}</span>,
+
+    <span class="co">--optional parameters; used for dynamic resolution support</span>
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">1024</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">1024</span>
+<span class="ot">}</span></code></pre>
+<div class="section level5" id="x-required">
+<h5><a href="#TOC">x <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> x-location of the frame in the texture.</p>
+</div>
+<div class="section level5" id="y-required">
+<h5><a href="#TOC">y <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> y-location of the frame in the texture.</p>
+</div>
+<div class="section level5" id="width-required-1">
+<h5><a href="#TOC">width <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Width of the frame (if cropping, specify cropped width here).</p>
+</div>
+<div class="section level5" id="height-required-1">
+<h5><a href="#TOC">height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Height of the frame (if cropping, specify cropped height here).</p>
+</div>
+<div class="section level5" id="sourcewidth-optional">
+<h5><a href="#TOC">sourceWidth <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Width of the original uncropped frame. Default: same as width (required parameter).</p>
+</div>
+<div class="section level5" id="sourceheight-optional">
+<h5><a href="#TOC">sourceHeight <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Height of the original uncropped frame. Default: same as height (required parameter).</p>
+</div>
+<div class="section level5" id="sourcex-optional">
+<h5><a href="#TOC">sourceX <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The x-origin of the crop rect relative to the uncropped image. Default: 0.</p>
+</div>
+<div class="section level5" id="sourcey-optional">
+<h5><a href="#TOC">sourceY <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The y-origin of the crop rect relative to the uncropped image. Default: 0.</p>
+</div>
+<div class="section level5" id="border-optional-1">
+<h5><a href="#TOC">border <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The amount of pixels around each individual frame. This is necessary for scaling image sheets without getting blending artifacts around the edges. Default: 0.</p>
+</div>
+<div class="section level5" id="sheetcontentwidth-sheetcontentheight-optional-1">
+<h5><a href="#TOC">sheetContentWidth / sheetContentHeight <sub><sup>(optional)</sup></sub></a></h5>
+<p>These values tell Corona the size of the original 1x image sheet. For example, if you're developing for both iPad and iPad Retina, and you're using an image sheet of 1000×1000 for the regular iPad, you should specify <code>1000</code> for both of these values and then design your Retina image sheet at 2000×2000.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level5" id="simple-1">
+<h5><a href="#TOC">Simple</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="co">--required parameters</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">70</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">41</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">2</span>,
+
+    <span class="co">--optional parameters; used for dynamic resolution support</span>
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">70</span>,  <span class="co">-- width of original 1x size of entire sheet</span>
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">82</span>  <span class="co">-- height of original 1x size of entire sheet</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">imageSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;fishies.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level5" id="complex-1">
+<h5><a href="#TOC">Complex</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="co">--array of tables representing each frame (required)</span>
+    <span class="kw">frames</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- FRAME 1:</span>
+        <span class="ot">{</span>
+            <span class="co">--all parameters below are required for each frame</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">2</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">70</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">50</span>
+        <span class="ot">}</span>,
+
+        <span class="co">-- FRAME 2:</span>
+        <span class="ot">{</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">2</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">242</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">52</span>
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+
+    <span class="co">--optional parameters; used for dynamic resolution support</span>
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">1024</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">1024</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">imageSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;imageframes.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 28-Oct-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.graphics.newImageSheet&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.graphics.newImageSheet&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.graphics.newImageSheet&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

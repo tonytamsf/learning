@@ -1,0 +1,1676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > physics > addBody</title>
+  <meta name="revised" content="22-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > physics > addBody" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#physics.addbody">physics.addBody()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#rectangular-body">Rectangular Body</a></li>
+<li><a href="#circular-body">Circular Body</a></li>
+<li><a href="#polygon-body">Polygon Body</a></li>
+<li><a href="#multi-element-body">Multi-Element Body</a><ul>
+<li><a href="#object-required">object <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#bodytype-optional">bodyType <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#density-optional">density <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#friction-optional">friction <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#bounce-optional">bounce <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#radius-optional">radius <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#shape-optional">shape <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#filter-optional">filter <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#example">Example</a><ul>
+<li><a href="#rectangular-bodies-default">Rectangular Bodies (Default)</a></li>
+<li><a href="#circular-bodies">Circular Bodies</a></li>
+<li><a href="#polygon-bodies">Polygon Bodies</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">physics</a>  ▸  <a href="addBody.html">addBody</a>
+</div>
+
+<div class="section level1" id="physics.addbody">
+<h1><a href="#TOC">physics.addBody()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">physics.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/Boolean.html">Boolean</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">bodies, physics, body, shape</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../../guide/physics/physicsBodies/index.html">Physics Bodies</a><br/><a href="removeBody.html">physics.removeBody()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Allows you to turn almost any Corona display object into a simulated physical object with one line of code, including the assignment of physical properties.</p>
+<ul>
+<li><p>If no <code>shape</code> information is specified, then the body boundaries will snap to the rectangular boundaries of the display object.</p></li>
+<li><p>If a <code>radius</code> value is specified, the body boundaries will be circular, centered at the middle of the display object used to create the physics body.</p></li>
+<li><p>If a <code>shape</code> table is specified, the body boundaries will follow the polygon provided by the shape. Note that the maximum number of sides per shape is eight (8), and all angles must be <strong>convex</strong>. Specifying a <code>shape</code> table will override a <code>radius</code> property, if both are specified in the same element. The shape coordinates must be defined in <strong>clockwise</strong> order. Finally, The first and last vertex must be different.</p></li>
+<li><p>A body shape is simply a table of local <strong>x</strong> and <strong>y</strong> coordinate pairs, relative to the center of the display object.</p></li>
+<li><p>A more complex body may be constructed by specifying multiple body elements and shapes. In cases where the overall shape of the object is concave, or the shape has more than eight sides, you can use multiple body elements to construct it. See the <a href="../../../guide/physics/physicsBodies/index.html">Physics Bodies</a> guide for more information.</p></li>
+<li><p>Each body element may have its own physical properties.</p></li>
+<li><p>The body element index is reported as part of each collision event, so it's possible to detect which part of a complex body was involved in a collision.</p></li>
+</ul>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>When you turn a display object into a physics object, the physics engine &quot;owns&quot; the object and has its own rules about the object. Physics assumes that the reference point of the object is the center of the object.</p>
+<p>You can <a href="../../type/DisplayObject/scale.html">scale</a> the object up or down, but the physics engine still sees the object as it was before the changes.</p>
+<p>You should not add physics bodies to objects created using <a href="../display/newLine.html">display.newLine()</a>.</p>
+<p>You should not attempt to add a physics body during a collision event. Instead, wait until the next application cycle.</p>
+<p>For further information, see the <a href="../../../guide/physics/physicsBodies/index.html">Physics Bodies</a> guide and the <a href="../../../guide/physics/limitations/index.html">Limitations</a> guide.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<div class="section level4" id="rectangular-body">
+<h4><a href="#TOC">Rectangular Body</a></h4>
+<pre><code>physics.addBody( object, [bodyType,] {density=d, friction=f, bounce=b [,filter=f]} )</code></pre>
+</div>
+<div class="section level4" id="circular-body">
+<h4><a href="#TOC">Circular Body</a></h4>
+<pre><code>physics.addBody( object, [bodyType,] {density=d, friction=f, bounce=b, radius=r [,filter=f]} )</code></pre>
+</div>
+<div class="section level4" id="polygon-body">
+<h4><a href="#TOC">Polygon Body</a></h4>
+<pre><code>physics.addBody( object, [bodyType,] {density=d, friction=f, bounce=b, shape=s [,filter=f]} )</code></pre>
+</div>
+<div class="section level4" id="multi-element-body">
+<h4><a href="#TOC">Multi-Element Body</a></h4>
+<pre><code>physics.addBody( object, [bodyType,]
+   {density=d1, friction=f1, bounce=b1, shape=s1},
+   {density=d2, friction=f2, bounce=b2, shape=s2},
+   {density=d3, friction=f3, bounce=b3, shape=s3}
+)</code></pre>
+<br/>
+<div class="section level5" id="object-required">
+<h5><a href="#TOC">object <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/DisplayObject/index.html">DisplayObject</a>.</em> The display object to add a physics body to.</p>
+</div>
+<div class="section level5" id="bodytype-optional">
+<h5><a href="#TOC">bodyType <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The body type may be specified in an optional string parameter before the first body element. The possible types are <code>&quot;static&quot;</code>, <code>&quot;dynamic&quot;</code> and <code>&quot;kinematic&quot;</code>. The default type is <code>&quot;dynamic&quot;</code> if no value is specified. See <a href="../../type/Body/bodyType.html">object.bodyType</a> for more information.</p>
+</div>
+<div class="section level5" id="density-optional">
+<h5><a href="#TOC">density <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Multiplied by the area of the body’s shape to determine mass. Based on a standard value of <code>1.0</code> for water. Lighter materials (such as wood) have a density below <code>1.0</code>, and heavier materials (such as stone) have a density greater than <code>1.0</code>. Default value is <code>1.0</code>.</p>
+</div>
+<div class="section level5" id="friction-optional">
+<h5><a href="#TOC">friction <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> May be any non-negative value; a value of <code>0.0</code> means no friction and <code>1.0</code> means fairly strong friction. The default value is <code>0.3</code>.</p>
+</div>
+<div class="section level5" id="bounce-optional">
+<h5><a href="#TOC">bounce <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Determines how much of an object's velocity is returned after a collision. The default value is <code>0.2</code>.</p>
+</div>
+<div class="section level5" id="radius-optional">
+<h5><a href="#TOC">radius <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Radius of the bounding circle.</p>
+</div>
+<div class="section level5" id="shape-optional">
+<h5><a href="#TOC">shape <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Array.html">Array</a>.</em> Shape array containing the shape's vertices: <code>{ x1,y1, x2,y2, ..., xn,yn }</code>. For example <code>pentagonShape = { 0,-37, 37,-10, 23,34, -23,34, -37,-10 }</code>.</p>
+<p>The coordinates must be defined in <strong>clockwise</strong> order, and the resulting shape must be <strong>convex</strong> at all angle points. The physics engine assumes that the <code>0,0</code> point is the center of the object. A negative <strong>x</strong> will be to the left of object's center and a negative <strong>y</strong> will be top of object's center.</p>
+</div>
+<div class="section level5" id="filter-optional">
+<h5><a href="#TOC">filter <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Filter values. See <a href="../../../guide/physics/collisionDetection/index.html">Collision Detection</a> for more information.</p>
+<ul>
+<li><code>categoryBits = cb</code> where <code>cb</code> is the category of object (generally only one bit set). Defaults to <code>0x0001</code> if not set.</li>
+<li><code>maskBits = mb</code>, where <code>mb</code> is the categories that the shape would accept for collision. Defaults to <code>0xFFFF</code></li>
+<li><code>groupIndex = gb</code>, where <code>gb</code> specifies that a certain group of objects will never collide (negative) or always collide (positive). Defaults to <code>0</code> (disabled). If <code>groupIndex</code> is set to non-zero, it overrides the <code>maskBits</code> setting.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<div class="section level4" id="rectangular-bodies-default">
+<h4><a href="#TOC">Rectangular Bodies (Default)</a></h4>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">physics</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;physics&quot;</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>start<span class="ot">()</span>
+
+<span class="kw">local</span> <span class="kw">sky</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;bkg_clouds.png&quot;</span> <span class="ot">)</span>
+<span class="kw">sky</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">160</span><span class="ot">;</span> <span class="kw">sky</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">195</span>
+
+<span class="kw">local</span> <span class="kw">ground</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;ground.png&quot;</span> <span class="ot">)</span>
+<span class="kw">ground</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">160</span><span class="ot">;</span> <span class="kw">ground</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">445</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">ground</span>, <span class="st">&quot;static&quot;</span>, <span class="ot">{</span> <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">crate</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span> <span class="ot">)</span>
+<span class="kw">crate</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">180</span><span class="ot">;</span> <span class="kw">crate</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="ot">-</span><span class="dv">50</span><span class="ot">;</span> <span class="kw">crate</span><span class="ot">.</span><span class="kw">rotation</span> <span class="ot">=</span> <span class="dv">5</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="circular-bodies">
+<h4><a href="#TOC">Circular Bodies</a></h4>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">ball</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span><span class="st">&quot;ball.png&quot;</span><span class="ot">)</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">ball</span>, <span class="ot">{</span> <span class="kw">density</span> <span class="ot">=</span> <span class="dv">1.0</span>, <span class="kw">friction</span> <span class="ot">=</span> <span class="dv">0.3</span>, <span class="kw">bounce</span> <span class="ot">=</span> <span class="dv">0.2</span>, <span class="kw">radius</span> <span class="ot">=</span> <span class="dv">25</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="polygon-bodies">
+<h4><a href="#TOC">Polygon Bodies</a></h4>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">pentagon</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span><span class="st">&quot;pentagon.png&quot;</span><span class="ot">)</span>
+
+<span class="kw">pentagonShape</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>,<span class="ot">-</span><span class="dv">37</span>, <span class="dv">37</span>,<span class="ot">-</span><span class="dv">10</span>, <span class="dv">23</span>,<span class="dv">34</span>, <span class="ot">-</span><span class="dv">23</span>,<span class="dv">34</span>, <span class="ot">-</span><span class="dv">37</span>,<span class="ot">-</span><span class="dv">10</span> <span class="ot">}</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">pentagon</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.8</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span>, <span class="kw">shape</span><span class="ot">=</span><span class="kw">pentagonShape</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 22-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.physics.addBody&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.physics.addBody&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.physics.addBody&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

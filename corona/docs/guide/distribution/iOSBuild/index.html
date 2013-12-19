@@ -1,0 +1,1779 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > distribution > iOSBuild </title>
+  <meta name="revised" content="21-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > distribution > iOSBuild " />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#provisioning-and-building-ios">Provisioning and Building — iOS</a><ul>
+<li><a href="#developer-certificate-setup">Developer Certificate Setup</a></li>
+<li><a href="#registering-devices">Registering Devices</a></li>
+<li><a href="#creating-app-ids">Creating App IDs</a></li>
+<li><a href="#creating-provisioning-profiles">Creating Provisioning Profiles</a><ul>
+<li><a href="#development">Development</a></li>
+<li><a href="#distribution-app-store">Distribution: App Store</a></li>
+<li><a href="#distribution-ad-hoc">Distribution: Ad Hoc</a></li>
+</ul></li>
+<li><a href="#build-process">Build Process</a></li>
+<li><a href="#device-installation">Device Installation</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [distribution][guide.distribution]  ▸  <a href="index.html">iOSBuild</a>
+</div>
+<div class="section level1" id="provisioning-and-building-ios">
+<h1><a href="#TOC">Provisioning and Building — iOS</a></h1>
+<p>This guide explains how to set up your system and devices in the <strong>iOS Dev Center</strong>. It also explains how to build your apps for testing or distribution.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>Corona SDK on <a href="../../start/installWin/index.html">Windows</a> only supports device builds for Android. Corona SDK on <a href="../../start/installMac/index.html">Mac OS X</a> supports both iOS and Android development.</p>
+</div>
+
+<div class="guides-toc">
+
+<ul>
+<li><a href="#certificate">Developer Certificate Setup</a></li>
+<li><a href="#devices">Registering Devices</a></li>
+<li><a href="#appID">Creating App IDs</a></li>
+<li><a href="#provisioning">Creating Provisioning Profiles</a></li>
+<li><a href="#building">Build Process</a></li>
+<li><a href="#installapp">Device Installation</a></li>
+</ul>
+</div>
+
+
+<a id="certificate"></a>
+<div class="section level2" id="developer-certificate-setup">
+<h2><a href="#TOC">Developer Certificate Setup</a></h2>
+<ol style="list-style-type: decimal">
+<li><p>You will need an <a href="https://developer.apple.com/devcenter/ios/">Apple Developer</a> account to install/test apps on iOS devices and publish to the App Store. The current price of the program is $99 per year, mandated and managed by Apple. Without an account, you can still build and test on the iOS Simulator (bundled with Xcode), but you will require a developer account for the other tasks.</p></li>
+<li><p>Once registered, log in to the <a href="https://developer.apple.com/devcenter/ios/">iOS Dev Center</a> with your Apple Developer credentials.</p></li>
+<li><p>Navigate to the <strong>Certificates, Identifiers &amp; Profiles</strong> dashboard and click on <strong>Certificates</strong>. It should link to a screen containing this:</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-certificates.png" alt="iOS Certificates" /><p class="caption">iOS Certificates</p>
+</div>
+</div>
+
+<ol start="4" style="list-style-type: decimal">
+<li><p>In the upper-right corner, click the  <strong>[+]</strong>  button to create a new certificate.</p></li>
+<li><p>You'll be prompted to choose which type of certificate to create. There are two types which pertain to this guide:</p>
+<p><strong>Development: iOS App Development</strong> — use this during development to test on your own devices.</p>
+<p><strong>Distribution: App Store and Ad Hoc</strong> — use this only for submission to the App Store or to install your app on a limited number of registered devices.</p></li>
+<li><p>Select the type and click <strong>Continue</strong> at the bottom. You'll be prompted to generate a new certificate. As indicated in the instructions, open the <strong>Keychain Access</strong> tool from the <strong>Applications</strong> → <strong>Utilities</strong> folder.</p></li>
+<li><p>From the main <strong>Keychain Access</strong> menu, select <strong>Certificate Assistant</strong> → <strong>Request a Certificate From a Certificate Authority</strong>. You will be presented with a form containing the following fields:</p>
+<p><strong>User Email Address</strong> — enter the email address associated with your Apple Developer account.</p>
+<p><strong>Common Name</strong> — enter your name or company/team name.</p>
+<p><strong>CA Email Address</strong> — this field is <strong>not</strong> required, since you will save the certificate to disk.</p>
+<p><strong>Request is:</strong> — select <strong>Saved to disk</strong>.</p></li>
+<li><p>Click <strong>Continue</strong> and then specify where to save the file (Desktop is fine). This will generate the certificate signing request. Click <strong>Done</strong> in the next window.</p></li>
+<li><p>Back in the <strong>iOS Dev Center</strong>, proceed to the next step, titled <strong>Generate your certificate</strong>. Near the bottom, under <strong>Upload CSR file</strong>, click the <strong>Choose File...</strong> button and select the file you just created. Click the <strong>Generate</strong> button to confirm.</p></li>
+<li><p>The final step is to download and install the certificate on your local keychain. Follow the instructions provided on the screen.</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-download-certificate.png" alt="Download Certificate" /><p class="caption">Download Certificate</p>
+</div>
+</div>
+
+<ol start="11" style="list-style-type: decimal">
+<li>Back in the <strong>Certificates</strong> section of the dashboard, the new certificate should appear.</li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-certificates-2.png" alt="Certificate Installed" /><p class="caption">Certificate Installed</p>
+</div>
+</div>
+
+
+
+
+<a id="devices"></a>
+</div>
+<div class="section level2" id="registering-devices">
+<h2><a href="#TOC">Registering Devices</a></h2>
+<p>Some guides begin with creating App IDs, but we recommend that you register your devices first. This will save you the task of modifying and re-downloading the provisioning profiles later.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>You are allowed to register 100 devices per year. If you register a device, you can only remove it from your quota at the beginning of the next subscription term.</p>
+</div>
+
+<ol style="list-style-type: decimal">
+<li>From the <strong>Certificates, Identifiers &amp; Profiles</strong> dashboard, click on the <strong>Devices</strong> option. It should link to a screen containing this:</li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-devices.png" alt="iOS Devices" /><p class="caption">iOS Devices</p>
+</div>
+</div>
+
+<ol start="2" style="list-style-type: decimal">
+<li><p>In the upper-right corner, click the  <strong>[+]</strong>  button to register a new device.</p></li>
+<li><p>You'll be prompted to register either one device or multiple devices. If you choose the first option, enter the following information:</p>
+<p><strong>Name</strong> — this name is only visible to you and helps to identify the device.</p>
+<p><strong>UDID</strong> — this 40-character hexadecimal value is the <strong>U</strong>nique <strong>D</strong>evice <strong>Id</strong>entifier for the device. You can find this by connecting your device and opening the <strong>XCode Organizer</strong>. Select the device in the left column and look for <strong>Identifier</strong> in the information panel. Alternatively, open <strong>iTunes</strong>, select the device from the top menu, and open the <strong>Summary</strong> tab. Beside the device image, if you see <strong>Serial Number</strong>, left-click it. The value should change to <strong>Identifier (UDID)</strong>. Right-click it and select <strong>Copy Identifier (UDID)</strong>.</p></li>
+<li><p>Click <strong>Continue</strong> to register the device. Back in the <strong>Devices</strong> section of the dashboard, the new device should appear.</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-devices-2.png" alt="Device Registered" /><p class="caption">Device Registered</p>
+</div>
+</div>
+
+
+
+
+<a id="appID"></a>
+</div>
+<div class="section level2" id="creating-app-ids">
+<h2><a href="#TOC">Creating App IDs</a></h2>
+<p>Next, you must create a new <strong>App ID</strong> for each unique app, or a wildcard ID for multiple apps.</p>
+<ol style="list-style-type: decimal">
+<li>From the <strong>Certificates, Identifiers &amp; Profiles</strong> dashboard, click on the <strong>App IDs</strong> option. It should link to a screen containing this:</li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-appids.png" alt="iOS App IDs" /><p class="caption">iOS App IDs</p>
+</div>
+</div>
+
+<ol start="2" style="list-style-type: decimal">
+<li><p>In the upper-right corner, click the  <strong>[+]</strong>  button to create a new App ID.</p></li>
+<li><p>Fill in the information:</p>
+<p><strong>App ID Description</strong> — only you will see this; it helps you identify the app.</p>
+<p><strong>App Services</strong> — select the services you would like to enable. Most of these must be edited after the App ID is created.</p>
+<p><strong>App ID Prefix</strong> — this should be set to the <strong>Team ID</strong> that's associated with your developer account.</p>
+<p><strong>App ID Suffix</strong> — this is not visible to consumers, but it must be unique. Apple recommends that you specify the <strong>Bundle ID</strong> in reverse-domain format, i.e. <code>com.domainname.myapp</code>. Alternatively, you can create a <strong>Wildcard App ID</strong> which can be used for multiple apps. To do this, specify the Bundle ID with an asterisk (<strong>*</strong>) at the end, i.e. <code>com.domainname.*</code>. The drawback of this option is that it cannot be used for any app employing Game Center, In–App Purchases, Data Protection, or iCloud, since these features require a unique App ID. If you intend to use any of these services, please use the <strong>Explicit App ID</strong> option.</p></li>
+<li><p>Click <strong>Continue</strong>. This should lead to a screen where you can confirm the App ID details. Click <strong>Submit</strong> to complete the creation of the App ID. Back in the <strong>App IDs</strong> section of the dashboard, the new ID should appear.</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-appids-2.png" alt="App ID Created" /><p class="caption">App ID Created</p>
+</div>
+</div>
+
+
+
+
+<a id="provisioning"></a>
+</div>
+<div class="section level2" id="creating-provisioning-profiles">
+<h2><a href="#TOC">Creating Provisioning Profiles</a></h2>
+<p>All iOS apps require that you use provisioning profiles during development. You cannot run an app on a device until you provision that device for development.</p>
+<ol style="list-style-type: decimal">
+<li>From the <strong>Certificates, Identifiers &amp; Profiles</strong> dashboard, click on the <strong>Provisioning Profiles</strong> option. It should link to a screen containing this:</li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-profiles.png" alt="iOS Provisioning Profiles" /><p class="caption">iOS Provisioning Profiles</p>
+</div>
+</div>
+
+<ol start="2" style="list-style-type: decimal">
+<li><p>In the upper-right corner, click the  <strong>[+]</strong>  button to create a new provisioning profile.</p></li>
+<li><p>You'll be prompted to choose which type of provisioning profile to create.</p>
+<p><strong>Development: iOS App Development</strong> — use this during development to test on your own devices.</p>
+<p><strong>Distribution: App Store</strong> — use this only for submission to the App Store.</p>
+<p><strong>Distribution: Ad Hoc</strong> — use this to install your app on a limited number of registered devices.</p></li>
+<li><p>Select the type you want to create and click <strong>Continue</strong>. On the next screen, you'll be prompted to select the <strong>App ID</strong> to associate with the profile. Assuming you've created at least one App ID, select it from the list and click <strong>Continue</strong>. If you haven't created any App IDs, please see <a href="#appID">Creating App IDs</a> above.</p></li>
+<li><p>Next, you must associate at least one <strong>certificate</strong> with the provisioning profile. Select the appropriate certificate(s) from the list and click <strong>Continue</strong>. Note that the provisioning profile must be associated with a matching certificate type. For example, if you want to create a provisioning profile for distribution, you must first create a distribution certificate. If no certificates exist for the type of profile you wish to create, the system will prompt you to create one — in this case, please see <a href="#certificate">Developer Certificate Setup</a> above.</p></li>
+<li><p>Now proceed to the proper section below, since the steps vary for each profile type.</p></li>
+</ol>
+<div class="section level3" id="development">
+<h3><a href="#TOC">Development</a></h3>
+<ol style="list-style-type: decimal">
+<li><p>You must associate at least one <strong>device</strong> with the development provisioning profile. Select the device(s) from the list and click <strong>Continue</strong>. If you haven't registered any devices, please see <a href="#devices">Registering Devices</a> above.</p></li>
+<li><p>On the next screen, you must provide a <strong>Profile Name</strong> for the provisioning profile. This will be used to identify the profile in the portal. Also, confirm the settings that you made in the previous steps. When you're ready, click <strong>Generate</strong> to create the profile.</p></li>
+<li><p>The next step is to download and install the provisioning profile.</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-download-prof-dev.png" alt="Download Profile" /><p class="caption">Download Profile</p>
+</div>
+</div>
+
+<ol start="4" style="list-style-type: decimal">
+<li><p>To ensure that the profile is installed, open the <strong>Xcode Organizer</strong>. In the left column, under the <strong>LIBRARY</strong> header, select <strong>Provisioning Profiles</strong>. The new profile should appear on the list, marked with a green icon and <strong>valid profile</strong>. You must also add the profile to each device that you selected during the profile creation. Connect the device to your computer and click the <strong>Refresh</strong> button in the bottom-right corner of the Xcode Organizer window. When it's done, select the device in the left column, click <strong>Provisioning Profiles</strong>, and confirm that it's installed and valid.</p></li>
+<li><p>Finally, to associate the new profile with Corona, restart the Corona Simulator. The profile should appear as a <strong>Code Signing Identity</strong> in the build window. See <a href="#building">Build Process</a> below for more details.</p></li>
+</ol>
+</div>
+<div class="section level3" id="distribution-app-store">
+<h3><a href="#TOC">Distribution: App Store</a></h3>
+<ol style="list-style-type: decimal">
+<li><p>You must provide a <strong>Profile Name</strong> for the provisioning profile. This will be used to identify the profile in the portal. Also, confirm the settings that you made in the previous steps. When you're ready, click <strong>Generate</strong> to create the profile.</p></li>
+<li><p>The next step is to download and install the provisioning profile.</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-download-prof-dist.png" alt="Download Profile" /><p class="caption">Download Profile</p>
+</div>
+</div>
+
+<ol start="3" style="list-style-type: decimal">
+<li><p>To ensure that the profile is installed, open the <strong>Xcode Organizer</strong>. In the left column, under the <strong>LIBRARY</strong> header, select <strong>Provisioning Profiles</strong>. The new profile should appear on the list, marked with a green icon and <strong>valid profile</strong>.</p></li>
+<li><p>Finally, to associate the new profile with Corona, restart the Corona Simulator. The profile should appear as a <strong>Code Signing Identity</strong> in the build window. See <a href="#building">Build Process</a> below for more details.</p></li>
+</ol>
+</div>
+<div class="section level3" id="distribution-ad-hoc">
+<h3><a href="#TOC">Distribution: Ad Hoc</a></h3>
+<ol style="list-style-type: decimal">
+<li><p>You must associate at least one <strong>device</strong> with the ad hoc provisioning profile. Select the device(s) from the list and click <strong>Continue</strong>. If you haven't registered any devices, please see <a href="#devices">Registering Devices</a> above.</p></li>
+<li><p>On the next screen, you must provide a <strong>Profile Name</strong> for the provisioning profile. This will be used to identify the profile in the portal. Also, confirm the settings that you made in the previous steps. When you're ready, click <strong>Generate</strong> to create the profile.</p></li>
+<li><p>The next step is to download and install the provisioning profile.</p></li>
+</ol>
+<div class="image-indent">
+
+<div class="figure">
+<img src="../../../images/simulator/ios-download-prof-adhoc.png" alt="Download Profile" /><p class="caption">Download Profile</p>
+</div>
+</div>
+
+<ol start="4" style="list-style-type: decimal">
+<li><p>To ensure that the profile is installed, open the <strong>Xcode Organizer</strong>. In the left column, under the <strong>LIBRARY</strong> header, select <strong>Provisioning Profiles</strong>. The new profile should appear on the list, marked with a green icon and <strong>valid profile</strong>.</p></li>
+<li><p>Finally, to associate the new profile with Corona, restart the Corona Simulator. The profile should appear as a <strong>Code Signing Identity</strong> in the build window. See <a href="#building">Build Process</a> below for more details.</p></li>
+</ol>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>If you configure an App ID <strong>without</strong> additional services like Push Notifications, and later <strong>add</strong> those features to the App ID, you must reinstall the provisioning profile by repeating all of the download and installation steps.</p>
+</div>
+
+
+
+
+<a id="building"></a>
+</div>
+</div>
+<div class="section level2" id="build-process">
+<h2><a href="#TOC">Build Process</a></h2>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>If you aren't familiar with the available <a href="../buildSettings/index.html">build settings</a> for an app, please review them before proceeding with this section.</p>
+</div>
+
+<p>Building your app is a simple process once you have your certificate and provisioning profiles installed. You can build your application for testing in the Xcode Simulator or on a device.</p>
+<ol style="list-style-type: decimal">
+<li><p>From the Corona Simulator, select <strong>File</strong> → <strong>Open...</strong> to load the project you wish to build.</p></li>
+<li><p>Select <strong>File</strong> → <strong>Build</strong> → <strong>iOS...</strong> and the following window will appear:</p>
+<div class="figure">
+<img src="../../../images/simulator/build-ios.png" alt="Build Window (iOS)" /><p class="caption">Build Window (iOS)</p>
+</div></li>
+<li><p>Fill in the information:</p>
+<p><strong>Application name</strong> — by default, this will match your project folder; keep this name or specify another.</p>
+<p><strong>Version</strong> — specify a version name for your app.</p>
+<p><strong>Build for</strong> — select <strong>Xcode Simulator</strong> or <strong>Device</strong> to build a compiled app for testing on that selection.</p>
+<p><strong>Supported Devices</strong> — select either <strong>iPhone + iPad (Universal)</strong>, <strong>iPhone only</strong>, or <strong>iPad only</strong> depending on your target device(s).</p>
+<p><strong>Code Signing Identity</strong> — select the appropriate provisioning profile for either <strong>development</strong> or <strong>distribution</strong>.</p>
+<p><strong>Save to folder</strong> — specify where to save the compiled app.</p></li>
+<li><p>Click <strong>Build</strong> and Corona will compile the app. You will then have an application file that can be loaded on a device or submitted to the App Store, depending on which provisioning profile you selected.</p></li>
+</ol>
+<a id="installapp"></a>
+</div>
+<div class="section level2" id="device-installation">
+<h2><a href="#TOC">Device Installation</a></h2>
+<p>There are two methods to install an app for testing on an iOS device. Remember that you can <strong>not</strong> test an app built for <strong>App Store Distribution</strong> on a device.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Xcode Organizer</strong></p>
+<p>Connect your device, open <strong>Xcode</strong>, and then open the <strong>Organizer</strong> (<strong>Window</strong> → <strong>Organizer</strong>).</p>
+<p>Under the <strong>DEVICES</strong> header in the left column, look for the device name. It should have a <strong>green</strong> indicator beside it. If the indicator is not green, power the device off and on again to establish a proper connection.</p>
+<p>Select the <strong>Applications</strong> option for the device (expand the device menu if necessary). Next, drag the <strong>.app</strong> file that was generated by Corona into the main frame. Alternatively, click on the <strong>Add</strong> button at the bottom of the window and select the <strong>.app</strong> file. Assuming there are no provisioning/certificate errors, the app should install on the device.</p></li>
+<li><p><strong>iTunes</strong></p>
+<p>Connect your device and ensure that <strong>iTunes</strong> is open.</p>
+<p>Select <strong>File</strong> → <strong>Add to Library...</strong> (⌘-O) and navigate to the <strong>.app</strong> file that was generated by Corona. Alternatively, drag the file over the iTunes dock icon and release.</p>
+<p>The view should change to the device's info screen and show all installed apps. Confirm that your app is listed in the <strong>Apps</strong> menu on the left.</p>
+<p><strong>Sync</strong> the device and the app should install. Note that iTunes can be particular about app versions — if you repeatedly test new versions of your app, you should remove the previous version from the device before installing the new version. This will ensure that the most current version is installed.</p></li>
+</ol>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 21-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.distribution.iOSBuild.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.distribution.iOSBuild.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.distribution.iOSBuild.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

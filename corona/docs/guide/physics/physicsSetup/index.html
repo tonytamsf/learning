@@ -1,0 +1,1651 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > physics > physicsSetup </title>
+  <meta name="revised" content="30-Aug-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > physics > physicsSetup " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#physics-setup">Physics Setup</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#physics-setup-1">Physics Setup</a><ul>
+<li><a href="#start-pause-stop">Start / Pause / Stop</a></li>
+<li><a href="#sleeping-bodies">Sleeping Bodies</a></li>
+</ul></li>
+<li><a href="#simulation-options">Simulation Options</a><ul>
+<li><a href="#physics.setgravity">physics.setGravity()</a></li>
+<li><a href="#physics.setscale">physics.setScale()</a></li>
+<li><a href="#physics.setdrawmode">physics.setDrawMode()</a></li>
+<li><a href="#physics.setpositioniterations">physics.setPositionIterations()</a></li>
+<li><a href="#physics.setvelocityiterations">physics.setVelocityIterations()</a></li>
+<li><a href="#physics.setcontinuous">physics.setContinuous()</a></li>
+<li><a href="#physics.setaveragecollisionpositions">physics.setAverageCollisionPositions()</a></li>
+<li><a href="#physics.setreportcollisionsincontentcoordinates">physics.setReportCollisionsInContentCoordinates()</a></li>
+<li><a href="#physics.setdebugerrorsenabled">physics.setDebugErrorsEnabled()</a></li>
+<li><a href="#physics.settimestep">physics.setTimeStep()</a></li>
+<li><a href="#physics.setmks">physics.setMKS()</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [physics][guide.physics]  ▸  <a href="index.html">physicsSetup</a>
+</div>
+<div class="section level1" id="physics-setup">
+<h1><a href="#TOC">Physics Setup</a></h1>
+<p>This guide discusses how to set up Box2D physics in your Corona app. Physics are commonly used for apps that involve a simulation of objects that move, collide, and interact under various physical forces like gravity.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#setup">Physics Setup</a></li>
+<li><a href="#options">Simulation Options</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Corona makes it very easy to add physics to your apps, even if you've never worked with a physics engine before. While the underlying engine is built around the popular Box2D, we've taken a different design approach which eliminates a lot of the coding that is traditionally required.</p>
+<p>To work with the Corona physics engine, just begin with familiar Corona <a href="../../media/displayObjects/index.html">display objects</a>. Corona treats physical body properties as an extension of its graphics objects: any standard display object including images, vector objects, or animated sprites can be &quot;made physical&quot; and they will automatically interact with other objects in the simulation.</p>
+<p>Note that Corona automatically translates between its familiar onscreen units and the internal metric units of the physical simulation. All position values are exposed in pixels which are converted internally to meters at a default ratio of 30 pixels-per-meter. For further consistency, all angular values are exposed in degrees rather than radians, and position <code>(0,0)</code> remains at the top left corner of the content area.</p>
+<a id="setup"></a>
+</div>
+<div class="section level2" id="physics-setup-1">
+<h2><a href="#TOC">Physics Setup</a></h2>
+<p>To begin using physics, you must require the library. The following line makes the physics engine available under the <code>physics</code> namespace:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">physics</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;physics&quot;</span> <span class="ot">)</span></code></pre>
+<div class="section level3" id="start-pause-stop">
+<h3><a href="#TOC">Start / Pause / Stop</a></h3>
+<p>The following functions start, pause, and stop the physics simulation:</p>
+<ul>
+<li><p><code>physics.start()</code> — either instantiates or resumes the simulation (if paused). You <strong>must</strong> start the physics simulation before calling any other physics functions in this guide.</p></li>
+<li><p><code>physics.pause()</code> — pauses the physics simulation.</p></li>
+<li><p><code>physics.stop()</code> — this is treated as a request to &quot;destroy&quot; the physics world. If you merely want to pause the physics engine, use <code>physics.pause()</code>.</p></li>
+</ul>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>start<span class="ot">()</span>  <span class="co">--do this before any other physics call(s)</span>
+
+<span class="kw">physics</span><span class="ot">.</span>pause<span class="ot">()</span>
+<span class="kw">physics</span><span class="ot">.</span>stop<span class="ot">()</span></code></pre>
+</div>
+<div class="section level3" id="sleeping-bodies">
+<h3><a href="#TOC">Sleeping Bodies</a></h3>
+<p>By default, physical bodies not involved in a collision will &quot;sleep&quot; after a few seconds. This reduces performance overhead, but in some cases you may not want this behavior. This is particularly true in apps that use the accelerometer to effect changes in physics gravity — in this case, sleeping bodies will not respond to changes in the direction of gravity.</p>
+<p>You can override this behavior on any given body with the <code>body.isSleepingAllowed = false</code> command (<a href="../../../api/type/Body/isSleepingAllowed.html">reference</a>), or override it globally for <strong>all</strong> bodies in the world by using an optional boolean parameter in <code>physics.start()</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>start<span class="ot">(</span> <span class="kw">true</span> <span class="ot">)</span>   <span class="co">--prevent all bodies from sleeping</span>
+
+<span class="kw">physics</span><span class="ot">.</span>start<span class="ot">(</span> <span class="kw">false</span> <span class="ot">)</span>  <span class="co">--default behavior; bodies may sleep after a few seconds</span></code></pre>
+<a id="options"></a>
+</div>
+</div>
+<div class="section level2" id="simulation-options">
+<h2><a href="#TOC">Simulation Options</a></h2>
+<p>The physics engine features several global simulation options. These can be used to fine-tune your physics simulation beyond the default behavior.</p>
+<div class="section level4" id="physics.setgravity">
+<h4><a href="#TOC">physics.setGravity()</a></h4>
+<p><a href="../../../api/library/physics/setGravity.html">physics.setGravity()</a> sets the <strong>x</strong> and <strong>y</strong> components of the global gravity vector, in units of m/s². The default is <code>( 0, 9.8 )</code> to simulate standard Earth gravity, pointing downward on the <strong>y</strong> axis.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setGravity<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">6</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="physics.setscale">
+<h4><a href="#TOC">physics.setScale()</a></h4>
+<p><a href="../../../api/library/physics/setScale.html">physics.setScale()</a> sets the internal pixels-per-meter ratio that is used in converting between on-screen Corona coordinates and simulated physics coordinates. This should be done only once, before any physical objects are instantiated.</p>
+<p>Changing this value has no visual consequences — it simply affects the accuracy of the physical model. The Box2D engine is tuned for simulating medium-sized objects between 0.1m and 10m in size, so it works best when the objects in your game are mapped to physical properties that fall roughly within this range.</p>
+<p>The default scaling value is <code>30</code>, which means that the optimal 0.1m to 10m range corresponds to visible objects between 3 and 300 pixels in size. For larger objects, you may wish to increase this value to <code>60</code> or more.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setScale<span class="ot">(</span> <span class="dv">60</span> <span class="ot">)</span></code></pre>
+<p>You may also want to increase this value if the objects you are simulating seem too sluggish or react too slowly. In this case, they are likely too big and heavy for your purposes — try raising the scale value and/or reduce their densities.</p>
+</div>
+<div class="section level4" id="physics.setdrawmode">
+<h4><a href="#TOC">physics.setDrawMode()</a></h4>
+<p><a href="../../../api/library/physics/setDrawMode.html">physics.setDrawMode()</a> sets one of three possible &quot;rendering modes&quot; for the physics engine. While this feature will run on devices, it's most useful in the Corona Simulator when debugging unexpected physics engine behavior.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setDrawMode<span class="ot">(</span> <span class="st">&quot;hybrid&quot;</span> <span class="ot">)</span>  <span class="co">--overlays collision outlines on normal display objects</span>
+<span class="kw">physics</span><span class="ot">.</span>setDrawMode<span class="ot">(</span> <span class="st">&quot;normal&quot;</span> <span class="ot">)</span>  <span class="co">--the default Corona renderer, with no collision outlines</span>
+<span class="kw">physics</span><span class="ot">.</span>setDrawMode<span class="ot">(</span> <span class="st">&quot;debug&quot;</span> <span class="ot">)</span>   <span class="co">--shows collision engine outlines only</span></code></pre>
+<p>Physics data is displayed using colored vector graphics which reflect different object types and attributes. See the <a href="../physicsBodies/index.html">Physics Bodies</a> guide for details.</p>
+<ul>
+<li>orange — dynamic physics bodies</li>
+<li>dark blue — kinematic physics bodies</li>
+<li>green — static, non-moveable physics bodies</li>
+<li>gray — a body that is &quot;sleeping&quot; due to lack of activity</li>
+<li>light blue — physical joints (see the <a href="../physicsJoints/index.html">Physics Joints</a> guide)</li>
+</ul>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>When working with Corona <a href="../../start/displayGroups/index.html">display groups</a> and Box2D, it's important to remember that Box2D expects all physics objects to share a <strong>global coordinate system</strong>. Both grouped and ungrouped display objects will work well since they will share the internal coordinates of that group. However, unexpected results will occur if physical objects are added to different display groups and those groups are moved, scaled, or rotated independently of each other. As a general rule, do <strong>not</strong> alter the position, scale, or rotation of display groups that contain physics objects.</p>
+</div>
+
+</div>
+<div class="section level4" id="physics.setpositioniterations">
+<h4><a href="#TOC">physics.setPositionIterations()</a></h4>
+<p><a href="../../../api/library/physics/setPositionIterations.html">physics.setPositionIterations()</a> sets the accuracy of the engine's position calculations.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setPositionIterations<span class="ot">(</span> <span class="dv">16</span> <span class="ot">)</span></code></pre>
+<p>The default value is <code>8</code>, which means that the engine will iterate through eight position approximations per frame for each object. Increasing this number will cause fewer momentary inaccuracies like overlapping objects, but it will increase computational overhead. The default value should work for most general cases.</p>
+</div>
+<div class="section level4" id="physics.setvelocityiterations">
+<h4><a href="#TOC">physics.setVelocityIterations()</a></h4>
+<p><a href="../../../api/library/physics/setVelocityIterations.html">physics.setVelocityIterations()</a> sets the accuracy of the engine's velocity calculations.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setVelocityIterations<span class="ot">(</span> <span class="dv">6</span> <span class="ot">)</span></code></pre>
+<p>The default value is <code>3</code>, which means that the engine will iterate through three velocity approximations per frame for each object. Increasing this number will cause fewer momentary inaccuracies like overlapping objects, but it will increase computational overhead. The default value should work for most general cases.</p>
+</div>
+<div class="section level4" id="physics.setcontinuous">
+<h4><a href="#TOC">physics.setContinuous()</a></h4>
+<p><a href="../../../api/library/physics/setContinuous.html">physics.setContinuous()</a> controls whether continuous physics is enabled or not. By default, Box2D performs continuous collision detection, which prevents objects from &quot;tunneling.&quot; If it were turned off, an object that moves quickly enough could potentially pass through a thin wall.</p>
+<p>In certain complex situations where bodies are connected by pivot joints (ragdolls, for example), instability can occur. One way to solve this is to turn up the number of velocity iterations using <a href="../../../api/library/physics/setVelocityIterations.html">physics.setVelocityIterations()</a>. However, this can be computationally expensive and reduce frame rates. Another solution is to <strong>disable</strong> continuous physics:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setContinuous<span class="ot">(</span> <span class="kw">false</span> <span class="ot">)</span></code></pre>
+<p>Turning it off should prevent the instability without increasing iterations. However, you'll need to make your static bodies extra thick to prevent tunneling effects.</p>
+</div>
+<div class="section level4" id="physics.setaveragecollisionpositions">
+<h4><a href="#TOC">physics.setAverageCollisionPositions()</a></h4>
+<p><a href="../../../api/library/physics/setAverageCollisionPositions.html">physics.setAverageCollisionPositions()</a> enables the averaging of all contact points in a <a href="../collisionDetection/index.html">collision</a> between physics bodies. Because it's common for Box2D to report multiple collision points during a single frame iteration, this setting is useful to report those points as one averaged point.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setAverageCollisionPositions<span class="ot">(</span> <span class="kw">true</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="physics.setreportcollisionsincontentcoordinates">
+<h4><a href="#TOC">physics.setReportCollisionsInContentCoordinates()</a></h4>
+<p><a href="../../../api/library/physics/setReportCollisionsInContentCoordinates.html">physics.setReportCollisionsInContentCoordinates()</a> sets the content origin as the reference point in the <a href="../../../api/event/collision/index.html">collision</a>, <a href="../../../api/event/preCollision/index.html">preCollision</a>, and <a href="../../../api/event/postCollision/index.html">postCollision</a> physics events.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setReportCollisionsInContentCoordinates<span class="ot">(</span> <span class="kw">true</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="physics.setdebugerrorsenabled">
+<h4><a href="#TOC">physics.setDebugErrorsEnabled()</a></h4>
+<p><a href="../../../api/library/physics/setDebugErrorsEnabled.html">physics.setDebugErrorsEnabled()</a> allows extra physics errors to be caught by Box2D. Default is <code>true</code> (enabled).</p>
+</div>
+<div class="section level4" id="physics.settimestep">
+<h4><a href="#TOC">physics.setTimeStep()</a></h4>
+<p><a href="../../../api/library/physics/setTimeStep.html">physics.setTimeStep()</a> specifies either a frame-based (approximated) physics simulation or a time-based simulation.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>setTimeStep<span class="ot">(</span> <span class="dv">0</span> <span class="ot">)</span>  <span class="co">--time-based physics simulation</span></code></pre>
+</div>
+<div class="section level4" id="physics.setmks">
+<h4><a href="#TOC">physics.setMKS()</a></h4>
+<p><a href="../../../api/library/physics/setMKS.html">physics.setMKS()</a> sets the MKS (meters, kilograms, and seconds) value of the physics simulation for specific keys. This is strictly for advanced purposes — the average developer and project will not require this function.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 30-Aug-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.physics.physicsSetup.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.physics.physicsSetup.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.physics.physicsSetup.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

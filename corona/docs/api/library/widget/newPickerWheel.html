@@ -1,0 +1,1704 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newPickerWheel</title>
+  <meta name="revised" content="26-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newPickerWheel" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newpickerwheel">widget.newPickerWheel()</a><ul>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left, top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#font-optional">font <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#fontsize-optional">fontSize <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#fontcolor-optional">fontColor <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#columncolor-optional">columnColor <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#columns-optional">columns <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#visual-customization">Visual Customization</a><ul>
+<li><a href="#sheet-required">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#backgroundframe-required">backgroundFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#backgroundwidth-backgroundheight-required">backgroundWidth, backgroundHeight <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#overlayframe-required">overlayFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#overlayframewidth-overlayframeheight-required">overlayFrameWidth, overlayFrameHeight <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#separatorframe-required">separatorFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#separatorwidth-separatorheight-required">separatorWidth, separatorHeight <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#maskfile-required">maskFile <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newPickerWheel.html">newPickerWheel</a>
+</div>
+<div class="section level1" id="widget.newpickerwheel">
+<h1><a href="#TOC">widget.newPickerWheel()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/PickerWidget/index.html">PickerWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, picker, pickerWheel, wheel</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/PickerWidget/index.html">PickerWidget</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<!---
+
+![][images.sdk.widget.newPicker]
+
+-->
+
+<p>Creates a <a href="../../type/PickerWidget/index.html">Picker Wheel</a> object.</p>
+<!---
+
+To set a theme for this widget, See: [widget.setTheme()][api.library.widget.setTheme]
+
+-->
+
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>To conserve texture memory, a <a href="../../type/PickerWidget/index.html">Picker Wheel</a> can only be created from an imageSheet.</p>
+<p>This widget does not support scaling.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newPickerWheel( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This is an optional id to assign to your <a href="../../type/PickerWidget/index.html">Picker Wheel</a>. Default is &quot;widget_pickerWheel&quot;.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left, top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the position where the <a href="../../type/PickerWidget/index.html">Picker Wheel</a> will be created. The default values for left and top are 0, 0.</p>
+</div>
+<div class="section level5" id="font-optional">
+<h5><a href="#TOC">font <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This is the font that will be used when rendering column rows. Default is <code>native.systemFontBold</code>.</p>
+</div>
+<div class="section level5" id="fontsize-optional">
+<h5><a href="#TOC">fontSize <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The font size (in pixels) for your <a href="../../type/PickerWidget/index.html">Picker Wheel</a> columns. The default is 22.</p>
+</div>
+<div class="section level5" id="fontcolor-optional">
+<h5><a href="#TOC">fontColor <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> This is a table that holds the color (in rbga format) of your <a href="../../type/PickerWidget/index.html">Picker Wheel</a> columns. Example:</p>
+<pre><code>{ 0, 0, 0, 255 }</code></pre>
+</div>
+<div class="section level5" id="columncolor-optional">
+<h5><a href="#TOC">columnColor <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> This is a table that holds the color (in rbga format) of your <a href="../../type/PickerWidget/index.html">Picker Wheel</a> columns. The default is white:</p>
+<pre><code>{ 255, 255, 255, 255 }</code></pre>
+</div>
+<div class="section level5" id="columns-optional">
+<h5><a href="#TOC">columns <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> This is a table that should have sub-tables representing the individual columns in your picker wheel. The numerical keys in each column table will represent the individual rows (see Example section). Additionally, each column table can have the following properties:</p>
+<ul>
+<li><strong>width:</strong> <a href="../../type/Number.html">Number</a>. By default, columns are split evenly between the pickerWheel's viewable area, but there are some cases where you want some columns to be wider than the others. Use the width property to set a custom width on a per-column basis.</li>
+<li><strong>labels:</strong> <a href="../../type/Table.html">Table</a>. This is a table which contains a label for each row. Ex: { &quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;, &quot;Four&quot; }</li>
+<li><strong>startIndex:</strong> <a href="../../type/Number.html">Number</a>. If you want a column to start at a specific row, specify the index number of that row here.<br /></li>
+<li><strong>align:</strong> <a href="../../type/String.html">String</a>. This can either be set to <code>right</code>, <code>left</code> or <code>center</code>. If this property is not set, text will be center-aligned for that column by default.</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="visual-customization">
+<h2><a href="#TOC">Visual Customization</a></h2>
+<div class="section level5" id="sheet-required">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> This is the image sheet object for your <a href="../../type/PickerWidget/index.html">Picker Wheel</a>.</p>
+</div>
+<div class="section level5" id="backgroundframe-required">
+<h5><a href="#TOC">backgroundFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the background frame index that will sit behind the <a href="../../type/PickerWidget/index.html">Picker Wheel</a> overlay (glass image). This image will be stretched to the full width/height of the <a href="../../type/PickerWidget/index.html">Picker Wheel</a>.</p>
+</div>
+<div class="section level5" id="backgroundwidth-backgroundheight-required">
+<h5><a href="#TOC">backgroundWidth, backgroundHeight <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the <a href="../../type/PickerWidget/index.html">Picker Wheel</a> background frame image.</p>
+</div>
+<div class="section level5" id="overlayframe-required">
+<h5><a href="#TOC">overlayFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the overlay frame index (glass image) of the <a href="../../type/PickerWidget/index.html">Picker Wheel</a>.</p>
+</div>
+<div class="section level5" id="overlayframewidth-overlayframeheight-required">
+<h5><a href="#TOC">overlayFrameWidth, overlayFrameHeight <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the <a href="../../type/PickerWidget/index.html">Picker Wheel</a> overlay frame image.</p>
+</div>
+<div class="section level5" id="separatorframe-required">
+<h5><a href="#TOC">separatorFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the separator (divider) frame index that separates each <a href="../../type/PickerWidget/index.html">Picker Wheel</a> column.</p>
+</div>
+<div class="section level5" id="separatorwidth-separatorheight-required">
+<h5><a href="#TOC">separatorWidth, separatorHeight <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the <a href="../../type/PickerWidget/index.html">Picker Wheel</a> separator frame image.</p>
+</div>
+<div class="section level5" id="maskfile-required">
+<h5><a href="#TOC">maskFile <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This is the maskFile used to crop the <a href="../../type/PickerWidget/index.html">Picker Wheel</a> columns.</p>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Create two tables to hold our days &amp; years      </span>
+<span class="kw">local</span> <span class="kw">days</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">years</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="co">-- Populate the days table</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">31</span> <span class="kw">do</span>
+    <span class="kw">days</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="co">-- Populate the years table</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">44</span> <span class="kw">do</span>
+    <span class="kw">years</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">1969</span> <span class="ot">+</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="co">-- Set up the Picker Wheel&#39;s columns</span>
+<span class="kw">local</span> <span class="kw">columnData</span> <span class="ot">=</span> 
+<span class="ot">{</span> 
+    <span class="ot">{</span> 
+        <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;right&quot;</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">150</span>,
+        <span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">5</span>,
+        <span class="kw">labels</span> <span class="ot">=</span> 
+        <span class="ot">{</span>
+            <span class="st">&quot;January&quot;</span>, <span class="st">&quot;February&quot;</span>, <span class="st">&quot;March&quot;</span>, <span class="st">&quot;April&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;June&quot;</span>, <span class="st">&quot;July&quot;</span>, <span class="st">&quot;August&quot;</span>, <span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>, <span class="st">&quot;November&quot;</span>, <span class="st">&quot;December&quot;</span> 
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+
+    <span class="ot">{</span>
+        <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;left&quot;</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">60</span>,
+        <span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">18</span>,
+        <span class="kw">labels</span> <span class="ot">=</span> <span class="kw">days</span>,
+    <span class="ot">}</span>,
+
+    <span class="ot">{</span>
+        <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">80</span>,
+        <span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">10</span>,
+        <span class="kw">labels</span> <span class="ot">=</span> <span class="kw">years</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span>
+
+<span class="co">-- Create a new Picker Wheel</span>
+<span class="kw">local</span> <span class="kw">pickerWheel</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newPickerWheel</span>
+<span class="ot">{</span>
+    <span class="kw">top</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">-</span> <span class="dv">222</span>,
+    <span class="kw">font</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFontBold</span>,
+    <span class="kw">columns</span> <span class="ot">=</span> <span class="kw">columnData</span>,
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newPickerWheel&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newPickerWheel&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newPickerWheel&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

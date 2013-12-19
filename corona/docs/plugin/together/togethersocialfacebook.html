@@ -1,0 +1,1877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > togethersocialfacebook</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > togethersocialfacebook" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.togethersocialfacebook">together.TogetherSocialFacebook</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#string-facebookappid"><a href="../../api/type/String.html">string</a> FacebookAppID</a></li>
+<li><a href="#table-facebookprivileges"><a href="../../api/type/Table.html">table</a> FacebookPrivileges</a></li>
+<li><a href="#friendmanager-friendmanager"><a href="friendmanager.html">FriendManager</a> FriendManager</a></li>
+<li><a href="#table-facebookfriends"><a href="../../api/type/Table.html">table</a> FacebookFriends</a></li>
+<li><a href="#table-facebookfriendsdictionarybysocialid"><a href="../../api/type/Table.html">table</a> FacebookFriendsDictionaryBySocialID</a></li>
+<li><a href="#boolean-facebookfriendsretrieved"><a href="../../api/type/Boolean.html">boolean</a> FacebookFriendsRetrieved</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#initialize"><a href="#more_initialize">Initialize()</a></a></li>
+<li><a href="#getfacebookfriendcount"><a href="#more_getfacebookfriendcount">GetFacebookFriendCount()</a></a></li>
+<li><a href="#getfacebookfriend"><a href="#more_getfacebookfriend">GetFacebookFriend()</a></a></li>
+<li><a href="#findbysocialid"><a href="#more_findbysocialid">FindBySocialID()</a></a></li>
+<li><a href="#login"><a href="#more_login">Login()</a></a></li>
+<li><a href="#logout"><a href="#more_logout">Logout()</a></a></li>
+<li><a href="#sendpost"><a href="#more_sendpost">SendPost()</a></a></li>
+<li><a href="#sendposttouser"><a href="#more_sendposttouser">SendPostToUser()</a></a></li>
+<li><a href="#getfriends"><a href="#more_getfriends">GetFriends()</a></a></li>
+<li><a href="#initialize-1">Initialize()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#getfacebookfriendcount-1">GetFacebookFriendCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+</ul></li>
+<li><a href="#getfacebookfriend-1">GetFacebookFriend()</a><ul>
+<li><a href="#returns-togetherexternalfriend">Returns <a href="togetherexternalfriend.html">TogetherExternalFriend</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#findbysocialid-1">FindBySocialID()</a><ul>
+<li><a href="#returns-externalfriend">Returns <a href="externalfriend.html">ExternalFriend</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#login-1">Login()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#logout-1">Logout()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#sendpost-1">SendPost()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#sendposttouser-1">SendPostToUser()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#getfriends-1">GetFriends()</a><ul>
+<li><a href="#returns-void-5">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="togethersocialfacebook.html">togethersocialfacebook</a>
+</div>
+<div class="section level1" id="together.togethersocialfacebook">
+<h1><a href="#TOC">together.TogetherSocialFacebook</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">TogetherSocialFacebook</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The TogetherSocialFacebook class handles all Facebook related operations.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="string-facebookappid">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> FacebookAppID</a></h4>
+<p>The ID of the Facebook Application that is passed into the facebook.login() function.</p>
+</div>
+<div class="section level4" id="table-facebookprivileges">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> FacebookPrivileges</a></h4>
+<p>The privileges to request from facebook whenever the User logs in.</p>
+</div>
+<div class="section level4" id="friendmanager-friendmanager">
+<h4><a href="#TOC"><a href="friendmanager.html">FriendManager</a> FriendManager</a></h4>
+<p>The FriendManager also accessible from g_Together.FriendManager</p>
+</div>
+<div class="section level4" id="table-facebookfriends">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> FacebookFriends</a></h4>
+<p>A table of external Facebook friends</p>
+</div>
+<div class="section level4" id="table-facebookfriendsdictionarybysocialid">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> FacebookFriendsDictionaryBySocialID</a></h4>
+<p>A table of external Facebook friends where each key is a Friend's FacebookID</p>
+</div>
+<div class="section level4" id="boolean-facebookfriendsretrieved">
+<h4><a href="#TOC"><a href="../../api/type/Boolean.html">boolean</a> FacebookFriendsRetrieved</a></h4>
+<p>A boolean indicating whether Facebook friends have been retrieved during this session</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="initialize">
+<h5><a href="#TOC"><a href="#more_initialize">Initialize()</a></a></h5>
+</div>
+<div class="section level5" id="getfacebookfriendcount">
+<h5><a href="#TOC"><a href="#more_getfacebookfriendcount">GetFacebookFriendCount()</a></a></h5>
+</div>
+<div class="section level5" id="getfacebookfriend">
+<h5><a href="#TOC"><a href="#more_getfacebookfriend">GetFacebookFriend()</a></a></h5>
+</div>
+<div class="section level5" id="findbysocialid">
+<h5><a href="#TOC"><a href="#more_findbysocialid">FindBySocialID()</a></a></h5>
+</div>
+<div class="section level5" id="login">
+<h5><a href="#TOC"><a href="#more_login">Login()</a></a></h5>
+</div>
+<div class="section level5" id="logout">
+<h5><a href="#TOC"><a href="#more_logout">Logout()</a></a></h5>
+</div>
+<div class="section level5" id="sendpost">
+<h5><a href="#TOC"><a href="#more_sendpost">SendPost()</a></a></h5>
+</div>
+<div class="section level5" id="sendposttouser">
+<h5><a href="#TOC"><a href="#more_sendposttouser">SendPostToUser()</a></a></h5>
+</div>
+<div class="section level5" id="getfriends">
+<h5><a href="#TOC"><a href="#more_getfriends">GetFriends()</a></a></h5>
+<hr />
+<div id="more_initialize">
+</div>
+
+</div>
+<div class="section level3" id="initialize-1">
+<h3><a href="#TOC">Initialize()</a></h3>
+<p>Initializes the instance so it can connect to Facebook.</p>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:Initialize( facebookAppID, facebookPrivileges )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> facebookAppID</b></p>
+<p><i>The Facebook Application ID to authenticate with</p>
+<p></i> <b><a href="../../api/type/Table.html">table</a> facebookPrivileges</b></p>
+<p><i>The privileges to authenticate with</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getfacebookfriendcount">
+</div>
+
+<div class="section level3" id="getfacebookfriendcount-1">
+<h3><a href="#TOC">GetFacebookFriendCount()</a></h3>
+<p>Gets the number of FacebookFriends currently managed internally.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:GetFacebookFriendCount(  )</code></pre>
+<hr />
+<div id="more_getfacebookfriend">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getfacebookfriend-1">
+<h3><a href="#TOC">GetFacebookFriend()</a></h3>
+<p>Finds the Facebook friend at the specified index.</p>
+<div class="section level4" id="returns-togetherexternalfriend">
+<h4><a href="#TOC">Returns <a href="togetherexternalfriend.html">TogetherExternalFriend</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:GetFacebookFriend( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the friend to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findbysocialid">
+</div>
+
+<div class="section level3" id="findbysocialid-1">
+<h3><a href="#TOC">FindBySocialID()</a></h3>
+<p>Finds the Facebook friend by their Facebook ID.</p>
+<div class="section level4" id="returns-externalfriend">
+<h4><a href="#TOC">Returns <a href="externalfriend.html">ExternalFriend</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:FindBySocialID( socialID )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> socialID</b></p>
+<p><i>The index of the FacebookFriend to find if it exists, otherwise returns nil</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_login">
+</div>
+
+<div class="section level3" id="login-1">
+<h3><a href="#TOC">Login()</a></h3>
+<p>Attempts to log into Facebook. After successfully connecting, this will also register the user with their profile information. If this user has already registered through Facebook before, the accounts will be merged. Additionally, their Facebook friends list will be retrieved and synchronized to their Together friends list.</p>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:Login( togetherFacebookUser, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherfacebookuser.html">TogetherFacebookUser</a> togetherFacebookUser</b></p>
+<p><i>An instance of a FacebookUser object that gets filled in with their Facebook information.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_logout">
+</div>
+
+<div class="section level3" id="logout-1">
+<h3><a href="#TOC">Logout()</a></h3>
+<p>Attempts to log the user out of Facebook if connected</p>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:Logout( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_sendpost">
+</div>
+
+<div class="section level3" id="sendpost-1">
+<h3><a href="#TOC">SendPost()</a></h3>
+<p>Submits a wall post to the active user's wall</p>
+<blockquote>
+<p><b>Note</b> This method does not display a dialog box</p>
+</blockquote>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:SendPost( postName, postDescription, postMessage, postPictureLink, postCaption, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> postName</b></p>
+<p><i>The name/title of the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postDescription</b></p>
+<p><i>The description of the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postMessage</b></p>
+<p><i>A message for the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postPictureLink</b></p>
+<p><i>A media link for the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postCaption</b></p>
+<p><i>The caption for the wall post</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_sendposttouser">
+</div>
+
+<div class="section level3" id="sendposttouser-1">
+<h3><a href="#TOC">SendPostToUser()</a></h3>
+<p>Submits a wall post to a User's wall</p>
+<blockquote>
+<p><b>Note</b> This method will attempt to display a Facebook dialog</p>
+</blockquote>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:SendPostToUser( who, postName, postDescription, postMessage, postPictureLink, postCaption, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="externalfriend.html">ExternalFriend</a> who</b></p>
+<p><i>The receiver of the wall post must be a friend</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postName</b></p>
+<p><i>A name/title for the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postDescription</b></p>
+<p><i>The description of the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postMessage</b></p>
+<p><i>A message for the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postPictureLink</b></p>
+<p><i>A media link for the wall post</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> postCaption</b></p>
+<p><i>The caption for the wall post</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getfriends">
+</div>
+
+<div class="section level3" id="getfriends-1">
+<h3><a href="#TOC">GetFriends()</a></h3>
+<p>Retrieves your Facebook friends list and synchronizes it with your Together friends list</p>
+<div class="section level4" id="returns-void-5">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherSocialFacebook:GetFriends( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.togethersocialfacebook&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.togethersocialfacebook&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.togethersocialfacebook&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

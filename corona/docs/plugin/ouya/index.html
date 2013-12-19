@@ -1,0 +1,1658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > ouya </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > ouya " />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#ouya.">ouya.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#key.der">key.der</a></li>
+</ul></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#ouyasdk.ouyasetdeveloperid">ouyaSDK.ouyaSetDeveloperId</a></li>
+<li><a href="#ouyasdk.asyncluaouyafetchgameruuid">ouyaSDK.asyncLuaOuyaFetchGamerUUID</a></li>
+<li><a href="#ouyasdk.asyncluaouyarequestproducts">ouyaSDK.asyncLuaOuyaRequestProducts</a></li>
+<li><a href="#ouyasdk.asyncluaouyarequestpurchase">ouyaSDK.asyncLuaOuyaRequestPurchase</a></li>
+<li><a href="#ouyasdk.asyncluaouyarequestreceipts">ouyaSDK.asyncLuaOuyaRequestReceipts</a></li>
+<li><a href="#plugin_ouya.developerid-310a8f51-4d6e-4ae5-bda0-b93878e5f5d0">plugin_ouya.developerId = &quot;310a8f51-4d6e-4ae5-bda0-b93878e5f5d0&quot;;</a></li>
+<li><a href="#plugin_ouya.initialize">plugin_ouya.initialize</a></li>
+<li><a href="#plugin_ouya.ouyasetdeveloperid">plugin_ouya.ouyaSetDeveloperId</a></li>
+<li><a href="#plugin_ouya.asyncluaouyafetchgameruuid">plugin_ouya.asyncLuaOuyaFetchGamerUUID</a></li>
+<li><a href="#plugin_ouya.asyncluaouyarequestproducts">plugin_ouya.asyncLuaOuyaRequestProducts</a></li>
+<li><a href="#plugin_ouya.asyncluaouyarequestpurchase">plugin_ouya.asyncLuaOuyaRequestPurchase</a></li>
+<li><a href="#plugin_ouya.asyncluaouyarequestreceipts">plugin_ouya.asyncLuaOuyaRequestReceipts</a></li>
+</ul></li>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#sdk">SDK</a></li>
+<li><a href="#enterprise">Enterprise</a></li>
+</ul></li>
+<li><a href="#sample-code">Sample Code</a></li>
+<li><a href="#support">Support</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">ouya</a>
+</div>
+<div class="section level1" id="ouya.">
+<h1><a href="#TOC">ouya.*</a></h1>
+<blockquote>
+<p><strong>Type</strong> plugin.ouya</p>
+</blockquote>
+<blockquote>
+<p><strong>Revision</strong> 001</p>
+</blockquote>
+<blockquote>
+<p><strong>Keywords</strong> ouya, in-app-purchase, iap, store, gameNetwork</p>
+</blockquote>
+<blockquote>
+<p><strong>See also</strong> <a href="http://www.coronalabs.com/store/plugin">Marketplace</a></p>
+</blockquote>
+<blockquote>
+<p><strong>Availability</strong> Basic, Pro, Enterprise</p>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The OUYA plugin is available for Corona PRO and Corona Enterprise. The plugin adds an interface for in-app-purchases which allows purchases of entitlements and consumables. The plugin also adds support for accessing the gamer unique identifier.</p>
+</div>
+<div class="section level2" id="platforms">
+<h2><a href="#TOC">Platforms</a></h2>
+<p>Ouya is only supported on Android.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<p>local ouya = require(&quot;plugin.ouya&quot;)</p>
+<p>This causes the plugin to initialize which registers the Java Named Functions making it possible to call into the plugin from Lua.</p>
+<div class="section level4" id="key.der">
+<h4><a href="#TOC">key.der</a></h4>
+<p>This is the signing key from the developer portal that goes into your Corona Assets folder (next to main.lua).</p>
+</div>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<div class="section level4" id="ouyasdk.ouyasetdeveloperid">
+<h4><a href="#TOC">ouyaSDK.ouyaSetDeveloperId</a></h4>
+<p>Before IAP functions can be invoked the developer id must be set. This developer id corresponds with the signing key, and bundle id, and needs to match for proper encryption/decryption.</p>
+</div>
+<div class="section level4" id="ouyasdk.asyncluaouyafetchgameruuid">
+<h4><a href="#TOC">ouyaSDK.asyncLuaOuyaFetchGamerUUID</a></h4>
+<p>Requires developer id to be set.</p>
+<p>This method has success, failure, and cancel callbacks.</p>
+<p>The success event provides access to the gamer's unique identifier.</p>
+</div>
+<div class="section level4" id="ouyasdk.asyncluaouyarequestproducts">
+<h4><a href="#TOC">ouyaSDK.asyncLuaOuyaRequestProducts</a></h4>
+<p>Requires developer id to be set.</p>
+<p>This method has success, failure, and cancel callbacks.</p>
+<p>The success event provides access purchasable details for name, description, and price for the given entitlement/consumable purchasable identifier.</p>
+<p>The failure event provides an error code and description.</p>
+<p>The cancel event provides no arguments and indicates the request was cancelled.</p>
+</div>
+<div class="section level4" id="ouyasdk.asyncluaouyarequestpurchase">
+<h4><a href="#TOC">ouyaSDK.asyncLuaOuyaRequestPurchase</a></h4>
+<p>Requires developer id to be set.</p>
+<p>This method has success, failure, and cancel callbacks.</p>
+<p>The success event provides opens the purchase dialog for the requested purchasable identifier.</p>
+<p>The failure event provides an error code and description.</p>
+<p>The cancel event provides no arguments and indicates the request was cancelled.</p>
+</div>
+<div class="section level4" id="ouyasdk.asyncluaouyarequestreceipts">
+<h4><a href="#TOC">ouyaSDK.asyncLuaOuyaRequestReceipts</a></h4>
+<p>Requires developer id to be set.</p>
+<p>This method has success, failure, and cancel callbacks.</p>
+<p>The success event returns the list of receipts associated with the bundle identifier for the gamer.</p>
+<p>The failure event provides an error code and description.</p>
+<p>The cancel event provides no arguments and indicates the request was cancelled.</p>
+</div>
+<div class="section level4" id="plugin_ouya.developerid-310a8f51-4d6e-4ae5-bda0-b93878e5f5d0">
+<h4><a href="#TOC">plugin_ouya.developerId = &quot;310a8f51-4d6e-4ae5-bda0-b93878e5f5d0&quot;;</a></h4>
+<p>Be sure to set your developer id from the developer portal.</p>
+</div>
+<div class="section level4" id="plugin_ouya.initialize">
+<h4><a href="#TOC">plugin_ouya.initialize</a></h4>
+<p>Common method handles initialization for the wrapper methods.</p>
+</div>
+<div class="section level4" id="plugin_ouya.ouyasetdeveloperid">
+<h4><a href="#TOC">plugin_ouya.ouyaSetDeveloperId</a></h4>
+<p>Wraps calling ouyaSDK.ouyaSetDeveloperId so that the plugin is only initialized once.</p>
+</div>
+<div class="section level4" id="plugin_ouya.asyncluaouyafetchgameruuid">
+<h4><a href="#TOC">plugin_ouya.asyncLuaOuyaFetchGamerUUID</a></h4>
+<p>Wraps calling ouyaSDK.asyncLuaOuyaFetchGamerUUID to check if the plugin has been initialized before invoking.</p>
+</div>
+<div class="section level4" id="plugin_ouya.asyncluaouyarequestproducts">
+<h4><a href="#TOC">plugin_ouya.asyncLuaOuyaRequestProducts</a></h4>
+<p>Wraps calling ouyaSDK.asyncLuaOuyaRequestProducts to check if the plugin has been initialized before invoking.</p>
+</div>
+<div class="section level4" id="plugin_ouya.asyncluaouyarequestpurchase">
+<h4><a href="#TOC">plugin_ouya.asyncLuaOuyaRequestPurchase</a></h4>
+<p>Wraps calling ouyaSDK.asyncLuaOuyaRequestPurchase to check if the plugin has been initialized before invoking.</p>
+</div>
+<div class="section level4" id="plugin_ouya.asyncluaouyarequestreceipts">
+<h4><a href="#TOC">plugin_ouya.asyncLuaOuyaRequestReceipts</a></h4>
+<p>Wraps calling ouyaSDK.asyncLuaOuyaRequestReceipts to check if the plugin has been initialized before invoking.</p>
+</div>
+</div>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>When you build using the Corona Simulator, the server automatically takes care of integrating the plugin into your project.</p>
+<p>All you need to do is add an entry into a <code>plugins</code> table of your <code>build.settings</code>. The following is an example of a minimal <code>build.settings</code> file:</p>
+<pre><code>settings =
+{
+    plugins =
+    {
+        [&quot;plugin.ouya&quot;] =
+        {
+            publisherId = &quot;tv.ouya&quot;
+        },
+    },      
+}</code></pre>
+<p>Add the intent filter so that your game icon will appear in the OUYA Play section.</p>
+<pre><code>   android =
+   {
+      mainIntentFilter =
+      {
+         categories = { &quot;tv.ouya.intent.category.GAME&quot; },
+      }
+   },</code></pre>
+</div>
+<div class="section level3" id="enterprise">
+<h3><a href="#TOC">Enterprise</a></h3>
+<p>The plugin is compatible with Corona Enterpise.</p>
+<p>You'll find more enterprise specific examples on the OUYA site. https://github.com/ouya/docs/blob/master/corona.md</p>
+</div>
+</div>
+<div class="section level2" id="sample-code">
+<h2><a href="#TOC">Sample Code</a></h2>
+<p><a href="https://github.com/ouya/ouya-sdk-examples/tree/master/Corona/Submission/ouya/samples/InAppPurchasesPlugin">InAppPurchasesPlugin</a> - Uses ouya plugin for in-app-purchases for Mac and Windows (required Corona PRO)</p>
+</div>
+<div class="section level2" id="support">
+<h2><a href="#TOC">Support</a></h2>
+<p>More support is available from the inneractive team:</p>
+<ul>
+<li><script type="text/javascript">
+<!--
+h='&#116;&#x61;&#x67;&#x65;&#110;&#x69;&#x67;&#x6d;&#x61;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#116;&#x69;&#x6d;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'E-mail'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x2d;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#116;&#x69;&#x6d;&#32;&#x61;&#116;&#32;&#116;&#x61;&#x67;&#x65;&#110;&#x69;&#x67;&#x6d;&#x61;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="http://forums.ouya.tv/categories/corona-on-ouya">Forum</a></li>
+<li><a href="https://devs.ouya.tv/developers/docs/corona">Docs</a></li>
+<li><a href="http://www.ouya.tv">Plugin Publisher</a></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.ouya.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.ouya.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.ouya.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

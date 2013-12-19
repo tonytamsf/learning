@@ -1,0 +1,1697 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > display > newText</title>
+  <meta name="revised" content="19-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > display > newText" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#display.newtext">display.newText()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#parent-optional">parent <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#text-required">text <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#x-y-optional">x / y <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-height-optional">width / height <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#font-required">font <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fontsize-required">fontSize <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#align-optional">align <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#syntax-legacy">Syntax (Legacy)</a><ul>
+<li><a href="#parentgroup-optional">parentGroup <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#text-required-1">text <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#x-y-required">x / y <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#width-height-optional-1">width / height <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#font-required-1">font <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fontsize-required-1">fontSize <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#single-line-text">Single-Line Text</a></li>
+<li><a href="#multi-line-text">Multi-Line Text</a></li>
+<li><a href="#updating-the-text-string-post-creation">Updating the Text String Post-Creation</a></li>
+<li><a href="#multi-line-text-with-alternate-alignment">Multi-Line Text with Alternate Alignment</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">display</a>  ▸  <a href="newText.html">newText</a>
+</div>
+
+<div class="section level1" id="display.newtext">
+<h1><a href="#TOC">display.newText()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">display.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/DisplayObject/index.html">DisplayObject</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">text, text object</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/ShapeObject/setFillColor.html">object:setFillColor()</a><br/><a href="newEmbossedText.html">display.newEmbossedText()</a><br/><a href="http://www.coronalabs.com/blog/2013/01/16/faq-wednesday-custom-fonts/">Using Custom Fonts</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a text object. The local origin is at the center of the text. Supports multi-line text by specifying a <code>width</code> and <code>height</code> when the object is created (optional).</p>
+<p>By default, the text color is white <code>( 1, 1, 1 )</code>. See <a href="../../type/ShapeObject/setFillColor.html">object:setFillColor()</a> for more information.</p>
+<!---
+
+## Gotchas
+
+* There is currently a bug on all platforms that will cause text to disappear when rotated when "antialias" is set to "true" in config.lua. This does not affect the text if the rotation is 0, 90, or 180 degrees. If you need rotated text, the only solution is to set antialias to false.
+
+-->
+
+<!---
+
+* You should not pass an empty string in a `display.newText()` call. Doing so will result in the text not being positioned correctly.
+
+-->
+
+
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>display.newText( { options } )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="parent-optional">
+<h5><a href="#TOC">parent <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/GroupObject/index.html">GroupObject</a>.</em> Display group in which to insert the text object.</p>
+</div>
+<div class="section level5" id="text-required">
+<h5><a href="#TOC">text <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The text to display.</p>
+</div>
+<div class="section level5" id="x-y-optional">
+<h5><a href="#TOC">x / y <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Coordinates for the object's <strong>x</strong> and <strong>y</strong> center point.</p>
+</div>
+<div class="section level5" id="width-height-optional">
+<h5><a href="#TOC">width / height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Optional parameters to enable multi-line text. Text will be wrapped at <code>width</code> and be cropped at <code>height</code>. Set <code>height</code> to <code>0</code> and the text box height will adjust to the amount of text, but never exceed the maximum texture height for the device. Both <code>width</code> and <code>height</code> are required if you use the <code>align</code> property (see below).</p>
+</div>
+<div class="section level5" id="font-required">
+<h5><a href="#TOC">font <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Names the font. Obtain an array of available fonts via native.getFontNames(). Alternatively, you can pass the following constants instead of a string:</p>
+<ul>
+<li><code>native.systemFont</code></li>
+<li><code>native.systemFontBold</code></li>
+</ul>
+</div>
+<div class="section level5" id="fontsize-required">
+<h5><a href="#TOC">fontSize <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The size of the text in content-pixels.</p>
+</div>
+<div class="section level5" id="align-optional">
+<h5><a href="#TOC">align <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This specifies the alignment of the text when a <code>width</code> parameter is supplied. Default value is <code>&quot;left&quot;</code>. Valid values are <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;right&quot;</code>.</p>
+</div>
+</div>
+<div class="section level2" id="syntax-legacy">
+<h2><a href="#TOC">Syntax (Legacy)</a></h2>
+<p>Either of the following are valid:</p>
+<pre><code>display.newText( [parentGroup,] text, x, y, font, fontSize )
+display.newText( [parentGroup,] text, x, y, [width, height,] font, fontSize )</code></pre>
+<div class="section level5" id="parentgroup-optional">
+<h5><a href="#TOC">parentGroup <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/GroupObject/index.html">GroupObject</a>.</em> Display group in which to insert the text object.</p>
+</div>
+<div class="section level5" id="text-required-1">
+<h5><a href="#TOC">text <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The text to display.</p>
+</div>
+<div class="section level5" id="x-y-required">
+<h5><a href="#TOC">x / y <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Coordinates for the object's <strong>x</strong> and <strong>y</strong> center point.</p>
+</div>
+<div class="section level5" id="width-height-optional-1">
+<h5><a href="#TOC">width / height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Optional arguments to enable multi-line text. Text will be wrapped at <code>width</code> and be cropped at <code>height</code>. Set <code>height</code> to <code>0</code> and the text box height will adjust to the amount of text, but never exceed the maximum texture height for the device.</p>
+</div>
+<div class="section level5" id="font-required-1">
+<h5><a href="#TOC">font <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Names the font. Obtain an array of available fonts via <a href="../native/getFontNames.html">native.getFontNames()</a>. Alternatively, you can pass the following constants instead of a string:</p>
+<ul>
+<li><code>native.systemFont</code></li>
+<li><code>native.systemFontBold</code></li>
+</ul>
+</div>
+<div class="section level5" id="fontsize-required-1">
+<h5><a href="#TOC">fontSize <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The size of the text in content-pixels.</p>
+</div>
+</div>
+<div class="section level2" id="limitations">
+<h2><a href="#TOC">Limitations</a></h2>
+<ul>
+<li>The <code>newText</code> object uses a mask when the object is created. Since there is a masking nesting limit of three on all platforms, care must be taken when inserting text into <code>newContainers</code>, <code>ScrollView</code> or <code>TableView</code> objects (which also consume a mask). If you exceed the mask nesting limit, the text may appear as a solid (white) block.</li>
+<li>In V1 Compatability mode, x,y becomes Left/Top.</li>
+</ul>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level5" id="single-line-text">
+<h5><a href="#TOC">Single-Line Text</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Hello World!&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFont</span>, <span class="dv">16</span> <span class="ot">)</span>
+<span class="kw">myText</span>:setFillColor<span class="ot">(</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level5" id="multi-line-text">
+<h5><a href="#TOC">Multi-Line Text</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Hello World!&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">display</span><span class="ot">.</span><span class="kw">contentWidth</span>, <span class="kw">display</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">*</span> <span class="dv">0.5</span>, <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFont</span>, <span class="dv">16</span> <span class="ot">)</span>
+<span class="kw">myText</span>:setFillColor<span class="ot">(</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level5" id="updating-the-text-string-post-creation">
+<h5><a href="#TOC">Updating the Text String Post-Creation</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;hello&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFontBold</span>, <span class="dv">12</span> <span class="ot">)</span>
+<span class="kw">myText</span>:setFillColor<span class="ot">(</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span>
+
+<span class="kw">myText</span><span class="ot">.</span><span class="kw">text</span> <span class="ot">=</span> <span class="st">&quot;Hello World!&quot;</span></code></pre>
+</div>
+<div class="section level5" id="multi-line-text-with-alternate-alignment">
+<h5><a href="#TOC">Multi-Line Text with Alternate Alignment</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="co">--parent = textGroup,</span>
+    <span class="kw">text</span> <span class="ot">=</span> <span class="st">&quot;Hello World&quot;</span>,     
+    <span class="kw">x</span> <span class="ot">=</span> <span class="dv">150</span>,
+    <span class="kw">y</span> <span class="ot">=</span> <span class="dv">150</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">128</span>,     <span class="co">--required for multi-line and alignment</span>
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">300</span>,    <span class="co">--required for multi-line and alignment</span>
+    <span class="kw">font</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFontBold</span>,   
+    <span class="kw">fontSize</span> <span class="ot">=</span> <span class="dv">18</span>,
+    <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;right&quot;</span>  <span class="co">--new alignment parameter</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="kw">options</span> <span class="ot">)</span>
+<span class="kw">myText</span>:setFillColor<span class="ot">(</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 19-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.display.newText&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.display.newText&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.display.newText&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

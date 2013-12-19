@@ -1,0 +1,1648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > crossinstall </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > crossinstall " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#crossinstall.">crossinstall.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#sign-up">Sign Up</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#ads.init"><a href="init.html">ads.init()</a></a></li>
+<li><a href="#ads.show"><a href="show.html">ads.show()</a></a></li>
+<li><a href="#ads.hide"><a href="hide.html">ads.hide()</a></a></li>
+</ul></li>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#sdk">SDK</a></li>
+<li><a href="#enterprise">Enterprise</a></li>
+</ul></li>
+<li><a href="#sample-code">Sample Code</a></li>
+<li><a href="#support">Support</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">crossinstall</a>
+</div>
+<div class="section level1" id="crossinstall.">
+<h1><a href="#TOC">crossinstall.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Library.html">library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">CrossInstall</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Availability</strong></td>
+<td align="left">Starter, Basic, Pro, Enterprise</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The crossinstall plugin enables you to incorporate banner and full-screen ads into your application seamlessly and with industry leading payouts.</p>
+</div>
+<div class="section level2" id="sign-up">
+<h2><a href="#TOC">Sign Up</a></h2>
+<p>To use the crossinstall service, please <a href="http://www.crossinstall.com/signup?developer=1">sign up</a> for an account.</p>
+</div>
+<div class="section level2" id="platforms">
+<h2><a href="#TOC">Platforms</a></h2>
+<p>The following platforms are supported:</p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+</ul>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<p>You access this plugin by passing the appropriate provider name to the <a href="http://docs.coronalabs.com/api/library/ads/index.html">ads library</a>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua">  <span class="kw">local</span> <span class="kw">ads</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;ads&quot;</span>
+  <span class="kw">ads</span><span class="ot">.</span>init<span class="ot">(</span> <span class="st">&quot;crossinstall&quot;</span>, <span class="kw">appID</span>, <span class="kw">adListener</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<div class="section level4" id="ads.init">
+<h4><a href="#TOC"><a href="init.html">ads.init()</a></a></h4>
+</div>
+<div class="section level4" id="ads.show">
+<h4><a href="#TOC"><a href="show.html">ads.show()</a></a></h4>
+</div>
+<div class="section level4" id="ads.hide">
+<h4><a href="#TOC"><a href="hide.html">ads.hide()</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>When you build using the Corona Simulator, the server automatically takes care of integrating the plugin into your project.</p>
+<p>All you need to do is add an entry into a <code>plugins</code> table of your <code>build.settings</code>. The following is an example of a minimal <code>build.settings</code> file:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.ads.crossinstall&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.crossinstall&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="enterprise">
+<h3><a href="#TOC">Enterprise</a></h3>
+<p>Start <a href="http://docs.coronalabs.com/daily/native/plugin/index.html">here</a>.</p>
+</div>
+</div>
+<div class="section level2" id="sample-code">
+<h2><a href="#TOC">Sample Code</a></h2>
+<p>You can download sample code and read more documentation <a href="http://www.crossinstall.com/docs/corona">here</a>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">ads</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;ads&quot;</span>
+
+<span class="kw">local</span> <span class="kw">function</span> adListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+  <span class="co">-- event table includes:</span>
+  <span class="co">--    event.provider</span>
+  <span class="co">--    event.isError (e.g. true/false )</span>
+  <span class="co">--    event.response (e.g. &quot;Success&quot;/&lt;errorMessage&gt;/&quot;Fullscreen closed&quot;)</span>
+
+  <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">isError</span> <span class="kw">then</span>
+    <span class="co">-- handle failed ad loading</span>
+  <span class="kw">else</span>
+    <span class="co">-- optionally handle interstitial closing, etc</span>
+  <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">ads</span><span class="ot">.</span>init<span class="ot">(</span> <span class="st">&quot;crossinstall&quot;</span>, <span class="st">&quot;your crossinstall app id, like AbCd&quot;</span>, <span class="kw">adListener</span> <span class="ot">)</span>
+
+<span class="co">-- to display a 320x50 banner ad at the bottom of the screen:</span>
+<span class="kw">ads</span><span class="ot">.</span>show<span class="ot">(</span> <span class="st">&quot;banner&quot;</span>, <span class="st">&quot;my placement name&quot;</span>, <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">430</span>, <span class="kw">w</span><span class="ot">=</span><span class="dv">320</span>, <span class="kw">h</span><span class="ot">=</span><span class="dv">50</span>, <span class="kw">timeout</span><span class="ot">=</span><span class="dv">15</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="co">-- to display a fullscreen interstital ad:</span>
+<span class="kw">ads</span><span class="ot">.</span>show<span class="ot">(</span> <span class="st">&quot;fullscreen&quot;</span>, <span class="st">&quot;my placement name&quot;</span>, <span class="ot">{</span><span class="kw">timeout</span><span class="ot">=</span><span class="dv">15</span><span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level2" id="support">
+<h2><a href="#TOC">Support</a></h2>
+<p>More support is available from the CrossInstall team:</p>
+<ul>
+<li><script type="text/javascript">
+<!--
+h='&#x63;&#114;&#x6f;&#x73;&#x73;&#x69;&#110;&#x73;&#116;&#x61;&#108;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x2f;&#x2f;&#104;&#x65;&#108;&#112;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'E-mail'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x2d;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x2f;&#x2f;&#104;&#x65;&#108;&#112;&#32;&#x61;&#116;&#32;&#x63;&#114;&#x6f;&#x73;&#x73;&#x69;&#110;&#x73;&#116;&#x61;&#108;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="http://forums.coronalabs.com/forum/613-crossinstall/">Forum</a></li>
+<li><a href="http://www.crossinstall.com/">CrossInstall Dashboard</a></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.crossinstall.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.crossinstall.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.crossinstall.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

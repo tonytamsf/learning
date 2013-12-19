@@ -1,0 +1,1689 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Types > DisplayObject </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Types > DisplayObject " />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#displayobject">DisplayObject</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#object.alpha"><a href="alpha.html">object.alpha</a></a></li>
+<li><a href="#object.anchorx"><a href="anchorX.html">object.anchorX</a></a></li>
+<li><a href="#object.anchory"><a href="anchorY.html">object.anchorY</a></a></li>
+<li><a href="#object.contentbounds-read-only"><a href="contentBounds.html">object.contentBounds</a> <sub><sup>(read-only)</sup></sub></a></li>
+<li><a href="#object.contentheight-read-only"><a href="contentHeight.html">object.contentHeight</a> <sub><sup>(read-only)</sup></sub></a></li>
+<li><a href="#object.contentwidth-read-only"><a href="contentWidth.html">object.contentWidth</a> <sub><sup>(read-only)</sup></sub></a></li>
+<li><a href="#object.height"><a href="height.html">object.height</a></a></li>
+<li><a href="#object.ishittestmasked"><a href="isHitTestMasked.html">object.isHitTestMasked</a></a></li>
+<li><a href="#object.ishittestable"><a href="isHitTestable.html">object.isHitTestable</a></a></li>
+<li><a href="#object.isvisible"><a href="isVisible.html">object.isVisible</a></a></li>
+<li><a href="#object.maskrotation"><a href="maskRotation.html">object.maskRotation</a></a></li>
+<li><a href="#object.maskscalex"><a href="maskScaleX.html">object.maskScaleX</a></a></li>
+<li><a href="#object.maskscaley"><a href="maskScaleY.html">object.maskScaleY</a></a></li>
+<li><a href="#object.maskx"><a href="maskX.html">object.maskX</a></a></li>
+<li><a href="#object.masky"><a href="maskY.html">object.maskY</a></a></li>
+<li><a href="#object.parent-read-only"><a href="parent.html">object.parent</a> <sub><sup>(read-only)</sup></sub></a></li>
+<li><a href="#object.rotation"><a href="rotation.html">object.rotation</a></a></li>
+<li><a href="#object.width"><a href="width.html">object.width</a></a></li>
+<li><a href="#object.x"><a href="x.html">object.x</a></a></li>
+<li><a href="#object.xscale"><a href="xScale.html">object.xScale</a></a></li>
+<li><a href="#object.y"><a href="y.html">object.y</a></a></li>
+<li><a href="#object.yscale"><a href="yScale.html">object.yScale</a></a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#objectcontenttolocal"><a href="contentToLocal.html">object:contentToLocal()</a></a></li>
+<li><a href="#objectlocaltocontent"><a href="localToContent.html">object:localToContent()</a></a></li>
+<li><a href="#objectremoveself"><a href="removeSelf.html">object:removeSelf()</a></a></li>
+<li><a href="#objectrotate"><a href="rotate.html">object:rotate()</a></a></li>
+<li><a href="#objectscale"><a href="scale.html">object:scale()</a></a></li>
+<li><a href="#objectsetmask"><a href="setMask.html">object:setMask()</a></a></li>
+<li><a href="#objectsetreferencepoint"><a href="setReferencePoint.html">object:setReferencePoint()</a></a></li>
+<li><a href="#objecttoback"><a href="toBack.html">object:toBack()</a></a></li>
+<li><a href="#objecttofront"><a href="toFront.html">object:toFront()</a></a></li>
+<li><a href="#objecttranslate"><a href="translate.html">object:translate()</a></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Types</a>  ▸  <a href="index.html">DisplayObject</a>
+</div>
+<div class="section level1" id="displayobject">
+<h1><a href="#TOC">DisplayObject</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Parent</strong></td>
+<td align="left"><a href="../EventListener/index.html">EventListener</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="../../library/display/index.html">display.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../library/display/newImage.html">display.newImage()</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newImageRect.html">display.newImageRect()</a></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newGroup.html">display.newGroup()</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newCircle.html">display.newCircle()</a></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newRect.html">display.newRect()</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newRoundedRect.html">display.newRoundedRect()</a></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newLine.html">display.newLine()</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><a href="../../library/display/newText.html">display.newText()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>All drawing that occurs on the screen is accomplished by creating DisplayObjects. Anything that appears on the screen is an instance of a DisplayObject. You don’t actually create these objects directly. Instead, you create special kinds of DisplayObject such as rectangles, circles, images, text, etc.</p>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<p><em>(Inherits properties from <a href="../EventListener/index.html">EventListener</a>)</em></p>
+<div class="section level4" id="object.alpha">
+<h4><a href="#TOC"><a href="alpha.html">object.alpha</a></a></h4>
+</div>
+<div class="section level4" id="object.anchorx">
+<h4><a href="#TOC"><a href="anchorX.html">object.anchorX</a></a></h4>
+</div>
+<div class="section level4" id="object.anchory">
+<h4><a href="#TOC"><a href="anchorY.html">object.anchorY</a></a></h4>
+</div>
+<div class="section level4" id="object.contentbounds-read-only">
+<h4><a href="#TOC"><a href="contentBounds.html">object.contentBounds</a> <sub><sup>(read-only)</sup></sub></a></h4>
+</div>
+<div class="section level4" id="object.contentheight-read-only">
+<h4><a href="#TOC"><a href="contentHeight.html">object.contentHeight</a> <sub><sup>(read-only)</sup></sub></a></h4>
+</div>
+<div class="section level4" id="object.contentwidth-read-only">
+<h4><a href="#TOC"><a href="contentWidth.html">object.contentWidth</a> <sub><sup>(read-only)</sup></sub></a></h4>
+</div>
+<div class="section level4" id="object.height">
+<h4><a href="#TOC"><a href="height.html">object.height</a></a></h4>
+</div>
+<div class="section level4" id="object.ishittestmasked">
+<h4><a href="#TOC"><a href="isHitTestMasked.html">object.isHitTestMasked</a></a></h4>
+</div>
+<div class="section level4" id="object.ishittestable">
+<h4><a href="#TOC"><a href="isHitTestable.html">object.isHitTestable</a></a></h4>
+</div>
+<div class="section level4" id="object.isvisible">
+<h4><a href="#TOC"><a href="isVisible.html">object.isVisible</a></a></h4>
+</div>
+<div class="section level4" id="object.maskrotation">
+<h4><a href="#TOC"><a href="maskRotation.html">object.maskRotation</a></a></h4>
+</div>
+<div class="section level4" id="object.maskscalex">
+<h4><a href="#TOC"><a href="maskScaleX.html">object.maskScaleX</a></a></h4>
+</div>
+<div class="section level4" id="object.maskscaley">
+<h4><a href="#TOC"><a href="maskScaleY.html">object.maskScaleY</a></a></h4>
+</div>
+<div class="section level4" id="object.maskx">
+<h4><a href="#TOC"><a href="maskX.html">object.maskX</a></a></h4>
+</div>
+<div class="section level4" id="object.masky">
+<h4><a href="#TOC"><a href="maskY.html">object.maskY</a></a></h4>
+</div>
+<div class="section level4" id="object.parent-read-only">
+<h4><a href="#TOC"><a href="parent.html">object.parent</a> <sub><sup>(read-only)</sup></sub></a></h4>
+</div>
+<div class="section level4" id="object.rotation">
+<h4><a href="#TOC"><a href="rotation.html">object.rotation</a></a></h4>
+</div>
+<div class="section level4" id="object.width">
+<h4><a href="#TOC"><a href="width.html">object.width</a></a></h4>
+</div>
+<div class="section level4" id="object.x">
+<h4><a href="#TOC"><a href="x.html">object.x</a></a></h4>
+</div>
+<div class="section level4" id="object.xscale">
+<h4><a href="#TOC"><a href="xScale.html">object.xScale</a></a></h4>
+</div>
+<div class="section level4" id="object.y">
+<h4><a href="#TOC"><a href="y.html">object.y</a></a></h4>
+</div>
+<div class="section level4" id="object.yscale">
+<h4><a href="#TOC"><a href="yScale.html">object.yScale</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<p><em>(Inherits methods from <a href="../EventListener/index.html">EventListener</a>)</em></p>
+<div class="section level4" id="objectcontenttolocal">
+<h4><a href="#TOC"><a href="contentToLocal.html">object:contentToLocal()</a></a></h4>
+</div>
+<div class="section level4" id="objectlocaltocontent">
+<h4><a href="#TOC"><a href="localToContent.html">object:localToContent()</a></a></h4>
+</div>
+<div class="section level4" id="objectremoveself">
+<h4><a href="#TOC"><a href="removeSelf.html">object:removeSelf()</a></a></h4>
+</div>
+<div class="section level4" id="objectrotate">
+<h4><a href="#TOC"><a href="rotate.html">object:rotate()</a></a></h4>
+</div>
+<div class="section level4" id="objectscale">
+<h4><a href="#TOC"><a href="scale.html">object:scale()</a></a></h4>
+</div>
+<div class="section level4" id="objectsetmask">
+<h4><a href="#TOC"><a href="setMask.html">object:setMask()</a></a></h4>
+</div>
+<div class="section level4" id="objectsetreferencepoint">
+<h4><a href="#TOC"><a href="setReferencePoint.html">object:setReferencePoint()</a></a></h4>
+</div>
+<div class="section level4" id="objecttoback">
+<h4><a href="#TOC"><a href="toBack.html">object:toBack()</a></a></h4>
+</div>
+<div class="section level4" id="objecttofront">
+<h4><a href="#TOC"><a href="toFront.html">object:toFront()</a></a></h4>
+</div>
+<div class="section level4" id="objecttranslate">
+<h4><a href="#TOC"><a href="translate.html">object:translate()</a></a></h4>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.type.DisplayObject.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.type.DisplayObject.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.type.DisplayObject.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

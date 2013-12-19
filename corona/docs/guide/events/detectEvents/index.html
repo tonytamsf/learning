@@ -1,0 +1,1679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > Eventss > detectEvents </title>
+  <meta name="revised" content="27-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > Eventss > detectEvents " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#basic-interactivity-and-event-detection">Basic Interactivity and Event Detection</a><ul>
+<li><a href="#runtime-events">Runtime Events</a></li>
+<li><a href="#local-events">Local Events</a></li>
+<li><a href="#function-and-table-listeners">Function and Table Listeners</a></li>
+<li><a href="#understanding-hit-events">Understanding Hit Events</a><ul>
+<li><a href="#setting-focus">Setting Focus</a></li>
+<li><a href="#tap-touch-multitouch">Tap / Touch / Multitouch</a></li>
+</ul></li>
+<li><a href="#event-listeners">Event Listeners</a></li>
+<li><a href="#registering-events">Registering Events</a></li>
+<li><a href="#removing-event-listeners">Removing Event Listeners</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [events][guide.events]  ▸  <a href="index.html">detectEvents</a>
+</div>
+<div class="section level1" id="basic-interactivity-and-event-detection">
+<h1><a href="#TOC">Basic Interactivity and Event Detection</a></h1>
+<p><strong>Events</strong> are the foundation of interactive applications in Corona. They're used to trigger responses in your app like a tap on the screen, detection of a specific system event, completion of a timer, collision of two physical bodies, etc. Events are detected using the <a href="../../../api/type/EventListener/addEventListener.html">addEventListener()</a> object method which directs Corona to track (listen for) the associated event within a listener function. See the <a href="#registerevents">Registering Events</a> section for details.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#runtime">Runtime Events</a></li>
+<li><a href="#local">Local Events</a></li>
+<li><a href="#functionvstable">Function and Table Listeners</a></li>
+<li><a href="#hit">Understanding Hit Events</a></li>
+<li><a href="#listeners">Event Listeners</a></li>
+<li><a href="#registerevents">Registering Events</a></li>
+<li><a href="#remove">Removing Event Listeners</a></li>
+</ul>
+</div>
+
+
+<a id="runtime"></a>
+<div class="section level2" id="runtime-events">
+<h2><a href="#TOC">Runtime Events</a></h2>
+<p><strong>Runtime events</strong> are dispatched to the global Runtime listener. These events are not directed at any particular object; rather, they are broadcast to all interested listeners. Common Runtime events include the following:</p>
+<ul>
+<li><p><code>enterFrame</code> events occur at the frames-per-second interval of the application (30 or 60).</p></li>
+<li><p><code>system</code> events are dispatched when certain external events occur, such as when the device needs to suspend or exit the application.</p></li>
+<li><p><code>orientation</code> events occur when the device orientation changes from portrait to landscape or vice-versa.</p></li>
+</ul>
+<p>The following code shows how an app can respond to <code>system</code> events:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> onSystemEvent<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">eventType</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">eventType</span> <span class="ot">==</span> <span class="st">&quot;applicationSuspend&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--perform all necessary actions for when the device suspends the application, i.e. during a phone call</span>
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">eventType</span> <span class="ot">==</span> <span class="st">&quot;applicationResume&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--perform all necessary actions for when the app resumes from a suspended state</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;system&quot;</span>, <span class="kw">onSystemEvent</span> <span class="ot">)</span> </code></pre>
+<a id="local"></a>
+</div>
+<div class="section level2" id="local-events">
+<h2><a href="#TOC">Local Events</a></h2>
+<p><strong>Local events</strong> are sent to a single listener and are not broadcast to the global Runtime. Common local events include the following:</p>
+<ul>
+<li><p><code>hit</code> events occur when the user touches the device screen.</p></li>
+<li><p><code>collision</code> events occur when two <a href="../../../api/library/physics/index.html">physics</a> objects collide.</p></li>
+<li><p><code>timer</code> events occur when a running <a href="../../../api/event/timer/index.html">timer</a> completes its duration.</p></li>
+<li><p><code>audio</code> events can be dispatched when a <a href="../../../api/event/audio/index.html">audio</a> file finishes playing.</p></li>
+</ul>
+<p>Local events vary in usage and are discussed further in their topic-appropriate <a href="../../index.html">guides</a> and/or the <a href="../../../api/index.html">API Reference</a>.</p>
+<a id="functionvstable"></a>
+</div>
+<div class="section level2" id="function-and-table-listeners">
+<h2><a href="#TOC">Function and Table Listeners</a></h2>
+<p>Listeners can be either functions or table/display objects.</p>
+<p>When a <strong>function listener</strong> is invoked, it is passed a table representing the event:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myListener</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Listener called with event of type: &quot;</span><span class="ot">..</span><span class="kw">event</span><span class="ot">.</span><span class="kw">name</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myListener</span> <span class="ot">)</span>
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;enterFrame&quot;</span>, <span class="kw">myListener</span> <span class="ot">)</span></code></pre>
+<p>Sometimes a function listener is not convenient because certain variables are not in scope when the listener is invoked. In these situations, <strong>table listeners</strong> should be used. Table listeners must have an instance method with a name corresponding to the event name:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--assume myClass and myClass:new() already exist</span>
+
+<span class="kw">function</span> <span class="kw">myClass</span>:enterFrame<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;enterFrame called at time: &quot;</span><span class="ot">..</span><span class="kw">event</span><span class="ot">.</span><span class="kw">time</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">function</span> <span class="kw">myClass</span>:touch<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;touch occurred at: &quot;</span><span class="ot">..</span><span class="kw">event</span><span class="ot">.</span><span class="kw">x</span><span class="ot">..</span><span class="st">&quot;,&quot;</span><span class="ot">..</span><span class="kw">event</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">myObject</span> <span class="ot">=</span> <span class="kw">myClass</span>:new<span class="ot">()</span> 
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myObject</span> <span class="ot">)</span>
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;enterFrame&quot;</span>, <span class="kw">myObject</span> <span class="ot">)</span></code></pre>
+<a id="hit"></a>
+</div>
+<div class="section level2" id="understanding-hit-events">
+<h2><a href="#TOC">Understanding Hit Events</a></h2>
+<p>When the user touches the screen, a <strong>hit</strong> event is generated and dispatched to display objects in the display hierarchy. Only those objects that intersect the hit location on the screen will receive the event. Hit events propagate through these objects in a particular order. By default, the first object to receive the event is the front-most display object in the display hierarchy that intersects the hit location. The next object to receive the event is the next object back in the hierarchy that intersects the hit location, and so on. For more information on display objects, please read the <a href="../../media/displayObjects/index.html">Display Objects</a> guide.</p>
+<p>Hit events propagate until they are <strong>handled</strong>. This means that if you have multiple objects overlaying each other in the display hierarchy, and a hit event listener has been applied to each, the hit event will propagate through <strong>all</strong> of these objects. However, you can stop propagation to the next underlying object by telling Corona that the event has been handled. This is as simple as returning <code>true</code> from the event listener — this stops the propagation cycle and prevents any underlying objects from responding to the hit event.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> myTouchListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;began&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--code executed when the button is touched</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;object touched = &quot;</span><span class="ot">..</span>tostring<span class="ot">(</span><span class="kw">event</span><span class="ot">.</span><span class="kw">target</span><span class="ot">)</span> <span class="ot">)</span>  <span class="co">--&#39;event.target&#39; is the touched object</span>
+    <span class="kw">end</span>
+    <span class="kw">return</span> <span class="kw">true</span>  <span class="co">--prevents touch propagation to underlying objects</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">50</span> <span class="ot">)</span>
+<span class="kw">myButton</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myTouchListener</span> <span class="ot">)</span></code></pre>
+<p>Note that if the hit event is still not handled after traversal through the entire display hierarchy, it is broadcast as a global event to the Runtime listener.</p>
+<div class="section level3" id="setting-focus">
+<h3><a href="#TOC">Setting Focus</a></h3>
+<p>You can direct all hit events to a specific display object by setting the <strong>focus</strong> on that object. Consider a typical button. If the user touches the button and — without lifting — slides off the button, the button generally should not trigger an action. Likewise, if the touch slides off the button and intersects another interactive object, you probably don't want that object to react since the touch began on the button.</p>
+<p>This is easily solved by setting focus on the display object which instructs the system to deliver all future hit events to that display object.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> myTouchListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;began&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">display</span><span class="ot">.</span>getCurrentStage<span class="ot">()</span>:setFocus<span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">target</span> <span class="ot">)</span>  <span class="co">--&#39;event.target&#39; is the touched object</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;ended&quot;</span> <span class="kw">or</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;cancelled&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">display</span><span class="ot">.</span>getCurrentStage<span class="ot">()</span>:setFocus<span class="ot">(</span> <span class="kw">nil</span> <span class="ot">)</span>  <span class="co">--setting focus to &#39;nil&#39; removes the focus</span>
+
+    <span class="kw">end</span>
+    <span class="kw">return</span> <span class="kw">true</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">50</span> <span class="ot">)</span>
+<span class="kw">myButton</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myTouchListener</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="tap-touch-multitouch">
+<h3><a href="#TOC">Tap / Touch / Multitouch</a></h3>
+<p>For more information on hit events and multitouch (more than one touch on the screen at the same time), please refer to the <a href="../touchMultitouch/index.html">Tap / Touch / Multitouch</a> guide.</p>
+<a id="listeners"></a>
+</div>
+</div>
+<div class="section level2" id="event-listeners">
+<h2><a href="#TOC">Event Listeners</a></h2>
+<p>As illustrated in each example above, events are dispatched to <strong>event listeners</strong> which are written as basic functions. An <code>event</code> argument is always dispatched to the function.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> myTouchListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Touch X location&quot;</span><span class="ot">..</span><span class="kw">event</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Touch Y location&quot;</span><span class="ot">..</span><span class="kw">event</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">50</span> <span class="ot">)</span>
+<span class="kw">myButton</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myTouchListener</span> <span class="ot">)</span></code></pre>
+<p>Notice how the <code>event</code> argument passed to the <code>myTouchListener</code> function contains both <code>x</code> and <code>y</code> properties that represent the point on the screen where the touch occurred. Properties associated with the <code>event</code> argument are unique to each event type — please refer to the <a href="../../../api/event/index.html">Events</a> API documentation for details.</p>
+<a id="registerevents"></a>
+</div>
+<div class="section level2" id="registering-events">
+<h2><a href="#TOC">Registering Events</a></h2>
+<p>Events can be registered using the <a href="../../../api/type/EventListener/addEventListener.html">addEventListener()</a> object method. Just pass the string name of the event type and the name of the event listener function that should handle it.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--standard touch listener on an object</span>
+<span class="kw">myButton</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myTouchListener</span> <span class="ot">)</span>
+
+<span class="co">--Runtime &#39;system&#39; event listener</span>
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;system&quot;</span>, <span class="kw">onSystemEvent</span> <span class="ot">)</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>As shown above, two types of event listeners can be created with the <code>addEventListener()</code> object method: listeners attached to display objects and listeners attached to the global Runtime.</p>
+<p>When you create a display object and add a <strong>local</strong> touch event listener to it, you essentially <strong>point</strong> to a block of code via reference to the function. This code resides in its own memory and it persists after the display object is removed. When that occurs, there's no way to sense future events on the object, so the local event listener is effectively removed for you. You don't need to explicitly remove it.</p>
+<p><strong>Runtime</strong> event listeners, on the other hand, <strong>must</strong> be removed when you're finished using them. Otherwise, they'll continue to run because the Runtime event is global. Not only will this cause a memory leak, but if any functions executing in the Runtime attempt to reference object(s) that no longer exist, the program will crash. See <a href="#remove">Removing Event Listeners</a> below for more information.</p>
+</div>
+
+
+
+
+<a id="remove"></a>
+</div>
+<div class="section level2" id="removing-event-listeners">
+<h2><a href="#TOC">Removing Event Listeners</a></h2>
+<p>Most listeners, with the exception of Runtime listeners like <code>&quot;enterFrame&quot;</code>, will be removed automatically when the associated object is removed, for example when you call <a href="../../../api/type/DisplayObject/removeSelf.html">removeSelf()</a> or <a href="../../../api/library/display/remove.html">display.remove()</a>. However, you may need to explicitly remove an event listener without removing the object.</p>
+<p>Removing an event listener is done using the built-in <a href="../../../api/type/EventListener/removeEventListener.html">removeEventListener()</a> object method.</p>
+<p>This function is called in the same exact manner as <code>addEventListener()</code>. For example, if you want to stop listening for touch events on the <code>myButton</code> object, remove the listener as follows:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">myButton</span>:removeEventListener<span class="ot">(</span> <span class="st">&quot;touch&quot;</span>, <span class="kw">myTouchListener</span> <span class="ot">)</span></code></pre>
+<p>Both the type and function name are required to remove the associated listener, because it's possible to assign multiple listeners of the same type to a single object. For instance, you could have two (or more) different listener functions assigned to the <code>&quot;touch&quot;</code> event of the <code>myButton</code> display object. Therefore, when calling <code>removeEventListener()</code>, you need to specify the type of event you want to stop listening for, as well as the listener function that was previously assigned to that event.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 27-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.events.detectEvents.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.events.detectEvents.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.events.detectEvents.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1715 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > physics > collisionDetection </title>
+  <meta name="revised" content="30-Aug-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > physics > collisionDetection " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#collision-detection">Collision Detection</a><ul>
+<li><a href="#collision-events">Collision Events</a><ul>
+<li><a href="#collision">collision</a></li>
+<li><a href="#precollision">preCollision</a></li>
+<li><a href="#postcollision">postCollision</a></li>
+</ul></li>
+<li><a href="#collision-handling">Collision Handling</a><ul>
+<li><a href="#global-collision-handling">Global Collision Handling</a></li>
+<li><a href="#local-collision-handling">Local Collision Handling</a></li>
+</ul></li>
+<li><a href="#multi-element-collisions">Multi-Element Collisions</a></li>
+<li><a href="#collision-forces">Collision Forces</a></li>
+<li><a href="#collision-filtering">Collision Filtering</a><ul>
+<li><a href="#categorybitsmaskbits">categoryBits/maskBits</a></li>
+<li><a href="#groupindex">groupIndex</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [physics][guide.physics]  ▸  <a href="index.html">collisionDetection</a>
+</div>
+<div class="section level1" id="collision-detection">
+<h1><a href="#TOC">Collision Detection</a></h1>
+<p>This guide discusses how to handle collisions between physical objects, or ignore (filter) collisions between specific object sets.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#collisionevents">Collision Events</a></li>
+<li><a href="#handling">Collision Handling</a></li>
+<li><a href="#multielement">Multi-Element Collisions</a></li>
+<li><a href="#forces">Collision Forces</a></li>
+<li><a href="#filtering">Collision Filtering</a></li>
+</ul>
+</div>
+
+
+<a id="collisionevents"></a>
+<div class="section level2" id="collision-events">
+<h2><a href="#TOC">Collision Events</a></h2>
+<p>Physics engine collision events are exposed through the standard Corona event+listener model, with three event types:</p>
+<div class="section level3" id="collision">
+<h3><a href="#TOC">collision</a></h3>
+<p>For general collision detection, you should listen for an event named <code>&quot;collision&quot;</code>. The <code>&quot;collision&quot;</code> event includes phases for <code>&quot;began&quot;</code> and <code>&quot;ended&quot;</code>, which signify the moments of initial contact and broken contact. If you do not implement a <code>&quot;collision&quot;</code> listener, this event will not fire.</p>
+</div>
+<div class="section level3" id="precollision">
+<h3><a href="#TOC">preCollision</a></h3>
+<p>An event type that fires right before the objects start to interact. Depending on your game logic, you may wish to detect this event and conditionally override the collision.</p>
+<p>For example, in a platform game, you may wish to construct &quot;one-sided&quot; platforms that the character can jump vertically through, but only in one direction. You might do this by comparing the character and platform position to see if the character is below the platform, and then using a short timer to make the <code>isSensor</code> body property temporarily true for the character object so that it passes through the platform. If you do not implement a <code>&quot;preCollision&quot;</code> listener, this event will not fire.</p>
+<p>Note that <code>&quot;preCollision&quot;</code>&quot; events are quite noisy, and may report many times per contact, which may affect performance. Therefore, you should only listen for these events if you need pre-collision warnings, and we also recommend that you use local listeners within the objects of interest, rather than listening globally to all &quot;preCollision&quot; events in the world.</p>
+</div>
+<div class="section level3" id="postcollision">
+<h3><a href="#TOC">postCollision</a></h3>
+<p>An event type that fires right after the objects have interacted. This is the only event in which the collision force is reported. See the <a href="#forces">Collision Forces</a> section below for more on this topic. If you do not implement a <code>&quot;postCollision&quot;</code> listener, this event will not fire.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+Propagation Rules
+</div>
+
+<p>Collision events in Corona have a propagation model similar to touch events. You can use this to further optimize your game performance by limiting the number of events that are created. By default, a collision between two objects will fire a local event for the first object, then a local event for the second object, then a global event in the Runtime object (assuming all have active listeners enabled). However, you may only be interested in some of this information.</p>
+<p>Any collision event handler that returns <code>true</code> will stop further propagation of that collision event, even if there are further listeners that would otherwise have received it. This allows you to further limit the number of events that are created and passed to the Lua side. While individual events are not very expensive, large numbers of them can affect overall performance, so limiting event propagation is a good practice.</p>
+</div>
+
+
+
+
+<a id="handling"></a>
+</div>
+</div>
+<div class="section level2" id="collision-handling">
+<h2><a href="#TOC">Collision Handling</a></h2>
+<p>Collisions are reported between pairs of objects, and they can be detected either <strong>globally</strong>, using a Runtime listener, or <strong>locally</strong> within an object, using a table listener.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>Currently, the Box2D physics engine is liable to crash during a collision if Corona code attempts to modify objects still involved in the collision. This is because Box2D is still working out the iterated mathematics on these objects. Thus, you should never modify/create physics objects during a collision.</p>
+<p>If you need to modify/create an object as a result of a collision, your collision handler should set a flag or add a time delay so the change can occur in the next application cycle or later, e.g. with <code>timer.performWithDelay()</code>.</p>
+</div>
+
+<div class="section level3" id="global-collision-handling">
+<h3><a href="#TOC">Global Collision Handling</a></h3>
+<p>When detected as a Runtime event, each collision event includes <code>event.object1</code> and <code>event.object2</code>, which contain the table IDs of the two Corona display objects involved.</p>
+<p>Because Corona display objects behave like Lua tables, you may freely add any arbitrary data to these tables, such as names, category designators, point values, or even stored functions, and then retrieve this data at collision time. For example, you may wish to store object names in an easily-accessible string format:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">crate1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span>, <span class="dv">100</span>, <span class="dv">200</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate1</span>, <span class="ot">{</span> <span class="kw">density</span> <span class="ot">=</span> <span class="dv">1.0</span>, <span class="kw">friction</span> <span class="ot">=</span> <span class="dv">0.3</span>, <span class="kw">bounce</span> <span class="ot">=</span> <span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span>
+<span class="kw">crate1</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">=</span> <span class="st">&quot;first crate&quot;</span>
+
+<span class="kw">local</span> <span class="kw">crate2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span>, <span class="dv">100</span>, <span class="dv">120</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate2</span>, <span class="ot">{</span> <span class="kw">density</span> <span class="ot">=</span> <span class="dv">1.0</span>, <span class="kw">friction</span> <span class="ot">=</span> <span class="dv">0.3</span>, <span class="kw">bounce</span> <span class="ot">=</span> <span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span>
+<span class="kw">crate2</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">=</span> <span class="st">&quot;second crate&quot;</span>
+
+<span class="kw">local</span> <span class="kw">function</span> onCollision<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;began&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;began: &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">object1</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">..</span> <span class="st">&quot; and &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">object2</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;ended&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;ended: &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">object1</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">..</span> <span class="st">&quot; and &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">object2</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">)</span>
+
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;collision&quot;</span>, <span class="kw">onCollision</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="local-collision-handling">
+<h3><a href="#TOC">Local Collision Handling</a></h3>
+<p>When detected with a table listener within an object, each collision event includes a <code>self</code> table ID, representing the object itself, and <code>event.other</code> which contains the table ID of the other Corona display object involved in the collision. Again, you may wish to store each object's name in string format and retrieve it during the collision event:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">crate1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate1</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span>
+<span class="kw">crate1</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">=</span> <span class="st">&quot;first crate&quot;</span>
+
+<span class="kw">local</span> <span class="kw">crate2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate2</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span>
+<span class="kw">crate2</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">=</span> <span class="st">&quot;second crate&quot;</span>
+
+<span class="kw">local</span> <span class="kw">function</span> onLocalCollision<span class="ot">(</span> <span class="kw">self</span>, <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;began&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">..</span> <span class="st">&quot;: collision began with &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">other</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;ended&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">..</span> <span class="st">&quot;: collision ended with &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">other</span><span class="ot">.</span><span class="kw">myName</span> <span class="ot">)</span>
+
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">crate1</span><span class="ot">.</span><span class="kw">collision</span> <span class="ot">=</span> <span class="kw">onLocalCollision</span>
+<span class="kw">crate1</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;collision&quot;</span>, <span class="kw">crate1</span> <span class="ot">)</span>
+
+<span class="kw">crate2</span><span class="ot">.</span><span class="kw">collision</span> <span class="ot">=</span> <span class="kw">onLocalCollision</span>
+<span class="kw">crate2</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;collision&quot;</span>, <span class="kw">crate2</span> <span class="ot">)</span></code></pre>
+<a id="multielement"></a>
+</div>
+</div>
+<div class="section level2" id="multi-element-collisions">
+<h2><a href="#TOC">Multi-Element Collisions</a></h2>
+<p>Collision events involving a multi-element body (see the <a href="../physicsBodies/index.html">Physics Bodies</a> guide) also return the specific body part involved in the collision. This allows for more finely-tuned game logic: for example, you may decide that colliding with the nose of a rocket does more damage than colliding with its tailfins.</p>
+<p>Body elements are identified by a numerical index, where the first element added to the body is given the number 1, the second one is number 2, the third is number 3, and so on.</p>
+<p>For <strong>global</strong> collision events, two additional integer values are returned:</p>
+<pre><code>event.element1
+event.element2</code></pre>
+<p>These numerical properties are equal to the index of the elements in object1 and object2 that were involved in the collision. For example, object1 might a rocket with three body elements: nose, body and tail. If the collision is with its tail, the value of event.element1 would be 3; if the collision is with its body, the value of event.element1 would be 2. Again, this number is simply determined by the order in which you declared the elements of the body during its construction.</p>
+<p>When collisions involve single-element bodies, both of the above values will always be 1.</p>
+<p>Similarly, <strong>local</strong> collision events (table listeners) return two additional values:</p>
+<pre><code>event.selfElement
+event.otherElement</code></pre>
+<p>As above, these values will be 1 in the case of single-element bodies, and in multi-element bodies will range from 1 to the total number of elements in the body, numbered by the order in which the elements were added to the body.</p>
+<a id="forces"></a>
+</div>
+<div class="section level2" id="collision-forces">
+<h2><a href="#TOC">Collision Forces</a></h2>
+<p>Once a collision has occurred, you can obtain the direct force of the collision, along with the sideways force between the two objects, which is effectively a frictional force. For example, you may have game objects that should be destroyed only if a collision is sufficiently forceful.</p>
+<p>The direct force of the collision is reported within the <code>&quot;postCollision&quot;</code> event as <code>event.force</code>, and the frictional force is available as <code>event.friction</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> onPostCollision<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">force</span> <span class="ot">&gt;</span> <span class="dv">1.0</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Collision force: &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">force</span> <span class="ot">..</span> <span class="st">&quot; Friction: &quot;</span> <span class="ot">..</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">friction</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;postCollision&quot;</span>, <span class="kw">onPostCollision</span> <span class="ot">)</span></code></pre>
+<p>In the example above, very small forces are screened out. Also, a global listener is used here to simplify the example.</p>
+<p>Since the <code>&quot;postCollision&quot;</code> event stream from the physics engine can be quite noisy (it registers a series of increasingly tiny forces as objects &quot;settle&quot;), you will probably want to choose your own threshold for ignoring some of it.</p>
+<p><strong>Technical Note:</strong> Box2D is actually reporting collision impulses, which are forces multiplied by the elapsed time of each world step, but since this time interval is always the same, this distinction can be ignored for the purposes of game logic.</p>
+<a id="filtering"></a>
+</div>
+<div class="section level2" id="collision-filtering">
+<h2><a href="#TOC">Collision Filtering</a></h2>
+<p>By default, all bodies collide with all other bodies, but you may want to fine-tune this behavior. For example, in the classic arcade game <em>Asteroids</em>, none of the asteroids collide with other asteroids, but all of them collide with the player and with the enemy spaceships. There are two ways to accomplish this.</p>
+<div class="section level3" id="categorybitsmaskbits">
+<h3><a href="#TOC">categoryBits/maskBits</a></h3>
+<p>First, you can assign <code>categoryBits</code> and <code>maskBits</code> to your objects via a &quot;collision filter&quot; definition, which is an optional table assigned during body construction. An object will only collide with other objects if their categoryBits are among its assigned maskBits. Normally, an object will only have one category bit assigned, but may have one or more mask bits depending on what other things it should collide with.</p>
+<p><strong>Update:</strong> see the helpful <a href="http://forums.coronalabs.com/topic/2128-collision-filters-helper-chart/">collision filter worksheet</a> and discussion for help on determining the correct values.</p>
+<p>In the example below, the red balloon has a maskBits value of 3, so it would collide with any objects in category bits 2 and 1, which in this case would include other red balloons (category bit 2) or the wall objects (category bit 1). Meanwhile, it will pass through any blue balloons (category bit 4), since bit 4 is not included in its maskBits value.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">borderCollisionFilter</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">categoryBits</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="kw">maskBits</span> <span class="ot">=</span> <span class="dv">6</span> <span class="ot">}</span> 
+<span class="co">-- border collides with (4 and 2) only</span>
+
+<span class="kw">borderBody</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.4</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.8</span>, <span class="kw">bodyType</span><span class="ot">=</span><span class="st">&quot;static&quot;</span>, <span class="kw">filter</span><span class="ot">=</span><span class="kw">borderCollisionFilter</span> <span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">borderTop</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">320</span>, <span class="dv">1</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">borderTop</span>, <span class="kw">borderBody</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">borderBottom</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">479</span>, <span class="dv">320</span>, <span class="dv">1</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">borderBottom</span>, <span class="kw">borderBody</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">borderLeft</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">480</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">borderLeft</span>, <span class="kw">borderBody</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">borderRight</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">319</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">480</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">borderRight</span>, <span class="kw">borderBody</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">redCollisionFilter</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">categoryBits</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="kw">maskBits</span> <span class="ot">=</span> <span class="dv">3</span> <span class="ot">}</span> 
+<span class="co">-- red collides with (2 and 1) only</span>
+
+<span class="kw">local</span> <span class="kw">blueCollisionFilter</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">categoryBits</span> <span class="ot">=</span> <span class="dv">4</span>, <span class="kw">maskBits</span> <span class="ot">=</span> <span class="dv">5</span> <span class="ot">}</span> 
+<span class="co">-- blue collides with (4 and 1) only</span>
+
+<span class="kw">local</span> <span class="kw">redBody</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">0.2</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.95</span>, <span class="kw">radius</span><span class="ot">=</span><span class="dv">43.0</span>, <span class="kw">filter</span><span class="ot">=</span><span class="kw">redCollisionFilter</span> <span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">blueBody</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">0.2</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.95</span>, <span class="kw">radius</span><span class="ot">=</span><span class="dv">43.0</span>, <span class="kw">filter</span><span class="ot">=</span><span class="kw">blueCollisionFilter</span> <span class="ot">}</span>
+
+<span class="kw">redBalloon</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;red_balloon.png&quot;</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">redBalloon</span>, <span class="kw">redBody</span> <span class="ot">)</span>
+
+<span class="kw">blueBalloon</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;blue_balloon.png&quot;</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">blueBalloon</span>, <span class="kw">blueBody</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="groupindex">
+<h3><a href="#TOC">groupIndex</a></h3>
+<p>The second method is to assign a <code>groupIndex</code> to each object, via the same filter definition shown above. This value can be a positive or negative integer, and may be a simpler way of specifying collision rules. Objects with the same positive <code>groupIndex</code> value will always collide with each other, and objects with the same negative <code>groupIndex</code> value will never collide with each other.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">greenCollisionFilter</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">groupIndex</span> <span class="ot">=</span> <span class="ot">-</span><span class="dv">2</span> <span class="ot">}</span></code></pre>
+<p>If both <code>groupIndex</code> and <code>collisionBits</code>/<code>maskBits</code> are assigned to an object, the <code>groupIndex</code> has higher precedence.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 30-Aug-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.physics.collisionDetection.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.physics.collisionDetection.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.physics.collisionDetection.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

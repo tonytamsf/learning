@@ -1,0 +1,1862 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Enterprise > Plugins > submission</title>
+  <meta name="revised" content="04-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Enterprise > Plugins > submission" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#plugin-submission-guide">Plugin Submission Guide</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#distribution">Distribution</a></li>
+<li><a href="#packaging-for-submission">Packaging for Submission</a><ul>
+<li><a href="#directory-structure">Directory Structure</a></li>
+<li><a href="#format-for-metadata.json">Format for metadata.json</a></li>
+<li><a href="#format-for-per-platform-metadata.lua">Format for per-platform metadata.lua</a><ul>
+<li><a href="#android">Android</a></li>
+<li><a href="#ios-and-ios-simulator">iOS and iOS Simulator</a><ul>
+<li><a href="#default-frameworks">Default Frameworks</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#creating-documentation">Creating Documentation</a></li>
+</ul></li>
+<li><a href="#plugin-versioning">Plugin Versioning</a><ul>
+<li><a href="#choosing-a-version">Choosing a Version</a></li>
+<li><a href="#multiple-versions">Multiple Versions</a></li>
+</ul></li>
+<li><a href="#template">Template</a><ul>
+<li><a href="#example">Example</a></li>
+</ul></li>
+<li><a href="#faq">FAQ</a><ul>
+<li><a href="#do-i-need-to-create-plugins-for-platforms-that-are-not-supported-such-as-windows-and-osx">Do I need to create plugins for platforms that are not supported, such as Windows and OSX?</a></li>
+<li><a href="#i-have-uploaded-a-plugin-for-platform-x.-where-do-i-add-plugins-for-the-additional-platforms">I have uploaded a plugin for 'platform X'. Where do I add plugins for the additional platforms?</a></li>
+<li><a href="#i-have-created-static-libraries-for-ios-.a-files-and-jar-files-for-android-.jar-files-for-android-how-do-i-produce-dlls-and-dylibs-for-the-simulators">I have created static libraries for iOS (.a files) and jar files for Android (.jar files for Android), how do I produce dll's and dylibs for the simulators?</a></li>
+<li><a href="#we-have-updated-our-documentation-andor-libraries-but-they-are-not-available">We have updated our documentation and/or libraries, but they are not available?</a></li>
+<li><a href="#why-is-there-an-iphone-and-iphone-sim-folder">Why is there an iphone and iphone-sim folder?</a></li>
+<li><a href="#can-i-include-resources-in-my-android-plugin">Can I include resources in my Android plugin?</a></li>
+<li><a href="#which-version-of-the-android-ndk-should-i-be-using-for-native-library-.so-plugin-creation">Which version of the Android NDK should I be using for native library (.so) plugin creation**</a></li>
+<li><a href="#where-should-i-post-my-plugin-sample-code">Where should I post my plugin sample code?</a></li>
+<li><a href="#how-can-i-test-my-plugin">How can I test my plugin?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Enterprise</a>  ▸  <a href="index.html">Plugins</a>  ▸  <a href="submission.html">submission</a>
+</div>
+<div class="section level1" id="plugin-submission-guide">
+<h1><a href="#TOC">Plugin Submission Guide</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">plugin, marketplace</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="http://www.coronalabs.com/store/plugin">Marketplace</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>This guide is for 3rd parties who are ready to submit a plugin.</p>
+</div>
+<div class="section level2" id="distribution">
+<h2><a href="#TOC">Distribution</a></h2>
+<p>Plugins are distributed differently depending on the product;</p>
+<ul>
+<li>Corona SDK
+<ul>
+<li>Your plugins will be hosted live on Corona's build servers, so your plugins are available immediately to all SDK developers.</li>
+<li>When a SDK developer creates a project that requires your plugin, the build server automatically integrates the plugin during the build process.</li>
+</ul></li>
+<li>Corona Enterprise
+<ul>
+<li>The Enterprise developer will have to include the plugin into the native project.</li>
+<li>Depending on the target OS, this can take several forms: static library (iOS), shared library (Mac/Win/Android), or JAR file (Android).</li>
+</ul></li>
+</ul>
+</div>
+<div class="section level2" id="packaging-for-submission">
+<h2><a href="#TOC">Packaging for Submission</a></h2>
+<p>Plugins should be submitted via a bitbucket repo that has been shared with you. The structure of that repo must follow a particular format.</p>
+<p>When you have an update to your repo, you can generate a pull request.</p>
+<p>To help you get started, we have created a <a href="https://github.com/coronalabs/plugins-submission-template">Plugin Submission Template</a> that contains starter files, with the exception of the <code>plugins</code> binary directory.</p>
+<div class="section level3" id="directory-structure">
+<h3><a href="#TOC">Directory Structure</a></h3>
+<p>You should package up your files in the following format</p>
+<ul>
+<li><code>metadata.json</code> Key information about your plugin. See 'Format for metadata.json' below.</li>
+<li><code>docs/</code> Contains documentation. See 'Creating Documentation' below.</li>
+<li><code>plugins/</code>
+<ul>
+<li><code>${VERSION}/</code> Daily build version, e.g. <code>2013.1076</code>. See 'Plugin Versioning' below.
+<ul>
+<li><code>android/</code>
+<ul>
+<li>Binary (.jar) (.so support coming soon)</li>
+<li><code>metadata.lua</code> See 'Format for per-platform metadata.lua' below.</li>
+</ul></li>
+<li><code>iphone/</code>
+<ul>
+<li>Binary (.a) (armv7)</li>
+<li><code>metadata.lua</code> See 'Format for per-platform metadata.lua' below.</li>
+</ul></li>
+<li><code>iphone-sim/</code>
+<ul>
+<li>Binary (.a) (i386)</li>
+<li><code>metadata.lua</code> See 'Format for per-platform metadata.lua' below.</li>
+</ul></li>
+<li><code>mac-sim/</code>
+<ul>
+<li>Binary (.dylib) or Lua plugin</li>
+</ul></li>
+<li><code>win32-sim/</code>
+<ul>
+<li>Binary (.dll) or Lua plugin</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><code>samples/</code> This contains the SDK-style project, e.g. 'main.lua', that we can use to verify your plugin.</li>
+</ul>
+</div>
+<div class="section level3" id="format-for-metadata.json">
+<h3><a href="#TOC">Format for metadata.json</a></h3>
+<p>This json file contains information about the publisher, the name of the plugin as it appears in Lua, and other related information.</p>
+<p>The <a href="https://github.com/coronalabs/plugins-submission-template">Plugin Submission Template</a> contains a <code>metadata.json</code> file that should be updated with the appropriate information.</p>
+<p>Here's an example:</p>
+<pre><code>{
+    &quot;contact&quot;: &quot;john@mycompany.com&quot;,
+    &quot;url&quot;: &quot;http://www.mycompany.com&quot;,
+    &quot;pluginName&quot;: &quot;plugin.mylibrary&quot;,
+    &quot;publisherId&quot;: &quot;com.mycompany&quot;
+}</code></pre>
+</div>
+<div class="section level3" id="format-for-per-platform-metadata.lua">
+<h3><a href="#TOC">Format for per-platform metadata.lua</a></h3>
+<p>The <code>metadata.lua</code> file describes properties of the plugin binary. This file is required for the following target platforms:</p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>iOS Simulator</li>
+</ul>
+<p>The <a href="https://github.com/coronalabs/plugins-submission-template">Plugin Submission Template</a> provides stub versions. Examples are listed below:</p>
+<div class="section level4" id="android">
+<h4><a href="#TOC">Android</a></h4>
+<p>On Android, you need to specify the format of the binary. Currently .jar is supported. Support for native .so shared libraries is coming soon.</p>
+<p>In addition, you can specify elements in the <code>AndroidManifest.xml</code> file that need to be modified in order to accommodate the plugin.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">metadata</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugin</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="fu">format</span> <span class="ot">=</span> <span class="st">&#39;jar&#39;</span>,
+        <span class="kw">manifest</span> <span class="ot">=</span> 
+        <span class="ot">{</span>
+            <span class="kw">permissions</span> <span class="ot">=</span> <span class="ot">{}</span>,
+            <span class="kw">usesPermissions</span> <span class="ot">=</span>
+            <span class="ot">{</span>
+                <span class="st">&quot;android.permission.INTERNET&quot;</span>,
+                <span class="st">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span>,
+                <span class="st">&quot;android.permission.READ_PHONE_STATE&quot;</span>,
+            <span class="ot">}</span>,
+            <span class="kw">usesFeatures</span> <span class="ot">=</span> <span class="ot">{}</span>,
+            <span class="kw">applicationChildElements</span> <span class="ot">=</span>
+            <span class="ot">{</span>
+                <span class="co">-- Array of strings</span>
+                <span class="st">[[</span>
+<span class="st">&lt;activity android:name=&quot;com.mycompany.MyActivity&quot;</span>
+<span class="st">          android:configChanges=&quot;keyboard|keyboardHidden&quot;/&gt;]]</span>,
+            <span class="ot">}</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span>
+
+<span class="kw">return</span> <span class="kw">metadata</span></code></pre>
+</div>
+<div class="section level4" id="ios-and-ios-simulator">
+<h4><a href="#TOC">iOS and iOS Simulator</a></h4>
+<p>The iOS and iOS Simulator <code>metadata.lua</code> files should be the same.</p>
+<p>In both, you specify the format of the binary. Currently only static libraries are supported.</p>
+<p>For frameworks, Corona already links to a list by default (see 'Default Frameworks' below). If you need to link against additional frameworks, you can specify them in the <code>metadata.lua</code> file as either required frameworks or optional frameworks (weak linking). When you list them, please <strong>remove</strong> the <code>.framework</code> extension.</p>
+<p>Here's an example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">metadata</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugin</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="fu">format</span> <span class="ot">=</span> <span class="st">&#39;staticLibrary&#39;</span>,
+
+        <span class="co">-- This is the name without the &#39;lib&#39; prefix.</span>
+        <span class="co">-- In this case, the static library is called: libplugin_openudid.a</span>
+        <span class="kw">staticLibs</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&#39;plugin_openudid&#39;</span>, <span class="ot">}</span>,
+
+        <span class="kw">frameworks</span> <span class="ot">=</span> <span class="ot">{}</span>,
+        <span class="kw">frameworksOptional</span> <span class="ot">=</span> <span class="ot">{}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span>
+
+<span class="kw">return</span> <span class="kw">metadata</span></code></pre>
+<div class="section level5" id="default-frameworks">
+<h5><a href="#TOC">Default Frameworks</a></h5>
+<p>By default, Corona will automatically require the following frameworks</p>
+<ul>
+<li>'iAd'</li>
+<li>'Foundation'</li>
+<li>'CoreMedia'</li>
+<li>'AddressBook'</li>
+<li>'AddressBookUI'</li>
+<li>'AudioToolbox'</li>
+<li>'AVFoundation'</li>
+<li>'CFNetwork'</li>
+<li>'CoreGraphics'</li>
+<li>'CoreLocation'</li>
+<li>'CoreMotion'</li>
+<li>'GameKit'</li>
+<li>'ImageIO'</li>
+<li>'MapKit'</li>
+<li>'MediaPlayer'</li>
+<li>'MessageUI'</li>
+<li>'MobileCoreServices'</li>
+<li>'OpenAL'</li>
+<li>'OpenGLES'</li>
+<li>'QuartzCore'</li>
+<li>'Security'</li>
+<li>'StoreKit'</li>
+<li>'SystemConfiguration'</li>
+<li>'UIKit'</li>
+</ul>
+<p>For backward iOS version compatibility, Corona weak links against the following frameworks:</p>
+<ul>
+<li>'Accounts'</li>
+<li>'AdSupport'</li>
+<li>'Social'</li>
+<li>'Twitter'</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section level3" id="creating-documentation">
+<h3><a href="#TOC">Creating Documentation</a></h3>
+<p>These files should be written in markdown files. Once your submission is accepted, these markdown files will be converted and hosted on our <a href="http://docs.coronalabs.com">docs site</a>.</p>
+<p>Your markdown files should follow the markdown files in the <a href="https://github.com/coronalabs/plugins-submission-template">Plugin Submission Template</a>. There is more information on how to deal with linking between multiple markdown files and what flavor of markdown we support in the template Readme.</p>
+</div>
+</div>
+<div class="section level2" id="plugin-versioning">
+<h2><a href="#TOC">Plugin Versioning</a></h2>
+<p>When a plugin is published to Corona's servers, you must specify a daily build version for the plugin binary you are deploying.</p>
+<p>This daily build version controls the availability of your plugin. Specifically, you will need to use that version (or subsequent versions) of the Corona SDK in order to use that plugin in a device build and, when available, in the Corona Simulator.</p>
+<p>For example, if you want your plugin to be available starting in daily build <code>2013.1076</code>, then you should use that for <code>${VERSION}</code> per the above directory structure.</p>
+<p>Then you would tell developers to install Corona SDK version <code>2013.1076</code> in order to access that plugin.</p>
+<div class="section level3" id="choosing-a-version">
+<h3><a href="#TOC">Choosing a Version</a></h3>
+<p>For new plugins, we recommend you use the most recent public release as your version. This ensures that your plugin is available to the broadest audience possible.</p>
+<p>When you build your plugin binary, you should use the corresponding version of CoronaEnterprise. For example, if you choose daily build version <code>2013.1076</code>, then you should build using CoronaEnterprise <code>2013.1076</code>.</p>
+</div>
+<div class="section level3" id="multiple-versions">
+<h3><a href="#TOC">Multiple Versions</a></h3>
+<p>Normally, when you update a plugin binary, you just resubmit the plugin.However, there may be an occasion in which a newer version of the plugin breaks backwards compatibility (e.g. API change) or your plugin depends on new functionality available in a later version of Corona.</p>
+<p>In this situation, you should deploy a separate plugin binary. This binary will correspond to a different/newer daily build version of Corona SDK. A developer then simply grabs that newer Corona SDK daily build to access the new version of the plugin. In this way, you can keep the legacy plugin binary around to preserve backwards compatibility.</p>
+<p>For example, here's what your <code>plugins</code> directory might look like:</p>
+<ul>
+<li><code>plugins/</code>
+<ul>
+<li><code>2013.1076/</code> Contains the older legacy plugin binaries.</li>
+<li><code>2013.1100/</code> Contains the new plugin binaries (e.g. different API)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="template">
+<h2><a href="#TOC">Template</a></h2>
+<div class="section level3" id="example">
+<h3><a href="#TOC">Example</a></h3>
+<p>The following is an example of how the <code>network</code> library would be packaged assuming it were introduced in daily build 2013.1076:</p>
+<ul>
+<li><code>metadata.json</code></li>
+<li><code>docs/</code>
+<ul>
+<li><code>index.markdown</code></li>
+<li><code>cancel.markdown</code></li>
+<li><code>canDetectNetworkStatusChanges.markdown</code></li>
+<li><code>download.markdown</code></li>
+<li><code>request.markdown</code></li>
+<li><code>setStatusListener.markdown</code></li>
+<li><code>upload.markdown</code></li>
+<li><code>images/</code>
+<ul>
+<li><code>diagram.png</code></li>
+</ul></li>
+</ul></li>
+<li><code>plugins/</code>
+<ul>
+<li><code>2013.1076/</code>
+<ul>
+<li><code>android/</code>
+<ul>
+<li><code>network.jar</code></li>
+<li><code>metadata.lua</code></li>
+</ul></li>
+<li><code>iphone/</code>
+<ul>
+<li><code>libnetwork.a</code> (armv7)</li>
+<li><code>metadata.lua</code></li>
+</ul></li>
+<li><code>iphone-sim/</code>
+<ul>
+<li><code>libnetwork.a</code> (i386)</li>
+<li><code>metadata.lua</code></li>
+</ul></li>
+<li><code>mac-sim/</code>
+<ul>
+<li><code>network.dylib</code></li>
+</ul></li>
+<li><code>win32-sim/</code>
+<ul>
+<li><code>network.dll</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><code>samples/</code>
+<ul>
+<li><code>main.lua</code></li>
+<li><code>background.png</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="faq">
+<h2><a href="#TOC">FAQ</a></h2>
+<div class="section level3" id="do-i-need-to-create-plugins-for-platforms-that-are-not-supported-such-as-windows-and-osx">
+<h3><a href="#TOC">Do I need to create plugins for platforms that are not supported, such as Windows and OSX?</a></h3>
+<p>At a minimum you will need to supply a LUA plugin stub for all platforms (including plugin versions for Windows and OSX). These stubs should allow Corona SDK developers to make calls as they would on a fully supported platform. A sample LUA stub can be found here: <a href="https://github.com/coronalabs/plugins-lua-template/blob/master/shared/plugin_PLUGIN_NAME.lua">https://github.com/coronalabs/plugins-lua-template/blob/master/shared/plugin_PLUGIN_NAME.lua</a></p>
+</div>
+<div class="section level3" id="i-have-uploaded-a-plugin-for-platform-x.-where-do-i-add-plugins-for-the-additional-platforms">
+<h3><a href="#TOC">I have uploaded a plugin for 'platform X'. Where do I add plugins for the additional platforms?</a></h3>
+<p>Under the daily build version of the plugin folder you should supply your plugin implementations within the folders named <strong>android</strong>, <strong>iphone</strong>, <strong>iphone-sim</strong>, <strong>mac-sim</strong>, and <strong>win32-sim</strong>.</p>
+</div>
+<div class="section level3" id="i-have-created-static-libraries-for-ios-.a-files-and-jar-files-for-android-.jar-files-for-android-how-do-i-produce-dlls-and-dylibs-for-the-simulators">
+<h3><a href="#TOC">I have created static libraries for iOS (.a files) and jar files for Android (.jar files for Android), how do I produce dll's and dylibs for the simulators?</a></h3>
+<p>If the plugin does not have an implementation for Windows or OSX then we recommend creating LUA stub files (see above.)</p>
+<p>If you wish to provide Windows or Mac simulator plugin implementations, you will need to use Visual Studio and Xcode respectively, to produce Dll's and Dylibs. A few links of interest can be found here:</p>
+<p><a href="http://msdn.microsoft.com/en-us/library/ms235636(v=vs.80).aspx">Visual Studio DLL Walkthrough</a></p>
+<p><a href="https://developer.apple.com/library/mac/#documentation/developertools/conceptual/dynamiclibraries/100-Articles/CreatingDynamicLibraries.html#//apple_ref/doc/uid/TP40002073-SW1">Xcode Dylib Walkthrough</a></p>
+</div>
+<div class="section level3" id="we-have-updated-our-documentation-andor-libraries-but-they-are-not-available">
+<h3><a href="#TOC">We have updated our documentation and/or libraries, but they are not available?</a></h3>
+<p>Please contact us whenever there is a change made to the documentation or libraries to make sure that we are aware of your change and that you wish to make it publicly available. <a href="plugins@coronalabs.com">plugins@coronalabs.com</a>.</p>
+</div>
+<div class="section level3" id="why-is-there-an-iphone-and-iphone-sim-folder">
+<h3><a href="#TOC">Why is there an iphone and iphone-sim folder?</a></h3>
+<p>When you submit a plugin, two versions should be submitted. The iphone folder should contain the <strong>armv7</strong> plugin and the iphone-sim folder should contain the <strong>i386</strong> version of the plugin. This ensures that there is a plugin available for both the XCode simulator and the physical device.</p>
+</div>
+<div class="section level3" id="can-i-include-resources-in-my-android-plugin">
+<h3><a href="#TOC">Can I include resources in my Android plugin?</a></h3>
+<p>Resources cannot be included directly in an Android plugin, it's recommended that the plugin download resource files it requires.</p>
+</div>
+<div class="section level3" id="which-version-of-the-android-ndk-should-i-be-using-for-native-library-.so-plugin-creation">
+<h3><a href="#TOC">Which version of the Android NDK should I be using for native library (.so) plugin creation**</a></h3>
+<p>For plugins available for Corona SDK builds 2013.1148 and above the native library (.so) plugin should be built with the Android NDK labelled android-ndk-r8b.</p>
+</div>
+<div class="section level3" id="where-should-i-post-my-plugin-sample-code">
+<h3><a href="#TOC">Where should I post my plugin sample code?</a></h3>
+<p>We recommend uploading sample code to a GitHub repo and linking to it from within the plugin index.markdown under the header &quot;Sample Code&quot;.</p>
+</div>
+<div class="section level3" id="how-can-i-test-my-plugin">
+<h3><a href="#TOC">How can I test my plugin?</a></h3>
+<p>The plugin can be tested using the Enterprise version of Corona SDK by linking the static library (iOS) or through including the library in your project's libs directory (Android). After initial testing with Enterprise, you will need to submit the binaries to Corona Labs to test with the Pro version of Corona SDK.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 04-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=native.plugin.submission&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=native.plugin.submission&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=native.plugin.submission&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > media > imageSheets </title>
+  <meta name="revised" content="26-Aug-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > media > imageSheets " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#image-sheets-sprite-sheets">Image Sheets (Sprite Sheets)</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#image-sheet-setup">Image Sheet Setup</a><ul>
+<li><a href="#simple-options">Simple Options</a></li>
+<li><a href="#complex-options">Complex Options</a></li>
+<li><a href="#dynamically-selected-image-sheets">Dynamically-Selected Image Sheets</a></li>
+</ul></li>
+<li><a href="#displaying-images">Displaying Images</a></li>
+<li><a href="#trimming-notes">Trimming Notes</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [media][guide.media]  ▸  <a href="index.html">imageSheets</a>
+</div>
+<div class="section level1" id="image-sheets-sprite-sheets">
+<h1><a href="#TOC">Image Sheets (Sprite Sheets)</a></h1>
+<p>Corona fully supports <strong>image sheets</strong>, sometimes referred to as sprite sheets or texture atlases. This allows you to load multiple images/frames from a single larger image file. Image sheets can be used for both static images and animated sprites. <!--- add link to sprite guide (left) --></p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#setup">Image Sheet Setup</a></li>
+<li><a href="#display">Displaying Images</a></li>
+<li><a href="#trimming">Trimming Notes</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>In mobile app design, where devices have limited texture memory, it's often essential to conserve this memory by using image sheets. In most cases, it is more efficient to consolidate several smaller images onto one larger sheet and &quot;pull&quot; a particular image from the sheet when you want to display it on the screen. Corona offers this functionality via image sheets.</p>
+<p>Image sheets are also a convenience feature. Using popular 3rd-party tools like <a href="http://www.codeandweb.com/texturepacker">TexturePacker</a>, you can design your images individually and then instruct the application to consolidate several image files into one optimized image sheet.</p>
+<p>For a more detailed explanation of the memory benefits of image sheets, please refer to the <a href="../../basics/optimization/index.html">Performance and Optimization</a> guide.</p>
+<a id="setup"></a>
+</div>
+<div class="section level2" id="image-sheet-setup">
+<h2><a href="#TOC">Image Sheet Setup</a></h2>
+<p>The syntax for a new image sheet requires, at minimum, the name of the file and a table of <strong>options</strong> which tells Corona about the images contained on the overall sheet. Depending on your needs, these options can be in &quot;simple&quot; format or &quot;complex&quot; format. If you're using a texture packing utility like those mentioned above, this task will typically be handled for you.</p>
+<p>Initializing the image sheet is done with the <a href="../../../api/library/graphics/newImageSheet.html">graphics.newImageSheet()</a> function:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="kw">filename</span>, <span class="ot">[</span><span class="kw">baseDir</span>, <span class="ot">]</span> <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<ul>
+<li><p><code>filename</code> — this is the name of the image file that includes all frames of the image sheet.</p></li>
+<li><p><code>baseDir</code> — specifies the base directory (<a href="../../../api/library/system/index.html">system directory constant</a>) where <code>filename</code> is located.</p></li>
+<li><p><code>options</code> — a table with keys and/or sub-tables that represent specific options related to the image sheet.</p></li>
+</ul>
+<div class="section level3" id="simple-options">
+<h3><a href="#TOC">Simple Options</a></h3>
+<p>This configuration assumes that all frames in the image sheet share identical size properties (width and height).</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">3</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="complex-options">
+<h3><a href="#TOC">Complex Options</a></h3>
+<p>This configuration is required if the image sheet has frames of varying sizes. In this configuration, <code>options</code> consists of an array of tables within a parent <code>frames</code> table. Each table in the array represents a single frame in the image sheet. For each frame, you must specify the <code>x</code> and <code>y</code> start <nobr>(upper-left corner)</nobr> along with the <code>width</code> and <code>height</code> of the frame. Taken together, these four parameters encompass the rectangular bounds of the frame.</p>
+<p>For example, consider the following image sheet (<code>mySheet.png</code>) with two frames of varying width:</p>
+<table border="0" cellpadding="0" cellspacing="0" style="margin-top:20px;">
+<tr>
+<th>
+ 
+</th>
+<th align="center" width="235" bgcolor="#e6e6e6">
+235
+</th>
+<th align="center" width="277" bgcolor="#f3f3f3">
+277
+</th>
+</tr>
+<tr>
+<th bgcolor="#f3f3f3">
+ 276 
+</th>
+<th colspan="2">
+
+<div class="figure">
+<img src="../../../images/simulator/image-sheets-birds1.png" /><p class="caption"></p>
+</div>
+</th>
+</table><div style="clear:both;">
+ 
+</div>
+
+<p>The image sheet setup would look like this:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">frames</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">--frame 1</span>
+        <span class="ot">{</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">0</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">235</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">276</span>
+        <span class="ot">}</span>,
+        <span class="co">--frame 2</span>
+        <span class="ot">{</span>    
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">235</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">277</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">276</span>
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="dynamically-selected-image-sheets">
+<h3><a href="#TOC">Dynamically-Selected Image Sheets</a></h3>
+<p>Just like individual images displayed with <a href="../../../api/library/display/newImageRect.html">display.newImageRect()</a>, image sheets may be selected dynamically depending on the screen resolution. To accomplish this, you must specify the following key-value pairs in the <code>options</code> table:</p>
+<ul>
+<li><code>sheetContentWidth</code></li>
+<li><code>sheetContentHeight</code></li>
+</ul>
+<p>These values tell Corona the size of the original 1x image sheet. For example, if you're developing for both iPad and iPad Retina, and you're using an image sheet of 1000×1000 for the regular iPad, you should specify <code>1000</code> for both of these values and then design your Retina image sheet at 2000×2000.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">10</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">1000</span>,  <span class="co">--width of original 1x size of entire sheet</span>
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">1000</span>  <span class="co">--height of original 1x size of entire sheet</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<p>For details on dynamic scaling and dynamic image selection (which applies to image sheets too), please refer to the <a href="../../basics/configSettings/index.html">Project Configuration</a> guide.</p>
+<a id="display"></a>
+</div>
+</div>
+<div class="section level2" id="displaying-images">
+<h2><a href="#TOC">Displaying Images</a></h2>
+<p>To display an image (frame) from an image sheet, use the existing display APIs but specify the sheet and a frame number instead of just the image name:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">frame1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">sheet</span>, <span class="dv">1</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">frame2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">sheet</span>, <span class="dv">2</span> <span class="ot">)</span></code></pre>
+<p>If you require dynamically-selected images, use <a href="../../../api/library/display/newImageRect.html">display.newImageRect()</a> and specify the width and height as usual:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">frame1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="kw">sheet</span>, <span class="dv">1</span>, <span class="dv">235</span>, <span class="dv">276</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">frame2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="kw">sheet</span>, <span class="dv">2</span>, <span class="dv">277</span>, <span class="dv">276</span> <span class="ot">)</span></code></pre>
+<a id="trimming"></a>
+</div>
+<div class="section level2" id="trimming-notes">
+<h2><a href="#TOC">Trimming Notes</a></h2>
+<p>As noted above, popular image packing programs offer the option to maximize (compact) your image sheets. Essentially, this means that the source images will be <strong>trimmed</strong> of empty surrounding space before they're packed into the final image sheet. These programs make intelligent use of the overall sheet dimensions and automatically arrange the images into the most efficient layout possible. For example, if you want to pack the two individual bird images into one image sheet using a packing program, the result may be as follows:</p>
+<table>
+<tr>
+<th valign="top">
+
+<div class="figure">
+<img src="../../../images/simulator/image-sheets-bird1.png" /><p class="caption"></p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>+</b>
+</th>
+<th valign="top">
+
+<div class="figure">
+<img src="../../../images/simulator/image-sheets-bird2.png" /><p class="caption"></p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>=</b>
+</th>
+<th valign="top">
+
+<div class="figure">
+<img src="../../../images/simulator/image-sheets-bird3.png" /><p class="caption"></p>
+</div>
+</th>
+</tr>
+</table>
+
+<p>Note that the transparent space, represented by the gray checkerboard in the above examples, is trimmed off and the birds are packed closely together to achieve the smallest possible image sheet. With this change, the image sheet is now 450×262 instead of 512×276.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>While trimming is often necessary to achieve the smallest possible image sheets, there are some important usage notes that you must be aware of, particularly in regards to positioning.</p>
+<p>When you place one of these images on the screen or use them in a sprite animation, you will typically want the images to be positioned as if they were <strong>not</strong> trimmed — meaning, the empty space that was trimmed is respected, not discarded, in regards to screen positioning. This ensures that the images align properly with each other, especially in an animation where the trimmed area will often vary per frame.</p>
+<p>Corona manages this with some additional parameters in the image sheet setup. These include <code>sourceX</code>, <code>sourceY</code>, <code>sourceWidth</code>, and <code>sourceHeight</code>. These are added to the image sheet <code>options</code> as follows:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>       
+    <span class="kw">frames</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">--frame 1</span>
+        <span class="ot">{</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">0</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">203</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">256</span>,
+            <span class="kw">sourceX</span> <span class="ot">=</span> <span class="dv">60</span>,
+            <span class="kw">sourceY</span> <span class="ot">=</span> <span class="dv">11</span>,
+            <span class="kw">sourceWidth</span> <span class="ot">=</span> <span class="dv">277</span>,
+            <span class="kw">sourceHeight</span> <span class="ot">=</span> <span class="dv">276</span>
+        <span class="ot">}</span>,
+        <span class="co">--frame 2</span>
+        <span class="ot">{</span>
+            <span class="kw">x</span> <span class="ot">=</span> <span class="dv">203</span>,
+            <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span>,
+            <span class="kw">width</span> <span class="ot">=</span> <span class="dv">247</span>,
+            <span class="kw">height</span> <span class="ot">=</span> <span class="dv">262</span>,
+            <span class="kw">sourceX</span> <span class="ot">=</span> <span class="dv">16</span>,
+            <span class="kw">sourceY</span> <span class="ot">=</span> <span class="dv">5</span>,
+            <span class="kw">sourceWidth</span> <span class="ot">=</span> <span class="dv">277</span>,
+            <span class="kw">sourceHeight</span> <span class="ot">=</span> <span class="dv">276</span>
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">450</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">262</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<p>Notice how in both frames, the <code>sourceWidth</code> and <code>sourceHeight</code> parameters match the size of the original, untrimmed frames. This imaginary &quot;canvas&quot; is what you must consider when positioning a trimmed image on the screen. Effectively, the image will be positioned in respect to the <strong>center</strong> point of the untrimmed frame size.</p>
+</div>
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Aug-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.media.imageSheets.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.media.imageSheets.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.media.imageSheets.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1810 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > media > displayObjects </title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > media > displayObjects " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#display-objects">Display Objects</a><ul>
+<li><a href="#creating-display-objects">Creating Display Objects</a></li>
+<li><a href="#properties-and-methods">Properties and Methods</a></li>
+<li><a href="#display-hierarchy">Display Hierarchy</a><ul>
+<li><a href="#inline-method">Inline Method</a></li>
+<li><a href="#direct-method">Direct Method</a></li>
+</ul></li>
+<li><a href="#object-order">Object Order</a></li>
+<li><a href="#screen-updates">Screen Updates</a></li>
+<li><a href="#object-references">Object References</a></li>
+<li><a href="#removing-display-objects">Removing Display Objects</a><ul>
+<li><a href="#direct-removal">Direct Removal</a></li>
+<li><a href="#group-removal">Group Removal</a></li>
+</ul></li>
+<li><a href="#technical-notes">Technical Notes</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [media][guide.media]  ▸  <a href="index.html">displayObjects</a>
+</div>
+<div class="section level1" id="display-objects">
+<h1><a href="#TOC">Display Objects</a></h1>
+<p>Corona <strong>display objects</strong> encompass a wide range of visual objects that you place on the stage or within display groups. These include images, text, shapes, lines, animated sprites, and more.</p>
+<ul>
+<li><a href="#creating">Creating Display Objects</a></li>
+<li><a href="#propertiesmethods">Properties and Methods</a></li>
+<li><a href="#hierarchy">Display Hierarchy</a></li>
+<li><a href="#objectorder">Object Order</a></li>
+<li><a href="#screenupdates">Screen Updates</a></li>
+<li><a href="#reference">Object References</a></li>
+<li><a href="#remove">Removing Display Objects</a></li>
+<li><a href="#technotes">Technical Notes</a></li>
+</ul>
+<a id="creating"></a>
+<div class="section level2" id="creating-display-objects">
+<h2><a href="#TOC">Creating Display Objects</a></h2>
+<p>Display objects are easily created using APIs from Corona's <a href="../../../api/library/display/index.html">display library</a>. Common display objects include the following:</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width25 headerrow notebox-title">
+Object
+</th>
+<th class="width25 headerfirst headerrow notebox-title">
+API
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newImage.html">Standard Image</a>
+</th>
+<th class="itemrow">
+<code>display.newImage()</code>
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newImageRect.html">Dynamically-Selected Image</a>
+</th>
+<th class="itemrow">
+<code>display.newImageRect()</code>
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newText.html">Text</a>
+</th>
+<th class="itemrow">
+<code>display.newText()</code>
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newRect.html">Rectangle</a>
+</th>
+<th class="itemrow">
+<code>display.newRect()</code>
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newCircle.html">Circle</a>
+</th>
+<th class="itemrow">
+<code>display.newCircle()</code>
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newLine.html">Line</a>
+</th>
+<th class="itemrow">
+<code>display.newLine()</code>
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<a href="../../../api/library/display/newGroup.html">Display Group</a>
+</th>
+<th class="itemrow">
+<code>display.newGroup()</code>
+</th>
+</tr>
+</table><div style="clear:both;">
+ 
+</div>
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--standard image</span>
+<span class="kw">local</span> <span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;image.png&quot;</span> <span class="ot">)</span>
+
+<span class="co">--dynamically-selected image (specific image file shown based on device resolution)</span>
+<span class="kw">local</span> <span class="kw">myDynamicImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="st">&quot;image.png&quot;</span>, <span class="dv">240</span>, <span class="dv">120</span> <span class="ot">)</span>
+
+<span class="co">--text</span>
+<span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Hello World!&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFont</span>, <span class="dv">16</span> <span class="ot">)</span>
+
+<span class="co">--rectangle</span>
+<span class="kw">local</span> <span class="kw">myRectangle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">50</span> <span class="ot">)</span>
+
+<span class="co">--circle</span>
+<span class="kw">local</span> <span class="kw">myCircle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newCircle<span class="ot">(</span> <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">30</span> <span class="ot">)</span>
+
+<span class="co">--line</span>
+<span class="kw">local</span> <span class="kw">myLine</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newLine<span class="ot">(</span> <span class="dv">0</span>, <span class="ot">-</span><span class="dv">110</span>, <span class="dv">27</span>, <span class="ot">-</span><span class="dv">35</span> <span class="ot">)</span>
+
+<span class="co">--display group (group of other display objects which can be manipulated as a whole)</span>
+<span class="kw">local</span> <span class="kw">myGroup</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newGroup<span class="ot">()</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>Display objects behave essentially like normal Lua tables. This means that you can add your own properties to an object, as long as they don't conflict with reserved property or method names. A minor exception is that you cannot index into a display object as an array using numerical indices. See <a href="#technotes">Technical Notes</a> at the end of this guide for more information.</p>
+</div>
+
+
+
+
+<a id="propertiesmethods"></a>
+</div>
+<div class="section level2" id="properties-and-methods">
+<h2><a href="#TOC">Properties and Methods</a></h2>
+<p>Display objects are all first-class citizens. You can move them, rotate them, animate (transition) them, and much more using <a href="../../../api/type/DisplayObject/index.html">common properties and methods</a>.</p>
+<p><strong>Properties</strong> are accessed via the <strong>dot operator</strong>. For example, you can change the alpha of an object to 50% by coding:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;image.png&quot;</span> <span class="ot">)</span>
+<span class="kw">myImage</span><span class="ot">.</span><span class="kw">alpha</span> <span class="ot">=</span> <span class="dv">0.5</span>  <span class="co">--change the alpha property</span></code></pre>
+<p><strong>Methods</strong> are executed via the <strong>colon operator</strong>. For example, you can translate (move) an object by coding:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;image.png&quot;</span> <span class="ot">)</span>
+<span class="kw">myImage</span>:translate<span class="ot">(</span> <span class="dv">10</span>, <span class="dv">50</span> <span class="ot">)</span>  <span class="co">--move the object 10 pixels right and 50 pixels down.</span></code></pre>
+<a id="hierarchy"></a>
+</div>
+<div class="section level2" id="display-hierarchy">
+<h2><a href="#TOC">Display Hierarchy</a></h2>
+<p>The screen/display in Corona consists of the <strong>stage</strong> and an optional hierarchy of child <strong>display groups</strong>, a special kind of display object that can contain child objects. This makes it possible to organize your display objects into groups and build relationships between other groups. Please refer to <a href="../../start/displayGroups/index.html">Display Groups and Coordinates</a> for more information on this topic.</p>
+<p>Display objects are added to the stage by default. However, you'll usually need to insert a display object into a specific display group. This is accomplished through two methods:</p>
+<div class="section level3" id="inline-method">
+<h3><a href="#TOC">Inline Method</a></h3>
+<p>As a convenience, most display objects accept a display group as the first argument to the API call. This will insert the object into that group.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myGroup</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newGroup<span class="ot">()</span>
+
+<span class="co">--create object in &#39;myGroup&#39;</span>
+<span class="kw">local</span> <span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">myGroup</span>, <span class="st">&quot;image.png&quot;</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="direct-method">
+<h3><a href="#TOC">Direct Method</a></h3>
+<p>The direct method inserts a display object into the specified group. This method can also be used to move an object from one group to another. Note that an object can't exist in two groups at once, so inserting it into a different group also removes it from its current group.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myGroup</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newGroup<span class="ot">()</span>
+
+<span class="co">--create object on the stage (default)</span>
+<span class="kw">local</span> <span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;image.png&quot;</span> <span class="ot">)</span>
+
+<span class="co">--insert object into &#39;myGroup&#39;</span>
+<span class="kw">myGroup</span>:insert<span class="ot">(</span> <span class="kw">myImage</span> <span class="ot">)</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>Although display groups are essentially tables, Lua library functions like <code>table.insert()</code> and <code>ipairs()</code> are <strong>not</strong> compatible with groups. In addition, you cannot get the number of children in a display group using <code>#myGroup</code>. Instead, use <code>myGroup.numChildren</code>.</p>
+</div>
+
+
+
+
+<a id="objectorder"></a>
+</div>
+</div>
+<div class="section level2" id="object-order">
+<h2><a href="#TOC">Object Order</a></h2>
+<p>Within a particular display group, objects are drawn in back-to-front order. Thus, the <strong>first</strong> object you create will reside <strong>behind</strong> objects created later.</p>
+<p>Fortunately, the ordering of display objects is not set in stone. You can change the relative ordering of an object at any time. The order in which a display group's children are drawn is determined by the order of the array. Using the <code>group:insert()</code> method, you can reorder the position of an object within its parent group.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">square</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="kw">myGroup</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">100</span> <span class="ot">)</span>  <span class="co">--red square is at the bottom</span>
+<span class="kw">square</span>:setFillColor<span class="ot">(</span> <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">circle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newCircle<span class="ot">(</span> <span class="kw">myGroup</span>, <span class="dv">80</span>, <span class="dv">120</span>, <span class="dv">50</span> <span class="ot">)</span>  <span class="co">--green circle is in the middle</span>
+<span class="kw">circle</span>:setFillColor<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">0</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">rect</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="kw">myGroup</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">120</span>, <span class="dv">80</span> <span class="ot">)</span>  <span class="co">--blue rectangle is at the top</span>
+<span class="kw">rect</span>:setFillColor<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span> <span class="ot">)</span>
+
+<span class="co">--&#39;square&#39;, &#39;circle&#39;, and &#39;rect&#39; all have same parent (&#39;myGroup&#39;)</span>
+<span class="kw">local</span> <span class="kw">parent</span> <span class="ot">=</span> <span class="kw">square</span><span class="ot">.</span><span class="kw">parent</span>
+
+<span class="co">--move &#39;square&#39; to the top (siblings at higher indices reside above those at lower ones)</span>
+<span class="co">--conceptually, this just re-inserts the object at the top of its group</span>
+<span class="kw">parent</span>:insert<span class="ot">(</span> <span class="kw">square</span> <span class="ot">)</span>
+
+<span class="co">--move &#39;circle&#39; &#39;below all other siblings</span>
+<span class="kw">parent</span>:insert<span class="ot">(</span> <span class="dv">1</span>, <span class="kw">circle</span> <span class="ot">)</span></code></pre>
+<p>In addition, objects can also be moved within a group using the <code>object:toBack</code> and <code>object:toFront</code> methods.</p>
+<a id="screenupdates"></a>
+</div>
+<div class="section level2" id="screen-updates">
+<h2><a href="#TOC">Screen Updates</a></h2>
+<p>The basic drawing model involves a cycle of executing Lua code and rendering objects in the display hierarchy. During this cycle, the screen only updates when objects in the display change. These changes occur by adding, removing, or changing properties of the child display objects.</p>
+<p>The screen never updates while a block of Lua code is executing. Therefore, if you modify a display object multiple times in a code block — updating the <code>x</code> position, for example — only the <strong>last</strong> change (the final <code>x</code> setting) will reflect when the screen updates.</p>
+<a id="reference"></a>
+</div>
+<div class="section level2" id="object-references">
+<h2><a href="#TOC">Object References</a></h2>
+<p>Because objects can be reordered in the hierarchy, using integer indices to access display group children is fragile. If you move a child above its sibling, all integer indices in your code must be updated.</p>
+<p>In most cases, it's easiest to refer to a display object by its variable name. Variables can be named whatever you wish <strong>except</strong> for names that begin with a number or names that are reserved by Lua or Corona. These naming rules apply to all variables in Lua, so please commit them to memory.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">yellowDuck</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Quack!&quot;</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="st">&quot;Arial&quot;</span>, <span class="dv">60</span> <span class="ot">)</span>  <span class="co">--OK!</span>
+
+<span class="kw">local</span> <span class="kw">orangeTiger22</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Roar!&quot;</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="st">&quot;Arial&quot;</span>, <span class="dv">60</span> <span class="ot">)</span>  <span class="co">--OK!</span>
+
+<span class="kw">local</span> 23dog <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Woof!&quot;</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="st">&quot;Arial&quot;</span>, <span class="dv">60</span> <span class="ot">)</span>  <span class="co">--unacceptable! (name begins with a number)</span>
+
+<span class="kw">local</span> <span class="kw">and</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;and&quot;</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="st">&quot;Arial&quot;</span>, <span class="dv">60</span> <span class="ot">)</span>  <span class="co">--unacceptable! (&#39;and&#39; is a Lua-reserved term)</span></code></pre>
+<p>Another option is to insert certain display objects into a standard Lua table for organizational purposes. This method is useful if you want to reference a set of objects independent of their display group. For example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">stars</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newGroup<span class="ot">()</span>
+
+<span class="kw">local</span> <span class="kw">redStar1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">stars</span>, <span class="st">&quot;redstar.png&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">redStar2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">stars</span>, <span class="st">&quot;redstar.png&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">redStar3</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">stars</span>, <span class="st">&quot;redstar.png&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">whiteStar1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">stars</span>, <span class="st">&quot;whitestar.png&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">whiteStar2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="kw">stars</span>, <span class="st">&quot;whitestar.png&quot;</span> <span class="ot">)</span>
+
+<span class="co">--insert only the red stars into a table</span>
+<span class="kw">local</span> <span class="kw">redStars</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">redStar1</span>, <span class="kw">redStar2</span>, <span class="kw">redStar3</span> <span class="ot">}</span></code></pre>
+<p>While both the red stars and white stars reside in the <code>stars</code> display group, you can manipulate just the red stars by looping through the <code>redStars</code> table:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="ot">#</span><span class="kw">redStars</span> <span class="kw">do</span>
+    <span class="co">--manipulate the star at the current index (i)</span>
+    <span class="kw">redStars</span><span class="ot">[</span><span class="kw">i</span><span class="ot">].</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">redStars</span><span class="ot">[</span><span class="kw">i</span><span class="ot">].</span><span class="kw">x</span> <span class="ot">+</span> <span class="dv">100</span>
+    <span class="kw">redStars</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span>:scale<span class="ot">(</span> <span class="dv">0.5</span>, <span class="dv">0.5</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<p>Note that if you use this method to store/organize display objects, you <strong>must</strong> remove the references from the table when the objects are cleared from the screen.</p>
+<a id="remove"></a>
+</div>
+<div class="section level2" id="removing-display-objects">
+<h2><a href="#TOC">Removing Display Objects</a></h2>
+<p>Because devices have limited memory, it's important to remove display objects from the display hierarchy when you no longer need them. This helps overall system performance by reducing memory consumption (especially texture memory) as well as eliminating unnecessary screen drawing.</p>
+<p>There are two basic methods to remove display objects from the display hierarchy.</p>
+<div class="section level3" id="direct-removal">
+<h3><a href="#TOC">Direct Removal</a></h3>
+<p>This method targets a particular display object and removes it from the display.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>remove<span class="ot">(</span> <span class="kw">myObject</span> <span class="ot">)</span>
+
+<span class="co">--OR</span>
+
+<span class="kw">myObject</span>:removeSelf<span class="ot">()</span>
+
+<span class="co">--OR</span>
+
+<span class="kw">myGroup</span>:<span class="fu">remove</span><span class="ot">(</span> <span class="kw">myObject</span> <span class="ot">)</span>  <span class="co">--group array index also valid</span></code></pre>
+<p>However, none of these methods completely frees the memory consumed by the display object. To prevent memory leaks, you <strong>must</strong> eliminate all variable references to a display object. This is achieved by setting the reference to <code>nil</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>remove <span class="ot">(</span> <span class="kw">myObject</span> <span class="ot">)</span>
+<span class="kw">myObject</span> <span class="ot">=</span> <span class="kw">nil</span>  <span class="co">--set reference to nil!</span>
+
+<span class="co">--OR</span>
+
+<span class="kw">myObject</span>:removeSelf<span class="ot">()</span>
+<span class="kw">myObject</span> <span class="ot">=</span> <span class="kw">nil</span>  <span class="co">--set reference to nil!</span>
+
+<span class="co">--OR</span>
+
+<span class="kw">myGroup</span>:<span class="fu">remove</span><span class="ot">(</span> <span class="kw">myObject</span> <span class="ot">)</span>
+<span class="kw">myObject</span> <span class="ot">=</span> <span class="kw">nil</span>  <span class="co">--set reference to nil!</span></code></pre>
+</div>
+<div class="section level3" id="group-removal">
+<h3><a href="#TOC">Group Removal</a></h3>
+<p>This method removes all children in a display group — all you need to do is remove the display group itself and then <code>nil</code> its reference.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>remove<span class="ot">(</span> <span class="kw">myGroup</span> <span class="ot">)</span>
+<span class="kw">myGroup</span> <span class="ot">=</span> <span class="kw">nil</span>
+
+<span class="co">--OR</span>
+
+<span class="kw">myGroup</span>:removeSelf<span class="ot">()</span>
+<span class="kw">myGroup</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<ul>
+<li><p>As mentioned in the <a href="#reference">Object References</a> section above, if there are other variables or references that point to a display object, it cannot be completely freed from memory. The solution is to <code>nil</code> out <strong>all</strong> of these external references. Once that is done, Lua can free the memory allocation.</p></li>
+<li><p>Global variables are never automatically freed from memory, so if a global variable points to a display object, it will continue to occupy memory even if the object is no longer in the display hierarchy. Remember to <code>nil</code> all global references to display objects.</p></li>
+<li><p>When you remove a display object, event listeners that are attached to it — tap and touch listeners, for example — are also freed from memory. You don't need to explicitly remove event listeners that are isolated to the object.</p></li>
+<li><p><a href="../../../api/library/transition/index.html">Transitions</a> that are applied to an object should be cancelled and set to <code>nil</code> before you remove the object. Since display objects are essentially Lua tables, one convenient method is to set the transition as a property of the display object itself. This allows you to easily access and cancel it.</p></li>
+</ul>
+</div>
+
+
+
+
+<a id="technotes"></a>
+</div>
+</div>
+<div class="section level2" id="technical-notes">
+<h2><a href="#TOC">Technical Notes</a></h2>
+<p>Near the beginning of this guide, we mentioned that display objects behave &quot;essentially&quot; like Lua tables. An exception to this rule is that you cannot set the metatables of display objects. This is due to the nature of our C++/Lua integration in this particular case.</p>
+<p>Corona display objects are native C++ objects internally. Lua implements binding of native pointers with &quot;userdata,&quot; which sets the metatable. Userdata metatables cannot be replaced by Lua code; this is a measure defined by Lua itself.</p>
+<p>Normally, native objects bound to Lua in this way do not behave like tables. There are several examples of this in Corona. Such objects may have properties and/or methods, but they are not extensible. In contrast, Corona display objects do behave like tables — this is a convenience feature, and the alternative would have been a field of &quot;userdata&quot; providing access to custom data associated with the display object. Merging this functionality directly into the display object is easier and more extensible for the end user.</p>
+<p>Essentially, the underlying native bridge is constrained by what is allowed in Lua, and we consider this architectural choice as a fundamental Corona feature. Ultimately, Corona is a C++/OpenGL engine with frameworks designed for rapid development, and these advantages justify the use of metatables for display objects.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.media.displayObjects.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.media.displayObjects.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.media.displayObjects.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

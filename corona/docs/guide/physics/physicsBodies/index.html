@@ -1,0 +1,1912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > physics > physicsBodies </title>
+  <meta name="revised" content="21-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > physics > physicsBodies " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#physics-bodies">Physics Bodies</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#creating-bodies">Creating Bodies</a><ul>
+<li><a href="#physical-properties">Physical Properties</a><ul>
+<li><a href="#density">Density</a></li>
+<li><a href="#friction">Friction</a></li>
+<li><a href="#bounce">Bounce</a></li>
+</ul></li>
+<li><a href="#body-type">Body Type</a><ul>
+<li><a href="#dynamic">dynamic</a></li>
+<li><a href="#static">static</a></li>
+<li><a href="#kinematic">kinematic</a></li>
+</ul></li>
+<li><a href="#rectangular-bodies">Rectangular Bodies</a></li>
+<li><a href="#circular-bodies">Circular Bodies</a></li>
+<li><a href="#polygonal-bodies">Polygonal Bodies</a></li>
+<li><a href="#multi-element-bodies">Multi-Element Bodies</a></li>
+</ul></li>
+<li><a href="#destroying-bodies">Destroying Bodies</a></li>
+<li><a href="#sensors">Sensors</a></li>
+<li><a href="#body-properties">Body Properties</a><ul>
+<li><a href="#object.bodytype">object.bodyType</a></li>
+<li><a href="#object.isawake">object.isAwake</a></li>
+<li><a href="#object.issleepingallowed">object.isSleepingAllowed</a></li>
+<li><a href="#object.isbodyactive">object.isBodyActive</a></li>
+<li><a href="#object.issensor">object.isSensor</a></li>
+<li><a href="#object.isfixedrotation">object.isFixedRotation</a></li>
+<li><a href="#object.gravityscale">object.gravityScale</a></li>
+<li><a href="#object.angularvelocity">object.angularVelocity</a></li>
+<li><a href="#object.angulardamping">object.angularDamping</a></li>
+<li><a href="#object.lineardamping">object.linearDamping</a></li>
+<li><a href="#object.isbullet">object.isBullet</a></li>
+</ul></li>
+<li><a href="#body-methods">Body Methods</a><ul>
+<li><a href="#objectsetlinearvelocity">object:setLinearVelocity()</a></li>
+<li><a href="#objectgetlinearvelocity">object:getLinearVelocity()</a></li>
+<li><a href="#objectapplyforce">object:applyForce()</a></li>
+<li><a href="#objectapplylinearimpulse">object:applyLinearImpulse()</a></li>
+<li><a href="#objectapplytorque">object:applyTorque()</a></li>
+<li><a href="#objectapplyangularimpulse">object:applyAngularImpulse()</a></li>
+<li><a href="#objectresetmassdata">object:resetMassData()</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [physics][guide.physics]  ▸  <a href="index.html">physicsBodies</a>
+</div>
+<div class="section level1" id="physics-bodies">
+<h1><a href="#TOC">Physics Bodies</a></h1>
+<p>This guide discusses how to create Box2D physical bodies in your Corona app, including polygonal and multi-element bodies.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#create">Creating Bodies</a></li>
+<li><a href="#destroy">Destroying Bodies</a></li>
+<li><a href="#sensors">Sensors</a></li>
+<li><a href="#properties">Body Properties</a></li>
+<li><a href="#methods">Body Methods</a></li>
+<li><a href="../limitations/index.html">Limitations</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The physics world is based on the interactions of physical bodies. Corona treats these physical bodies as an extension of its graphics objects. These bodies can be bound to Corona <a href="../../media/displayObjects/index.html">display objects</a> in a <nobr>one-to-one</nobr> relationship and Corona will automatically handle all position updates and other synchronization tasks.</p>
+<p>Standard object read/write attributes like <code>x</code>, <code>y</code>, and <code>rotation</code> should continue to work normally on physical bodies. However, if the object's <code>bodyType</code> is dynamic, the physics engine may &quot;fight back&quot; against your attempts to move the object manually, since it may be under the constant effect of gravity or other forces.</p>
+<p>A display object with a physical body can be deleted in the usual way, using either <a href="../../../api/type/DisplayObject/removeSelf.html">object:removeSelf()</a> or <a href="../../../api/library/display/remove.html">display.remove()</a>. In this case, it will be removed from both the visible screen <strong>and</strong> the physical simulation (the physical body data will be destroyed). Alternatively, you can use <a href="../../../api/library/physics/removeBody.html">physics.removeBody()</a> to remove just the physical body while retaining the core display object on screen. See <a href="#destroy">Destroying Objects</a> for more details and an important note regarding collisions.</p>
+<!---
+
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">Important</div>
+
+When you turn a display object into a physical object, the physics engine owns the object and applies its own rules. The engine assumes the anchor point of the object is its __center__, so changing the anchor point may change the object's position as a display object, but not in respect to the physics simulation.
+
+The same applies to scaling the object: you can scale the object up or down, but the physics engine still considers the core physical body as it was before the scaling was applied.
+
+Note that the physics engine's "view" of the object can be seen by setting the draw mode to either `"hybrid"` or `"debug"`.
+
+``````lua
+physics.setDrawMode( "hybrid" )
+``````
+``````lua
+physics.setDrawMode( "debug" )
+``````
+
+</div>
+
+-->
+
+
+
+
+<a id="create"></a>
+</div>
+<div class="section level2" id="creating-bodies">
+<h2><a href="#TOC">Creating Bodies</a></h2>
+<p>All physical bodies in Corona are created with the <a href="../../../api/library/physics/addBody.html">physics.addBody()</a> function. This allows you to turn any Corona display object into a simulated physical object with just one line of code, including the assignment of physical properties.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">object</span>, <span class="ot">{</span> <span class="kw">properties</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<div class="section level3" id="physical-properties">
+<h3><a href="#TOC">Physical Properties</a></h3>
+<p>All physical bodies possess three core properties, and each can be defined as a key-value pair in the properties table. These properties are optional and the default values will apply unless otherwise specified.</p>
+<div class="section level5" id="density">
+<h5><a href="#TOC">Density</a></h5>
+<p><code>density</code> is multiplied by the area of the body's shape to determine its mass. This parameter is based on a standard value of <code>1.0</code> for water, so materials that are lighter than water (such as wood) have a density below <code>1.0</code>, and heavier materials (such as stone) have a density greater than <code>1.0</code>. However, feel free to set density values to whatever feels right for your simulation, since overall object behavior will also depend on the gravity and <nobr>pixels-to-meter</nobr> scale settings (see <a href="../physicsSetup/index.html">Physics Setup</a>). The default value is <code>1.0</code>.</p>
+</div>
+<div class="section level5" id="friction">
+<h5><a href="#TOC">Friction</a></h5>
+<p><code>friction</code> may be any non-negative value. A value of <code>0</code> means no friction and <code>1.0</code> means fairly strong friction. The default value is <code>0.3</code>.</p>
+</div>
+<div class="section level5" id="bounce">
+<h5><a href="#TOC">Bounce</a></h5>
+<p><code>bounce</code> is the Box2D property known as &quot;restitution,&quot; and it determines how much of an object's velocity is returned after a collision. Values greater than <code>0.3</code> are fairly &quot;bouncy,&quot; and an object with a bounce value of <code>1.0</code> will rebound forever — for example, if the object is dropped to the ground, it will bounce back up to approximately the height from which it was dropped. Bounce values higher than <code>1.0</code> are valid, and they will actually gain velocity with each collision. The default value is <code>0.2</code>, which is slightly bouncy.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--examples:</span>
+
+<span class="kw">local</span> <span class="kw">crate</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span>, <span class="dv">100</span>, <span class="dv">200</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">1.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.3</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">balloon</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;balloon.png&quot;</span>, <span class="dv">200</span>, <span class="dv">200</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">balloon</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">0.1</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.1</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.4</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>Note that a pre-declared table of physical attributes can be used multiple times:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">crate1</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate1.png&quot;</span>, <span class="dv">100</span>, <span class="dv">200</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">crate2</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate2.png&quot;</span>, <span class="dv">180</span>, <span class="dv">280</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">crateMaterial</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">1.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.3</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate1</span>, <span class="kw">crateMaterial</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate2</span>, <span class="kw">crateMaterial</span> <span class="ot">)</span></code></pre>
+<a id="bodytype"></a>
+</div>
+</div>
+<div class="section level3" id="body-type">
+<h3><a href="#TOC">Body Type</a></h3>
+<p>Physical bodies can be one of three types: <strong>dynamic</strong>, <strong>static</strong>, or <strong>kinematic</strong>.</p>
+<div class="section level5" id="dynamic">
+<h5><a href="#TOC">dynamic</a></h5>
+<p>Dynamic bodies are fully simulated. They can be moved manually in code, but normally they move according to forces like gravity or reactionary collision forces. This is the default body type for physical objects in Box2D. Dynamic bodies can collide with all body types.</p>
+</div>
+<div class="section level5" id="static">
+<h5><a href="#TOC">static</a></h5>
+<p>Static bodies does not move under simulation and they behave as if they have infinite mass. Static bodies can be moved manually by the user, but they do not accept the application of velocity. Static bodies collide only with dynamic bodies, not with other static bodies or kinematic bodies.</p>
+</div>
+<div class="section level5" id="kinematic">
+<h5><a href="#TOC">kinematic</a></h5>
+<p>Kinematic bodies move under simulation only according to their velocity. Kinematic bodies will <strong>not</strong> respond to forces like gravity. They can be moved manually by the user, but normally they are moved by setting their velocities. Kinematic bodies collide only with dynamic bodies, not with other kinematic bodies or static bodies.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>As noted, some body types will — or will not — collide with other body types. In a collision between two physical objects, at least <strong>one</strong> of the objects must be dynamic, since this is the only body type which collides with any other type.</p>
+</div>
+
+<p>Declaring the body type in Corona is done either inline with the <code>physics.addBody()</code> call or post-creation using <a href="../../../api/type/Body/bodyType.html">object.bodyType</a>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--inline:</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">triangle</span>, <span class="st">&quot;static&quot;</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">1.6</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="co">--post-creation:</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">triangle</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">1.6</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span>
+<span class="kw">triangle</span><span class="ot">.</span><span class="kw">bodyType</span> <span class="ot">=</span> <span class="st">&quot;static&quot;</span></code></pre>
+</div>
+</div>
+<div class="section level3" id="rectangular-bodies">
+<h3><a href="#TOC">Rectangular Bodies</a></h3>
+<p>By default, the <code>physics.addBody()</code> constructor will apply a rectangular body that surrounds the edges of the associated image or vector object. This is useful for platforms, large ground bodies, and other simple rectangular objects. Note that this rectangle includes the transparent pixels around an image, if any exist.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">platform</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;platform.png&quot;</span>, <span class="dv">600</span>, <span class="dv">200</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">platform</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">1.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.3</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>If you don't want the physical body to match this bounding rectangle, you must define more specific shape data using either the circular <code>radius</code> property or a table of polygon coordinates (see below).</p>
+<p>When in doubt, use <a href="../../../api/library/physics/setDrawMode.html">physics.setDrawMode()</a> to check how the physics engine is actually considering the object.</p>
+</div>
+<div class="section level3" id="circular-bodies">
+<h3><a href="#TOC">Circular Bodies</a></h3>
+<p>Circular bodies are created by adding the <code>radius</code> parameter to the properties table. This works well for balls, rocks, and other objects that can be considered approximately round when calculating collisions.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">ball</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;ball.png&quot;</span>, <span class="dv">100</span>, <span class="dv">100</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">ball</span>, <span class="ot">{</span> <span class="kw">radius</span><span class="ot">=</span><span class="dv">50</span>, <span class="kw">density</span><span class="ot">=</span><span class="dv">1.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.3</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>Note that a non-circular oval does not exist in Box2D collision geometry, since circular bodies exist as a special case. To make an oval body, consider a table of polygon coordinates (see below).</p>
+<a id="polygonal"></a>
+</div>
+<div class="section level3" id="polygonal-bodies">
+<h3><a href="#TOC">Polygonal Bodies</a></h3>
+<p>Polygonal bodies can be created using the <code>shape</code> parameter. This is a Lua table of <strong>x</strong> and <strong>y</strong> coordinate pairs, where each pair defines a vertex point for the shape. These coordinates are specified relative to the <strong>center</strong> of the display object — thus, with <code>(0,0)</code> corresponding to the center of the object, a vertex point of <code>(-20,-10)</code> defines a point 20 pixels to the left of center and 10 pixels above center.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--triangle:</span>
+<span class="kw">local</span> <span class="kw">triangle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;triangle.png&quot;</span> <span class="ot">)</span>
+<span class="kw">triangle</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">200</span>
+<span class="kw">triangle</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">150</span>
+
+<span class="co">--define the shape table (once created, this can be used multiple times)</span>
+<span class="kw">local</span> <span class="kw">triangleShape</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>,<span class="ot">-</span><span class="dv">35</span>, <span class="dv">37</span>,<span class="dv">30</span>, <span class="ot">-</span><span class="dv">37</span>,<span class="dv">30</span> <span class="ot">}</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">triangle</span>, <span class="ot">{</span> <span class="kw">shape</span><span class="ot">=</span><span class="kw">triangleShape</span>, <span class="kw">density</span><span class="ot">=</span><span class="dv">1.6</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">)</span>
+
+
+<span class="co">--pentagon:</span>
+<span class="kw">local</span> <span class="kw">pentagon</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;pentagon.png&quot;</span> <span class="ot">)</span>
+<span class="kw">pentagon</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">200</span>
+<span class="kw">pentagon</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">50</span>
+
+<span class="kw">local</span> <span class="kw">pentagonShape</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>,<span class="ot">-</span><span class="dv">37</span>, <span class="dv">37</span>,<span class="ot">-</span><span class="dv">10</span>, <span class="dv">23</span>,<span class="dv">34</span>, <span class="ot">-</span><span class="dv">23</span>,<span class="dv">34</span>, <span class="ot">-</span><span class="dv">37</span>,<span class="ot">-</span><span class="dv">10</span> <span class="ot">}</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">pentagon</span>, <span class="ot">{</span> <span class="kw">shape</span><span class="ot">=</span><span class="kw">pentagonShape</span>, <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.8</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<ul>
+<li><p>Vertex points must be defined in <strong>clockwise</strong> order. The body may appear correct in the <code>hybrid</code> or <code>debug</code> views even if you specify the vertex points in <nobr>counter-clockwise</nobr> order, but collisions will not function properly.</p></li>
+<li><p>Polygonal shapes must be entirely <strong>convex</strong>. You cannot create shapes with concave bends, for example a bowl or cup. To accomplish such a task, you must assemble the body from multiple polygons, as explained in <a href="#multielement">Multi-Element Bodies</a> below.</p></li>
+<li><p>Polygonal shapes may have a maximum of <strong>8 vertex points</strong> and thus a maximum of 8 sides. If more are required, you must assemble the body from multiple neighboring polygons.</p></li>
+<li><p>Applications such as <a href="http://www.codeandweb.com/physicseditor">PhysicsEditor</a> can assist in the creation of polygonal bodies that obey the above rules.</p></li>
+</ul>
+</div>
+
+<a id="multielement"></a>
+</div>
+<div class="section level3" id="multi-element-bodies">
+<h3><a href="#TOC">Multi-Element Bodies</a></h3>
+<p>The above examples assume a body with only one element — either a rectangle, circle, or convex polygon. However, in more advanced situations, you will need to construct bodies from <strong>multiple</strong> polygons to achieve more precise collision boundaries. Also, since polygons in Box2D must be <strong>convex</strong>, any object with a concave shape must be constructed by assembling multiple body elements.</p>
+<p>When creating multi-element bodies, each element must be specified as a separate <a href="#polygonal">polygonal shape</a>. Although these shapes are declared individually, they will be regarded as part of the overall body and they will not shift/flex independently under the application of physical forces.</p>
+<p>The constructor for a multi-element body is essentially the same as the simple polygon constructor — just declare the additional elements after the first:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">object</span>, <span class="st">&quot;static&quot;</span>,
+    <span class="ot">{</span> <span class="kw">bodyElement1</span> <span class="ot">}</span>,
+    <span class="ot">{</span> <span class="kw">bodyElement2</span> <span class="ot">}</span>,
+    <span class="co">--etc.</span>
+<span class="ot">)</span></code></pre>
+<p>Note that each body element may have its own unique physical properties along with the shape definition for its collision boundaries. For example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">car</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;car.png&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">roofShape</span> <span class="ot">=</span> <span class="ot">{</span> <span class="ot">-</span><span class="dv">20</span>,<span class="ot">-</span><span class="dv">10</span>, <span class="dv">20</span>,<span class="ot">-</span><span class="dv">10</span>, <span class="dv">20</span>,<span class="dv">10</span>, <span class="ot">-</span><span class="dv">20</span>,<span class="dv">10</span> <span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">hoodShape</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>,<span class="ot">-</span><span class="dv">35</span>, <span class="dv">37</span>,<span class="dv">30</span>, <span class="ot">-</span><span class="dv">37</span>,<span class="dv">30</span> <span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">trunkShape</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>,<span class="ot">-</span><span class="dv">37</span>, <span class="dv">37</span>,<span class="ot">-</span><span class="dv">10</span>, <span class="dv">23</span>,<span class="dv">34</span>, <span class="ot">-</span><span class="dv">23</span>,<span class="dv">34</span>, <span class="ot">-</span><span class="dv">37</span>,<span class="ot">-</span><span class="dv">10</span> <span class="ot">}</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">car</span>, <span class="st">&quot;dynamic&quot;</span>,
+    <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.2</span>, <span class="kw">shape</span><span class="ot">=</span><span class="kw">roofShape</span> <span class="ot">}</span>,
+    <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">6.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.6</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.4</span>, <span class="kw">shape</span><span class="ot">=</span><span class="kw">hoodShape</span> <span class="ot">}</span>,
+    <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">4.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.4</span>, <span class="kw">shape</span><span class="ot">=</span><span class="kw">trunkShape</span> <span class="ot">}</span>
+<span class="ot">)</span></code></pre>
+<a id="destroy"></a>
+</div>
+</div>
+<div class="section level2" id="destroying-bodies">
+<h2><a href="#TOC">Destroying Bodies</a></h2>
+<p>Physical bodies can be destroyed like other display objects, using either <a href="../../../api/type/DisplayObject/removeSelf.html">object:removeSelf()</a> or <a href="../../../api/library/display/remove.html">display.remove()</a>. In this case, the object will be removed from both the visible screen <strong>and</strong> the physical simulation (the physical body data will be destroyed).</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">object</span>:removeSelf<span class="ot">()</span>
+<span class="co">--OR:</span>
+<span class="kw">display</span><span class="ot">.</span>remove<span class="ot">(</span> <span class="kw">object</span> <span class="ot">)</span></code></pre>
+<p>Alternatively, you can use <a href="../../../api/library/physics/removeBody.html">physics.removeBody()</a> to remove just the physical body while retaining the core display object on screen:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>removeBody<span class="ot">(</span> <span class="kw">object</span> <span class="ot">)</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>In both cases, the Box2D body will be safely retained until the end of the current world step. However, its Lua reference will be deleted immediately. Therefore, you should avoid accidental, multiple removal of the same Lua object. This may arise when handling object collisions which can potentially trigger multiple event phases before the collision is fully resolved. To prevent this from occurring, use conditional filtering of the <code>event.phase</code>, for example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> onCollision<span class="ot">(</span> <span class="kw">self</span>, <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">==</span> <span class="st">&quot;began&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">display</span><span class="ot">.</span>remove<span class="ot">(</span> <span class="kw">crate1</span> <span class="ot">)</span>
+        <span class="kw">crate1</span> <span class="ot">=</span> <span class="kw">nil</span>
+    <span class="kw">end</span>
+<span class="kw">end</span></code></pre>
+</div>
+
+
+
+
+<a id="sensors"></a>
+</div>
+<div class="section level2" id="sensors">
+<h2><a href="#TOC">Sensors</a></h2>
+<p>Any body — or any specific element of a multi-element body — can be turned into a sensor. Sensors do not physically interact with other bodies, but they produce <a href="../collisionDetection/index.html">collision</a> events when other bodies pass through them. This is useful if you need to detect when an object collides with a specific region (the sensor), but not cause any force reaction as a result.</p>
+<p>Setting a body element as a sensor is done either inline with the <code>physics.addBody()</code> call or post-creation using <a href="../../../api/type/Body/isSensor.html">object.isSensor</a>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--inline:</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">goal</span>, <span class="st">&quot;static&quot;</span>, <span class="ot">{</span> <span class="kw">isSensor</span><span class="ot">=</span><span class="kw">true</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="co">--post-creation:</span>
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">goal</span>, <span class="st">&quot;static&quot;</span> <span class="ot">)</span>
+<span class="kw">goal</span><span class="ot">.</span><span class="kw">isSensor</span> <span class="ot">=</span> <span class="kw">true</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>Objects that collide with a sensor will trigger a <code>&quot;began&quot;</code> event phase, just like normal non-sensor objects, and they will also trigger an <code>&quot;ended&quot;</code> event phase when they exit the collision bounds of the sensor. In addition, collision events will occur for <strong>each element</strong> in a <nobr>multi-element</nobr> sensor body.</p>
+</div>
+
+
+
+
+<a id="properties"></a>
+</div>
+<div class="section level2" id="body-properties">
+<h2><a href="#TOC">Body Properties</a></h2>
+<p>In Corona, many of the native Box2D set/get methods have been reduced to simple properties on the display object. The following examples assume that a physical body <code>object</code> has been created using one of the constructor methods.</p>
+<div class="section level4" id="object.bodytype">
+<h4><a href="#TOC">object.bodyType</a></h4>
+<p><a href="../../../api/type/Body/bodyType.html">object.bodyType</a> is a string value for the type of physical body. Possible values include <code>dynamic</code>, <code>static</code>, or <code>kinematic</code>. See the <a href="#bodytype">Body Type</a> section for details. Note that you cannot change the body type during a collision event, so you must queue this event after a slight, imperceptible delay:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> onCollisionDelay<span class="ot">()</span>
+    <span class="co">--change the body type</span>
+    <span class="kw">object</span><span class="ot">.</span><span class="kw">bodyType</span> <span class="ot">=</span> <span class="st">&quot;kinematic&quot;</span>
+<span class="kw">end</span>
+
+<span class="kw">timer</span><span class="ot">.</span>performWithDelay<span class="ot">(</span> <span class="dv">10</span>, <span class="kw">onCollisionDelay</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="object.isawake">
+<h4><a href="#TOC">object.isAwake</a></h4>
+<p><a href="../../../api/type/Body/isAwake.html">object.isAwake</a> is the boolean value for the body's current &quot;awake&quot; state. By default, all physical bodies automatically &quot;sleep&quot; when nothing interacts with them for a couple of seconds, and they stop being simulated until something like a collision wakes them up. This property can either fetch an object's current state or forcibly wake it up.</p>
+</div>
+<div class="section level4" id="object.issleepingallowed">
+<h4><a href="#TOC">object.isSleepingAllowed</a></h4>
+<p><a href="../../../api/type/Body/isSleepingAllowed.html">object.isSleepingAllowed</a> is the boolean value for whether the body is ever allowed to sleep. Keeping a body awake has a larger performance overhead and usually it's not necessary because a collision with another body will automatically wake it up. However, forcing a constant awake state is useful in cases such as a tilt gravity simulation, since sleeping bodies do not respond to changes in global gravity.</p>
+</div>
+<div class="section level4" id="object.isbodyactive">
+<h4><a href="#TOC">object.isBodyActive</a></h4>
+<p><a href="../../../api/type/Body/isBodyActive.html">object.isBodyActive</a> is used to set or get the body's current active state. Inactive bodies are not destroyed, but they are removed from the physics simulation and cease to interact with other bodies. Note that you cannot change the body's active state during a collision event, so you must queue this event after a slight, imperceptible delay:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> onCollisionDelay<span class="ot">()</span>
+    <span class="co">--change the body&#39;s active state to false</span>
+    <span class="kw">object</span><span class="ot">.</span><span class="kw">isBodyActive</span> <span class="ot">=</span> <span class="kw">false</span>
+<span class="kw">end</span>
+
+<span class="kw">timer</span><span class="ot">.</span>performWithDelay<span class="ot">(</span> <span class="dv">10</span>, <span class="kw">onCollisionDelay</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="object.issensor">
+<h4><a href="#TOC">object.isSensor</a></h4>
+<p><a href="../../../api/type/Body/isSensor.html">object.isSensor</a> is a write-only boolean property that sets an internal <code>isSensor=true</code> property across all elements in the body. See the <a href="#sensors">Sensors</a> section for more details. Because this property acts across all body elements, it unconditionally overrides any <code>isSensor</code> settings on the individual elements.</p>
+</div>
+<div class="section level4" id="object.isfixedrotation">
+<h4><a href="#TOC">object.isFixedRotation</a></h4>
+<p><a href="../../../api/type/Body/isFixedRotation.html">object.isFixedRotation</a> is the boolean value for whether the body's rotation should be locked, even if the body is subjected to off-center forces.</p>
+</div>
+<div class="section level4" id="object.gravityscale">
+<h4><a href="#TOC">object.gravityScale</a></h4>
+<p><a href="../../../api/type/Body/gravityScale.html">object.gravityScale</a> can be used to adjust the gravity effect on a specific body. For example, setting it to <code>0</code> makes the body float, even if other objects in the simulation are subject to normal gravity. The default value is <code>1.0</code>, meaning normal gravity. You can also set the value higher than normal, but be careful since increased gravity can decrease stability.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--make the object float in place, even if the simulation has normal gravity</span>
+<span class="kw">object</span><span class="ot">.</span><span class="kw">gravityScale</span> <span class="ot">=</span> <span class="dv">0</span></code></pre>
+</div>
+<div class="section level4" id="object.angularvelocity">
+<h4><a href="#TOC">object.angularVelocity</a></h4>
+<p><a href="../../../api/type/Body/angularVelocity.html">object.angularVelocity</a> is the numerical value of the current angular (rotational) velocity, in degrees per second.</p>
+</div>
+<div class="section level4" id="object.angulardamping">
+<h4><a href="#TOC">object.angularDamping</a></h4>
+<p><a href="../../../api/type/Body/angularDamping.html">object.angularDamping</a> is the numerical value for how much the body's rotation should be damped — as in, how quickly the rotating object will slow down to a full stop in the rotational sense (not linear). The default is <code>0</code>, meaning the body will rotate at the same velocity indefinitely.</p>
+</div>
+<div class="section level4" id="object.lineardamping">
+<h4><a href="#TOC">object.linearDamping</a></h4>
+<p><a href="../../../api/type/Body/linearDamping.html">object.linearDamping</a> is the numerical value for how much the body's linear motion is damped — as in, how quickly the object will slow down to a full stop in the linear sense (not rotational). The default is <code>0</code>, meaning the body will move at the same velocity indefinitely.</p>
+<p>Note that the application of constant linear velocity is accomplished through the <a href="../../../api/type/Body/setLinearVelocity.html">object:setLinearVelocity()</a> method described below, unlike the angular/rotational velocity which is set via the <a href="../../../api/type/Body/angularVelocity.html">object.angularVelocity</a> property.</p>
+</div>
+<div class="section level4" id="object.isbullet">
+<h4><a href="#TOC">object.isBullet</a></h4>
+<p><a href="../../../api/type/Body/isBullet.html">object.isBullet</a> is the boolean value for whether the body should be treated as a &quot;bullet&quot; in respect to collision detection. Bullets are subject to <strong>continuous</strong> collision detection rather than periodic detection. This is computationally more expensive, but it can prevent <nobr>fast-moving</nobr> objects from passing through solid barriers.</p>
+<a id="methods"></a>
+</div>
+</div>
+<div class="section level2" id="body-methods">
+<h2><a href="#TOC">Body Methods</a></h2>
+<p>The following examples assume that a physical body <code>object</code> has been created using one of the constructor methods.</p>
+<div class="section level4" id="objectsetlinearvelocity">
+<h4><a href="#TOC">object:setLinearVelocity()</a></h4>
+<p><a href="../../../api/type/Body/setLinearVelocity.html">object:setLinearVelocity()</a> sets the <strong>x</strong> and <strong>y</strong> components for the body's linear velocity, in pixels per second.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">object</span>:setLinearVelocity<span class="ot">(</span> <span class="dv">2</span>, <span class="dv">4</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="objectgetlinearvelocity">
+<h4><a href="#TOC">object:getLinearVelocity()</a></h4>
+<p><a href="../../../api/type/Body/getLinearVelocity.html">object:getLinearVelocity()</a> returns the <strong>x</strong> and <strong>y</strong> components for the body's linear velocity, in pixels per second. This function takes advantage of the fact that Lua can return multiple values, in this case both linear velocities.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">vx</span>, <span class="kw">vy</span> <span class="ot">=</span> <span class="kw">object</span>:getLinearVelocity<span class="ot">()</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Linear X velocity = &quot;</span> <span class="ot">..</span> <span class="kw">vx</span> <span class="ot">)</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Linear Y velocity = &quot;</span> <span class="ot">..</span> <span class="kw">vy</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="objectapplyforce">
+<h4><a href="#TOC">object:applyForce()</a></h4>
+<p><a href="../../../api/type/Body/applyForce.html">object:applyForce()</a> applies the specified <strong>x</strong> and <strong>y</strong> components of a linear force at a given point within world coordinates. If the target point is the body's center of mass, it will tend to push the body in a straight line. If the target point is offset from the center, the body will spin around its center of mass. For symmetrical objects, the center of mass and the center of the object will have the same position:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">object</span>:applyForce<span class="ot">(</span> <span class="dv">500</span>, <span class="dv">2000</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">x</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="objectapplylinearimpulse">
+<h4><a href="#TOC">object:applyLinearImpulse()</a></h4>
+<p><a href="../../../api/type/Body/applyLinearImpulse.html">object:applyLinearImpulse()</a> is similar to <code>object:applyForce()</code>, except that an <strong>impulse</strong> is a single, momentary jolt of force. See the <a href="#forcevsimpulse">Force and Impulse</a> notes below. Like <code>object:applyForce()</code>, the impulse can be applied to any point on the body (either the center of mass or an offset point).</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">object</span>:applyLinearImpulse<span class="ot">(</span> <span class="dv">60</span>, <span class="dv">20</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">x</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level4" id="objectapplytorque">
+<h4><a href="#TOC">object:applyTorque()</a></h4>
+<p><a href="../../../api/type/Body/applyTorque.html">object:applyTorque()</a> applies a rotational force to the body. Positive values will result in clockwise torque; negative values will result in counter-clockwise torque. The body will rotate about its center of mass.</p>
+</div>
+<div class="section level4" id="objectapplyangularimpulse">
+<h4><a href="#TOC">object:applyAngularImpulse()</a></h4>
+<p><a href="../../../api/type/Body/applyAngularImpulse.html">object:applyAngularImpulse()</a> is similar to <code>object:applyTorque()</code>, except that an <strong>impulse</strong> is a single, momentary jolt of force. See the <a href="#forcevsimpulse">Force and Impulse</a> notes below.</p>
+</div>
+<div class="section level4" id="objectresetmassdata">
+<h4><a href="#TOC">object:resetMassData()</a></h4>
+<p><a href="../../../api/type/Body/resetMassData.html">object:resetMassData()</a> is useful if the default mass data for the body has been overridden. This function resets it to the mass calculated from the shapes.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+Force and Impulse
+</div>
+
+<p>A common question is whether to apply <strong>force</strong> or <strong>impulse</strong> to a body. The difference is that an impulse is meant to simulate an immediate jolt/kick to the body, while force (and torque) is something exerted over time. Therefore, to get a realistic force/torque simulation, you should continually apply it on every application cycle, for as long as you want the force to continue. You can use a Runtime <a href="../../../api/event/enterFrame/index.html">enterFrame</a> event for this purpose:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">object</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="st">&quot;leaf.png&quot;</span>, <span class="dv">40</span>, <span class="dv">40</span> <span class="ot">)</span>
+<span class="kw">object</span><span class="ot">.</span><span class="kw">x</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">200</span>,<span class="dv">200</span>
+
+<span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">object</span>, <span class="st">&quot;dynamic&quot;</span>, <span class="ot">{</span> <span class="kw">radius</span><span class="ot">=</span><span class="dv">20</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">function</span> constantForce<span class="ot">()</span>
+    <span class="kw">object</span>:applyForce<span class="ot">(</span> <span class="dv">2</span>, <span class="ot">-</span><span class="dv">4</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">x</span>, <span class="kw">object</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">)</span>
+    <span class="kw">object</span>:applyTorque<span class="ot">(</span> <span class="dv">2</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;enterFrame&quot;</span>, <span class="kw">constantForce</span> <span class="ot">)</span></code></pre>
+</div>
+
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 21-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.physics.physicsBodies.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.physics.physicsBodies.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.physics.physicsBodies.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

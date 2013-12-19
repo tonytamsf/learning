@@ -1,0 +1,1759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > greenthrottle </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > greenthrottle " />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#greenthrottle.">greenthrottle.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#greenthrottle.getbuttonstate">greenthrottle.getButtonState()</a></li>
+<li><a href="#greenthrottle.getanalogstate">greenthrottle.getAnalogState()</a></li>
+<li><a href="#greenthrottle.getanalogchanged">greenthrottle.getAnalogChanged()</a></li>
+<li><a href="#greenthrottle.getconnectedstate">greenthrottle.getConnectedState()</a></li>
+<li><a href="#greenthrottle.getserviceconnected">greenthrottle.getServiceConnected()</a></li>
+<li><a href="#greenthrottle.clearcontrollerstate">greenthrottle.clearControllerState()</a></li>
+<li><a href="#greenthrottle.addleftbuttonremap">greenthrottle.addLeftButtonRemap()</a></li>
+<li><a href="#greenthrottle.removeleftbuttonremap">greenthrottle.removeLeftButtonRemap()</a></li>
+<li><a href="#greenthrottle.addrightbuttonremap">greenthrottle.addRightButtonRemap()</a></li>
+<li><a href="#greenthrottle.removerightbuttonremap">greenthrottle.removeRightButtonRemap()</a></li>
+<li><a href="#greenthrottle.hideandroidsystemui">greenthrottle.hideAndroidSystemUI()</a></li>
+<li><a href="#greenthrottle.startframe">greenthrottle.startFrame()</a></li>
+</ul></li>
+<li><a href="#constants">Constants</a><ul>
+<li><a href="#buttons">Buttons</a></li>
+<li><a href="#controller">Controller</a></li>
+<li><a href="#button-states">Button States</a></li>
+<li><a href="#analog-controls">Analog controls</a></li>
+</ul></li>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#sdk">SDK</a></li>
+<li><a href="#enterprise">Enterprise</a></li>
+</ul></li>
+<li><a href="#sample-code">Sample Code</a></li>
+<li><a href="#support">Support</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">greenthrottle</a>
+</div>
+<div class="section level1" id="greenthrottle.">
+<h1><a href="#TOC">greenthrottle.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Library.html">library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">greenthrottle, joystick, controller, bluetooth</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="http://developer.greenthrottle.com/gettingstarted.php">GreenThrottle</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Availability</strong></td>
+<td align="left">Starter, Basic, Pro, Enterprise</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>This library provides access to GreenThrottle's bluetooth joystick controllers</p>
+</div>
+<div class="section level2" id="platforms">
+<h2><a href="#TOC">Platforms</a></h2>
+<p>The following platforms are supported:</p>
+<ul>
+<li>Android</li>
+</ul>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>local greenthrottle = require &quot;plugin.greenthrottle&quot;</code></pre>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<div class="section level4" id="greenthrottle.getbuttonstate">
+<h4><a href="#TOC">greenthrottle.getButtonState()</a></h4>
+<p><code>greenthrottle.getButtonState(int buttonState, int controllerId, int button)</code></p>
+<p>Get the state of any of the buttons pressed by any of the controllers</p>
+<ul>
+<li>buttonState is either BUTTON_STATE_HELD, BUTTON_STATE_DOWN or BUTTON_STATE_UP. BUTTON_STATE_HELD means if it is held down. BUTTON_STATE_DOWN means if it was pressed down this frame. BUTTON_STATE_UP means it was released this frame.</li>
+<li>controllerId is the id of the controller to query. See above</li>
+<li>button. Button constant for button to check. see above</li>
+<li>returns true or false based on the state</li>
+</ul>
+</div>
+<div class="section level4" id="greenthrottle.getanalogstate">
+<h4><a href="#TOC">greenthrottle.getAnalogState()</a></h4>
+<p><code>greenthrottle.getAnalogState(axis, controllerId, analogControl)</code></p>
+<p>Get the state of the various analog controls on the controller</p>
+<ul>
+<li>Axis is the X or Y axis constant defined above. Single axis controls only have an X value, Y value will always return 0 for single axis.</li>
+<li>controllerId is the id of the controller to query. See above</li>
+<li>analogControl id as defined above.</li>
+<li>return floating point axis value based on inputs</li>
+</ul>
+</div>
+<div class="section level4" id="greenthrottle.getanalogchanged">
+<h4><a href="#TOC">greenthrottle.getAnalogChanged()</a></h4>
+<p><code>greenthrottle.getAnalogChanged(controllerId, analogControl)</code></p>
+<p>Is set per frame if there was activity for an analog control</p>
+<ul>
+<li>controllerId is the id of the controller to query. See above</li>
+<li>analogControl id as defined above</li>
+<li>returns true or false base on if there was an analog event for this control on the current frame</li>
+</ul>
+</div>
+<div class="section level4" id="greenthrottle.getconnectedstate">
+<h4><a href="#TOC">greenthrottle.getConnectedState()</a></h4>
+<p><code>greenthrottle.getConnectedState(controllerId)</code></p>
+<p>Is true if the service has sent a connect message to the plugin. false if no connection has been received or a disconnect message has been received</p>
+<ul>
+<li>controllerId is the id of the controller to query. See above</li>
+<li>returns true or false based on if the controller is connected</li>
+</ul>
+</div>
+<div class="section level4" id="greenthrottle.getserviceconnected">
+<h4><a href="#TOC">greenthrottle.getServiceConnected()</a></h4>
+<p><code>greenthrottle.getServiceConnected()</code></p>
+<p>Is true if the service has been connected. False if not. The service should connect automatically on startup of the corona app. If the service is not installed or is broken this will be false.</p>
+<ul>
+<li>returns true or false based on if the service is connected</li>
+</ul>
+</div>
+<div class="section level4" id="greenthrottle.clearcontrollerstate">
+<h4><a href="#TOC">greenthrottle.clearControllerState()</a></h4>
+<p><code>greenthrottle.clearControllerState(controllerId)</code></p>
+<p>Clear the state of the specified controller. Useful for controller disconnects so that controllers stop reporting values that will never be updated causing on screen problems.</p>
+<ul>
+<li>controllerId is the id of the controller to query. See above</li>
+</ul>
+</div>
+<div class="section level4" id="greenthrottle.addleftbuttonremap">
+<h4><a href="#TOC">greenthrottle.addLeftButtonRemap()</a></h4>
+<p><code>greenthrottle.addLeftButtonRemap()</code></p>
+<p>Remaps the left analog stick to the DPAD buttons so that you get DPAD pressed from the left analog stick. This function is called on startup by default.</p>
+</div>
+<div class="section level4" id="greenthrottle.removeleftbuttonremap">
+<h4><a href="#TOC">greenthrottle.removeLeftButtonRemap()</a></h4>
+<p><code>greenthrottle.removeLeftButtonRemap()</code></p>
+<p>Removes the left analog stick to dpad button remap.</p>
+</div>
+<div class="section level4" id="greenthrottle.addrightbuttonremap">
+<h4><a href="#TOC">greenthrottle.addRightButtonRemap()</a></h4>
+<p><code>greenthrottle.addRightButtonRemap()</code></p>
+<p>Remaps the right analog stick to the AYXB (A is Down and then clockwise) buttons respectively. This is disabled by default</p>
+</div>
+<div class="section level4" id="greenthrottle.removerightbuttonremap">
+<h4><a href="#TOC">greenthrottle.removeRightButtonRemap()</a></h4>
+<p><code>greenthrottle.removeRightButtonRemap()</code></p>
+<p>Removes the right analog stick to AYXB remap.</p>
+</div>
+<div class="section level4" id="greenthrottle.hideandroidsystemui">
+<h4><a href="#TOC">greenthrottle.hideAndroidSystemUI()</a></h4>
+<p><code>greenthrottle.hideAndroidSystemUI()</code></p>
+<p>Convenience function that hides the onscreen Android System UI when called. This is called by default on startup and onResume. Any on screen touch even twill bring it back typically so you made need to call it within your code if you want it to disappear again.</p>
+</div>
+<div class="section level4" id="greenthrottle.startframe">
+<h4><a href="#TOC">greenthrottle.startFrame()</a></h4>
+<p><code>greenthrottle.startFrame()</code></p>
+<p>This function should be called at the beginning of every GameLoop in order to manage state around BUTTON_STATE_DOWN, BUTTON_STATE_UP and analogChanged() Also issues every button press to the state buffers since the last call. Unless this function is called once per frame you will not see any button state changes.</p>
+</div>
+</div>
+<div class="section level2" id="constants">
+<h2><a href="#TOC">Constants</a></h2>
+<div class="section level3" id="buttons">
+<h3><a href="#TOC">Buttons</a></h3>
+<p>The follwoing are button constants used for button in <code>GetButtonState</code>:</p>
+<ul>
+<li><code>greenthrottle.BUTTON_A</code></li>
+<li><code>greenthrottle.BUTTON_B</code></li>
+<li><code>greenthrottle.BUTTON_Y</code></li>
+<li><code>greenthrottle.BUTTON_X</code></li>
+<li><code>greenthrottle.BUTTON_DOWN</code></li>
+<li><code>greenthrottle.BUTTON_UP</code></li>
+<li><code>greenthrottle.BUTTON_LEFT</code></li>
+<li><code>greenthrottle.BUTTON_RIGHT</code></li>
+<li><code>greenthrottle.BUTTON_L1</code></li>
+<li><code>greenthrottle.BUTTON_L2</code></li>
+<li><code>greenthrottle.BUTTON_L3</code></li>
+<li><code>greenthrottle.BUTTON_R1</code></li>
+<li><code>greenthrottle.BUTTON_R2</code></li>
+<li><code>greenthrottle.BUTTON_R3</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_LEFT_UP</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_LEFT_DOWN</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_LEFT_LEFT</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_LEFT_RIGHT</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_RIGHT_UP</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_RIGHT_DOWN</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_RIGHT_LEFT</code></li>
+<li><code>greenthrottle.BUTTON_ANALOG_RIGHT_RIGHT</code></li>
+<li><code>greenthrottle.BUTTON_BACK</code></li>
+<li><code>greenthrottle.BUTTON_START</code></li>
+<li><code>greenthrottle.BUTTON_GTHOME</code></li>
+</ul>
+</div>
+<div class="section level3" id="controller">
+<h3><a href="#TOC">Controller</a></h3>
+<p>These are the constants that define each of the potentially available controllers. Used in many functions:</p>
+<ul>
+<li><code>greenthrottle.CONTROLLER_1</code></li>
+<li><code>greenthrottle.CONTROLLER_2</code></li>
+<li><code>greenthrottle.CONTROLLER_3</code></li>
+<li><code>greenthrottle.CONTROLLER_4</code></li>
+</ul>
+</div>
+<div class="section level3" id="button-states">
+<h3><a href="#TOC">Button States</a></h3>
+<ul>
+<li><code>greenthrottle.BUTTON_STATE_HELD</code> if the button is down</li>
+<li><code>greenthrottle.BUTTON_STATE_DOWN</code> if the button was pressed down this frame</li>
+<li><code>greenthrottle.BUTTON_STATE_UP</code> if the button was released up this frame</li>
+</ul>
+</div>
+<div class="section level3" id="analog-controls">
+<h3><a href="#TOC">Analog controls</a></h3>
+<p>Used in <code>getAnalogState</code> and <code>getAnalogChanged</code>:</p>
+<ul>
+<li><code>greenthrottle.ANALOG_LEFT</code> Left analog Stick, x and y axis information ( -127 to 127, 0 centered)</li>
+<li><code>greenthrottle.ANALOG_RIGHT</code> Right analog Stick, x and y axis information ( -127 to 127, 0 centered)</li>
+<li><code>greenthrottle.ANALOG_L2</code> Left Trigger, x axis info ( 0 to 255 (fully engaged))</li>
+<li><code>greenthrottle.ANALOG_R2</code> Right Trigger, x axis info ( 0 to 255 (fully engaged))</li>
+</ul>
+<p>Analog AXIS. Used in <code>getAnalogState</code></p>
+<ul>
+<li><code>greenthrottle.ANALOG_AXIS_X</code> X Data for dual axis controls, only value for single axis.</li>
+<li><code>greenthrottle.ANALOG_AXIS_Y</code> Y Data for dual axis controls. Not used for single axis.</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>When you build using the Corona Simulator, the server automatically takes care of integrating the plugin into your project.</p>
+<p>All you need to do is add an entry into a <code>plugins</code> table of your <code>build.settings</code>. The following is an example of a minimal <code>build.settings</code> file:</p>
+<pre><code>settings =
+{
+    plugins =
+    {
+        -- key is the name passed to Lua&#39;s &#39;require()&#39;
+        [&quot;plugin.greenthrottle&quot;] =
+        {
+            -- required
+            publisherId = &quot;com.greenthrottle&quot;,
+        },
+    },      
+}</code></pre>
+</div>
+<div class="section level3" id="enterprise">
+<h3><a href="#TOC">Enterprise</a></h3>
+<p>This plugin is prebundled in the <code>Plugins-3rd-Party</code> folder of the CoronaEnterprise download.</p>
+<p>Copy the following JAR files to the <code>libs</code> directory of your Android project:</p>
+<ul>
+<li><code>JavaInputUnifier.jar</code></li>
+<li><code>plugin.greenthrottle.jar</code></li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="sample-code">
+<h2><a href="#TOC">Sample Code</a></h2>
+<p>You can access sample code <a href="https://github.com/coronalabs/samples-plugin-greenthrottle">here</a>.</p>
+</div>
+<div class="section level2" id="support">
+<h2><a href="#TOC">Support</a></h2>
+<p>More support is available from the GreenThrottle team:</p>
+<ul>
+<li>E-mail</li>
+<li>Forum</li>
+<li><a href="http://www.greenthrottle.com/">http://www.greenthrottle.com/</a></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.greenthrottle.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.greenthrottle.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.greenthrottle.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1673 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Types </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Types " />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#types">Types</a><ul>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#array"><a href="Array.html">Array</a></a></li>
+<li><a href="#boolean"><a href="Boolean.html">Boolean</a></a></li>
+<li><a href="#body"><a href="Body/index.html">Body</a></a></li>
+<li><a href="#constant"><a href="Constant.html">Constant</a></a></li>
+<li><a href="#containerobjectapi.type.containerobject">[ContainerObject][api.type.ContainerObject]</a></li>
+<li><a href="#displayobject"><a href="DisplayObject/index.html">DisplayObject</a></a></li>
+<li><a href="#event"><a href="Event.html">Event</a></a></li>
+<li><a href="#eventlistener"><a href="EventListener/index.html">EventListener</a></a></li>
+<li><a href="#file"><a href="File/index.html">File</a></a></li>
+<li><a href="#groupobject"><a href="GroupObject/index.html">GroupObject</a></a></li>
+<li><a href="#imagesheet"><a href="ImageSheet/index.html">ImageSheet</a></a></li>
+<li><a href="#inputaxis"><a href="InputAxis/index.html">InputAxis</a></a></li>
+<li><a href="#inputdevice"><a href="InputDevice/index.html">InputDevice</a></a></li>
+<li><a href="#joint"><a href="Joint/index.html">Joint</a></a></li>
+<li><a href="#function"><a href="Function.html">Function</a></a></li>
+<li><a href="#library"><a href="Library.html">Library</a></a></li>
+<li><a href="#listener"><a href="Listener.html">Listener</a></a></li>
+<li><a href="#map"><a href="Map/index.html">Map</a></a></li>
+<li><a href="#module"><a href="Module.html">Module</a></a></li>
+<li><a href="#nativedisplayobject"><a href="NativeDisplayObject/index.html">NativeDisplayObject</a></a></li>
+<li><a href="#number"><a href="Number.html">Number</a></a></li>
+<li><a href="#object"><a href="Object.html">Object</a></a></li>
+<li><a href="#recording"><a href="Recording/index.html">Recording</a></a></li>
+<li><a href="#rectobjectapi.type.rectobject">[RectObject][api.type.RectObject]</a></li>
+<li><a href="#runtime"><a href="Runtime/index.html">Runtime</a></a></li>
+<li><a href="#scene"><a href="Scene/index.html">Scene</a></a></li>
+<li><a href="#shapeobject"><a href="ShapeObject/index.html">ShapeObject</a></a></li>
+<li><a href="#snapshotobject"><a href="SnapshotObject/index.html">SnapshotObject</a></a></li>
+<li><a href="#spriteinstanceapi.type.spriteinstance-deprecated">[SpriteInstance][api.type.SpriteInstance] (deprecated)</a></li>
+<li><a href="#spriteobject"><a href="SpriteObject/index.html">SpriteObject</a></a></li>
+<li><a href="#spritesheetapi.type.spritesheet-deprecated">[SpriteSheet][api.type.SpriteSheet] (deprecated)</a></li>
+<li><a href="#stageobject"><a href="StageObject/index.html">StageObject</a></a></li>
+<li><a href="#string"><a href="String.html">String</a></a></li>
+<li><a href="#table"><a href="Table.html">Table</a></a></li>
+<li><a href="#textbox"><a href="TextBox/index.html">TextBox</a></a></li>
+<li><a href="#textfield"><a href="TextField/index.html">TextField</a></a></li>
+<li><a href="#textobject"><a href="TextObject/index.html">TextObject</a></a></li>
+<li><a href="#vectorobject-shapeobject"><a href="ShapeObject/index.html">VectorObject =&gt; ShapeObject</a></a></li>
+<li><a href="#video"><a href="Video/index.html">Video</a></a></li>
+<li><a href="#webview"><a href="WebView/index.html">WebView</a></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">API</a>  ▸  <a href="index.html">Types</a>
+</div>
+<div class="section level1" id="types">
+<h1><a href="#TOC">Types</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Availability</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/</em></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<div class="section level4" id="array">
+<h4><a href="#TOC"><a href="Array.html">Array</a></a></h4>
+</div>
+<div class="section level4" id="boolean">
+<h4><a href="#TOC"><a href="Boolean.html">Boolean</a></a></h4>
+</div>
+<div class="section level4" id="body">
+<h4><a href="#TOC"><a href="Body/index.html">Body</a></a></h4>
+</div>
+<div class="section level4" id="constant">
+<h4><a href="#TOC"><a href="Constant.html">Constant</a></a></h4>
+</div>
+<div class="section level4" id="containerobjectapi.type.containerobject">
+<h4><a href="#TOC">[ContainerObject][api.type.ContainerObject]</a></h4>
+</div>
+<div class="section level4" id="displayobject">
+<h4><a href="#TOC"><a href="DisplayObject/index.html">DisplayObject</a></a></h4>
+</div>
+<div class="section level4" id="event">
+<h4><a href="#TOC"><a href="Event.html">Event</a></a></h4>
+</div>
+<div class="section level4" id="eventlistener">
+<h4><a href="#TOC"><a href="EventListener/index.html">EventListener</a></a></h4>
+</div>
+<div class="section level4" id="file">
+<h4><a href="#TOC"><a href="File/index.html">File</a></a></h4>
+</div>
+<div class="section level4" id="groupobject">
+<h4><a href="#TOC"><a href="GroupObject/index.html">GroupObject</a></a></h4>
+</div>
+<div class="section level4" id="imagesheet">
+<h4><a href="#TOC"><a href="ImageSheet/index.html">ImageSheet</a></a></h4>
+</div>
+<div class="section level4" id="inputaxis">
+<h4><a href="#TOC"><a href="InputAxis/index.html">InputAxis</a></a></h4>
+</div>
+<div class="section level4" id="inputdevice">
+<h4><a href="#TOC"><a href="InputDevice/index.html">InputDevice</a></a></h4>
+</div>
+<div class="section level4" id="joint">
+<h4><a href="#TOC"><a href="Joint/index.html">Joint</a></a></h4>
+</div>
+<div class="section level4" id="function">
+<h4><a href="#TOC"><a href="Function.html">Function</a></a></h4>
+</div>
+<div class="section level4" id="library">
+<h4><a href="#TOC"><a href="Library.html">Library</a></a></h4>
+</div>
+<div class="section level4" id="listener">
+<h4><a href="#TOC"><a href="Listener.html">Listener</a></a></h4>
+</div>
+<div class="section level4" id="map">
+<h4><a href="#TOC"><a href="Map/index.html">Map</a></a></h4>
+</div>
+<div class="section level4" id="module">
+<h4><a href="#TOC"><a href="Module.html">Module</a></a></h4>
+</div>
+<div class="section level4" id="nativedisplayobject">
+<h4><a href="#TOC"><a href="NativeDisplayObject/index.html">NativeDisplayObject</a></a></h4>
+</div>
+<div class="section level4" id="number">
+<h4><a href="#TOC"><a href="Number.html">Number</a></a></h4>
+</div>
+<div class="section level4" id="object">
+<h4><a href="#TOC"><a href="Object.html">Object</a></a></h4>
+</div>
+<div class="section level4" id="recording">
+<h4><a href="#TOC"><a href="Recording/index.html">Recording</a></a></h4>
+</div>
+<div class="section level4" id="rectobjectapi.type.rectobject">
+<h4><a href="#TOC">[RectObject][api.type.RectObject]</a></h4>
+</div>
+<div class="section level4" id="runtime">
+<h4><a href="#TOC"><a href="Runtime/index.html">Runtime</a></a></h4>
+</div>
+<div class="section level4" id="scene">
+<h4><a href="#TOC"><a href="Scene/index.html">Scene</a></a></h4>
+</div>
+<div class="section level4" id="shapeobject">
+<h4><a href="#TOC"><a href="ShapeObject/index.html">ShapeObject</a></a></h4>
+</div>
+<div class="section level4" id="snapshotobject">
+<h4><a href="#TOC"><a href="SnapshotObject/index.html">SnapshotObject</a></a></h4>
+</div>
+<div class="section level4" id="spriteinstanceapi.type.spriteinstance-deprecated">
+<h4><a href="#TOC">[SpriteInstance][api.type.SpriteInstance] (deprecated)</a></h4>
+</div>
+<div class="section level4" id="spriteobject">
+<h4><a href="#TOC"><a href="SpriteObject/index.html">SpriteObject</a></a></h4>
+</div>
+<div class="section level4" id="spritesheetapi.type.spritesheet-deprecated">
+<h4><a href="#TOC">[SpriteSheet][api.type.SpriteSheet] (deprecated)</a></h4>
+</div>
+<div class="section level4" id="stageobject">
+<h4><a href="#TOC"><a href="StageObject/index.html">StageObject</a></a></h4>
+</div>
+<div class="section level4" id="string">
+<h4><a href="#TOC"><a href="String.html">String</a></a></h4>
+</div>
+<div class="section level4" id="table">
+<h4><a href="#TOC"><a href="Table.html">Table</a></a></h4>
+</div>
+<div class="section level4" id="textbox">
+<h4><a href="#TOC"><a href="TextBox/index.html">TextBox</a></a></h4>
+</div>
+<div class="section level4" id="textfield">
+<h4><a href="#TOC"><a href="TextField/index.html">TextField</a></a></h4>
+</div>
+<div class="section level4" id="textobject">
+<h4><a href="#TOC"><a href="TextObject/index.html">TextObject</a></a></h4>
+</div>
+<div class="section level4" id="vectorobject-shapeobject">
+<h4><a href="#TOC"><a href="ShapeObject/index.html">VectorObject =&gt; ShapeObject</a></a></h4>
+</div>
+<div class="section level4" id="video">
+<h4><a href="#TOC"><a href="Video/index.html">Video</a></a></h4>
+</div>
+<div class="section level4" id="webview">
+<h4><a href="#TOC"><a href="WebView/index.html">WebView</a></a></h4>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.type.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.type.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.type.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

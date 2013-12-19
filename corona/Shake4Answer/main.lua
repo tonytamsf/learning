@@ -42,13 +42,14 @@ end
 local startShake = 0
 local shakeCount = 0
 
-local countAfter2Seconds = function()
+local countAfter2Seconds = function( )
 
-   local rand = math.random( 3 )
+   local rand = math.random( 3 ) 
    sounds[1] = "sounds/" .. names[rand] .. '/most-definitely.m4a'
    sounds[2] = "sounds/" .. names[rand] .. '/no-way.m4a' 
    sounds[3] = "sounds/" .. names[rand] .. '/maybe.m4a'
 
+   print (shakeCount)
    print ( "play" .. sounds[shakeCount])
    media.playSound( sounds[shakeCount] )
    
@@ -58,6 +59,65 @@ local countAfter2Seconds = function()
 
 end
 
+
+
+local widget = require( "widget" )
+
+-- Function to handle button events
+local function handleButtonEvent( event )
+
+    if ( "ended" == event.phase ) then
+        print( "Button was pressed and released" )
+        playSound (1)
+        shakeCount = event.target.shakeCount 
+    end
+
+end
+
+-- Create the button
+local yesButton = widget.newButton
+{
+    left = 100,
+    top = 200,
+    id = "yesButton",
+  defaultFile = "buttonGray.png",
+  overFile = "buttonBlue.png",
+    label = "Yes",
+    onEvent = handleButtonEvent
+}
+yesButton.shakeCount = 1
+
+
+local noButton = widget.newButton
+{
+    left = 100,
+    top = 160,
+  defaultFile = "buttonGray.png",
+  overFile = "buttonBlue.png",
+    id = "noButton",
+    label = "No",
+    onEvent = handleButtonEvent
+}
+noButton.shakeCount = 2
+
+
+local maybeButton = widget.newButton
+{
+    left = 100,
+    top = 120,
+  defaultFile = "buttonGray.png",
+  overFile = "buttonBlue.png",
+      id = "maybeButton",
+    label = "Maybe",
+    onEvent = handleButtonEvent
+}
+maybeButton.shakeCount = 3
+
+ function playSound( answer )
+
+  timer.performWithDelay( 200, countAfter2Seconds )
+
+end
 ---
 --- wait for the shake
 ---

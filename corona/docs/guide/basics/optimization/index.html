@@ -1,0 +1,1779 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > basics > optimization </title>
+  <meta name="revised" content="12-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > basics > optimization " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#performance-and-optimization">Performance and Optimization</a><ul>
+<li><a href="#using-memory-efficiently">Using Memory Efficiently</a></li>
+<li><a href="#reducing-power-consumption">Reducing Power Consumption</a></li>
+<li><a href="#transitions-and-animations">Transitions and Animations</a></li>
+<li><a href="#conserving-texture-memory">Conserving Texture Memory</a></li>
+<li><a href="#lua-optimizations">Lua Optimizations</a><ul>
+<li><a href="#localize-localize">Localize, Localize</a></li>
+<li><a href="#avoid-table.insert">Avoid &quot;table.insert()&quot;</a></li>
+<li><a href="#avoid-unpack">Avoid &quot;unpack()&quot;</a></li>
+<li><a href="#avoid-ipairs">Avoid &quot;ipairs()&quot;</a></li>
+<li><a href="#math-performance">Math Performance</a></li>
+</ul></li>
+<li><a href="#managing-audio">Managing Audio</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [basics][guide.basics]  ▸  <a href="index.html">optimization</a>
+</div>
+<div class="section level1" id="performance-and-optimization">
+<h1><a href="#TOC">Performance and Optimization</a></h1>
+<p>As you develop your application, you should always consider how your design choices affect performance. Despite ongoing core improvements, mobile devices still face fundamental constraints in processing power, memory usage, and battery life. Therefore, performance and optimization is crucial to achieving faster response time, minimizing memory usage, and maximizing battery life.</p>
+<p>In addition to this guide, please view the <a href="http://www.coronalabs.com/blog/2013/04/02/cleaning-up-display-objects-andlisteners/">Cleaning Up Display Objects and Listeners</a> tutorial.</p>
+<ul>
+<li><a href="#memory">Using Memory Efficiently</a></li>
+<li><a href="#power">Reducing Power Consumption</a></li>
+<li><a href="#transitions">Transitions and Animations</a></li>
+<li><a href="#texturemem">Conserving Texture Memory</a></li>
+<li><a href="#lua">Lua Optimizations</a></li>
+<li><a href="#audio">Managing Audio</a></li>
+</ul>
+<a id="memory"></a>
+<div class="section level2" id="using-memory-efficiently">
+<h2><a href="#TOC">Using Memory Efficiently</a></h2>
+<p>Memory is a critical resource on mobile devices. Some devices may even terminate your application if you consume too much memory.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Eliminate memory leaks</strong> — your application should <strong>not</strong> have memory leaks. Although Lua handles memory management and cleanup automatically, memory leaks can still occur. For example, global variables are never considered garbage; it's up to you to tell Lua that these variables are garbage by setting them to <code>nil</code>. Global variables are not recommended in general, but if you must use them for convenience, ensure that you remove them from memory when they're no longer needed.</p></li>
+<li><p><strong>Keep resource files as small as possible</strong> — resource files used by your application typically reside on the disk. They must be loaded into memory before they can be used. Images and audio files should be as small as possible. You should also reuse the same image assets whenever it's feasible. For example, if you design a flip-style menu with the same background image for each page, you should use that image on all pages and layer the necessary foreground images over it. For more details, please see <a href="#texturemem">Conserving Texture Memory</a> below.</p></li>
+<li><p><strong>Load resources lazily</strong> — avoid loading resource files until they're actually needed. While pre-loading resource files might seem like good practice, this can actually backfire because of how devices respond to low memory situations. One notable exception is audio files. In general, you should load sound effects for a particular scene or level before it begins, because loading them on demand can cause a slight skip during time-critical code. For more information, see <a href="#audio">Managing Audio</a> below.</p></li>
+<li><p><strong>Remove objects from the display hierarchy</strong> — when a display object is created, it is implicitly added to the display hierarchy. When you no longer need a display object, you should remove it from the display hierarchy and set its reference to <code>nil</code>. This makes the object eligible for garbage collection. However, this is no guarantee that the object will be removed from memory. If other variables in memory reference the display object, Lua will <strong>not</strong> consider it garbage. See the <a href="../../media/displayObjects/index.html">Display Objects</a> guide for more information on removing objects.</p></li>
+</ol>
+<a id="power"></a>
+</div>
+<div class="section level2" id="reducing-power-consumption">
+<h2><a href="#TOC">Reducing Power Consumption</a></h2>
+<p>Battery life is inherently limited on mobile devices because of their small form factor. You can improve battery life by adhering to the following practices.</p>
+<p><strong>Network access</strong> consumes a considerable amount of power. You can minimize the impact of network traffic by following these guidelines:</p>
+<ol style="list-style-type: decimal">
+<li><p>Do not &quot;poll&quot;; instead, connect to external network servers only when necessary.</p></li>
+<li><p>Optimize the data that you transmit so it's as small as possible.</p></li>
+<li><p>Transmit in bursts. More power is consumed the longer the network is actively transmitting data. It's better to transmit data in bursts rather than spreading it out into smaller transmission packets over time.</p></li>
+</ol>
+<p><strong>GPS</strong> and <strong>accelerometer</strong> hardware also consumes power. If you access location data via GPS, stop collecting it when you have the data you need. If you use the accelerometer, try to limit it to scenes where it's essential for the desired functionality.</p>
+<p><strong>Disk access</strong> — reading and writing files to the device's local disk — should be handled similarly to network access. It's better to transmit larger packets of data to/from the disk rather than spreading it out over numerous smaller transactions.</p>
+<a id="transitions"></a>
+</div>
+<div class="section level2" id="transitions-and-animations">
+<h2><a href="#TOC">Transitions and Animations</a></h2>
+<p>If you need to set or transition a specific property of several display objects to the same value — for example, fade an entire overlay menu to <code>alpha=0</code> — it's better to add the objects to a display group and modify the property of the entire group. It's easier to code and it optimizes memory and speed. See the <a href="../../start/displayGroups/index.html">Display Groups and Coordinates</a> guide for more information.</p>
+<p>If you're using sprite animations, a common oversight is allowing offscreen or invisible sprites to continue animating. While these sprites may not be visible to the user, they'll continue to use processor power while animating. We suggest that you pause all animations that move off the screen or otherwise become inactive.</p>
+<a id="texturemem"></a>
+</div>
+<div class="section level2" id="conserving-texture-memory">
+<h2><a href="#TOC">Conserving Texture Memory</a></h2>
+<p>Texture memory is too often ignored until it reaches &quot;critical mass,&quot; at which point it's difficult and time-consuming to make the required changes to art assets.</p>
+<p>In regards to texture memory, 8-bit or 24-bit <strong>PNG</strong> images all unpack into 32-bit images. They are rectangular arrays of pixels and there are effectively 4 color arrays (channels) per image: red, green, blue, and alpha (RGB+A).</p>
+<p>In OpenGL, textures obey the <strong>Power of 2 (PoT)</strong> rule. This means that any texture rounds up to the <strong>next highest Power of 2</strong> (2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, etc.) in terms of the texture memory it occupies. Thus, an image sized 320×480 and another sized 280×400 will both consume 512×512 of texture memory. Note that the next highest PoT occurs independently on either the horizontal or vertical, and the effective size does not always adhere to a &quot;square&quot; configuration — thus, an image sized 920×40 will round up to 1024×64 in required texture memory, not 1024×1024.</p>
+<p>While this might seem innocuous at first glance, the actual memory consumption is dictated by both the PoT size <strong>and</strong> the 4 color channels. This means that each pixel in the texture array requires 4 bytes of memory, and it adds up quickly:</p>
+<p><strong>Image(sheet) sized 350×500:</strong></p>
+<pre><code>512×512 (pixels) × 4 (bytes) = 1,048,576 bytes = 1 MB</code></pre>
+<p><strong>Image(sheet) sized 514×1024:</strong></p>
+<pre><code>1024×1024 (pixels) × 4 (bytes) = 4,194,304 bytes = 4 MB</code></pre>
+<p>Notice that the next PoT up requires <strong>four times</strong> the texture memory! This is even more concerning when developing for both &quot;normal&quot; devices and Retina/HD devices. If the pixel density between two devices is double, as with the iPad vs. the Retina iPad, all images will likewise need to double in size to keep them crisp and sharp. However, doubling their size requires more than double the texture memory — 4× in the above example — and in general, Retina/HD devices do not contain 4× the texture memory compared to their predecessors.</p>
+<p>With this in mind, texture memory can usually be managed without an excessive amount of effort. Just remember these tips:</p>
+<ol style="list-style-type: decimal">
+<li><p>Always unload textures (remove them from the display hierarchy) when they're no longer needed.</p></li>
+<li><p>If you have a background texture that needs to be 525×600 on the screen, consider creating it as a proportional 448×512 image to constrain it to the 512 PoT range. Then, in code, scale it up slightly by setting its desired width and height. If it's just a small increase in size, the minor loss of clarity likely won't be perceived by the user, especially on a small phone screen.</p></li>
+<li><p>If you're using image sheets, consider using a tool like <a href="http://www.codeandweb.com/texturepacker">TexturePacker</a> to pack your images into the smallest PoT configuration possible.</p></li>
+</ol>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>There is also a limit on the maximum texture size that a device will support. If you exceed this limit, the texture will either fail to load or the application will crash. You can use the <code>system.getInfo( &quot;maxTextureSize&quot; )</code> command to determine the maximum texture size for a particular device. See <a href="../../../api/library/system/getInfo.html">system.getInfo()</a> for more information.</p>
+</div>
+
+
+
+
+<a id="lua"></a>
+</div>
+<div class="section level2" id="lua-optimizations">
+<h2><a href="#TOC">Lua Optimizations</a></h2>
+<p>At the code level, you should adhere to as many Lua optimizations as possible. Most of the performance tricks below pertain primarily to time-critical routines — that is, points in your app where there is a lot happening or where the user experience could be adversely affected by sluggish performance. However, every bit helps and we suggest that you follow these as a habit.</p>
+<div class="section level3" id="localize-localize">
+<h3><a href="#TOC">Localize, Localize</a></h3>
+<p>While avoiding global variables and functions isn't always possible across the board, minimal usage is the best practice. Access to local variables and functions is simply faster, especially in time-critical routines.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--NON-LOCAL (DISCOURAGED)</span>
+<span class="kw">CCX</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentCenterX</span>  <span class="co">--global variable</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+    <span class="kw">local</span> <span class="kw">image</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;myImage&quot;</span> <span class="ot">)</span>
+    <span class="kw">image</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">CCX</span>
+<span class="kw">end</span>
+
+<span class="co">--LOCAL (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="kw">CCX</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentCenterX</span>  <span class="co">--local variable</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+    <span class="kw">local</span> <span class="kw">image</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;myImage&quot;</span> <span class="ot">)</span>
+    <span class="kw">image</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">CCX</span>
+<span class="kw">end</span></code></pre>
+<p>This also applies to core Lua libraries like the <code>math</code> library. In time-critical routines, you should always localize library functions.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--NON-LOCAL (DISCOURAGED)</span>
+<span class="kw">local</span> <span class="kw">function</span> foo<span class="ot">(</span> <span class="kw">x</span> <span class="ot">)</span>
+    <span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+        <span class="kw">x</span> <span class="ot">=</span> <span class="kw">x</span> <span class="ot">+</span> <span class="fu">math.sin</span><span class="ot">(</span><span class="kw">i</span><span class="ot">)</span>
+    <span class="kw">end</span>
+    <span class="kw">return</span> <span class="kw">x</span>
+<span class="kw">end</span>
+
+<span class="co">--&quot;EXTERNAL&quot; LOCAL (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="fu">sin</span> <span class="ot">=</span> <span class="fu">math.sin</span>  <span class="co">--local reference to &#39;math.sin&#39;</span>
+<span class="kw">local</span> <span class="kw">function</span> foo<span class="ot">(</span><span class="kw">x</span><span class="ot">)</span>
+    <span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+        <span class="kw">x</span> <span class="ot">=</span> <span class="kw">x</span> <span class="ot">+</span> <span class="fu">sin</span><span class="ot">(</span><span class="kw">i</span><span class="ot">)</span>
+    <span class="kw">end</span>
+    <span class="kw">return</span> <span class="kw">x</span>
+<span class="kw">end</span></code></pre>
+<p>Finally, remember that functions should be localized whenever possible. Of course, this will require proper scoping. If you're new to Lua, please refer to <a href="http://omnigeek.robmiracle.com/2011/10/14/understanding-scope-for-beginning-programmers/">Understanding Scope for Beginners</a>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--NON-LOCAL (DISCOURAGED)</span>
+<span class="kw">function</span> func1<span class="ot">()</span>
+   func2<span class="ot">(</span> <span class="st">&quot;myValue&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">function</span> func2<span class="ot">(</span> <span class="kw">y</span> <span class="ot">)</span>
+   <span class="fu">print</span><span class="ot">(</span> <span class="kw">y</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+func1<span class="ot">()</span>
+
+<span class="co">--LOCAL (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="kw">function</span> func2<span class="ot">(</span> <span class="kw">y</span> <span class="ot">)</span>  <span class="co">--&#39;func2&#39; properly scoped above &#39;func1&#39;</span>
+   <span class="fu">print</span><span class="ot">(</span> <span class="kw">y</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">function</span> func1<span class="ot">()</span>
+   func2<span class="ot">(</span> <span class="st">&quot;myValue&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+func1<span class="ot">()</span></code></pre>
+</div>
+<div class="section level3" id="avoid-table.insert">
+<h3><a href="#TOC">Avoid &quot;table.insert()&quot;</a></h3>
+<p>Let's compare four methods that all achieve the same thing: the common act of inserting values into a table. Of the four, the Lua <code>table.insert()</code> function is a mediocre performer and should be avoided.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--table.insert() (DISCOURAGED)</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">table_insert</span> <span class="ot">=</span> <span class="fu">table.insert</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   table_insert<span class="ot">(</span> <span class="kw">a</span>, <span class="kw">i</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">--LOOP INDEX METHOD (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+    <span class="kw">a</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="co">--TABLE SIZE METHOD (ACCEPTABLE)</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   <span class="kw">a</span><span class="ot">[#</span><span class="kw">a</span><span class="ot">+</span><span class="dv">1</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="co">--COUNTER METHOD (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">index</span> <span class="ot">=</span> <span class="dv">1</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   <span class="kw">a</span><span class="ot">[</span><span class="kw">index</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">i</span>
+   <span class="kw">index</span> <span class="ot">=</span> <span class="kw">index</span><span class="ot">+</span><span class="dv">1</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level3" id="avoid-unpack">
+<h3><a href="#TOC">Avoid &quot;unpack()&quot;</a></h3>
+<p>The Lua <code>unpack()</code> function is not a great performer. Fortunately, a simple loop can be written to accomplish the same thing.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--unpack() (DISCOURAGED)</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span> <span class="ot">}</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   <span class="fu">print</span><span class="ot">(</span> <span class="fu">unpack</span><span class="ot">(</span><span class="kw">a</span><span class="ot">)</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">--LOOP METHOD (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span> <span class="ot">}</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   <span class="fu">print</span><span class="ot">(</span> <span class="kw">a</span><span class="ot">[</span><span class="dv">1</span><span class="ot">]</span>,<span class="kw">a</span><span class="ot">[</span><span class="dv">2</span><span class="ot">]</span>,<span class="kw">a</span><span class="ot">[</span><span class="dv">3</span><span class="ot">]</span>,<span class="kw">a</span><span class="ot">[</span><span class="dv">4</span><span class="ot">]</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<p>The caveat is that you must know the length of the table to retrieve all of its values in the loop method. Thus, <code>unpack()</code> still has its uses — in a table of unknown length, for example — but it should be avoided in time-critical routines.</p>
+</div>
+<div class="section level3" id="avoid-ipairs">
+<h3><a href="#TOC">Avoid &quot;ipairs()&quot;</a></h3>
+<p>When iterating through a table, the overhead of the Lua <code>ipairs()</code> function does not justify its use, especially when you can accomplish the same thing using a Lua construct.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--ipairs() (DISCOURAGED)</span>
+<span class="kw">local</span> <span class="kw">t1</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">t2</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">t3</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">t4</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">t1</span>, <span class="kw">t2</span>, <span class="kw">t3</span>, <span class="kw">t4</span> <span class="ot">}</span>
+
+<span class="kw">for</span> <span class="kw">i</span>,<span class="kw">v</span> <span class="kw">in</span> <span class="fu">ipairs</span><span class="ot">(</span> <span class="kw">a</span> <span class="ot">)</span> <span class="kw">do</span>
+   <span class="fu">print</span><span class="ot">(</span> <span class="kw">i</span>,<span class="kw">v</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">--LUA CONSTRUCT (RECOMMENDED)</span>
+<span class="kw">local</span> <span class="kw">t1</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">t2</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">t3</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">t4</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">t1</span>, <span class="kw">t2</span>, <span class="kw">t3</span>, <span class="kw">t4</span> <span class="ot">}</span>
+
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="ot">#</span><span class="kw">a</span> <span class="kw">do</span>
+   <span class="fu">print</span><span class="ot">(</span> <span class="kw">a</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level3" id="math-performance">
+<h3><a href="#TOC">Math Performance</a></h3>
+<p>Certain mathematical functions and processes are faster than others. For example, multiplication is faster than division and you should multiply by a decimal instead of dividing.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--MULTIPLICATION BY DECIMAL (RECOMMENDED)</span>
+<span class="kw">x</span> <span class="ot">*</span> <span class="dv">0.5</span> <span class="ot">;</span> <span class="kw">y</span> <span class="ot">*</span> <span class="dv">0.125</span>
+
+<span class="co">--DIVISION (DISCOURAGED)</span>
+<span class="kw">x</span><span class="ot">/</span><span class="dv">2</span> <span class="ot">;</span> <span class="kw">y</span><span class="ot">/</span><span class="dv">8</span></code></pre>
+<p>Multiplication is also faster than exponentiation:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--MULTIPLICATION (RECOMMENDED)</span>
+<span class="kw">x</span> <span class="ot">*</span> <span class="kw">x</span> <span class="ot">*</span> <span class="kw">x</span>
+
+<span class="co">--EXPONENTIATION (DISCOURAGED)</span>
+<span class="kw">x</span><span class="ot">^</span><span class="dv">3</span></code></pre>
+<p>Finally, avoid <code>math.fmod()</code> for positive numbers and use the modulus operator instead:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--math.fmod() (DISCOURAGED)</span>
+<span class="kw">local</span> <span class="kw">fmod</span> <span class="ot">=</span> <span class="kw">math</span><span class="ot">.</span><span class="kw">fmod</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   <span class="kw">if</span> <span class="ot">(</span> fmod<span class="ot">(</span> <span class="kw">i</span>,<span class="dv">30</span> <span class="ot">)</span> <span class="ot">&lt;</span> <span class="dv">1</span> <span class="ot">)</span> <span class="kw">then</span>
+      <span class="kw">local</span> <span class="kw">x</span> <span class="ot">=</span> <span class="dv">1</span>
+   <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">--MODULUS OPERATOR (RECOMMENDED)</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">100</span> <span class="kw">do</span>
+   <span class="kw">if</span> <span class="ot">(</span> <span class="ot">(</span> <span class="kw">i</span>%<span class="dv">30</span> <span class="ot">)</span> <span class="ot">&lt;</span> <span class="dv">1</span> <span class="ot">)</span> <span class="kw">then</span>
+      <span class="kw">local</span> <span class="kw">x</span> <span class="ot">=</span> <span class="dv">1</span>
+   <span class="kw">end</span>
+<span class="kw">end</span></code></pre>
+<a id="audio"></a>
+</div>
+</div>
+<div class="section level2" id="managing-audio">
+<h2><a href="#TOC">Managing Audio</a></h2>
+<p>Sound effects for an app should almost always be pre-loaded in <strong>non</strong>-time-critical code, for example, before a scene or level begins. Additionally, you should compress/sample sounds to the smallest acceptable quality in most cases. 11khz mono (not stereo) is considered acceptable in most cases, since the user will likely be listening through the phone/tablet speaker or earbuds. Also, using simple, cross-platform formats like <strong>WAV</strong> do not tax the CPU heavily.</p>
+<p>If desired, sound effects can be organized in a table as follows, for easy reference and eventual disposal.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">soundTable</span> <span class="ot">=</span> <span class="ot">{</span>
+   <span class="kw">mySound1</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;a.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound2</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;b.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound3</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;c.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound4</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;d.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound5</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;e.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound6</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;f.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound7</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;g.wav&quot;</span> <span class="ot">)</span>,
+   <span class="kw">mySound8</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>loadSound<span class="ot">(</span> <span class="st">&quot;h.wav&quot;</span> <span class="ot">)</span>,
+<span class="ot">}</span></code></pre>
+<p>With this structure, playback is as simple as:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">mySound</span> <span class="ot">=</span> <span class="kw">audio</span><span class="ot">.</span>play<span class="ot">(</span> <span class="kw">soundTable</span><span class="ot">[</span><span class="st">&quot;mySound1&quot;</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<p>Remember, you <strong>must</strong> dispose of audio files when they're no longer needed and clear any references to them.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">ST</span> <span class="ot">=</span> <span class="kw">soundTable</span>
+
+<span class="kw">for</span> <span class="kw">s</span>,<span class="kw">v</span> <span class="kw">in</span> <span class="fu">pairs</span><span class="ot">(</span><span class="kw">ST</span><span class="ot">)</span> <span class="kw">do</span>
+    <span class="kw">audio</span><span class="ot">.</span>dispose<span class="ot">(</span> <span class="kw">ST</span><span class="ot">[</span><span class="kw">s</span><span class="ot">]</span> <span class="ot">)</span> <span class="ot">;</span> <span class="kw">ST</span><span class="ot">[</span><span class="kw">s</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">nil</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 12-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.basics.optimization.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.basics.optimization.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.basics.optimization.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

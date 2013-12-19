@@ -1,0 +1,2254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > togethergameinstance</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > togethergameinstance" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.togethergameinstance">together.TogetherGameInstance</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#number-gameinstanceid"><a href="../../api/type/Number.html">number</a> GameInstanceID</a></li>
+<li><a href="#string-gameinstancetype"><a href="../../api/type/String.html">string</a> GameInstanceType</a></li>
+<li><a href="#number-gameinstanceduelid"><a href="../../api/type/Number.html">number</a> GameInstanceDuelID</a></li>
+<li><a href="#number-creatoruserid"><a href="../../api/type/Number.html">number</a> CreatorUserID</a></li>
+<li><a href="#number-roomid"><a href="../../api/type/Number.html">number</a> RoomID</a></li>
+<li><a href="#number-chatroomid"><a href="../../api/type/Number.html">number</a> ChatRoomID</a></li>
+<li><a href="#number-secondssincegamestarted"><a href="../../api/type/Number.html">number</a> SecondsSinceGameStarted</a></li>
+<li><a href="#number-secondssincelastmodified"><a href="../../api/type/Number.html">number</a> SecondsSinceLastModified</a></li>
+<li><a href="#number-lastmodifytimestamp"><a href="../../api/type/Number.html">number</a> LastModifyTimestamp</a></li>
+<li><a href="#number-roundcount"><a href="../../api/type/Number.html">number</a> RoundCount</a></li>
+<li><a href="#number-totalturncount"><a href="../../api/type/Number.html">number</a> TotalTurnCount</a></li>
+<li><a href="#boolean-active"><a href="../../api/type/Boolean.html">boolean</a> Active</a></li>
+<li><a href="#number-state"><a href="../../api/type/Number.html">number</a> State</a></li>
+<li><a href="#number-usercount"><a href="../../api/type/Number.html">number</a> UserCount</a></li>
+<li><a href="#number-maxusers"><a href="../../api/type/Number.html">number</a> MaxUsers</a></li>
+<li><a href="#number-turnuserid"><a href="../../api/type/Number.html">number</a> TurnUserID</a></li>
+<li><a href="#number-turnindex"><a href="../../api/type/Number.html">number</a> TurnIndex</a></li>
+<li><a href="#number-playcount"><a href="../../api/type/Number.html">number</a> PlayCount</a></li>
+<li><a href="#number-winninguserid"><a href="../../api/type/Number.html">number</a> WinningUserID</a></li>
+<li><a href="#boolean-isusermemberof"><a href="../../api/type/Boolean.html">boolean</a> IsUserMemberOf</a></li>
+<li><a href="#number-leaderboardid"><a href="../../api/type/Number.html">number</a> LeaderboardID</a></li>
+<li><a href="#propertycollection-properties"><a href="propertycollection.html">PropertyCollection</a> Properties</a></li>
+<li><a href="#table-gameinstanceusers"><a href="../../api/type/Table.html">table</a> GameInstanceUsers</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#addgameinstanceuser"><a href="#more_addgameinstanceuser">AddGameInstanceUser()</a></a></li>
+<li><a href="#findgameinstanceuserbyuserid"><a href="#more_findgameinstanceuserbyuserid">FindGameInstanceUserByUserID()</a></a></li>
+<li><a href="#findgameinstanceuserbygameinstanceuserid"><a href="#more_findgameinstanceuserbygameinstanceuserid">FindGameInstanceUserByGameInstanceUserID()</a></a></li>
+<li><a href="#getgameinstanceusercount"><a href="#more_getgameinstanceusercount">GetGameInstanceUserCount()</a></a></li>
+<li><a href="#getgameinstanceuser"><a href="#more_getgameinstanceuser">GetGameInstanceUser()</a></a></li>
+<li><a href="#getturnindexforuser"><a href="#more_getturnindexforuser">GetTurnIndexForUser()</a></a></li>
+<li><a href="#indexofgameinstanceuser"><a href="#more_indexofgameinstanceuser">IndexOfGameInstanceUser()</a></a></li>
+<li><a href="#indexofgameinstanceuserbyuserid"><a href="#more_indexofgameinstanceuserbyuserid">IndexOfGameInstanceUserByUserID()</a></a></li>
+<li><a href="#indexofgameinstanceuserbygameinstanceuserid"><a href="#more_indexofgameinstanceuserbygameinstanceuserid">IndexOfGameInstanceUserByGameInstanceUserID()</a></a></li>
+<li><a href="#removegameinstanceuser"><a href="#more_removegameinstanceuser">RemoveGameInstanceUser()</a></a></li>
+<li><a href="#getdetails"><a href="#more_getdetails">GetDetails()</a></a></li>
+<li><a href="#finish"><a href="#more_finish">Finish()</a></a></li>
+<li><a href="#forfeit"><a href="#more_forfeit">Forfeit()</a></a></li>
+<li><a href="#inviteuser"><a href="#more_inviteuser">InviteUser()</a></a></li>
+<li><a href="#leave"><a href="#more_leave">Leave()</a></a></li>
+<li><a href="#makemove"><a href="#more_makemove">MakeMove()</a></a></li>
+<li><a href="#modify"><a href="#more_modify">Modify()</a></a></li>
+<li><a href="#addgameinstanceuser-1">AddGameInstanceUser()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#findgameinstanceuserbyuserid-1">FindGameInstanceUserByUserID()</a><ul>
+<li><a href="#returns-togethergameinstanceuser">Returns <a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#findgameinstanceuserbygameinstanceuserid-1">FindGameInstanceUserByGameInstanceUserID()</a><ul>
+<li><a href="#returns-togethergameinstanceuser-1">Returns <a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#getgameinstanceusercount-1">GetGameInstanceUserCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+</ul></li>
+<li><a href="#getgameinstanceuser-1">GetGameInstanceUser()</a><ul>
+<li><a href="#returns-togethergameinstanceuser-2">Returns <a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#getturnindexforuser-1">GetTurnIndexForUser()</a><ul>
+<li><a href="#returns-number-1">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#indexofgameinstanceuser-1">IndexOfGameInstanceUser()</a><ul>
+<li><a href="#returns-number-2">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#indexofgameinstanceuserbyuserid-1">IndexOfGameInstanceUserByUserID()</a><ul>
+<li><a href="#returns-number-3">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#indexofgameinstanceuserbygameinstanceuserid-1">IndexOfGameInstanceUserByGameInstanceUserID()</a><ul>
+<li><a href="#returns-number-4">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a><ul>
+<li><a href="#removegameinstanceuser-1">RemoveGameInstanceUser()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-9">Syntax</a></li>
+<li><a href="#parameters-8">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-8"></i></a><ul>
+<li><a href="#getdetails-1">GetDetails()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-10">Syntax</a></li>
+<li><a href="#parameters-9">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-9"></i></a><ul>
+<li><a href="#finish-1">Finish()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-11">Syntax</a></li>
+<li><a href="#parameters-10">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-10"></i></a><ul>
+<li><a href="#forfeit-1">Forfeit()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-12">Syntax</a></li>
+<li><a href="#parameters-11">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-11"></i></a><ul>
+<li><a href="#inviteuser-1">InviteUser()</a><ul>
+<li><a href="#returns-void-5">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-13">Syntax</a></li>
+<li><a href="#parameters-12">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-12"></i></a><ul>
+<li><a href="#leave-1">Leave()</a><ul>
+<li><a href="#returns-void-6">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-14">Syntax</a></li>
+<li><a href="#parameters-13">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-13"></i></a><ul>
+<li><a href="#makemove-1">MakeMove()</a><ul>
+<li><a href="#returns-void-7">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-15">Syntax</a></li>
+<li><a href="#parameters-14">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-14"></i></a><ul>
+<li><a href="#modify-1">Modify()</a><ul>
+<li><a href="#returns-void-8">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-16">Syntax</a></li>
+<li><a href="#parameters-15">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-15"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="togethergameinstance.html">togethergameinstance</a>
+</div>
+<div class="section level1" id="together.togethergameinstance">
+<h1><a href="#TOC">together.TogetherGameInstance</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">TogetherGameInstance</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The GameInstance class represents a Together GameInstance or individual match.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="number-gameinstanceid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> GameInstanceID</a></h4>
+<p>The ID of the GameInstance.</p>
+</div>
+<div class="section level4" id="string-gameinstancetype">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> GameInstanceType</a></h4>
+<p>The type of GameInstance. ie (Board 3x3, Board 6x6, Board 9x9)</p>
+</div>
+<div class="section level4" id="number-gameinstanceduelid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> GameInstanceDuelID</a></h4>
+<p>The ID of the duel the GameInstance belongs to. This is the ID of the first GameInstance in a line of rematches.</p>
+</div>
+<div class="section level4" id="number-creatoruserid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> CreatorUserID</a></h4>
+<p>The ID of the User that created the GameInstance.</p>
+</div>
+<div class="section level4" id="number-roomid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> RoomID</a></h4>
+<p>The ID of the Room the GameInstance was created. If equal to 0, then the GameInstance wasn't created in a room.</p>
+</div>
+<div class="section level4" id="number-chatroomid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> ChatRoomID</a></h4>
+<p>The ID of the ChatRoom associated with the GameInstance.</p>
+</div>
+<div class="section level4" id="number-secondssincegamestarted">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> SecondsSinceGameStarted</a></h4>
+<p>The number of seconds since the GameInstance was started.</p>
+</div>
+<div class="section level4" id="number-secondssincelastmodified">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> SecondsSinceLastModified</a></h4>
+<p>The number of seconds since the GameInstance was last modified.</p>
+</div>
+<div class="section level4" id="number-lastmodifytimestamp">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> LastModifyTimestamp</a></h4>
+<p>A timestamp for when the GameInstance was last modified.</p>
+</div>
+<div class="section level4" id="number-roundcount">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> RoundCount</a></h4>
+<p>The number of rounds the GameInstance has progressed through.</p>
+</div>
+<div class="section level4" id="number-totalturncount">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> TotalTurnCount</a></h4>
+<p>The total number of moves made.</p>
+</div>
+<div class="section level4" id="boolean-active">
+<h4><a href="#TOC"><a href="../../api/type/Boolean.html">boolean</a> Active</a></h4>
+<p>A boolean indicating whether the GameInstance is active.</p>
+</div>
+<div class="section level4" id="number-state">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> State</a></h4>
+<p>The State of the GameInstance.</p>
+</div>
+<div class="section level4" id="number-usercount">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> UserCount</a></h4>
+<p>The number of users in the GameInstance.</p>
+</div>
+<div class="section level4" id="number-maxusers">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> MaxUsers</a></h4>
+<p>The max number of users in the GameInstance.</p>
+</div>
+<div class="section level4" id="number-turnuserid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> TurnUserID</a></h4>
+<p>The ID of the User whose turn it is. When 0, it is no User's turn. This will occur if first User makes their initial move and another possible User hasn't joined the GameInstance yet.</p>
+</div>
+<div class="section level4" id="number-turnindex">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> TurnIndex</a></h4>
+<p>The index of whose turn it is.</p>
+</div>
+<div class="section level4" id="number-playcount">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> PlayCount</a></h4>
+<p>The number of times a GameInstance has been played in the duel. This value will be 1 for the initial GameInstance. 2 for the second GameInstance in the duel. 3 for the third GameInstance in the duel.</p>
+</div>
+<div class="section level4" id="number-winninguserid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> WinningUserID</a></h4>
+<p>The ID of the User that has won the GameInstance. When 0, there is no winner of the GameInstance.</p>
+</div>
+<div class="section level4" id="boolean-isusermemberof">
+<h4><a href="#TOC"><a href="../../api/type/Boolean.html">boolean</a> IsUserMemberOf</a></h4>
+<p>A boolean indicating whether the logged in User is a member of the GameInstance.</p>
+</div>
+<div class="section level4" id="number-leaderboardid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> LeaderboardID</a></h4>
+<p>The ID of the Leaderboard associated with the GameInstance.</p>
+</div>
+<div class="section level4" id="propertycollection-properties">
+<h4><a href="#TOC"><a href="propertycollection.html">PropertyCollection</a> Properties</a></h4>
+<p>A property collection containing all custom properties for the GameInstance.</p>
+</div>
+<div class="section level4" id="table-gameinstanceusers">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> GameInstanceUsers</a></h4>
+<p>Contains all the GameInstanceUsers that are playing the GameInstance.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="addgameinstanceuser">
+<h5><a href="#TOC"><a href="#more_addgameinstanceuser">AddGameInstanceUser()</a></a></h5>
+</div>
+<div class="section level5" id="findgameinstanceuserbyuserid">
+<h5><a href="#TOC"><a href="#more_findgameinstanceuserbyuserid">FindGameInstanceUserByUserID()</a></a></h5>
+</div>
+<div class="section level5" id="findgameinstanceuserbygameinstanceuserid">
+<h5><a href="#TOC"><a href="#more_findgameinstanceuserbygameinstanceuserid">FindGameInstanceUserByGameInstanceUserID()</a></a></h5>
+</div>
+<div class="section level5" id="getgameinstanceusercount">
+<h5><a href="#TOC"><a href="#more_getgameinstanceusercount">GetGameInstanceUserCount()</a></a></h5>
+</div>
+<div class="section level5" id="getgameinstanceuser">
+<h5><a href="#TOC"><a href="#more_getgameinstanceuser">GetGameInstanceUser()</a></a></h5>
+</div>
+<div class="section level5" id="getturnindexforuser">
+<h5><a href="#TOC"><a href="#more_getturnindexforuser">GetTurnIndexForUser()</a></a></h5>
+</div>
+<div class="section level5" id="indexofgameinstanceuser">
+<h5><a href="#TOC"><a href="#more_indexofgameinstanceuser">IndexOfGameInstanceUser()</a></a></h5>
+</div>
+<div class="section level5" id="indexofgameinstanceuserbyuserid">
+<h5><a href="#TOC"><a href="#more_indexofgameinstanceuserbyuserid">IndexOfGameInstanceUserByUserID()</a></a></h5>
+</div>
+<div class="section level5" id="indexofgameinstanceuserbygameinstanceuserid">
+<h5><a href="#TOC"><a href="#more_indexofgameinstanceuserbygameinstanceuserid">IndexOfGameInstanceUserByGameInstanceUserID()</a></a></h5>
+</div>
+<div class="section level5" id="removegameinstanceuser">
+<h5><a href="#TOC"><a href="#more_removegameinstanceuser">RemoveGameInstanceUser()</a></a></h5>
+</div>
+<div class="section level5" id="getdetails">
+<h5><a href="#TOC"><a href="#more_getdetails">GetDetails()</a></a></h5>
+</div>
+<div class="section level5" id="finish">
+<h5><a href="#TOC"><a href="#more_finish">Finish()</a></a></h5>
+</div>
+<div class="section level5" id="forfeit">
+<h5><a href="#TOC"><a href="#more_forfeit">Forfeit()</a></a></h5>
+</div>
+<div class="section level5" id="inviteuser">
+<h5><a href="#TOC"><a href="#more_inviteuser">InviteUser()</a></a></h5>
+</div>
+<div class="section level5" id="leave">
+<h5><a href="#TOC"><a href="#more_leave">Leave()</a></a></h5>
+</div>
+<div class="section level5" id="makemove">
+<h5><a href="#TOC"><a href="#more_makemove">MakeMove()</a></a></h5>
+</div>
+<div class="section level5" id="modify">
+<h5><a href="#TOC"><a href="#more_modify">Modify()</a></a></h5>
+<hr />
+<div id="more_addgameinstanceuser">
+</div>
+
+</div>
+<div class="section level3" id="addgameinstanceuser-1">
+<h3><a href="#TOC">AddGameInstanceUser()</a></h3>
+<p>Adds a GameInstanceUser to the manager internally without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:AddGameInstanceUser( gameInstanceUser )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a> gameInstanceUser</b></p>
+<p><i>Instance of the GameInstanceUser to add to the internal list</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findgameinstanceuserbyuserid">
+</div>
+
+<div class="section level3" id="findgameinstanceuserbyuserid-1">
+<h3><a href="#TOC">FindGameInstanceUserByUserID()</a></h3>
+<p>Finds the GameInstanceUser with the specified UserID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togethergameinstanceuser">
+<h4><a href="#TOC">Returns <a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:FindGameInstanceUserByUserID( userID )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of the User to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findgameinstanceuserbygameinstanceuserid">
+</div>
+
+<div class="section level3" id="findgameinstanceuserbygameinstanceuserid-1">
+<h3><a href="#TOC">FindGameInstanceUserByGameInstanceUserID()</a></h3>
+<p>Finds the GameInstanceUser with the specified GameInstanceUserID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togethergameinstanceuser-1">
+<h4><a href="#TOC">Returns <a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:FindGameInstanceUserByGameInstanceUserID( gameInstanceUserID )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceUserID</b></p>
+<p><i>The ID of the GameInstanceUser to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getgameinstanceusercount">
+</div>
+
+<div class="section level3" id="getgameinstanceusercount-1">
+<h3><a href="#TOC">GetGameInstanceUserCount()</a></h3>
+<p>Gets the number of GameInstanceUsers currently managed internally.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:GetGameInstanceUserCount(  )</code></pre>
+<hr />
+<div id="more_getgameinstanceuser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getgameinstanceuser-1">
+<h3><a href="#TOC">GetGameInstanceUser()</a></h3>
+<p>Gets the GameInstanceUser at the specified index if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togethergameinstanceuser-2">
+<h4><a href="#TOC">Returns <a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:GetGameInstanceUser( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the GameInstanceUser to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getturnindexforuser">
+</div>
+
+<div class="section level3" id="getturnindexforuser-1">
+<h3><a href="#TOC">GetTurnIndexForUser()</a></h3>
+<p>Gets the TurnIndex for a particular User. Turn indexes are base 0. Returns -1 if the user is not found.</p>
+<div class="section level4" id="returns-number-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:GetTurnIndexForUser( userID )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of the User we're interested in getting the TurnIndex for</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofgameinstanceuser">
+</div>
+
+<div class="section level3" id="indexofgameinstanceuser-1">
+<h3><a href="#TOC">IndexOfGameInstanceUser()</a></h3>
+<p>Returns the index of the specified GameInstanceUser if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-number-2">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:IndexOfGameInstanceUser( gameInstanceUser )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togethergameinstanceuser.html">TogetherGameInstanceUser</a> gameInstanceUser</b></p>
+<p><i>Instance of the GameInstanceUser to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofgameinstanceuserbyuserid">
+</div>
+
+<div class="section level3" id="indexofgameinstanceuserbyuserid-1">
+<h3><a href="#TOC">IndexOfGameInstanceUserByUserID()</a></h3>
+<p>Returns the index of the GameInstanceUser with the specified UserID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-3">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:IndexOfGameInstanceUserByUserID( userID )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of the User to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofgameinstanceuserbygameinstanceuserid">
+</div>
+
+<div class="section level3" id="indexofgameinstanceuserbygameinstanceuserid-1">
+<h3><a href="#TOC">IndexOfGameInstanceUserByGameInstanceUserID()</a></h3>
+<p>Returns the index of the GameInstanceUser with the specified GameInstanceUserID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-4">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:IndexOfGameInstanceUserByGameInstanceUserID( gameInstanceUserID )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceUserID</b></p>
+<p><i>The ID of the GameInstanceUser to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_removegameinstanceuser">
+</div>
+
+<div class="section level3" id="removegameinstanceuser-1">
+<h3><a href="#TOC">RemoveGameInstanceUser()</a></h3>
+<p>Removes a GameInstanceUser from the internally managed list. This does not delete the user from the instance persistently.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-9">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:RemoveGameInstanceUser( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-8">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the GameInstanceUser to be removed internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-8">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getdetails">
+</div>
+
+<div class="section level3" id="getdetails-1">
+<h3><a href="#TOC">GetDetails()</a></h3>
+<p>Gets the GameInstance's details. This message should be called whenever it is necessary to get the latest state of a GameInstance. Internally, this method passes the GameInstance's LastModifyTimestamp to the server. If the LastModifyTimestamp is the same value on the server, a &quot;No Change&quot; error will be returned. If you do not wish this behavior, set LastModifyTimestamp on the GameInstance object to 0 before calling this method and full details will always be returned. Upon success, this will automatically update the internal data.</p>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-10">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:GetDetails( gameInstanceID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-9">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceID</b></p>
+<p><i>The ID of the GameInstance to retrieve details for</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-9">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_finish">
+</div>
+
+<div class="section level3" id="finish-1">
+<h3><a href="#TOC">Finish()</a></h3>
+<p>Finishes a GameInstance. This message should be called whenever a GameInstance is finished. The State of the GameInstance will change to (4 = GAME_STATE_FINISHED). A Leaderboard will be generated for the GameInstance. Upon success this will automatically update the internal data.</p>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-11">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:Finish( winningUserID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-10">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> winningUserID</b></p>
+<p><i>The ID of the User that has won the GameInstance. Pass in 0 if there was no winner.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-10">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_forfeit">
+</div>
+
+<div class="section level3" id="forfeit-1">
+<h3><a href="#TOC">Forfeit()</a></h3>
+<p>Forfeits a GameInstance. This message should be called whenever a GameInstance is forfeited by a User. The State of the GameInstance will change to (16 = GAME_STATE_FORFEIT). Upon success, this will automatically update the internal data.</p>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-12">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:Forfeit( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-11">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-11">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_inviteuser">
+</div>
+
+<div class="section level3" id="inviteuser-1">
+<h3><a href="#TOC">InviteUser()</a></h3>
+<p>Invites a User to a GameInstance. Upon success, this will automatically update the internal data.</p>
+<div class="section level4" id="returns-void-5">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-13">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:InviteUser( inviteeUserID, inviteeSocialType, inviteeSocialID, gameUserProperties, notificationMessage, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-12">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> inviteeUserID</b></p>
+<p><i>The ID of the Together User to invite to the GameInstance. Pass in 0 when inviting an external (Facebook) friend.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> inviteeSocialType</b></p>
+<p><i>The type of social network we're inviting a friend from. Pass &quot;FB&quot; for Facebook. Pass &quot;&quot; when passing a valid Together User.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> inviteeSocialID</b></p>
+<p><i>The ID of the external (Facebook) friend we're inviting. For a Facebook friend, pass the friend's FacebookID. Pass &quot;&quot; when passing a valid Together User.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> gameUserProperties</b></p>
+<p><i>A PropertyCollection to associate with the GameInstanceUser that gets created, or nil to attach no properties.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> notificationMessage</b></p>
+<p><i>The notification message to send to the Together User. Pass &quot;&quot; to prevent sending a notification.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-12">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_leave">
+</div>
+
+<div class="section level3" id="leave-1">
+<h3><a href="#TOC">Leave()</a></h3>
+<p>Leaves this GameInstance. Upon success, this will automatically update the internal data.</p>
+<div class="section level4" id="returns-void-6">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-14">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:Leave( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-13">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-13">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_makemove">
+</div>
+
+<div class="section level3" id="makemove-1">
+<h3><a href="#TOC">MakeMove()</a></h3>
+<p>Makes a move in the GameInstance with optional turn index updates. Turn indexes are base 0. Upon success, this will automatically update the internal data. The following GameInstance members are sent to the server when this method is called.<br /> * <b>GameInstanceID:</b> The ID of the GameInstance we're making a move in.<br /> * <b>TurnIndex:</b> The current Index of which User whose turn it is.<br /> * <b>NewTurnUserID:</b> The UserID of the User whose turn it should be. Pass in 0 to<br /> assign the next turn to no one. The only time 0 should be passed<br /> is if another User can join the game and the game is waiting. This<br /> is because whenever a User joins a game and the current TurnUserID is<br /> unassigned, turn is immediately assigned to the new user.<br /> * <b>NewTurnIndex:</b> The index of the next User to assign the turn to. For a two player<br /> GameInstance, the TurnIndex should either be 0 or 1.<br /> * <b>GameInstanceUserID:</b> The current GameInstanceUserID whose turn it is.<br /> * <b>GameProps:</b> The GameInstance.Properties member representing the properties for the GameInstance.<br /> * <b>GameUserProps:</b> The Properties of the GameInstanceUser that is making the move.</p>
+<div class="section level4" id="returns-void-7">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-15">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:MakeMove( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-14">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-14">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_modify">
+</div>
+
+<div class="section level3" id="modify-1">
+<h3><a href="#TOC">Modify()</a></h3>
+Modifies the GameInstance. Upon success, this will automatically update the internal data. The following GameInstance members are sent to the server when this method is called:<br /> * <b>GameInstanceID:</b> The ID of the GameInstance we're making a move in.<br /> * <b>Active:</b> The active boolean on the GameInstance.<br /> * <b>TurnUserID:</b> The UserID of the User whose turn it should be. Pass in 0 to assign the next turn to no one.<br /> * <b>TurnIndex:</b> The Index of the User whose turn it is.<br /> * <b>GameProps:</b> The GameInstance.Properties member representing the properties for the GameInstance.<br /> * <b>State:</b> The State of the GameInstance.<br />
+<table>
+<tr><td>
+<small>GAME_STATE_WAITING_FOR_PLAYERS
+</td><td>
+<small>=1
+</td><td>
+<small>Waiting for players to join the game.
+</td></tr>
+<tr><td>
+<small>GAME_STATE_IN_PROGRESS
+</td><td>
+<small>=2
+</td><td>
+<small>Players are currently playing the game.
+</td></tr>
+<tr><td>
+<small>GAME_STATE_FINISHED
+</td><td>
+<small>=4
+</td><td>
+<small>Game has been finished and a leaderboard was generated.
+</td></tr>
+<tr><td>
+<small>GAME_STATE_POSSIBLE_REMATCH
+</td><td>
+<small>=8
+</td><td>
+<small>A rematched Game waiting for enough players to join.
+</td></tr>
+<tr><td>
+<small>GAME_STATE_FORFEIT
+</td><td>
+<small>=16
+</td><td>
+<small>Game was forfeited by a User.<big>
+</td></tr>
+</table>
+
+<div class="section level4" id="returns-void-8">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-16">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherGameInstance:Modify( indexOfUserToModify, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-15">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> indexOfUserToModify</b></p>
+<p><i>The index of the GameInstanceUser to modify as well. Pass -1 to modify no GameInstanceUser.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-15">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.togethergameinstance&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.togethergameinstance&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.togethergameinstance&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

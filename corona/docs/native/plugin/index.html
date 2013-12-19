@@ -1,0 +1,1876 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Enterprise > Plugins </title>
+  <meta name="revised" content="04-Jun-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Enterprise > Plugins " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#plugins">Plugins</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#types-of-plugins">Types of Plugins</a><ul>
+<li><a href="#libraries-vs-providers">Libraries vs Providers</a></li>
+</ul></li>
+<li><a href="#using-plugins">Using Plugins</a><ul>
+<li><a href="#sdk">SDK</a></li>
+<li><a href="#enterprise">Enterprise</a></li>
+</ul></li>
+<li><a href="#conventions">Conventions</a><ul>
+<li><a href="#library-plugins">Library Plugins</a></li>
+<li><a href="#provider-plugins">Provider Plugins</a></li>
+</ul></li>
+<li><a href="#plugin-projects">Plugin Projects</a><ul>
+<li><a href="#ios">iOS</a><ul>
+<li><a href="#creating-a-universal-binary">Creating a Universal Binary</a></li>
+</ul></li>
+<li><a href="#android">Android</a></li>
+<li><a href="#mac">Mac</a></li>
+<li><a href="#win">Win</a></li>
+</ul></li>
+<li><a href="#coding-plugins">Coding Plugins</a><ul>
+<li><a href="#lua-only">Lua-only</a><ul>
+<li><a href="#library">Library</a></li>
+<li><a href="#provider">Provider</a></li>
+</ul></li>
+<li><a href="#native-only">Native-only</a><ul>
+<li><a href="#c">C</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#library-1">Library</a></li>
+<li><a href="#provider-1">Provider</a></li>
+</ul></li>
+<li><a href="#lua-native">Lua + Native</a><ul>
+<li><a href="#library-2">Library</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Enterprise</a>  ▸  <a href="index.html">Plugins</a>
+</div>
+<div class="section level1" id="plugins">
+<h1><a href="#TOC">Plugins</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">extensions, plugin</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="submission.html">Plugin Submission Guide</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Plugins allow you to extend the functionality of Corona.</p>
+</div>
+<div class="section level2" id="architecture">
+<h2><a href="#TOC">Architecture</a></h2>
+<p>Corona plugins leverage Lua's module system. In Lua's module system, plugins are lazily loaded by a corresponding call to the Lua function <a href="../../api/library/package/require.html">require</a>.</p>
+<p>Typically, these plugins are just shared native libraries which is supported on platforms like Mac (.dylib's), Windows (.dll's), and Android (.so's).</p>
+<p>In some cases, plugins cannot be written as shared libraries:</p>
+<ul>
+<li>On iOS, shared libraries are not supported, so plugins must be static libraries (.a's).</li>
+<li>On Android, it's often convenient to create pure Java plugins (.jar's).</li>
+</ul>
+<p>In these 2 specific cases, Corona adds special loaders that ensures these plugins can be easily loaded as long as certain conventions are followed.</p>
+</div>
+<div class="section level2" id="types-of-plugins">
+<h2><a href="#TOC">Types of Plugins</a></h2>
+<p>In Corona, there are 2 kinds of plugins:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Libraries.</strong> Library plugins are just Lua libraries. These can be used to wrap native functionality. These libraries are namespaced with the prefix <code>plugin.</code></li>
+<li><strong>Providers.</strong> Provider plugins are designed to standardize functionality provided by 3rd party service providers. You would never explicitly load these plugins via <code>require</code>. Instead, a wrapper interface loads them implicitly because the wrapper depends on the provider for the underlying functionality. These wrapper interfaces can be libraries (e.g. <a href="../../api/library/ads/index.html">ads</a>) or functions (e.g. <a href="../../api/library/native/showPopup.html">native.showPopup</a>).</li>
+</ol>
+<div class="section level3" id="libraries-vs-providers">
+<h3><a href="#TOC">Libraries vs Providers</a></h3>
+<p>Most plugins you create will be Libraries instead of Providers.</p>
+<p>The difference is that library plugins are just standard Lua libraries, whereas provider plugins are a Corona convention. In particular, provider plugins are designed to be used in conjunction with specific Corona wrapper interfaces (libraries or functions). These interfaces are:</p>
+<ul>
+<li><a href="../../api/library/ads/index.html">ads</a></li>
+<li><a href="../../api/library/analytics/index.html">analytics</a></li>
+<li><a href="../../api/library/licensing/index.html">licensing</a></li>
+<li><a href="../../api/library/native/showPopup.html">native.showPopup()</a></li>
+</ul>
+<p>Wrapper libraries have the added feature that allows you to switch providers while still using the same interface.</p>
+</div>
+</div>
+<div class="section level2" id="using-plugins">
+<h2><a href="#TOC">Using Plugins</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>Plugins are hosted on our server. You can incorporate plugins by making an appropriate change in <code>build.settings</code>.</p>
+<p>Currently, this feature is available in a private Beta.</p>
+</div>
+<div class="section level3" id="enterprise">
+<h3><a href="#TOC">Enterprise</a></h3>
+<p>Native plugins can easily be added to your iOS or Android project.</p>
+<p>On iOS, plugins will be in the form of <code>.a</code> (static library) files that needs to be linked into your app executable.</p>
+<p>On Android, plugins can come in the form of .so (shared library) or .jar files. These files should be in your projects <code>libs</code> directory to ensure that the <code>ant</code> script sees them.</p>
+<p>When you add a plugin you should be aware of the following:</p>
+<ul>
+<li><strong>Resources.</strong> If the plugin comes with resources, you should make sure those resources are available</li>
+<li><strong>Dependencies.</strong> If the plugin depends on linking to system frameworks or libraries, you'll need to make sure the appropriate linker flags are set.</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="conventions">
+<h2><a href="#TOC">Conventions</a></h2>
+<p>Plugins must follow different naming conventions depending on the type of plugin. These conventions ensure that Corona can locate the plugins properly.</p>
+<div class="section level3" id="library-plugins">
+<h3><a href="#TOC">Library Plugins</a></h3>
+<p>Library plugins are simply Lua modules where the module name is prefixed with <code>plugin.</code> The prefix helps avoid namespace collisions with Corona libraries. These libraries should be loaded via Lua's <code>require</code> function.</p>
+<p>For example, if there were a new library <code>myLibrary</code>, then you could access it in Lua:</p>
+<pre><code>local myLibrary = require &quot;plugin.myLibrary&quot;</code></pre>
+</div>
+<div class="section level3" id="provider-plugins">
+<h3><a href="#TOC">Provider Plugins</a></h3>
+<p>Provider plugins are also Lua modules, but you do not load them directly. Instead the wrapper library (or function) allows you to specify the provider and then loads them for you.</p>
+<p>In order for the provider to be loaded, it needs to follow a specific namespace convention. These libraries are prefixed with <code>CoronaProvider</code> followed by the name of the wrapper. Here's a simple formula:</p>
+<pre><code>local moduleName = &quot;CoronaProvider.&quot; .. wrapperName .. &quot;.&quot; .. providerName</code></pre>
+<p>For example, if we were offering a new provider for the <code>analytics</code> called <code>allYourDataAreBelongToUs</code>, then the library would be called <code>CoronaProvider.analytics.allYourDataAreBelongToUs</code>.</p>
+</div>
+</div>
+<div class="section level2" id="plugin-projects">
+<h2><a href="#TOC">Plugin Projects</a></h2>
+<p>When you create a plugin, you can use the <code>App</code> project template to simplify the creation of your plugin project as well as the testing of your plugins. After all, the plugin itself is not an executable and needs to run inside an actual application.</p>
+<p>This project has separate sub-folders for the platform-specific project files for each target platform:</p>
+<ul>
+<li><code>ios</code></li>
+<li><code>android</code></li>
+</ul>
+<p>There's also a <code>Corona</code> folder that sits along side these folders that contain the classical Corona project, e.g. <code>main.lua</code>. You can modify these files to test the Lua APIs that are offered by your plugin.</p>
+<div class="section level3" id="ios">
+<h3><a href="#TOC">iOS</a></h3>
+<p>Under the <code>ios</code> folder, there are 2 XCode projects:</p>
+<ul>
+<li><code>App.xcodeproj</code> This is the project that builds the .app executable that runs on the device. The <code>App.xcodeproj</code> automatically builds the plugin as an implicit dependency.</li>
+<li><code>Plugin.xcodeproj</code> This is the project that builds the plugin as a <code>.a</code> static library. You would use this project directly if you wanted to share your plugin outside of the <code>App</code> project.</li>
+</ul>
+<p>For plugin development, you should modify the Plugin.xcodeproj.</p>
+<div class="section level4" id="creating-a-universal-binary">
+<h4><a href="#TOC">Creating a Universal Binary</a></h4>
+<p>Most often, you will want to create a universal binary for your plugin. In other words, you'd like to ship one static library that supports both the device and the Xcode simulator. The former will run on devices like the iPhone, while the latter will run on your Mac.</p>
+<p>You can achieve that using the <code>lipo</code> tool. In the following example, we are creating a universal library for <code>staticlibrary.a</code>:</p>
+<pre><code>lipo -create &quot;/path/to/iphoneos/staticlibrary.a&quot; &quot;/path/to/iphoneos-simulator/staticlibrary.a&quot; -output &quot;/path/to/dst/staticlibrary.a&quot;</code></pre>
+</div>
+</div>
+<div class="section level3" id="android">
+<h3><a href="#TOC">Android</a></h3>
+<p>Under the <code>android</code> folder, there are 2 shell scripts:</p>
+<ul>
+<li><code>build.sh</code> This builds the .apk that installs on the device.</li>
+<li><code>build.plugin.sh</code> This builds the plugin as a <code>.jar</code> file only including the Java files under 'src/plugin' in your project. You would use this project directly if you wanted to share your plugin outside of the <code>App</code> project.</li>
+</ul>
+</div>
+<div class="section level3" id="mac">
+<h3><a href="#TOC">Mac</a></h3>
+<p>Forthcoming.</p>
+</div>
+<div class="section level3" id="win">
+<h3><a href="#TOC">Win</a></h3>
+<p>Forthcoming.</p>
+</div>
+</div>
+<div class="section level2" id="coding-plugins">
+<h2><a href="#TOC">Coding Plugins</a></h2>
+<p>Plugins build upon Lua's module system, so they can come in 3 different flavors:</p>
+<ol style="list-style-type: decimal">
+<li>Pure Lua code</li>
+<li>Native code</li>
+<li>Hybrid of Lua and native code</li>
+</ol>
+<div class="section level3" id="lua-only">
+<h3><a href="#TOC">Lua-only</a></h3>
+<p>You can create both libraries and providers from within Lua.</p>
+<div class="section level4" id="library">
+<h4><a href="#TOC">Library</a></h4>
+<p>A library can be created using the <a href="../../api/type/CoronaLibrary/index.html">CoronaLibrary</a> class. Here's how a library called <code>plugin.myLibrary</code> would look:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- plugin.myLibrary.lua</span>
+
+<span class="co">-- Create library</span>
+<span class="kw">local</span> <span class="kw">Library</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;CoronaLibrary&quot;</span>
+<span class="kw">local</span> <span class="kw">lib</span> <span class="ot">=</span> <span class="kw">Library</span>:new<span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&#39;plugin.myLibrary&#39;</span>, <span class="kw">publisherId</span><span class="ot">=</span><span class="st">&#39;com.mycompany&#39;</span> <span class="ot">}</span>
+
+<span class="co">-- Create a function for the library</span>
+<span class="kw">lib</span><span class="ot">.</span><span class="kw">doSomething</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">()</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;I did something!&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Return lib instead of using &#39;module()&#39; which pollutes the global namespace</span>
+<span class="kw">return</span> <span class="kw">lib</span></code></pre>
+</div>
+<div class="section level4" id="provider">
+<h4><a href="#TOC">Provider</a></h4>
+<p>Providers can also be created in Lua using the <a href="../../api/type/CoronaProvider/index.html">CoronaProvider</a> class.</p>
+<p>For example, if you were writing a provider for the <code>analytics</code> provider called <code>allYourDataAreBelongToUs</code>, then you would instantiate an instance of <code>CoronaProvider.analytics</code>. <code>CoronaProvider.analytics</code> is a subclass of <a href="../../api/type/CoronaProvider/index.html">CoronaProvider</a> created by Corona that should be used to create all analytics provider instances.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- CoronaProvider.analytics.allYourDataAreBelongToUs.lua</span>
+
+<span class="co">-- Create instance</span>
+<span class="kw">local</span> <span class="kw">Provider</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;CoronaProvider.analytics&quot;</span>
+<span class="kw">local</span> <span class="kw">instance</span> <span class="ot">=</span> <span class="kw">Provider</span>:new<span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&#39;allYourDataAreBelongToUs&#39;</span>, <span class="kw">publisherId</span><span class="ot">=</span><span class="st">&#39;com.mycompany&#39;</span> <span class="ot">}</span>
+<span class="kw">instance</span><span class="ot">.</span><span class="kw">init</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">(...)</span>
+    <span class="co">-- insert implementation here</span>
+<span class="kw">end</span>
+
+<span class="kw">instance</span><span class="ot">.</span><span class="kw">logEvent</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">(...)</span>
+    <span class="co">-- insert implementation here</span>
+<span class="kw">end</span>
+
+<span class="kw">return</span> <span class="kw">instance</span></code></pre>
+<p>You can create your own provider types in Lua by subclassing <a href="../../api/type/CoronaProvider/index.html">CoronaProvider</a>. For example, below is the implementation of <code>CoronaProvider.ads</code>, the base class used to create all ad provider instances:</p>
+<pre><code>-- CoronaProvider.ads.lua
+
+-- Create new provider class 
+local Provider = require &quot;CoronaProvider&quot;
+local Class = Provider:newClass( &quot;CoronaProvider.ads&quot; )
+
+-- Default implementations
+local function defaultFunction()
+    print( &quot;WARNING: The &#39;ads&#39; library is not available on this platform.&quot; )
+end
+
+Class.init = defaultFunction
+Class.show = defaultFunction
+Class.hide = defaultFunction
+Class.testAppId = &#39;No_TestAppId_Exists&#39;
+
+-- Return an instance
+return Class</code></pre>
+</div>
+</div>
+<div class="section level3" id="native-only">
+<h3><a href="#TOC">Native-only</a></h3>
+<p>In addition to the plugin naming conventions above, Corona expects plugins to follow some additional conventions that ensure Lua can locate these modules</p>
+<div class="section level4" id="c">
+<h4><a href="#TOC">C</a></h4>
+<p>In C, these conventions are just the standard Lua naming conventions for modules:</p>
+<ul>
+<li>The name of the module function must be prefixed by <code>luaopen_</code>.</li>
+<li>The signature of this function should match <a href="http://www.lua.org/manual/5.1/manual.html#lua_CFunction">lua_CFunction</a>.</li>
+<li>If a module contains a dot ('.'), it is replaced by an underscore ('_') in the name of the function, since C does not allow dots in symbol names.</li>
+<li>This function should be publicly visible.</li>
+</ul>
+<p>For example, the Lua library <code>plugin.myLibrary</code> would have a Lua function called <code>luaopen_plugin_myLibrary</code>.</p>
+</div>
+<div class="section level4" id="java">
+<h4><a href="#TOC">Java</a></h4>
+<p>If you write the module in Java, Corona has setup Lua to load Java code and to let that Java code define the Lua library via JNLua. Here, Lua looks for the Java class <code>LuaLoader</code> and instantiates it. Corona assumes the following conventions:</p>
+<ul>
+<li>The <code>LuaLoader</code> class has a default (empty) constructor.</li>
+<li>The <code>LuaLoader</code> class must implement the JNLua interface <code>com.naef.jnlua.JavaFunction</code>.</li>
+<li>The namespace of <code>LuaLoader</code> should be the same as the name passed to <code>require</code>.</li>
+</ul>
+<p>For example, the Lua library <code>plugin.myLibrary</code> would be implemented by the (fully-qualified) class <code>plugin.myLibrary.LuaLoader</code> and that class would implement the <code>invoke()</code> method of the <code>com.naef.jnlua.JavaFunction</code> interface.</p>
+<p>This convention applies to providers, so for example, the above analytics provider <code>allYourDataAreBelongToUs</code> would be implemented by the class <code>CoronaProvider.analytics.allYourDataAreBelongToUs.LuaLoader</code>.</p>
+</div>
+<div class="section level4" id="library-1">
+<h4><a href="#TOC">Library</a></h4>
+<p>The following C code is equivalent to the Lua code <code>plugin.myLibrary.lua</code> above:</p>
+<pre><code>static int doSomething( lua_State *L )
+{
+    lua_getglobal( L, &quot;print&quot; );
+    lua_pushstring( &quot;I did something!&quot; );
+    CoronaLuaDoCall( L, 1, 0 );
+    return 0;
+}
+
+// Export so it&#39;s visible to &#39;require&#39;
+CORONA_EXPORT
+int luaopen_plugin_myLibrary( lua_State *L )
+{
+    static const luaL_Reg kFunctions[] =
+    {
+        { &quot;doSomething&quot;, doSomething },
+
+        { NULL, NULL }
+    };
+
+    // Create &quot;myLibrary&quot;
+    // NOTE: Lua version assumes version and revision default to 1.
+    int result = CoronaLibraryNew(
+        L, &quot;myLibrary&quot;, &quot;com.mycompany&quot;, 1, 1, kFunctions, NULL );
+
+    return result;
+}</code></pre>
+</div>
+<div class="section level4" id="provider-1">
+<h4><a href="#TOC">Provider</a></h4>
+<p>The following is equivalent to <code>CoronaProvider.analytics.allYourDataAreBelongToUs.lua</code> above:</p>
+<pre><code>static int init( lua_State *L )
+{
+    // Do something
+    return 0;
+}
+
+static int logEvent( lua_State *L )
+{
+    // Do something
+    return 0;
+}
+
+CORONA_EXPORT
+int luaopen_CoronaProvider_analytics_allYourDataAreBelongToUs( lua_State *L )
+{
+    const char *name = lua_tostring( L, 1 ); // This should be &quot;allYourDataAreBelongToUs&quot;
+
+    int result = CoronaLibraryProviderNew( L, &quot;analytics&quot;, name, &quot;com.mycompany&quot; );
+
+    if ( result )
+    {
+        const luaL_Reg kFunctions[] =
+        {
+            { &quot;init&quot;, init },
+            { &quot;logEvent&quot;, logEvent },
+
+            { NULL, NULL }
+        };
+
+        luaL_register( L, NULL, kFunctions );
+    }
+
+    return result;
+}
+</code></pre>
+</div>
+</div>
+<div class="section level3" id="lua-native">
+<h3><a href="#TOC">Lua + Native</a></h3>
+<div class="section level4" id="library-2">
+<h4><a href="#TOC">Library</a></h4>
+<p>You can also create libraries in a hybrid fashion. For example, you can create the library via Lua code, and then do further initialization in C.</p>
+<p>Below is an example for creating the <code>myLibrary</code> library from Lua and then adding additional functions on the native C side. Here, we assume <code>kBuffer</code> stores the Lua bytecodes corresponding to <code>myLibrary.lua</code></p>
+<pre><code>// The bytecodes for myLibrary.lua are contained in kBuffer
+static const unsigned char kBuffer[] = { ... }
+
+static int bufferLoader( lua_State *L )
+{
+    return luaL_loadbuffer( L, (const char*)kBuffer, sizeof( kBuffer ), &quot;myLibrary&quot; );
+}
+
+static int somethingElse( lua_State *L )
+{
+    printf( &quot;I&#39;m doing something else!&quot; );
+    return 0;
+}
+
+CORONA_EXPORT
+int luaopen_myLibrary( lua_State *L )
+{
+    lua_CFunction factory = Corona::Lua::Open&lt; bufferLoader &gt;;
+    int result = CoronaLibraryNewWithFactory( L, factory, NULL, NULL );
+
+    if ( result )
+    {
+        const luaL_Reg kFunctions[] =
+        {
+            { &quot;somethingElse&quot;, somethingElse },
+
+            { NULL, NULL }
+        };
+
+        luaL_register( L, NULL, kFunctions );
+    }
+
+    return result;
+}</code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 04-Jun-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=native.plugin.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=native.plugin.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=native.plugin.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

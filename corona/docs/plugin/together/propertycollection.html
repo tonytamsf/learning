@@ -1,0 +1,1791 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > propertycollection</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > propertycollection" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.propertycollection">together.PropertyCollection</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#string-name"><a href="../../api/type/String.html">string</a> Name</a></li>
+<li><a href="#table-properties"><a href="../../api/type/Table.html">table</a> Properties</a></li>
+<li><a href="#table-children"><a href="../../api/type/Table.html">table</a> Children</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#new"><a href="#more_new">New()</a></a></li>
+<li><a href="#findproperty"><a href="#more_findproperty">FindProperty()</a></a></li>
+<li><a href="#get"><a href="#more_get">Get()</a></a></li>
+<li><a href="#getex"><a href="#more_getex">GetEx()</a></a></li>
+<li><a href="#set"><a href="#more_set">Set()</a></a></li>
+<li><a href="#hasproperty"><a href="#more_hasproperty">HasProperty()</a></a></li>
+<li><a href="#getcount"><a href="#more_getcount">GetCount()</a></a></li>
+<li><a href="#getat"><a href="#more_getat">GetAt()</a></a></li>
+<li><a href="#new-1">New()</a><ul>
+<li><a href="#returns-propertycollection">Returns <a href="propertycollection.html">PropertyCollection</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+</ul></li>
+<li><a href="#findproperty-1">FindProperty()</a><ul>
+<li><a href="#returns-togetherproperty">Returns <a href="togetherproperty.html">TogetherProperty</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#get-1">Get()</a><ul>
+<li><a href="#returns-string">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#getex-1">GetEx()</a><ul>
+<li><a href="#returns-string-1">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#set-1">Set()</a><ul>
+<li><a href="#returns-togetherproperty-1">Returns <a href="togetherproperty.html">TogetherProperty</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#hasproperty-1">HasProperty()</a><ul>
+<li><a href="#returns-boolean">Returns <a href="../../api/type/Boolean.html">boolean</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#getcount-1">GetCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+</ul></li>
+<li><a href="#getat-1">GetAt()</a><ul>
+<li><a href="#returns-togetherproperty-2">Returns <a href="togetherproperty.html">TogetherProperty</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="propertycollection.html">propertycollection</a>
+</div>
+<div class="section level1" id="together.propertycollection">
+<h1><a href="#TOC">together.PropertyCollection</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">PropertyCollection</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The PropertyCollection class contains a list of TogetherProperties and additional child PropertyCollections.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="string-name">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> Name</a></h4>
+<p>The name of this collection node.</p>
+</div>
+<div class="section level4" id="table-properties">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> Properties</a></h4>
+<p>A list of TogetherProperties.</p>
+</div>
+<div class="section level4" id="table-children">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> Children</a></h4>
+<p>A list of children PropertyCollections.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="new">
+<h5><a href="#TOC"><a href="#more_new">New()</a></a></h5>
+</div>
+<div class="section level5" id="findproperty">
+<h5><a href="#TOC"><a href="#more_findproperty">FindProperty()</a></a></h5>
+</div>
+<div class="section level5" id="get">
+<h5><a href="#TOC"><a href="#more_get">Get()</a></a></h5>
+</div>
+<div class="section level5" id="getex">
+<h5><a href="#TOC"><a href="#more_getex">GetEx()</a></a></h5>
+</div>
+<div class="section level5" id="set">
+<h5><a href="#TOC"><a href="#more_set">Set()</a></a></h5>
+</div>
+<div class="section level5" id="hasproperty">
+<h5><a href="#TOC"><a href="#more_hasproperty">HasProperty()</a></a></h5>
+</div>
+<div class="section level5" id="getcount">
+<h5><a href="#TOC"><a href="#more_getcount">GetCount()</a></a></h5>
+</div>
+<div class="section level5" id="getat">
+<h5><a href="#TOC"><a href="#more_getat">GetAt()</a></a></h5>
+<hr />
+<div id="more_new">
+</div>
+
+</div>
+<div class="section level3" id="new-1">
+<h3><a href="#TOC">New()</a></h3>
+<p>Creates a new PropertyCollection object</p>
+<div class="section level4" id="returns-propertycollection">
+<h4><a href="#TOC">Returns <a href="propertycollection.html">PropertyCollection</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:New(  )</code></pre>
+<hr />
+<div id="more_findproperty">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="findproperty-1">
+<h3><a href="#TOC">FindProperty()</a></h3>
+<p>Gets the property with the specified name if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherproperty">
+<h4><a href="#TOC">Returns <a href="togetherproperty.html">TogetherProperty</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:FindProperty( propertyName )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_get">
+</div>
+
+<div class="section level3" id="get-1">
+<h3><a href="#TOC">Get()</a></h3>
+<p>Gets the property value with the specified name if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-string">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:Get( propertyName )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getex">
+</div>
+
+<div class="section level3" id="getex-1">
+<h3><a href="#TOC">GetEx()</a></h3>
+<p>Gets the value of the property with the specified name if it exists, otherwise this will create the new property with the default value and return that value.</p>
+<div class="section level4" id="returns-string-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:GetEx( propertyName, defaultValue )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to find</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> defaultValue</b></p>
+<p><i>The value to be returned when the property is not found</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_set">
+</div>
+
+<div class="section level3" id="set-1">
+<h3><a href="#TOC">Set()</a></h3>
+<p>Sets the value of the property with the specified name if it exists, otherwise creates it with the set value.</p>
+<div class="section level4" id="returns-togetherproperty-1">
+<h4><a href="#TOC">Returns <a href="togetherproperty.html">TogetherProperty</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:Set( propertyName, propertyValue )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to set or create</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propertyValue</b></p>
+<p><i>The value to set for the property</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_hasproperty">
+</div>
+
+<div class="section level3" id="hasproperty-1">
+<h3><a href="#TOC">HasProperty()</a></h3>
+<p>Checks to see whether a property with the specified name exists.</p>
+<div class="section level4" id="returns-boolean">
+<h4><a href="#TOC">Returns <a href="../../api/type/Boolean.html">boolean</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:HasProperty( propertyName )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to check for</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getcount">
+</div>
+
+<div class="section level3" id="getcount-1">
+<h3><a href="#TOC">GetCount()</a></h3>
+<p>Returns the number of properties in the collection. This does not include children collections.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:GetCount(  )</code></pre>
+<hr />
+<div id="more_getat">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getat-1">
+<h3><a href="#TOC">GetAt()</a></h3>
+<p>Gets the property at the specified index.</p>
+<div class="section level4" id="returns-togetherproperty-2">
+<h4><a href="#TOC">Returns <a href="togetherproperty.html">TogetherProperty</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>PropertyCollection:GetAt( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index to return from the collection</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.propertycollection&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.propertycollection&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.propertycollection&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

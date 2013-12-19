@@ -1,0 +1,1847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > media > imageMask </title>
+  <meta name="revised" content="17-Jul-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > media > imageMask " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#masking-images">Masking Images</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#creating-mask-images">Creating Mask Images</a></li>
+<li><a href="#applying-masks">Applying Masks</a></li>
+<li><a href="#mask-manipulation">Mask Manipulation</a></li>
+<li><a href="#group-masking">Group Masking</a></li>
+<li><a href="#hit-masking">Hit Masking</a></li>
+<li><a href="#removing-masks">Removing Masks</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [media][guide.media]  ▸  <a href="index.html">imageMask</a>
+</div>
+<div class="section level1" id="masking-images">
+<h1><a href="#TOC">Masking Images</a></h1>
+<p>This guide discusses how to use <a href="../../../api/library/graphics/newMask.html">graphics.newMask()</a> to mask individual display objects or entire display groups.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#create">Creating Mask Images</a></li>
+<li><a href="#apply">Applying Masks</a></li>
+<li><a href="#manipulate">Mask Manipulation</a></li>
+<li><a href="#groupmask">Group Masking</a></li>
+<li><a href="#hitmasking">Hit Masking</a> <!--- * [Dynamic Mask Selection](#dynamic) --></li>
+<li><a href="#remove">Removing Masks</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Masking is a common practice in digital design. Using a black and white (or grayscale) image mask, you can show/hide portions of a <a href="../displayObjects/index.html">display object</a> or <a href="../../start/displayGroups/index.html">display group</a> according to the mask composition. For example, you may create a mask image with white portions and black portions. When applied to a target object/group, the black portions of the mask will render the underlying pixels fully transparent (this is represented by the gray checkerboard in the following examples). In contrast, pixels behind the white portion of the mask image will remain fully visible.</p>
+<table>
+<tr>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-base1.png" alt="(image)" /><p class="caption">(image)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>+</b><br /> 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-mask1.png" alt="(mask)" /><p class="caption">(mask)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>=</b><br /> 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-result1.png" alt="(result)" /><p class="caption">(result)</p>
+</div>
+</th>
+</tr>
+</table>
+
+<p>Mask images can also be created with gray regions or gradients. In this case, a region of 80% gray will render pixels in the underlying object/group at 20% opacity. Similarly, a region of 10% gray will render the underlying pixels at 90% opacity.</p>
+<table>
+<tr>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-base1.png" alt="(image)" /><p class="caption">(image)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>+</b><br /> 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-mask2.png" alt="(mask)" /><p class="caption">(mask)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>=</b><br /> 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-result2.png" alt="(result)" /><p class="caption">(result)</p>
+</div>
+</th>
+</tr>
+</table>
+
+
+
+
+<a id="create"></a>
+</div>
+<div class="section level2" id="creating-mask-images">
+<h2><a href="#TOC">Creating Mask Images</a></h2>
+<p>Mask image files can be created using any standard image editing program like <a href="http://www.adobe.com/products/photoshop.html">Photoshop</a>®, <a href="http://www.gimp.org/downloads/">GIMP</a>, or <a href="http://www.getpaint.net/download.html">Paint.NET</a>. When creating the image, you <strong>must</strong> obey the following rules to ensure that masks behave properly.</p>
+<div class="guide-notebox-imp" style="padding-top:3px;">
+
+<ul>
+<li><p>The mask image must have width and height dimensions that are <strong>divisible by 4</strong>.</p></li>
+<li><p>The mask image must be bordered by at least <strong>3 pixels</strong> of black space on all four sides. You may need to increase the overall size of your mask image to include this border.</p></li>
+</ul>
+</div>
+
+
+
+
+<a id="apply"></a>
+</div>
+<div class="section level2" id="applying-masks">
+<h2><a href="#TOC">Applying Masks</a></h2>
+<p>With the mask file properly prepared and saved, the next step is to create an actual mask using the <a href="../../../api/library/graphics/newMask.html">graphics.newMask()</a> API. Just supply the name of the mask image file to the function as follows:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">mask</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newMask<span class="ot">(</span> <span class="st">&quot;maskframe.png&quot;</span> <span class="ot">)</span></code></pre>
+<p>Next, apply the mask to an object of your choice using the <code>setMask()</code> function:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">mountains</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="st">&quot;mountains.png&quot;</span>, <span class="dv">280</span>, <span class="dv">216</span> <span class="ot">)</span>
+<span class="kw">mountains</span><span class="ot">.</span><span class="kw">x</span>, <span class="kw">mountains</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">200</span>,<span class="dv">160</span>
+
+<span class="kw">mountains</span>:setMask<span class="ot">(</span> <span class="kw">mask</span> <span class="ot">)</span></code></pre>
+<table>
+<tr>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-base1.png" alt="(image)" /><p class="caption">(image)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>→</b><br /> 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-result1.png" alt="(result)" /><p class="caption">(result)</p>
+</div>
+</th>
+</table>
+
+<p>As illustrated, the area of the photo masked by black is invisible while the white area remains fully visible. The photo and mask can now be regarded as a single display object and, like any normal display object, it can be moved, rotated, inserted into a display group, etc.</p>
+<p>Note that the width and height of the masked object remain the same as the unmasked version, even though the example photo appears smaller because of the mask. Corona respects the original dimensions in regards to size and positioning. However, touch/tap detection is ignored on completely masked (invisible) regions of an object unless you declare otherwise — see <a href="#hitmasking">Hit Masking</a> below for more information.</p>
+<a id="manipulate"></a>
+</div>
+<div class="section level2" id="mask-manipulation">
+<h2><a href="#TOC">Mask Manipulation</a></h2>
+<p>Masks are always applied to an object's default reference point at an angle of 0 with a scale ratio of 1:1. However, you can manipulate the mask after you've set it, in instances where you need to rotate/scale it or change its position relative to the image/group.</p>
+<p>The following functions are available for mask manipulation:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+<tr>
+<th class="width20 headerfirst headerrow notebox-title">
+Function
+</th>
+<th class="width15 headerrow notebox-title">
+ 
+</th>
+<th class="width40 headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>object.maskX</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/type/DisplayObject/maskX.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets or retrieves the <strong>x</strong> position of the mask.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>object.maskY</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/type/DisplayObject/maskY.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets or retrieves the <strong>y</strong> position of the mask.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>object.maskRotation</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/type/DisplayObject/maskRotation.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets or retrieves the rotation angle of the mask.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>object.maskScaleX</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/type/DisplayObject/maskScaleX.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets or retrieves the <strong>x</strong> scale factor of the mask.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>object.maskScaleY</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/type/DisplayObject/maskScaleY.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets or retrieves the <strong>y</strong> scale factor of the mask.
+</th>
+</tr>
+</table><div style="clear:both;">
+ 
+</div>
+
+<p>The following example sets the mask, shifts its <strong>x</strong> position 10 pixels to the left, rotates it 20 degrees, and scales it down to 80% its normal size:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">mask</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newMask<span class="ot">(</span> <span class="st">&quot;maskframe.png&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">mountains</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="st">&quot;mountains.png&quot;</span>, <span class="dv">280</span>, <span class="dv">216</span> <span class="ot">)</span>
+<span class="kw">mountains</span><span class="ot">.</span><span class="kw">x</span>, <span class="kw">mountains</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">200</span>,<span class="dv">160</span>
+
+<span class="kw">mountains</span>:setMask<span class="ot">(</span> <span class="kw">mask</span> <span class="ot">)</span>
+
+<span class="kw">mountains</span><span class="ot">.</span><span class="kw">maskX</span> <span class="ot">=</span> <span class="ot">-</span><span class="dv">10</span>
+<span class="kw">mountains</span><span class="ot">.</span><span class="kw">maskRotation</span> <span class="ot">=</span> <span class="dv">20</span>
+<span class="kw">mountains</span><span class="ot">.</span><span class="kw">maskScaleX</span> <span class="ot">=</span> <span class="dv">0.8</span>
+<span class="kw">mountains</span><span class="ot">.</span><span class="kw">maskScaleY</span> <span class="ot">=</span> <span class="dv">0.8</span></code></pre>
+<table style="margin-bottom:-10px;">
+<tr>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-result1.png" alt="(before)" /><p class="caption">(before)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+<b>→</b><br /> 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-result3.png" alt="(after)" /><p class="caption">(after)</p>
+</div>
+</th>
+</table>
+
+
+
+
+<a id="groupmask"></a>
+</div>
+<div class="section level2" id="group-masking">
+<h2><a href="#TOC">Group Masking</a></h2>
+<p>As indicated already, masks can be applied to <a href="../../start/displayGroups/index.html">display groups</a> as well as individual display objects. Just remember that the default reference point of a group is in the top-left corner, not the center. Thus, if you want to center a mask over a group, it requires a few more lines of code:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newGroup<span class="ot">()</span>
+
+<span class="kw">local</span> <span class="kw">mask</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newMask<span class="ot">(</span> <span class="st">&quot;maskframe.png&quot;</span> <span class="ot">)</span>
+
+<span class="kw">group</span>:setMask<span class="ot">(</span> <span class="kw">mask</span> <span class="ot">)</span>
+
+<span class="kw">group</span>:setReferencePoint<span class="ot">(</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">CenterReferencePoint</span> <span class="ot">)</span>
+<span class="kw">group</span><span class="ot">.</span><span class="kw">maskX</span> <span class="ot">=</span> <span class="kw">group</span><span class="ot">.</span><span class="kw">x</span>
+<span class="kw">group</span><span class="ot">.</span><span class="kw">maskY</span> <span class="ot">=</span> <span class="kw">group</span><span class="ot">.</span><span class="kw">y</span></code></pre>
+<a id="hitmasking"></a>
+</div>
+<div class="section level2" id="hit-masking">
+<h2><a href="#TOC">Hit Masking</a></h2>
+<p>Masking can also be used to prevent touch/tap response over completely masked (invisible) regions of an object. This is not possible with a standard, unmasked display object surrounded by transparent pixels. In that case, the object will appear smaller than its canvas size, but the system will still recognize user input on the transparent region. Thus, when dealing with very precise touch/tap recognition, the solution is to mask the image, using 100% black to mask the areas which should <strong>not</strong> return a touch or tap response.</p>
+<p>In the normal, unmasked image below, the system will report input response over the entire canvas, including the transparent pixels represented by gray checkerboard. However, if you need to constrain user input to only the <strong>visible</strong> portion (the icon itself), a mask is the best solution. In the masked example shown here, touch/tap response will be ignored outside of the visible region.</p>
+<table>
+<tr>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-base2.png" alt="(image)" /><p class="caption">(image)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+ 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-mask3.png" alt="(mask)" /><p class="caption">(mask)</p>
+</div>
+</th>
+<th class="flowchart-arrow" width="40" nowrap>
+ 
+</th>
+<th>
+
+<div class="figure">
+<img src="../../../images/simulator/image-mask-base2.png" alt="(result)" /><p class="caption">(result)</p>
+</div>
+</th>
+</tr>
+</table>
+
+<p>If you need to override this behavior, but still require masking on the object, you can instruct the system to recognize user input on <strong>all</strong> areas of the masked object by setting the <code>object.isHitTestMasked</code> property to <code>false</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">object</span><span class="ot">.</span><span class="kw">isHitTestMasked</span> <span class="ot">=</span> <span class="kw">false</span></code></pre>
+<!---
+
+<a id="dynamic"></a>
+
+## Dynamic Mask Selection
+
+Unlike images and image sheets, Corona will not automatically load different mask files using dynamic image selection based on the screen resolution. The standard behavior of masks is to scale along with the content area. This makes basic mask usage very simple: provide one mask image file and it will scale according to the object on which it's placed.
+
+However, an accurate, detailed mask image is sometimes required and auto-scaling is not ideal in that instance. One workaround is to retrieve the internal image&nbsp;suffix using [display.imageSuffix][api.library.display.imageSuffix] and append it to the file parameter of `graphics.newMask()`. If you're not familiar with `display.imageSuffix` and how it relates to dynamic scaling, please read the [Project&nbsp;Configuration][guide.basics.configSettings] guide first.
+
+Essentially, `display.imageSuffix` returns the exact image suffix that you've declared in your `config.lua` file, or `nil` if the content scale ratio is 1:1. Here's an example of how to utilize it for dynamic mask selection:
+
+``````lua
+--this assumes that the required mask image files exist, for example 'maskframe.png', 'maskframe@2x.png', and 'maskframe@4x.png'
+
+local suffix = ""
+if ( display.imageSuffix ) then
+    suffix = display.imageSuffix
+end
+
+local mask = graphics.newMask( "maskframe"..suffix..".png" )
+
+local mountains = display.newImageRect( "mountains.png", 280, 216 )
+mountains.x, mountains.y = 200,160
+
+mountains:setMask( mask )
+
+mountains.maskScaleX = display.contentScaleX
+mountains.maskScaleY = display.contentScaleY
+``````
+
+-->
+
+
+
+
+<a id="remove"></a>
+</div>
+<div class="section level2" id="removing-masks">
+<h2><a href="#TOC">Removing Masks</a></h2>
+<p>To remove a mask from an object, simply call <code>object:setMask( nil )</code>. Remember to also <code>nil</code> the handle of the mask if it won't be used again.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">mountains</span>:setMask<span class="ot">(</span> <span class="kw">nil</span> <span class="ot">)</span>
+<span class="kw">mask</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 17-Jul-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.media.imageMask.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.media.imageMask.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.media.imageMask.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

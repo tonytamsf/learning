@@ -1,0 +1,1792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > storyboard </title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > storyboard " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#storyboard.">storyboard.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#storyboard.disableautopurge"><a href="disableAutoPurge.html">storyboard.disableAutoPurge</a></a></li>
+<li><a href="#storyboard.isdebug"><a href="isDebug.html">storyboard.isDebug</a></a></li>
+<li><a href="#storyboard.purgeonscenechange"><a href="purgeOnSceneChange.html">storyboard.purgeOnSceneChange</a></a></li>
+<li><a href="#storyboard.stage"><a href="stage.html">storyboard.stage</a></a></li>
+</ul></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#storyboard.getcurrentscenename"><a href="getCurrentSceneName.html">storyboard.getCurrentSceneName()</a></a></li>
+<li><a href="#storyboard.getprevious"><a href="getPrevious.html">storyboard.getPrevious()</a></a></li>
+<li><a href="#storyboard.getscene"><a href="getScene.html">storyboard.getScene()</a></a></li>
+<li><a href="#storyboard.gotoscene"><a href="gotoScene.html">storyboard.gotoScene()</a></a></li>
+<li><a href="#storyboard.hideoverlay"><a href="hideOverlay.html">storyboard.hideOverlay()</a></a></li>
+<li><a href="#storyboard.loadscene"><a href="loadScene.html">storyboard.loadScene()</a></a></li>
+<li><a href="#storyboard.newscene"><a href="newScene.html">storyboard.newScene()</a></a></li>
+<li><a href="#storyboard.printmemusage"><a href="printMemUsage.html">storyboard.printMemUsage()</a></a></li>
+<li><a href="#storyboard.purgeall"><a href="purgeAll.html">storyboard.purgeAll()</a></a></li>
+<li><a href="#storyboard.purgescene"><a href="purgeScene.html">storyboard.purgeScene()</a></a></li>
+<li><a href="#storyboard.reloadscene"><a href="reloadScene.html">storyboard.reloadScene()</a></a></li>
+<li><a href="#storyboard.removeall"><a href="removeAll.html">storyboard.removeAll()</a></a></li>
+<li><a href="#storyboard.removescene"><a href="removeScene.html">storyboard.removeScene()</a></a></li>
+<li><a href="#storyboard.showoverlay"><a href="showOverlay.html">storyboard.showOverlay()</a></a></li>
+</ul></li>
+<li><a href="#scene-template">Scene Template</a><ul>
+<li><a href="#scenetemplate.lua">scenetemplate.lua</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">storyboard</a>
+</div>
+
+<div class="section level1" id="storyboard.">
+<h1><a href="#TOC">storyboard.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Library.html">Library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">storyboard</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/Interface/Storyboard</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Storyboard is the officially supported, built-in solution to scene (e.g. &quot;screens&quot;) creation and management in Corona SDK. This library provides developers an easy way to create and transition between individual scenes.</p>
+<p>The primary object in the Storyboard API is the scene object, which is a type of event listener that responds to specific events and has a unique <code>scene.view</code> property which is a reference to the <a href="../../type/DisplayObject/index.html">display group</a> associated with the scene.</p>
+<p>See the <strong>Scene Template</strong> section for an example of how a scene module might be structured to listen to all the different events available to each scene. For more information on scene events, to include names and dispatch order, see the <a href="../../event/scene/index.html">scene events documentation</a>.</p>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<div class="section level4" id="storyboard.disableautopurge">
+<h4><a href="#TOC"><a href="disableAutoPurge.html">storyboard.disableAutoPurge</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.isdebug">
+<h4><a href="#TOC"><a href="isDebug.html">storyboard.isDebug</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.purgeonscenechange">
+<h4><a href="#TOC"><a href="purgeOnSceneChange.html">storyboard.purgeOnSceneChange</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.stage">
+<h4><a href="#TOC"><a href="stage.html">storyboard.stage</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<div class="section level4" id="storyboard.getcurrentscenename">
+<h4><a href="#TOC"><a href="getCurrentSceneName.html">storyboard.getCurrentSceneName()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.getprevious">
+<h4><a href="#TOC"><a href="getPrevious.html">storyboard.getPrevious()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.getscene">
+<h4><a href="#TOC"><a href="getScene.html">storyboard.getScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.gotoscene">
+<h4><a href="#TOC"><a href="gotoScene.html">storyboard.gotoScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.hideoverlay">
+<h4><a href="#TOC"><a href="hideOverlay.html">storyboard.hideOverlay()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.loadscene">
+<h4><a href="#TOC"><a href="loadScene.html">storyboard.loadScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.newscene">
+<h4><a href="#TOC"><a href="newScene.html">storyboard.newScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.printmemusage">
+<h4><a href="#TOC"><a href="printMemUsage.html">storyboard.printMemUsage()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.purgeall">
+<h4><a href="#TOC"><a href="purgeAll.html">storyboard.purgeAll()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.purgescene">
+<h4><a href="#TOC"><a href="purgeScene.html">storyboard.purgeScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.reloadscene">
+<h4><a href="#TOC"><a href="reloadScene.html">storyboard.reloadScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.removeall">
+<h4><a href="#TOC"><a href="removeAll.html">storyboard.removeAll()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.removescene">
+<h4><a href="#TOC"><a href="removeScene.html">storyboard.removeScene()</a></a></h4>
+</div>
+<div class="section level4" id="storyboard.showoverlay">
+<h4><a href="#TOC"><a href="showOverlay.html">storyboard.showOverlay()</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="scene-template">
+<h2><a href="#TOC">Scene Template</a></h2>
+<p>The following is a template you can use to create new scene modules. Don't let the length of the template overwhelm you&amp;mash;it shows all the possible events you can listen for on the scene object. You only need to include listeners for the events you want to listen to.</p>
+<div class="section level4" id="scenetemplate.lua">
+<h4><a href="#TOC">scenetemplate.lua</a></h4>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">storyboard</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;storyboard&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">scene</span> <span class="ot">=</span> <span class="kw">storyboard</span><span class="ot">.</span>newScene<span class="ot">()</span>
+
+<span class="co">--</span><span class="al">--------------------------------------------------------------------------------</span>
+<span class="co">-- </span>
+<span class="co">--      </span><span class="al">NOTE</span><span class="co">:</span>
+<span class="co">--      </span>
+<span class="co">--      Code outside of listener functions (below) will only be executed once,</span>
+<span class="co">--      unless storyboard.removeScene() is called.</span>
+<span class="co">-- </span>
+<span class="co">--</span><span class="al">------------------------------------------------------------------------------</span><span class="co">-</span>
+
+
+<span class="co">-- local forward references should go here </span><span class="al">--</span>
+
+
+<span class="co">--</span><span class="al">------------------------------------------------------------------------------</span><span class="co">-</span>
+<span class="co">-- BEGINNING OF YOUR IMPLEMENTATION</span>
+<span class="co">--</span><span class="al">------------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="co">-- Called when the scene&#39;s view does not exist:</span>
+<span class="kw">function</span> <span class="kw">scene</span>:createScene<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      CREATE display objects and add them to &#39;group&#39; here.</span>
+        <span class="co">--      Example use-case: Restore &#39;group&#39; from previously saved state.</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called BEFORE scene has moved onscreen:</span>
+<span class="kw">function</span> <span class="kw">scene</span>:willEnterScene<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      This event requires build 2012.782 or later.</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called immediately after scene has moved onscreen:</span>
+<span class="kw">function</span> <span class="kw">scene</span>:enterScene<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      INSERT code here (e.g. start timers, load audio, start listeners, etc.)</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called when scene is about to move offscreen:</span>
+<span class="kw">function</span> <span class="kw">scene</span>:exitScene<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      INSERT code here (e.g. stop timers, remove listeners, unload sounds, etc.)</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called AFTER scene has finished moving offscreen:</span>
+<span class="kw">function</span> <span class="kw">scene</span>:didExitScene<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      This event requires build 2012.782 or later.</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called prior to the removal of scene&#39;s &quot;view&quot; (display group)</span>
+<span class="kw">function</span> <span class="kw">scene</span>:destroyScene<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      INSERT code here (e.g. remove listeners, widgets, save state, etc.)</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called if/when overlay scene is displayed via storyboard.showOverlay()</span>
+<span class="kw">function</span> <span class="kw">scene</span>:overlayBegan<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+        <span class="kw">local</span> <span class="kw">overlay_name</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">sceneName</span>  <span class="co">-- name of the overlay scene</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      This event requires build 2012.797 or later.</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+<span class="co">-- Called if/when overlay scene is hidden/removed via storyboard.hideOverlay()</span>
+<span class="kw">function</span> <span class="kw">scene</span>:overlayEnded<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+        <span class="kw">local</span> <span class="kw">group</span> <span class="ot">=</span> <span class="kw">self</span><span class="ot">.</span><span class="kw">view</span>
+        <span class="kw">local</span> <span class="kw">overlay_name</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">sceneName</span>  <span class="co">-- name of the overlay scene</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+        <span class="co">--      This event requires build 2012.797 or later.</span>
+
+        <span class="co">--</span><span class="al">--------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">end</span>
+
+
+
+<span class="co">--</span><span class="al">------------------------------------------------------------------------------</span><span class="co">-</span>
+<span class="co">-- END OF YOUR IMPLEMENTATION</span>
+<span class="co">--</span><span class="al">------------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="co">-- &quot;createScene&quot; event is dispatched if scene&#39;s view does not exist</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;createScene&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;willEnterScene&quot; event is dispatched before scene transition begins</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;willEnterScene&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;enterScene&quot; event is dispatched whenever scene transition has finished</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;enterScene&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;exitScene&quot; event is dispatched before next scene&#39;s transition begins</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;exitScene&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;didExitScene&quot; event is dispatched after scene has finished transitioning out</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;didExitScene&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;destroyScene&quot; event is dispatched before view is unloaded, which can be</span>
+<span class="co">-- automatically unloaded in low memory situations, or explicitly via a call to</span>
+<span class="co">-- storyboard.purgeScene() or storyboard.removeScene().</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;destroyScene&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;overlayBegan&quot; event is dispatched when an overlay scene is shown</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;overlayBegan&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">-- &quot;overlayEnded&quot; event is dispatched when an overlay scene is hidden/removed</span>
+<span class="kw">scene</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;overlayEnded&quot;</span>, <span class="kw">scene</span> <span class="ot">)</span>
+
+<span class="co">--</span><span class="al">------------------------------------------------------------------------------</span><span class="co">-</span>
+
+<span class="kw">return</span> <span class="kw">scene</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.storyboard.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.storyboard.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.storyboard.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

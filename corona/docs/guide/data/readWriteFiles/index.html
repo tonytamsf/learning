@@ -1,0 +1,1855 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > data > readWriteFiles </title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > data > readWriteFiles " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#reading-and-writing-files">Reading and Writing Files</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#getting-file-paths">Getting File Paths</a></li>
+<li><a href="#writing-files">Writing Files</a></li>
+<li><a href="#reading-files">Reading Files</a><ul>
+<li><a href="#reading-lines">Reading Lines</a></li>
+</ul></li>
+<li><a href="#system-directories">System Directories</a></li>
+<li><a href="#working-with-subfolders">Working With Subfolders</a><ul>
+<li><a href="#creating-subfolders">Creating Subfolders</a></li>
+<li><a href="#accessing-files-in-subfolders">Accessing Files in Subfolders</a></li>
+<li><a href="#testing-if-files-exist">Testing if Files Exist</a></li>
+<li><a href="#copying-files-to-subfolders">Copying Files to Subfolders</a></li>
+<li><a href="#android-file-restrictions">Android File Restrictions</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [data][guide.data]  ▸  <a href="index.html">readWriteFiles</a>
+</div>
+<div class="section level1" id="reading-and-writing-files">
+<h1><a href="#TOC">Reading and Writing Files</a></h1>
+<p>This guide discusses how to read and write files from/to the device's local storage.</p>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#filepath">Getting File Paths</a></li>
+<li><a href="#writing">Writing Files</a></li>
+<li><a href="#reading">Reading Files</a></li>
+<li><a href="#directories">System Directories</a></li>
+<li><a href="#subfolders">Working With Subfolders</a></li>
+</ul>
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Reading and writing files — data in the form of plain text, JSON, XML, a local SQLite database, etc. — is essential to app development. There are countless cases when your app may need to read and/or write a file, but here are a few common instances:</p>
+<ul>
+<li><p>Save/load user settings or other statistics.</p></li>
+<li><p>Save the &quot;app state&quot; to a file and read it in a future session, so the user can return to exactly the same place where they left off, even if the app has exited.</p></li>
+<li><p>Generate a local HTML file and load it in a <a href="../../../api/library/native/newWebView.html">native Web view</a>.</p></li>
+<li><p>Load data from a file that has been downloaded from a remote server and use that data in the app.</p></li>
+</ul>
+<a id="filepath"></a>
+</div>
+<div class="section level2" id="getting-file-paths">
+<h2><a href="#TOC">Getting File Paths</a></h2>
+<p>The <code>system.pathForFile()</code> function is the foundation of all file operations in Corona. Lua requires the entire path of a file when reading and writing, but mobile operating systems such as iOS obscure the file system via &quot;sandboxing.&quot; This makes it difficult to determine exactly where the file resides. Fortunately, Corona has simplified this with the <code>system.pathForFile()</code> function (<a href="../../../api/library/system/pathForFile.html">reference</a>). This API returns a path that is compatible with Lua's file I/O functions.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">filename</span> <span class="ot">[</span>, <span class="kw">baseDirectory</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>The <code>baseDirectory</code> argument is an optional constant that corresponds to the base directory where the file is located. If not specified, the default is <a href="../../../api/library/system/ResourceDirectory.html">system.ResourceDirectory</a>. See the <a href="#directories">System Directories</a> section below for more information.</p>
+</div>
+
+
+
+
+<a id="writing"></a>
+</div>
+<div class="section level2" id="writing-files">
+<h2><a href="#TOC">Writing Files</a></h2>
+<p>In the context of this guide, &quot;writing&quot; is synonymous with &quot;saving&quot; since you might need to generate <strong>new</strong> files as well as write to existing files.</p>
+<p>Here's a basic example of how to write data to a file:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">saveData</span> <span class="ot">=</span> <span class="st">&quot;My app state data&quot;</span>
+
+<span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;myfile.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;w&quot;</span> <span class="ot">)</span>
+<span class="kw">file</span>:<span class="fu">write</span><span class="ot">(</span> <span class="kw">saveData</span> <span class="ot">)</span>
+
+<span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span>
+<span class="kw">file</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<ul>
+<li><p><code>system.pathForFile()</code> — this returns the path for the file to write, <code>myfile.txt</code>. Also, note that the base directory is set to <code>system.DocumentsDirectory</code>. This is important because, for security reasons, you can <strong>not</strong> write/save data to <code>system.ResourceDirectory</code>.</p></li>
+<li><p><code>io.open()</code> — this function opens the file for writing (or reading). It returns a new file handle, set to <code>file</code>. The second argument, <code>&quot;w&quot;</code>, corresponds to the &quot;mode&quot; that the file will be opened in. This dictates what you'll be doing with the file. In this case, <code>&quot;w&quot;</code> indicates <strong>write</strong> and tells Corona to create (write) a new file, or overwrite the file if it already exists. For a complete list of I/O modes, see the <a href="../../../api/library/io/open.html">io.open()</a> documentation.</p></li>
+<li><p><code>file:write()</code> — assuming the file is opened in write-compatible mode, the <code>file:write()</code> method will write the specified string to the file handle. In this example, the contents of the <code>saveData</code> variable are written to the specified file.</p></li>
+<li><p><code>io.close()</code> — whenever you perform file operations and you're finished with the file handle, do <strong>not</strong> forget to call <code>io.close()</code>. This method closes the file handle and ends the I/O process.</p></li>
+</ul>
+<a id="reading"></a>
+</div>
+<div class="section level2" id="reading-files">
+<h2><a href="#TOC">Reading Files</a></h2>
+<p>To read a file, just get the file path, open the I/O in <strong>read</strong> mode, and set the contents to a variable.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;myfile.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;r&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">savedData</span> <span class="ot">=</span> <span class="kw">file</span>:<span class="fu">read</span><span class="ot">(</span> <span class="st">&quot;*a&quot;</span> <span class="ot">)</span>
+
+<span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span>
+<span class="kw">file</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<ul>
+<li><p><code>system.pathForFile()</code> — once again, you'll need the path to the file that you want to read from. When reading files, you can specify any of the four system directories (see <a href="#directories">System Directories</a> below). For example, if you include/bundle data files as part of your app, you can <strong>read</strong> these files from <code>system.ResourceDirectory</code>.</p></li>
+<li><p><code>io.open()</code> — this function opens the file and returns the file handle, set to <code>file</code> in this example. This time, the second argument must be set to <code>&quot;r&quot;</code> which corresponds to the <strong>read</strong> mode. For a complete list of I/O modes, see the <a href="../../../api/library/io/open.html">io.open()</a> documentation.</p></li>
+<li><p><code>file:read()</code> — assuming the file is opened in read-compatible mode, the <code>file:read()</code> method will read the contents of the file and set it to the variable <code>savedData</code>. The argument for the read function specifies the format of the procedure. If you want to read the entire contents of the file (newline characters preserved), use <code>&quot;*a&quot;</code> as in this example. Other formats are explained in the <a href="../../../api/type/File/read.html">object:read()</a> documentation.</p></li>
+<li><p><code>io.close()</code> — as emphasized above, whenever you perform file operations and you're finished with the file handle, call <code>io.close()</code> to close the file handle and end the I/O process.</p></li>
+</ul>
+<div class="section level3" id="reading-lines">
+<h3><a href="#TOC">Reading Lines</a></h3>
+<p>Another common task when reading data is to process each <strong>line</strong> of a file and use it for some purpose. For example, if you have a text file representing a list of products along with a price for each, you can loop through the file by lines and output or parse each line (product) individually.</p>
+<p>The <code>file:lines()</code> function, in conjunction with a <code>for</code> loop, accomplishes this:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;myfile.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;r&quot;</span> <span class="ot">)</span>
+
+<span class="kw">for</span> <span class="kw">line</span> <span class="kw">in</span> <span class="kw">file</span>:<span class="fu">lines</span><span class="ot">()</span> <span class="kw">do</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">line</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span>
+<span class="kw">file</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<p>This process will return the next line on each iteration and continue until no more lines are available. Each line can be used in its entirety or parsed into smaller elements using string patterns. See the <a href="http://developer.coronalabs.com/content/strings">String Manipulation</a> guide for details.</p>
+<a id="directories"></a>
+</div>
+</div>
+<div class="section level2" id="system-directories">
+<h2><a href="#TOC">System Directories</a></h2>
+<p>As noted above, <code>system.pathForFile()</code> requires a <code>baseDirectory</code> argument if you want to access a directory aside from the default <code>system.ResourceDirectory</code>.</p>
+<p>Here are all four available system directory constants for reading/writing:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+<tr>
+<th class="headerrow notebox-title">
+ 
+</th>
+<th class="width25 headerfirst headerrow notebox-title">
+Directory
+</th>
+<th class="width15 headerrow notebox-title">
+Permissions
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+<th class="headerrow notebox-title">
+  
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl">
+ 
+</th>
+<th class="itemrow rowhl" style="vertical-align:baseline;">
+<code>system.ResourceDirectory</code>
+</th>
+<th class="itemrow rowhl" style="vertical-align:baseline;">
+read
+</th>
+<th class="itemrow rowhl">
+This directory refers to the core project directory which is the same location as the <code>main.lua</code> file. This is the default base directory for <code>system.pathForFile()</code>.
+</th>
+<th class="itemrow rowhl">
+  
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl2">
+ 
+</th>
+<th class="itemrow rowhl2" style="vertical-align:baseline;">
+<code>system.DocumentsDirectory</code>
+</th>
+<th class="itemrow rowhl2" style="vertical-align:baseline;">
+read/write
+</th>
+<th class="itemrow rowhl2">
+This directory is intended for files that the app cannot regenerate on its own, for example user-specific data, &quot;app state&quot; data, or anything that the app generates post-installation. Files in this directory will persist for the lifetime of the app — that is, until the app is explicitly removed from the device. On iOS, files in this location are backed up by syncing unless you specify otherwise (see notes below).
+</th>
+<th class="itemrow rowhl2">
+  
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl">
+ 
+</th>
+<th class="itemrow rowhl" style="vertical-align:baseline;">
+<code>system.TemporaryDirectory</code>
+</th>
+<th class="itemrow rowhl" style="vertical-align:baseline;">
+read/write
+</th>
+<th class="itemrow rowhl">
+This directory is intended for single-session data. Files written to this location will generally persist as long as the app is running, but the operating system reserves the right to delete this data at any time. Thus, do <strong>not</strong> place important data in this directory.
+</th>
+<th class="itemrow rowhl">
+  
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl2">
+ 
+</th>
+<th class="itemrow rowhl2" style="vertical-align:baseline;">
+<code>system.CachesDirectory</code>
+</th>
+<th class="itemrow rowhl2" style="vertical-align:baseline;">
+read/write
+</th>
+<th class="itemrow rowhl2">
+Files in <code>system.CachesDirectory</code> tend to have a longer lifespan than those in <code>system.TemporaryDirectory</code>, but this is not reliable and you shouldn't place important data in this directory. On iOS, files in this location are not backed up by syncing.
+</th>
+<th class="itemrow rowhl2">
+  
+</th>
+</tr>
+</table>
+
+<div class="guide-notebox">
+<div class="notebox-title">
+Notes
+</div>
+
+<ul>
+<li><p>On Android devices, there is no literal <code>system.ResourceDirectory</code> because all resource files reside inside a compressed APK file. See <a href="#androidrestrict">Android File Restrictions</a> below for more information.</p></li>
+<li><p>In the Corona Simulator, equivalents of <code>system.DocumentsDirectory</code> and <code>system.TemporaryDirectory</code> are located in a sandboxed folder for each application. You can view these directories and the files within by selecting <strong>File</strong> → <strong>Show Project Sandbox</strong> in the Simulator.</p></li>
+<li><p>On iOS and Mac OS X, the <code>native.setSync()</code> API can be used to set the iCloud automatic backup flag for files in <code>system.DocumentsDirectory</code>. See <a href="../../../api/library/native/setSync.html">native.setSync()</a> for more information.</p></li>
+<li><p>When accessing <code>system.ResourceDirectory</code> via <code>system.pathForFile()</code>, setting the <code>filename</code> parameter to <code>nil</code> will return the directory path without checking if the file exists.</p></li>
+<li><p>If you need to check for the presence of a file, examine <a href="#testingexist">Testing if Files Exist</a> in the next section.</p></li>
+</ul>
+</div>
+
+
+
+
+<a id="subfolders"></a>
+</div>
+<div class="section level2" id="working-with-subfolders">
+<h2><a href="#TOC">Working With Subfolders</a></h2>
+<div class="section level3" id="creating-subfolders">
+<h3><a href="#TOC">Creating Subfolders</a></h3>
+<p>Subfolders can be added to <code>system.DocumentsDirectory</code> and <code>system.TemporaryDirectory</code> using the <a href="../../../api/library/lfs/index.html">Lua File System</a> (LFS).</p>
+<p>Here's how to create an <code>images</code> folder within <code>system.DocumentsDirectory</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="fu">lfs</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;lfs&quot;</span> <span class="ot">)</span>
+
+<span class="co">--get raw path to documents directory</span>
+<span class="kw">local</span> <span class="kw">docs_path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+
+<span class="co">--change current working directory</span>
+<span class="kw">local</span> <span class="kw">success</span> <span class="ot">=</span> <span class="fu">lfs.chdir</span><span class="ot">(</span> <span class="kw">docs_path</span> <span class="ot">)</span> <span class="co">--returns &#39;true&#39; on success</span>
+
+<span class="kw">local</span> <span class="kw">new_folder_path</span>
+<span class="kw">local</span> <span class="kw">dname</span> <span class="ot">=</span> <span class="st">&quot;images&quot;</span>
+
+<span class="kw">if</span> <span class="ot">(</span> <span class="kw">success</span> <span class="ot">)</span> <span class="kw">then</span>
+    <span class="fu">lfs.mkdir</span><span class="ot">(</span> <span class="kw">dname</span> <span class="ot">)</span>
+    <span class="kw">new_folder_path</span> <span class="ot">=</span> <span class="fu">lfs.currentdir</span><span class="ot">()</span> <span class="ot">..</span> <span class="st">&quot;/&quot;</span> <span class="ot">..</span> <span class="kw">dname</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level3" id="accessing-files-in-subfolders">
+<h3><a href="#TOC">Accessing Files in Subfolders</a></h3>
+<p>You can access files in a subfolder in two ways, depending on what you want to do with the file. If you want to display an image or play a sound from the subfolder, concatenate the subfolder name with the file name and then supply the base directory. For example, if you want to display the <code>cat.png</code> file in the <code>images</code> subfolder, do the following:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">catImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;images/cat.png&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span></code></pre>
+<p>Note that you don't use <code>system.pathForFile()</code> in API calls that require a <code>baseDirectory</code> parameter, for example <code>display.newImage()</code>, <code>display.newImageRect()</code>, <code>audio.loadSound()</code>, etc.</p>
+<p>If you want to access a file in a subfolder for reading or writing, do the following:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;images/readme.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span> <span class="ot">)</span></code></pre>
+<p>If the file doesn't exist, it returns <code>nil</code> — this leads to the next topic.</p>
+<a id="testingexist"></a>
+</div>
+<div class="section level3" id="testing-if-files-exist">
+<h3><a href="#TOC">Testing if Files Exist</a></h3>
+<p>The following function can be used to test if a file exists in a folder or subfolder. Just remember to append the subfolder name to the file name before calling this function.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">function</span> doesFileExist<span class="ot">(</span> <span class="kw">fname</span>, <span class="kw">path</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">results</span> <span class="ot">=</span> <span class="kw">false</span>
+
+    <span class="kw">local</span> <span class="kw">filePath</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">fname</span>, <span class="kw">path</span> <span class="ot">)</span>
+
+    <span class="co">--filePath will be &#39;nil&#39; if file doesn&#39;t exist and the path is &#39;system.ResourceDirectory&#39;</span>
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">filePath</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">filePath</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">filePath</span>, <span class="st">&quot;r&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">filePath</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;File found: &quot;</span> <span class="ot">..</span> <span class="kw">fname</span> <span class="ot">)</span>
+        <span class="co">--clean up file handles</span>
+        <span class="kw">filePath</span>:<span class="fu">close</span><span class="ot">()</span>
+        <span class="kw">results</span> <span class="ot">=</span> <span class="kw">true</span>
+    <span class="kw">else</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;File does not exist: &quot;</span> <span class="ot">..</span> <span class="kw">fname</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> <span class="kw">results</span>
+<span class="kw">end</span>
+
+<span class="co">--check for file in &#39;system.DocumentsDirectory&#39;</span>
+<span class="kw">local</span> <span class="kw">results</span> <span class="ot">=</span> doesFileExist<span class="ot">(</span> <span class="st">&quot;images/cat.png&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+
+<span class="co">--check for file in &#39;system.ResourceDirectory&#39;</span>
+<span class="kw">local</span> <span class="kw">results</span> <span class="ot">=</span> doesFileExist<span class="ot">(</span> <span class="st">&quot;images/cat.png&quot;</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="copying-files-to-subfolders">
+<h3><a href="#TOC">Copying Files to Subfolders</a></h3>
+<p>The following function copies a file from one folder to another. This is useful if you need to copy a file bundled in <code>system.ResourceDirectory</code> to <code>system.DocumentsDirectory</code>. Note that you must create the destination subfolder before using this function.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">function</span> copyFile<span class="ot">(</span> <span class="kw">srcName</span>, <span class="kw">srcPath</span>, <span class="kw">dstName</span>, <span class="kw">dstPath</span>, <span class="kw">overwrite</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">results</span> <span class="ot">=</span> <span class="kw">false</span>
+
+    <span class="kw">local</span> <span class="kw">srcPath</span> <span class="ot">=</span> doesFileExist<span class="ot">(</span> <span class="kw">srcName</span>, <span class="kw">srcPath</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">srcPath</span> <span class="ot">==</span> <span class="kw">false</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">return</span> <span class="kw">nil</span>  <span class="co">-- nil = source file not found</span>
+    <span class="kw">end</span>
+
+    <span class="co">--check to see if destination file already exists</span>
+    <span class="kw">if</span> <span class="kw">not</span> <span class="ot">(</span> <span class="kw">overwrite</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">if</span> <span class="ot">(</span> <span class="kw">fileLib</span><span class="ot">.</span>doesFileExist<span class="ot">(</span> <span class="kw">dstName</span>, <span class="kw">dstPath</span> <span class="ot">)</span> <span class="ot">)</span> <span class="kw">then</span>
+            <span class="kw">return</span> <span class="dv">1</span>  <span class="co">-- 1 = file already exists (don&#39;t overwrite)</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+
+    <span class="co">--copy the source file to the destination file</span>
+    <span class="kw">local</span> <span class="kw">rfilePath</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">srcName</span>, <span class="kw">srcPath</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">wfilePath</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">dstName</span>, <span class="kw">dstPath</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">rfh</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">rfilePath</span>, <span class="st">&quot;rb&quot;</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">wfh</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">wfilePath</span>, <span class="st">&quot;wb&quot;</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="kw">not</span> <span class="ot">(</span> <span class="kw">wfh</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;writeFileName open error!&quot;</span> <span class="ot">)</span>
+        <span class="kw">return</span> <span class="kw">false</span>
+    <span class="kw">else</span>
+        <span class="co">--read the file from &#39;system.ResourceDirectory&#39; and write to the destination directory</span>
+        <span class="kw">local</span> <span class="kw">data</span> <span class="ot">=</span> <span class="kw">rfh</span>:<span class="fu">read</span><span class="ot">(</span> <span class="st">&quot;*a&quot;</span> <span class="ot">)</span>
+        <span class="kw">if</span> <span class="kw">not</span> <span class="ot">(</span> <span class="kw">data</span> <span class="ot">)</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;read error!&quot;</span> <span class="ot">)</span>
+            <span class="kw">return</span> <span class="kw">false</span>
+        <span class="kw">else</span>
+            <span class="kw">if</span> <span class="kw">not</span> <span class="ot">(</span> <span class="kw">wfh</span>:<span class="fu">write</span><span class="ot">(</span> <span class="kw">data</span> <span class="ot">)</span> <span class="ot">)</span> <span class="kw">then</span>
+                <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;write error!&quot;</span> <span class="ot">)</span>
+                <span class="kw">return</span> <span class="kw">false</span>
+            <span class="kw">end</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+
+    <span class="kw">results</span> <span class="ot">=</span> <span class="dv">2</span>  <span class="co">-- 2 = file copied successfully!</span>
+
+    <span class="co">--clean up file handles</span>
+    <span class="kw">rfh</span>:<span class="fu">close</span><span class="ot">()</span>
+    <span class="kw">wfh</span>:<span class="fu">close</span><span class="ot">()</span>
+
+    <span class="kw">return</span> <span class="kw">results</span>
+<span class="kw">end</span>
+
+<span class="co">--copy &#39;readme.txt&#39; from the &#39;system.ResourceDirectory&#39; to &#39;system.DocumentsDirectory&#39;.</span>
+copyFile<span class="ot">(</span> <span class="st">&quot;readme.txt&quot;</span>, <span class="kw">nil</span>, <span class="st">&quot;readme.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, <span class="kw">true</span> <span class="ot">)</span></code></pre>
+<a id="androidrestrict"></a>
+</div>
+<div class="section level3" id="android-file-restrictions">
+<h3><a href="#TOC">Android File Restrictions</a></h3>
+<p>File access in Corona is based on the underlining operating system which varies by platform. On iOS devices, you can access files in all of the directories described above. On Android, however, there is no literal <code>system.ResourceDirectory</code> because all resource files reside inside a compressed APK file.</p>
+<p>Corona allows direct loading of images and audio files using the appropriate APIs, but it has limited access to resource files on Android using the file I/O APIs. Specifically, the following types can not be read from the resources directory: <code>.html</code>, <code>.htm</code>., <code>.3gp</code>, <code>.m4v</code>, <code>.mp4</code>, <code>.png</code>, <code>.jpg</code>, and <code>.ttf</code>.</p>
+<p>Because of this limitation, if you have files of these types bundled in the core directory that you need to copy to another directory, you must change the file name so it can be accessed by the file I/O APIs. For example, if you want to move <code>cat.png</code> from the resource directory to the documents directory, it must be renamed <code>cat.png.txt</code> to be copied.</p>
+<p>Here's how to copy <code>cat.png</code> to the documents directory on Android, assuming it's stored as <code>cat.png.txt</code>. This technique works for all platforms, so if you make it work for Android, it will work everywhere.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua">copyFile<span class="ot">(</span> <span class="st">&quot;cat.png.txt&quot;</span>, <span class="kw">nil</span>, <span class="st">&quot;cat.png&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, <span class="kw">true</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">catImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;cat.png&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, <span class="dv">0</span>, <span class="dv">100</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.data.readWriteFiles.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.data.readWriteFiles.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.data.readWriteFiles.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

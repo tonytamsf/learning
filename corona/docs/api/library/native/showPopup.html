@@ -1,0 +1,1712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > Enterprise > showPopup</title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > Enterprise > showPopup" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#native.showpopup">native.showPopup()</a><ul>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#compose-e-mail-and-sms">Compose E-mail and SMS</a></li>
+<li><a href="#show-app-details-or-rate-an-app-in-the-app-store">Show App Details or Rate an App in the App Store</a></li>
+</ul></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#name-required">name <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#options-optional">options <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#format-for-options">Format for <code>options</code></a><ul>
+<li><a href="#mail">&quot;mail&quot;</a></li>
+<li><a href="#sms">&quot;sms&quot;</a></li>
+<li><a href="#appstore-and-rateapp">&quot;appStore&quot; and &quot;rateApp&quot;</a></li>
+<li><a href="#twitter">&quot;twitter&quot;</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#popup-events">Popup Events</a></li>
+<li><a href="#enterprise">Enterprise</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">Enterprise</a>  ▸  <a href="showPopup.html">showPopup</a>
+</div>
+
+<div class="section level1" id="native.showpopup">
+<h1><a href="#TOC">native.showPopup()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">native.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/Boolean.html">Boolean</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">email, sms, text message, store, show popup</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/Networking/ComposeEmailSMS</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="http://www.coronalabs.com/blog/2012/01/03/composing-email-and-sms-in-corona/">Composing E-mail and SMS</a> (tutorial)</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Displays the operating system's default popup window for a specified service.</p>
+<p>This function returns a <a href="../../type/Boolean.html">Boolean</a> indicating whether the popup was displayed or not. If it returns <code>false</code>, then the popup was not available or the service was not available for the device.</p>
+<div class="section level3" id="compose-e-mail-and-sms">
+<h3><a href="#TOC">Compose E-mail and SMS</a></h3>
+<p>Passing in <code>&quot;mail&quot;</code> or <code>&quot;sms&quot;</code> will display a popup window for composing an E-mail or SMS message respectively.</p>
+<p>For a walk-through on how to use this feature, please see the <a href="http://www.coronalabs.com/blog/2012/01/03/composing-email-and-sms-in-corona/">Composing E-mail and SMS</a> tutorial.</p>
+<p>On iOS, these popups are displayed within the app. On Android, the app is suspended while these popups are displayed.</p>
+</div>
+<div class="section level3" id="show-app-details-or-rate-an-app-in-the-app-store">
+<h3><a href="#TOC">Show App Details or Rate an App in the App Store</a></h3>
+<p>Passing in <code>&quot;appStore&quot;</code> will display a popup window from the app store that the application was downloaded from. It will display the app's details such as summary, an option to purchase (if not done already), and the option to write a review. This can be used to display the details of the currently running app or another app that you wish to advertise to the end-user.</p>
+<p>Passing in <code>&quot;rateApp&quot;</code> will display the &quot;Write Review&quot; popup window from the iTunes App Store for iOS 5 and older iOS versions. This bypasses the app details on iTunes so that the end-user can easily rate the app. On iOS 6 or any other app store, the app's details popup window will be displayed instead, just like how it is done when passing in <code>&quot;appStore&quot;</code> to this function. This is because the other app stores do not support bypassing the app details view.</p>
+<p>Only the following app stores are supported. A popup window will not be displayed for any other app store.</p>
+<ul>
+<li>Amazon App Store</li>
+<li>Google Play</li>
+<li>iTunes App Store</li>
+<li>Nook App Store</li>
+<li>Samsung App Store</li>
+</ul>
+<p>Note that the iTunes App Store and the Nook App Store require the app ID and EAN to be set in the options table in order to display the popup. All other app stores do not require any additional information.</p>
+<p>Also, note that displaying this popup suspends the app on both iOS and Android.</p>
+</div>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>native.showPopup( name )
+native.showPopup( name, options )</code></pre>
+<div class="section level5" id="name-required">
+<h5><a href="#TOC">name <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The string name of the popup to be shown. It can be one of the following: <code>&quot;mail&quot;</code>, <code>&quot;sms&quot;</code>, <code>&quot;appStore&quot;</code>, or <code>&quot;rateApp&quot;</code>.</p>
+</div>
+<div class="section level5" id="options-optional">
+<h5><a href="#TOC">options <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table of parameters. Each property of the table is also optional. See <strong>Format for options</strong> below.</p>
+</div>
+<div class="section level3" id="format-for-options">
+<h3><a href="#TOC">Format for <code>options</code></a></h3>
+<div class="section level4" id="mail">
+<h4><a href="#TOC">&quot;mail&quot;</a></h4>
+<p>For the <code>&quot;mail&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.to</code> is a single string or an array of strings. Each string is an e-mail address of a recipient.</li>
+<li>options.cc` is a single string or an array of strings. Each string is an e-mail address of a cc'd recipient.</li>
+<li><code>options.bcc</code> is a single string or an array of strings. Each string is an e-mail address of a bcc'd recipient.</li>
+<li><code>options.attachment</code> is a table of the form <code>{ baseDir=, filename= [, type=] }</code>. For the 'type' property, use an appropriate MIME type such as &quot;image&quot;. To send multiple attachments, you must create an array of these tables.</li>
+<li><code>options.body</code> is a string for the main body of the e-mail.</li>
+<li><code>options.isBodyHtml</code> is a boolean indicating whether the e-mail is HTML. By default, plain text is assumed.</li>
+<li><code>options.subject</code> is a string.</li>
+</ul>
+</div>
+<div class="section level4" id="sms">
+<h4><a href="#TOC">&quot;sms&quot;</a></h4>
+<p>For the <code>&quot;sms&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.to</code> is a single string or an array of strings. Each string is a phone number of the recipient.</li>
+<li><code>options.body</code> is a string for the main body of the e-mail.</li>
+</ul>
+</div>
+<div class="section level4" id="appstore-and-rateapp">
+<h4><a href="#TOC">&quot;appStore&quot; and &quot;rateApp&quot;</a></h4>
+<p>For the <code>&quot;appStore&quot;</code> and <code>&quot;rateApp&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.iOSAppId</code> is a string ID assigned to the app by the iTunes App Store.</li>
+<li><code>options.nookAppEAN</code> is a string ID assigned to the app by the Nook App Store.</li>
+<li><code>options.androidAppPackageName</code> is the unique package name string of the Android app to be displayed by the Google Play, Amazon, or Samsung app stores. This property is optional. If you do not provide a package name, then Corona will use the currently running app's package name by default. You should only set this if you want to display the app store details of another app.</li>
+<li><code>options.supportedAndroidStores</code> is an array of strings indicating which app stores are supported on Android. This is needed in case the app was not installed by an app store so that Corona knows which app store to display the popup from. This is especially needed while testing and debugging the app. The following string names are supported:
+<ul>
+<li><code>&quot;amazon&quot;</code></li>
+<li><code>&quot;google&quot;</code></li>
+<li><code>&quot;nook&quot;</code></li>
+<li><code>&quot;samsung&quot;</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="section level4" id="twitter">
+<h4><a href="#TOC">&quot;twitter&quot;</a></h4>
+<p>NOTE: This popup is only available on iOS (iOS 5 and after) because Apple offers native OS support via <code>TWTweetComposeViewController</code>.</p>
+<p>For the <code>&quot;twitter&quot;</code> popup, the following properties are supported.</p>
+<ul>
+<li><code>options.image</code> is a table of the form <code>{ baseDir=, filename= }</code> to the image you wish to post.</li>
+<li><code>options.message</code> is a string that prepopulates the message.</li>
+<li><code>options.listener</code> is a <a href="../../type/Listener.html">listener</a> that supports <a href="../../event/popup/index.html">popup events</a>.</li>
+<li><code>options.url</code> is a string for the url you wish to post. Alternatively, this can be an <a href="../../type/Array.html">array</a> of url strings.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section level2" id="popup-events">
+<h2><a href="#TOC">Popup Events</a></h2>
+<p>If a popup supports listeners (and you pass a listener via <code>options.listener</code>), then those listeners are dispatched <a href="../../event/popup/index.html">popup events</a>.</p>
+</div>
+<div class="section level2" id="enterprise">
+<h2><a href="#TOC">Enterprise</a></h2>
+<p>Unlike Corona SDK, the twitter popup is not pre-baked into Corona Enterprise. Instead, you must add the corresponding plugin to your iOS Xcode project in order to access the twitter popup. Specifically, you should add the static library located at: <code>CoronaEnterprise/Plugins/native-popup-twitter/ios/libnative-popup-twitter.a</code></p>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<p>Show an E-mail popup with one file attachment:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+   <span class="kw">to</span> <span class="ot">=</span> <span class="st">&quot;john.doe@somewhere.com&quot;</span>,
+   <span class="kw">subject</span> <span class="ot">=</span> <span class="st">&quot;My High Score&quot;</span>,
+   <span class="kw">body</span> <span class="ot">=</span> <span class="st">&quot;I scored over 9000!!! Can you do better?&quot;</span>,
+   <span class="kw">attachment</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">baseDir</span><span class="ot">=</span><span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, <span class="kw">filename</span><span class="ot">=</span><span class="st">&quot;Screenshot.png&quot;</span>, <span class="fu">type</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="ot">}</span>,
+<span class="ot">}</span>
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span><span class="st">&quot;mail&quot;</span>, <span class="kw">options</span><span class="ot">)</span></code></pre>
+<p>Show an HTML E-mail popup with multiple correspondents and attachments:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+   <span class="kw">to</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;john.doe@somewhere.com&quot;</span>, <span class="st">&quot;jane.doe@somewhere.com&quot;</span> <span class="ot">}</span>,
+   <span class="kw">cc</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;john.smith@somewhere.com&quot;</span>, <span class="st">&quot;jane.smith@somewhere.com&quot;</span> <span class="ot">}</span>,
+   <span class="kw">subject</span> <span class="ot">=</span> <span class="st">&quot;My High Score&quot;</span>,
+   <span class="kw">isBodyHtml</span> <span class="ot">=</span> <span class="kw">true</span>,
+   <span class="kw">body</span> <span class="ot">=</span> <span class="st">&quot;&lt;html&gt;&lt;body&gt;I scored over &lt;b&gt;9000&lt;/b&gt;!!! Can you do better?&lt;/body&gt;&lt;/html&gt;&quot;</span>,
+   <span class="kw">attachment</span> <span class="ot">=</span>
+   <span class="ot">{</span>
+      <span class="ot">{</span> <span class="kw">baseDir</span><span class="ot">=</span><span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, <span class="kw">filename</span><span class="ot">=</span><span class="st">&quot;Screenshot.png&quot;</span>, <span class="fu">type</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="ot">}</span>,
+      <span class="ot">{</span> <span class="kw">baseDir</span><span class="ot">=</span><span class="kw">system</span><span class="ot">.</span><span class="kw">ResourceDirectory</span>, <span class="kw">filename</span><span class="ot">=</span><span class="st">&quot;MyLogo.png&quot;</span>, <span class="fu">type</span><span class="ot">=</span><span class="st">&quot;image&quot;</span> <span class="ot">}</span>,
+   <span class="ot">}</span>,
+<span class="ot">}</span>
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span><span class="st">&quot;mail&quot;</span>, <span class="kw">options</span><span class="ot">)</span></code></pre>
+<p>Show a simple SMS popup. User must select contacts in popup window:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+   <span class="kw">body</span> <span class="ot">=</span> <span class="st">&quot;I scored over 9000!!! Can you do better?&quot;</span>
+<span class="ot">}</span>
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span><span class="st">&quot;sms&quot;</span>, <span class="kw">options</span><span class="ot">)</span></code></pre>
+<p>Show an SMS popup with multiple recipients. You must use phone numbers.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+   <span class="kw">to</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;1234567890&quot;</span>, <span class="st">&quot;9876543210&quot;</span> <span class="ot">}</span>,
+   <span class="kw">body</span> <span class="ot">=</span> <span class="st">&quot;I scored over 9000!!! Can you do better?&quot;</span>
+<span class="ot">}</span>
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span><span class="st">&quot;sms&quot;</span>, <span class="kw">options</span><span class="ot">)</span></code></pre>
+<p>Show a popup for rating the app on the app store.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+   <span class="kw">iOSAppId</span> <span class="ot">=</span> <span class="st">&quot;1234567890&quot;</span>,
+   <span class="kw">nookAppEAN</span> <span class="ot">=</span> <span class="st">&quot;0987654321&quot;</span>,
+   <span class="kw">supportedAndroidStores</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;google&quot;</span>, <span class="st">&quot;samsung&quot;</span>, <span class="st">&quot;amazon&quot;</span>, <span class="st">&quot;nook&quot;</span> <span class="ot">}</span>,
+<span class="ot">}</span>
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span><span class="st">&quot;rateApp&quot;</span>, <span class="kw">options</span><span class="ot">)</span></code></pre>
+<p>Show the app store details of another app that you wish to advertise.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+   <span class="kw">iOSAppId</span> <span class="ot">=</span> <span class="st">&quot;1234567890&quot;</span>,
+   <span class="kw">nookAppEAN</span> <span class="ot">=</span> <span class="st">&quot;0987654321&quot;</span>,
+   <span class="kw">androidAppPackageName</span> <span class="ot">=</span> <span class="st">&quot;my.other.app.&quot;</span>,
+   <span class="kw">supportedAndroidStores</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;google&quot;</span>, <span class="st">&quot;samsung&quot;</span>, <span class="st">&quot;amazon&quot;</span>, <span class="st">&quot;nook&quot;</span> <span class="ot">}</span>,
+<span class="ot">}</span>
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span><span class="st">&quot;appStore&quot;</span>, <span class="kw">options</span><span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.native.showPopup&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.native.showPopup&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.native.showPopup&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

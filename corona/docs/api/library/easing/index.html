@@ -1,0 +1,1698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > easing </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > easing " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#easing.">easing.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#easing-functions">Easing Functions</a><ul>
+<li><a href="#linear">linear</a></li>
+<li><a href="#continuousloop">continuousLoop</a></li>
+<li><a href="#insine-outsine-inoutsine-outinsine">inSine  ·  outSine  ·  inOutSine  ·  outInSine</a></li>
+<li><a href="#inquad-outquad-inoutquad-outinquad">inQuad  ·  outQuad  ·  inOutQuad  ·  outInQuad</a></li>
+<li><a href="#incubic-outcubic-inoutcubic-outincubic">inCubic  ·  outCubic  ·  inOutCubic  ·  outInCubic</a></li>
+<li><a href="#inquart-outquart-inoutquart-outinquart">inQuart  ·  outQuart  ·  inOutQuart  ·  outInQuart</a></li>
+<li><a href="#inquint-outquint-inoutquint-outinquint">inQuint  ·  outQuint  ·  inOutQuint  ·  outInQuint</a></li>
+<li><a href="#inexpo-outexpo-inoutexpo-outinexpo">inExpo  ·  outExpo  ·  inOutExpo  ·  outInExpo</a></li>
+<li><a href="#incirc-outcirc-inoutcirc-outincirc">inCirc  ·  outCirc  ·  inOutCirc  ·  outInCirc</a></li>
+<li><a href="#inback-outback-inoutback-outinback">inBack  ·  outBack  ·  inOutBack  ·  outInBack</a></li>
+<li><a href="#inelastic-outelastic-inoutelastic-outinelastic">inElastic  ·  outElastic  ·  inOutElastic  ·  outInElastic</a></li>
+<li><a href="#inbounce-outbounce-inoutbounce-outinbounce">inBounce  ·  outBounce  ·  inOutBounce  ·  outInBounce</a></li>
+</ul></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">easing</a>
+</div>
+<div class="section level1" id="easing.">
+<h1><a href="#TOC">easing.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Library.html">Library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">easing, animation, transition, tween, interpolation</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../../guide/media/transitionLib/index.html">Transitions/Tweens</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><a href="../transition/index.html">transition</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Easing functions provide a simple way of interpolating between two values to achieve varied animations. They are used in conjunction with the <a href="../transition/index.html">transition</a> library.</p>
+<p>The 42 easing methods included with Corona SDK are based on <a href="http://www.robertpenner.com/easing/">Robert Penner's easing functions</a>.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>transition.to( target, { transition=easing.outExpo } )
+transition.from( target, { transition=easing.inOutCirc } )</code></pre>
+<!---
+## Customization
+
+All easing functions take the same set of arguments. If you want to write your own easing function, it should obey the following signature:
+
+    easing.function( t, tMax, start, delta )
+
+##### t ~^(required)^~
+_[Number][api.type.Number]._ The time since the start of the transition.
+
+##### tMax ~^(required)^~
+_[Number][api.type.Number]._ The length in time of the transition.
+
+##### start ~^(required)^~
+_[Number][api.type.Number]._ The initial value.
+
+##### delta ~^(required)^~
+_[Number][api.type.Number]._ The change in the value at the end of the transition. The final value is `start + delta`.
+
+
+## Functions
+
+#### [easing.inExpo()][api.library.easing.inExpo]
+
+#### [easing.inOutExpo()][api.library.easing.inOutExpo]
+
+#### [easing.inOutQuad()][api.library.easing.inOutQuad]
+
+#### [easing.inQuad()][api.library.easing.inQuad]
+
+#### [easing.linear()][api.library.easing.linear]
+
+#### [easing.outExpo()][api.library.easing.outExpo]
+
+#### [easing.outQuad()][api.library.easing.outQuad]
+-->
+
+
+</div>
+<div class="section level2" id="easing-functions">
+<h2><a href="#TOC">Easing Functions</a></h2>
+<div class="section level4" id="linear">
+<h4><a href="#TOC">linear</a></h4>
+<p>This is the default interpolation and will be used unless another easing method isn't defined.</p>
+<div class="figure">
+<img src="../../../images/simulator/easing-linear.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="continuousloop">
+<h4><a href="#TOC">continuousLoop</a></h4>
+<p>This easing function will tween an object to its target state and then reverse back to the initial state (interpolation is linear).</p>
+<div class="figure">
+<img src="../../../images/simulator/easing-continuous.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="insine-outsine-inoutsine-outinsine">
+<h4><a href="#TOC">inSine  ·  outSine  ·  inOutSine  ·  outInSine</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-sine.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inquad-outquad-inoutquad-outinquad">
+<h4><a href="#TOC">inQuad  ·  outQuad  ·  inOutQuad  ·  outInQuad</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-quad.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="incubic-outcubic-inoutcubic-outincubic">
+<h4><a href="#TOC">inCubic  ·  outCubic  ·  inOutCubic  ·  outInCubic</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-cubic.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inquart-outquart-inoutquart-outinquart">
+<h4><a href="#TOC">inQuart  ·  outQuart  ·  inOutQuart  ·  outInQuart</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-quart.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inquint-outquint-inoutquint-outinquint">
+<h4><a href="#TOC">inQuint  ·  outQuint  ·  inOutQuint  ·  outInQuint</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-quint.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inexpo-outexpo-inoutexpo-outinexpo">
+<h4><a href="#TOC">inExpo  ·  outExpo  ·  inOutExpo  ·  outInExpo</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-expo.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="incirc-outcirc-inoutcirc-outincirc">
+<h4><a href="#TOC">inCirc  ·  outCirc  ·  inOutCirc  ·  outInCirc</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-circ.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inback-outback-inoutback-outinback">
+<h4><a href="#TOC">inBack  ·  outBack  ·  inOutBack  ·  outInBack</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-back.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inelastic-outelastic-inoutelastic-outinelastic">
+<h4><a href="#TOC">inElastic  ·  outElastic  ·  inOutElastic  ·  outInElastic</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-elastic.png" /><p class="caption"></p>
+</div>
+</div>
+<div class="section level4" id="inbounce-outbounce-inoutbounce-outinbounce">
+<h4><a href="#TOC">inBounce  ·  outBounce  ·  inOutBounce  ·  outInBounce</a></h4>
+<div class="figure">
+<img src="../../../images/simulator/easing-bounce.png" /><p class="caption"></p>
+</div>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">circle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newCircle<span class="ot">(</span> <span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">100</span> <span class="ot">)</span>
+<span class="kw">circle</span>:setFillColor<span class="ot">(</span> <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">255</span> <span class="ot">)</span>
+<span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">circle</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">400</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">200</span>, <span class="kw">transition</span><span class="ot">=</span><span class="kw">easing</span><span class="ot">.</span><span class="kw">inExpo</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<!---
+
+--sequenced transition
+local square = display.newRect( 100,100,100,100 )
+local params = {
+    name = "testSequence",
+    transitions = {
+        { time=1000, x=100 },
+        { time=2000, x=50, mode="withPrevious" },
+        { time=2000, x=0, mode="afterPrevious" },
+    }
+}
+
+local seq = transition.newSequence( square, params )
+transition.runSequence( "testSequence" )
+
+-->
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.easing.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.easing.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.easing.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

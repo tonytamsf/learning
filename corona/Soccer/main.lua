@@ -14,7 +14,7 @@ local _H = display.contentHeight
 
 physics.setContinuous(true)
 physics.setScale( 60 ) -- a value that seems good for small objects (based on playtesting)
-physics.setGravity( 0, 0 ) -- overhead view, therefore no gravity vector
+physics.setGravity( 1, 1 ) -- overhead view, therefore no gravity vector
 physics.setVelocityIterations( 100 )
 physics.setAverageCollisionPositions( true )
 physics.setPositionIterations( 16 )
@@ -32,7 +32,7 @@ local leftBorder = display.newImage("border-vertical.png", _W-1, centerY)
 
 require("players")
 
-local ball = display.newImage("soccerball.png", centerX, centerY)
+local ball = display.newImage("football.png", centerX, centerY)
 local ballBody = { density=0.3, friction=0.1, bounce=0.3, radius=10 }
 local borderBody = { density=0.2, friction=0.9, bounce=0}
 ball.myName = 'ball'

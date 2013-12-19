@@ -1,0 +1,1664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > os > date</title>
+  <meta name="revised" content="24-Jul-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > os > date" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#os.date">os.date()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#format-optional">format <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#time-optional">time <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">os</a>  ▸  <a href="date.html">date</a>
+</div>
+
+<div class="section level1" id="os.date">
+<h1><a href="#TOC">os.date()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">os.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/String.html">String</a> or <a href="../../type/Table.html">Table</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">time, date, format</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="time.html">os.time()</a><br/><a href="clock.html">os.clock()</a><br/><a href="../system/getTimer.html">system.getTimer()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Returns a string or a table containing date and time, formatted according to the given string format.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>os.date( [format [, time] ] )</code></pre>
+<div class="section level5" id="format-optional">
+<h5><a href="#TOC">format <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> If format starts with <code>!</code>, then the date is formatted in Coordinated Universal Time. After this optional character, if format is the string <code>*t</code>, then date returns a table with the following fields: <code>year</code> (four digits), <code>month</code> (1--12), <code>day</code> (1--31), <code>hour</code> (0--23), <code>min</code> (0--59), <code>sec</code> (0--61), <code>wday</code> (weekday, Sunday is 1), <code>yday</code> (day of the year), and <code>isdst</code> (daylight saving flag, a boolean).</p>
+<p>If format is not <code>*t</code>, then date returns the date as a string, formatted according to similar rules as the C function <code>strftime(3)</code>.</p>
+<p>The formatting codes <code>os.date()</code> understands are as follows:</p>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><code>%a</code></td>
+<td align="left">Abbreviated weekday name</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%A</code></td>
+<td align="left">Full weekday name</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%b</code></td>
+<td align="left">Abbreviated month name</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%B</code></td>
+<td align="left">Full month name</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%c</code></td>
+<td align="left">Date and time representation appropriate for locale</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%d</code></td>
+<td align="left">Day of month as decimal number (01 – 31)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%H</code></td>
+<td align="left">Hour in 24-hour format (00 – 23)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%I</code></td>
+<td align="left">Hour in 12-hour format (01 – 12)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%j</code></td>
+<td align="left">Day of year as decimal number (001 – 366)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%m</code></td>
+<td align="left">Month as decimal number (01 – 12)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%M</code></td>
+<td align="left">Minute as decimal number (00 – 59)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%p</code></td>
+<td align="left">Current locale's A.M./P.M. indicator for 12-hour clock</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%S</code></td>
+<td align="left">Second as decimal number (00 – 59)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%U</code></td>
+<td align="left">Week of year as decimal number, with Sunday as first day of week (00 – 53)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%w</code></td>
+<td align="left">Weekday as decimal number (0 – 6; Sunday is 0)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%W</code></td>
+<td align="left">Week of year as decimal number, with Monday as first day of week (00 – 53)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%x</code></td>
+<td align="left">Date representation for current locale</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%X</code></td>
+<td align="left">Time representation for current locale</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%y</code></td>
+<td align="left">Year without century, as decimal number (00 – 99)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%Y</code></td>
+<td align="left">Year with century, as decimal number</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%z</code>, <code>%Z</code></td>
+<td align="left">The time-zone name or time zone abbreviation</td>
+</tr>
+<tr class="even">
+<td align="left"><code>%%</code></td>
+<td align="left">Percent sign</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>This list is somewhat operating system dependent so don't rely on any additional format items you might discover working on all platforms.</p>
+</div>
+<div class="section level5" id="time-optional">
+<h5><a href="#TOC">time <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> If the time argument is present, this is the time to be formatted (see the <a href="time.html">os.time()</a> function for a description of this value). Otherwise, date formats the current time.</p>
+<p>When called without arguments, date returns a reasonable date and time representation that depends on the host system and on the current locale (that is, <a href="date.html">os.date()</a> is equivalent to <code>os.date(&quot;%c&quot;)</code> ).</p>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="fu">date</span> <span class="ot">=</span> <span class="fu">os.date</span><span class="ot">(</span> <span class="st">&quot;*t&quot;</span> <span class="ot">)</span>    <span class="co">-- returns table of date &amp; time values</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">date</span><span class="ot">.</span><span class="kw">year</span>, <span class="kw">date</span><span class="ot">.</span><span class="kw">month</span> <span class="ot">)</span>  <span class="co">-- print year and month</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">date</span><span class="ot">.</span><span class="kw">hour</span>, <span class="kw">date</span><span class="ot">.</span><span class="kw">min</span> <span class="ot">)</span>    <span class="co">-- print hour and minutes</span>
+
+<span class="fu">print</span><span class="ot">(</span> <span class="fu">os.date</span><span class="ot">(</span> <span class="st">&quot;%c&quot;</span> <span class="ot">)</span> <span class="ot">)</span>        <span class="co">-- print out time/date string: e.g., &quot;Thu Oct 23 14:55:02 2010&quot;</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 24-Jul-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.os.date&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.os.date&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.os.date&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

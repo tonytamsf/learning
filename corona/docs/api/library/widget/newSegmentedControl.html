@@ -1,0 +1,1681 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newSegmentedControl</title>
+  <meta name="revised" content="26-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newSegmentedControl" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newsegmentedcontrol">widget.newSegmentedControl()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left / top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#segmentwidth-optional">segmentWidth <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#segments-required">segments <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#defaultsegment-optional">defaultSegment <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#labelsize-optional">labelSize <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#labelfont-optional">labelFont <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onpress-optional">onPress <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#object.segmentlabel"><a href="../../type/SegmentedControlWidget/segmentLabel.html">object.segmentLabel</a></a></li>
+<li><a href="#object.segmentnumber"><a href="../../type/SegmentedControlWidget/segmentNumber.html">object.segmentNumber</a></a></li>
+</ul></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newSegmentedControl.html">newSegmentedControl</a>
+</div>
+<div class="section level1" id="widget.newsegmentedcontrol">
+<h1><a href="#TOC">widget.newSegmentedControl()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/SegmentedControlWidget/index.html">SegmentedControlWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, segment, segmentedControl, control</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/SegmentedControlWidget/index.html">SegmentedControlWidget</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a <a href="../../type/SegmentedControlWidget/index.html">Segmented Control</a> object.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<!---
+
+To conserve texture memory, a [Segmented Control][api.type.SegmentedControlWidget] can only be created from an [image&nbsp;sheet][api.library.graphics.newImageSheet].
+
+-->
+
+<p><a href="../../type/SegmentedControlWidget/index.html">Segmented Controls</a> do not support <a href="../../type/DisplayObject/scale.html">scaling</a> nor changing the width/height via <a href="../../type/DisplayObject/width.html">.width</a> or <a href="../../type/DisplayObject/height.html">.height</a>.</p>
+<p><a href="../../type/SegmentedControlWidget/index.html">Segmented Controls</a> do not support changing the <a href="../../type/DisplayObject/anchorX.html">anchorX</a> or <a href="../../type/DisplayObject/anchorY.html">anchorY</a> properties after creation.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newSegmentedControl( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> An optional identification to assign to the segmented control. Default is <code>widget_segmentedControl</code>.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left / top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The left and top position where the segmented control will be created. Default values are <code>0,0</code>.</p>
+</div>
+<div class="section level5" id="segmentwidth-optional">
+<h5><a href="#TOC">segmentWidth <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The width of each segment in pixels (all segments must be of equal width). Default is <code>50</code>.</p>
+</div>
+<div class="section level5" id="segments-required">
+<h5><a href="#TOC">segments <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table of comma-separated strings which defines the total segment count and the label that appears on each. For example:</p>
+<div class="code-indent" style="width:500px;">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">segments</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;Item 1&quot;</span>, <span class="st">&quot;Item 2&quot;</span>, <span class="st">&quot;Item 3&quot;</span>, <span class="st">&quot;Item 4&quot;</span> <span class="ot">}</span></code></pre>
+</div>
+
+</div>
+<div class="section level5" id="defaultsegment-optional">
+<h5><a href="#TOC">defaultSegment <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The segment that will be active upon the initial creation. Default is the first segment.</p>
+</div>
+<div class="section level5" id="labelsize-optional">
+<h5><a href="#TOC">labelSize <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Font size (in pixels) for the segment labels. Default is <code>12</code>.</p>
+</div>
+<div class="section level5" id="labelfont-optional">
+<h5><a href="#TOC">labelFont <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Font used for the segment labels. Default is <code>native.systemFont</code>.</p>
+<!---
+
+##### labelXOffset / labelYOffset ~^(optional)^~
+_[Numbers][api.type.Number]._ Optional __x__ and __y__ offsets for the segment labels. For example, `labelYOffset = -8` will shift the labels 8 pixels up from default.
+
+-->
+
+</div>
+<div class="section level5" id="onpress-optional">
+<h5><a href="#TOC">onPress <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> An optional function to be called when a segment is pressed. The callback function does not require testing for <code>event.phase</code> since it only honors <code>began</code>.</p>
+</div>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<div class="section level4" id="object.segmentlabel">
+<h4><a href="#TOC"><a href="../../type/SegmentedControlWidget/segmentLabel.html">object.segmentLabel</a></a></h4>
+</div>
+<div class="section level4" id="object.segmentnumber">
+<h4><a href="#TOC"><a href="../../type/SegmentedControlWidget/segmentNumber.html">object.segmentNumber</a></a></h4>
+<!---
+
+## Methods
+
+DOCUMENT :setSegment() once added!
+
+-->
+
+
+<!---
+
+## Visual Customization
+
+##### sheet ~^(required)^~
+_[ImageSheet][api.type.ImageSheet]._ The [image&nbsp;sheet][api.library.graphics.newImageSheet] object for the segmented control.
+
+##### width / height ~^(required)^~
+_[Numbers][api.type.Number]._ This is width/height of the [Segmented Control's][api.type.SegmentedControlWidget] frames. Each frame must be an equal width/height. Set these if you are using a custom imageSheet for your [Segmented Control][api.type.SegmentedControlWidget], if you are using the default theme then these values are set automatically for you.
+
+##### leftSegmentFrame, leftSegmentSelectedFrame ~^(required)^~
+_[Numbers][api.type.Number]._ This is the frame index for the [Segmented Control's][api.type.SegmentedControlWidget] left segment default and selected frames (this frame is the left edge with the rounded corners).
+
+##### rightSegmentFrame, rightSegmentSelectedFrame ~^(required)^~
+_[Numbers][api.type.Number]._ This is the frame index for the [Segmented Control's][api.type.SegmentedControlWidget] right segment default and selected frames (this frame is the right edge with the rounded corners).
+
+##### middleSegmentFrame, middleSegmentSelectedFrame ~^(required)^~
+_[Numbers][api.type.Number]._ This is the frame index for the [Segmented Control's][api.type.SegmentedControlWidget] middle segment default and selected frames (this frame is the middle fill).
+
+##### dividerFrame ~^(required)^~
+_[Number][api.type.Number]._ This is the frame index for the [Segmented Control's][api.type.SegmentedControlWidget] segment divider frame (this frame is the divider line between each segment).
+
+-->
+
+
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Listen for segmented control events      </span>
+<span class="kw">local</span> <span class="kw">function</span> onSegmentPress<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">target</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">target</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Segment Label is:&quot;</span>, <span class="kw">target</span><span class="ot">.</span><span class="kw">segmentLabel</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Segment Number is:&quot;</span>, <span class="kw">target</span><span class="ot">.</span><span class="kw">segmentNumber</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Create a default segmented control</span>
+<span class="kw">local</span> <span class="kw">segmentedControl</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newSegmentedControl</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">150</span>,
+    <span class="kw">segmentWidth</span> <span class="ot">=</span> <span class="dv">150</span>,
+    <span class="kw">segments</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;Item 1&quot;</span>, <span class="st">&quot;Item 2&quot;</span>, <span class="st">&quot;Item 3&quot;</span>, <span class="st">&quot;Item 4&quot;</span> <span class="ot">}</span>,
+    <span class="kw">defaultSegment</span> <span class="ot">=</span> <span class="dv">2</span>,
+    <span class="kw">onPress</span> <span class="ot">=</span> <span class="kw">onSegmentPress</span>
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newSegmentedControl&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newSegmentedControl&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newSegmentedControl&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

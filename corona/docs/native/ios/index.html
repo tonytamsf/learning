@@ -1,0 +1,1703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Enterprise > ios </title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Enterprise > ios " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#native-api-ios">Native API (iOS)</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#bridging-lua-and-c">Bridging Lua and C</a></li>
+<li><a href="#apis">APIs</a><ul>
+<li><a href="#coronadelegate"><a href="CoronaDelegate.html">CoronaDelegate</a></a></li>
+<li><a href="#coronaruntime"><a href="CoronaRuntime.html">CoronaRuntime</a></a></li>
+<li><a href="#c-api-corona"><a href="../C/index.html">C API (Corona)</a></a></li>
+</ul></li>
+<li><a href="#application-lifecycle">Application Lifecycle</a></li>
+<li><a href="#registering-a-custom-library">Registering a custom library</a></li>
+<li><a href="#calling-lua-from-c">Calling Lua from C</a><ul>
+<li><a href="#sending-events-to-runtime">Sending events to <code>Runtime</code></a></li>
+</ul></li>
+<li><a href="#custom-lua-error-handling">Custom Lua Error Handling</a></li>
+<li><a href="#common-errors">Common Errors</a><ul>
+<li><a href="#opengl-context-mismatch">OpenGL context mismatch</a></li>
+</ul></li>
+<li><a href="#xcode-configuration">XCode configuration</a><ul>
+<li><a href="#location-of-corona-project-files">Location of Corona project files</a></li>
+<li><a href="#png-files">PNG files</a></li>
+<li><a href="#handling-daily-builds">Handling Daily Builds</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Enterprise</a>  ▸  <a href="index.html">ios</a>
+</div>
+<div class="section level1" id="native-api-ios">
+<h1><a href="#TOC">Native API (iOS)</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">iOS, enterprise, Objective-C</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../index.html">Native coding</a>, <a href="../enterprise/index.html">Corona Enterprise</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+</div>
+<div class="section level2" id="bridging-lua-and-c">
+<h2><a href="#TOC">Bridging Lua and C</a></h2>
+<p>To bridge Lua and C code, you must use the C API offered by Lua. This will allow you to add libraries and functions in Lua that call directly into C. (See 'References' below for more information)</p>
+</div>
+<div class="section level2" id="apis">
+<h2><a href="#TOC">APIs</a></h2>
+<p>The following are specific to Corona Enterprise for iOS.</p>
+<div class="section level4" id="coronadelegate">
+<h4><a href="#TOC"><a href="CoronaDelegate.html">CoronaDelegate</a></a></h4>
+<p>Your code must implement this protocol if you wish to add your own functions at the Lua layer.</p>
+</div>
+<div class="section level4" id="coronaruntime">
+<h4><a href="#TOC"><a href="CoronaRuntime.html">CoronaRuntime</a></a></h4>
+<p>Key objects including the Lua state used by the Corona Engine are accessible via this protocol. The Corona engine gives you access to this via the <code>CoronaDelegate</code></p>
+</div>
+<div class="section level4" id="c-api-corona">
+<h4><a href="#TOC"><a href="../C/index.html">C API (Corona)</a></a></h4>
+<p>This is a collection of C APIs offered by the Corona engine that help you interact with Lua for Corona-specific patterns such as dispatching events.</p>
+</div>
+</div>
+<div class="section level2" id="application-lifecycle">
+<h2><a href="#TOC">Application Lifecycle</a></h2>
+<p>You can intercept UIApplicationDelegate events via your implementation of the <code>CoronaDelegate</code> protocol. See <a href="CoronaDelegate.html">CoronaDelegate</a> for more details.</p>
+</div>
+<div class="section level2" id="registering-a-custom-library">
+<h2><a href="#TOC">Registering a custom library</a></h2>
+<p>If you want to add your own library in Lua that wraps native C code, you should follow the standard Lua conventions as described in the <code>Coding Plugins</code> =&gt; <code>Native-only</code> section in the <a href="../plugin/index.html">Plugin guide</a>.</p>
+<p>For example, if your Lua library is called <code>mylibrary</code>, then you would create a Lua C function called <code>int luaopen_mylibrary( lua_State *L )</code>.</p>
+<p>In the Lua code you would access this library by calling <a href="../../api/library/package/require.html">require</a>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">mylibrary</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;mylibrary&quot;</span></code></pre>
+</div>
+<div class="section level2" id="calling-lua-from-c">
+<h2><a href="#TOC">Calling Lua from C</a></h2>
+<p>To call Lua from C, you must use the Lua C API. Every function in the Lua C API takes the <code>lua_State</code> pointer <code>L</code> as its first argument. You can get access to the proper <code>lua_State</code> variable via an instance of the <a href="CoronaRuntime.html">CoronaRuntime</a>.</p>
+<p>In order to use the Lua C API successfully, you must understand the Lua stack. This stack is different from a function call stack. It is designed to ease the marshalling of data across the Lua-C bridge.</p>
+<p>See 'References' below for more information.</p>
+<div class="section level3" id="sending-events-to-runtime">
+<h3><a href="#TOC">Sending events to <code>Runtime</code></a></h3>
+<p><em>NOTE: The following is available starting in build 843</em></p>
+<p>All events in Corona are Lua tables. In order for Corona to recognize the event as a Lua table, the <code>name</code> property of the Lua table must be set to the type of event.</p>
+<p>To make sending events to the global <a href="../../api/type/Runtime/index.html">Runtime</a> object, we've added a convenience utility function in <a href="../C/CoronaLua.html">Corona::Lua</a> called <code>RuntimeDispatchEvent</code>.</p>
+<p>In the following Lua code, we create a custom event of type <code>&quot;delegate&quot;</code>.</p>
+<pre><code>local event = { name = &quot;delegate&quot; }
+Runtime:dispatchEvent( event )</code></pre>
+<p>We translate this call into native code and send the event in the <code>didLoadMain:</code> method of <a href="CoronaDelegate.html">CoronaDelegate</a>.</p>
+<pre><code>@implementation MyCoronaDelegate
+
+- (void)didLoadMain:(id&lt;CoronaRuntime&gt;)runtime
+{
+    lua_State *L = runtime.L;
+
+    // DISPATCH CUSTOM EVENT
+    // Create &#39;delegate&#39; event
+    const char kNameKey[] = &quot;name&quot;;
+    const char kValueKey[] = &quot;delegate&quot;;
+    lua_newtable( L );
+    lua_pushstring( L, kValueKey );     // All events are Lua tables
+    lua_setfield( L, -2, kNameKey );    // that have a &#39;name&#39; property
+
+    Corona::Lua::RuntimeDispatchEvent( L, -1 );
+}
+
+@end</code></pre>
+</div>
+</div>
+<div class="section level2" id="custom-lua-error-handling">
+<h2><a href="#TOC">Custom Lua Error Handling</a></h2>
+<p>You can register a custom Lua error handler by calling <code>Corona::Lua::SetErrorHandler()</code>. Your handler will be called anytime a Lua error occurs at runtime.</p>
+<p>It will override Corona's internal default error handler.</p>
+<pre><code>static int MyTraceback( lua_State *L )
+{
+    lua_getfield(L, LUA_GLOBALSINDEX, &quot;debug&quot;);
+    if (!lua_istable(L, -1)) {
+        lua_pop(L, 1);
+        return 1;
+    }
+    lua_getfield(L, -1, &quot;traceback&quot;);
+    if (!lua_isfunction(L, -1)) {
+        lua_pop(L, 2);
+        return 1;
+    }
+    lua_pushvalue(L, 1);  // pass error message
+    lua_pushinteger(L, 1);  // skip this function and traceback
+    lua_call(L, 2, 1);  // call debug.traceback
+
+    // Log result of calling debug.traceback()
+    NSLog( @&quot;[LUA ERROR]: %s&quot;, lua_tostring( L, -1 ) );
+
+    return 1;
+}
+
+@implementation MyCoronaDelegate
+- (void)willLoadMain:(id&lt;CoronaRuntime&gt;)runtime
+{
+    Corona::Lua::SetErrorHandler( MyTraceback );
+}
+@end</code></pre>
+</div>
+<div class="section level2" id="common-errors">
+<h2><a href="#TOC">Common Errors</a></h2>
+<div class="section level3" id="opengl-context-mismatch">
+<h3><a href="#TOC">OpenGL context mismatch</a></h3>
+<p>Many 3rd party graphics libraries that use OpenGL will use their own OpenGL context.</p>
+<p>Corona performs its rendering on the main thread and does not expect the OpenGL context to change. Consequently, if you use certain graphics libraries, you may be inadvertently changing the OpenGL context. This will cause problems where Corona may not render or update properly.</p>
+<p>To ensure your code is dealing with OpenGL properly, you should ensure that the OpenGL context changes are &quot;balanced&quot;:</p>
+<pre><code>// 1. Save Corona&#39;s context
+EAGLContext *context = nil;
+context = [EAGLContext currentContext];
+
+// 2. Call 3rd party library
+
+// 3. Restore Corona&#39;s context
+[EAGLContext setCurrentContext:context];</code></pre>
+<p>For example, if the interface for the 3rd party library is shown via a modal view controller, you would perform steps 1 and 2 in the <code>presentViewController:animated:completion:</code> call and then perform step 3 in the <code>dismissViewControllerAnimated:completion:</code> call.</p>
+</div>
+</div>
+<div class="section level2" id="xcode-configuration">
+<h2><a href="#TOC">XCode configuration</a></h2>
+<p>We recommend you use the project template <code>App.xcodeproj</code> as the starting point for your XCode project.</p>
+<p>This project contains custom build phases that take care of packaging your Lua sources and resource files (images, audio, etc) properly.</p>
+<p>It also allows you to structure your native extensions as plugins that can be reused in future projects.</p>
+<p>See 'Plugin Projects' on the <a href="../plugin/index.html">main plugin page</a> for more information.</p>
+<div class="section level3" id="location-of-corona-project-files">
+<h3><a href="#TOC">Location of Corona project files</a></h3>
+<p>A normal Corona SDK project comprises of your Lua files (e.g. <code>main.lua</code>) and additional resource files like images, audio, video, etc.</p>
+<p>By default, <code>App.xcodeproj</code> is set up to assume that these files reside in a folder called <code>Corona</code> that is in a folder that sits alongside the folder for the XCode project itself.</p>
+</div>
+<div class="section level3" id="png-files">
+<h3><a href="#TOC">PNG files</a></h3>
+<p>By default, <code>App.xcodeproj</code> follows the XCode's default convention of optimizing PNG files with pngcrush. This makes them unreadable by MacOS.</p>
+<p>For projects with extremely large files, this results in significantly slower build times. You can bypass this optimization by setting the <code>CORONA_COPY_PNG_PRESERVE</code> environment variable <strong>prior</strong> to the <code>CompileScripts.sh</code> call in the <code>Compile</code> build phase:</p>
+<pre><code># Insert this before call to CompileScripts.sh
+# Overrides project to use the Fishies sample instead of looking for &#39;assets&#39;
+# Note the use of `export` ensuring child processes inherit the variable
+export CORONA_COPY_PNG_PRESERVE=&quot;--preserve&quot;</code></pre>
+<p><strong>NOTE:</strong> Bypassing the default optimization may result in slower load image load times because iOS may have to do extra work on the device to deal with endianness and/or to ensure that the pixels are in pre-multiply alpha format.</p>
+</div>
+<div class="section level3" id="handling-daily-builds">
+<h3><a href="#TOC">Handling Daily Builds</a></h3>
+<p>If you are using the new <code>App</code> project template, you should simply replace the <code>CoronaEnterprise</code> folder in your <code>/Applications</code> directory with the latest version from the daily builds. You'll only need to do this once, as all projects should automatically start using the latest version.</p>
+<p>If you are using an older version, you may need to replace the <code>Libraries</code> folder in your project with the corresponding folder in the latest daily build. You'll need to do this once for each projects.</p>
+</div>
+</div>
+<div class="section level2" id="references">
+<h2><a href="#TOC">References</a></h2>
+<p>We highly recommend getting the following book (especially Part IV on the C API):</p>
+<ul>
+<li><a href="http://www.inf.puc-rio.br/~roberto/pil2/">Programming in Lua, 2nd Edition</a></li>
+</ul>
+<p>For bridging between C and Lua, there are also a couple of resources online:</p>
+<ul>
+<li><a href="http://www.lua.org/manual/5.1/manual.html#3">Lua C API, Ch. 3 of Reference</a></li>
+<li><a href="http://www.lua.org/manual/5.1/#index">C API and auxiliary library</a></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=native.ios.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=native.ios.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=native.ios.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

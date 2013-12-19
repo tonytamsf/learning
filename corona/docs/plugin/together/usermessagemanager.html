@@ -1,0 +1,1912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > usermessagemanager</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > usermessagemanager" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.usermessagemanager">together.UserMessageManager</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#table-usermessages"><a href="../../api/type/Table.html">table</a> UserMessages</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#add"><a href="#more_add">Add()</a></a></li>
+<li><a href="#findbyusermessageid"><a href="#more_findbyusermessageid">FindByUserMessageID()</a></a></li>
+<li><a href="#getcount"><a href="#more_getcount">GetCount()</a></a></li>
+<li><a href="#get"><a href="#more_get">Get()</a></a></li>
+<li><a href="#indexof"><a href="#more_indexof">IndexOf()</a></a></li>
+<li><a href="#indexofbyusermessageid"><a href="#more_indexofbyusermessageid">IndexOfByUserMessageID()</a></a></li>
+<li><a href="#remove"><a href="#more_remove">Remove()</a></a></li>
+<li><a href="#getall"><a href="#more_getall">GetAll()</a></a></li>
+<li><a href="#createmessage"><a href="#more_createmessage">CreateMessage()</a></a></li>
+<li><a href="#markmessageasread"><a href="#more_markmessageasread">MarkMessageAsRead()</a></a></li>
+<li><a href="#deletemessage"><a href="#more_deletemessage">DeleteMessage()</a></a></li>
+<li><a href="#add-1">Add()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#findbyusermessageid-1">FindByUserMessageID()</a><ul>
+<li><a href="#returns-togetherusermessage">Returns <a href="togetherusermessage.html">TogetherUserMessage</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#getcount-1">GetCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+</ul></li>
+<li><a href="#get-1">Get()</a><ul>
+<li><a href="#returns-togetherusermessage-1">Returns <a href="togetherusermessage.html">TogetherUserMessage</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#indexof-1">IndexOf()</a><ul>
+<li><a href="#returns-number-1">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#indexofbyusermessageid-1">IndexOfByUserMessageID()</a><ul>
+<li><a href="#returns-number-2">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#remove-1">Remove()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#getall-1">GetAll()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#createmessage-1">CreateMessage()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a><ul>
+<li><a href="#markmessageasread-1">MarkMessageAsRead()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-9">Syntax</a></li>
+<li><a href="#parameters-8">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-8"></i></a><ul>
+<li><a href="#deletemessage-1">DeleteMessage()</a><ul>
+<li><a href="#returns-void-5">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-10">Syntax</a></li>
+<li><a href="#parameters-9">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-9"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="usermessagemanager.html">usermessagemanager</a>
+</div>
+<div class="section level1" id="together.usermessagemanager">
+<h1><a href="#TOC">together.UserMessageManager</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">UserMessageManager</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The UserMessageManager class is used to find and fetch messages directly sent to the current session's User account. With this class, a developer will be able to create a message, delete a message, get all messages, and mark a message as read. A Developer can use UserMessages as in-game email.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="table-usermessages">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> UserMessages</a></h4>
+<p>Stores all the UserMessages contained in the Manager.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="add">
+<h5><a href="#TOC"><a href="#more_add">Add()</a></a></h5>
+</div>
+<div class="section level5" id="findbyusermessageid">
+<h5><a href="#TOC"><a href="#more_findbyusermessageid">FindByUserMessageID()</a></a></h5>
+</div>
+<div class="section level5" id="getcount">
+<h5><a href="#TOC"><a href="#more_getcount">GetCount()</a></a></h5>
+</div>
+<div class="section level5" id="get">
+<h5><a href="#TOC"><a href="#more_get">Get()</a></a></h5>
+</div>
+<div class="section level5" id="indexof">
+<h5><a href="#TOC"><a href="#more_indexof">IndexOf()</a></a></h5>
+</div>
+<div class="section level5" id="indexofbyusermessageid">
+<h5><a href="#TOC"><a href="#more_indexofbyusermessageid">IndexOfByUserMessageID()</a></a></h5>
+</div>
+<div class="section level5" id="remove">
+<h5><a href="#TOC"><a href="#more_remove">Remove()</a></a></h5>
+</div>
+<div class="section level5" id="getall">
+<h5><a href="#TOC"><a href="#more_getall">GetAll()</a></a></h5>
+</div>
+<div class="section level5" id="createmessage">
+<h5><a href="#TOC"><a href="#more_createmessage">CreateMessage()</a></a></h5>
+</div>
+<div class="section level5" id="markmessageasread">
+<h5><a href="#TOC"><a href="#more_markmessageasread">MarkMessageAsRead()</a></a></h5>
+</div>
+<div class="section level5" id="deletemessage">
+<h5><a href="#TOC"><a href="#more_deletemessage">DeleteMessage()</a></a></h5>
+<hr />
+<div id="more_add">
+</div>
+
+</div>
+<div class="section level3" id="add-1">
+<h3><a href="#TOC">Add()</a></h3>
+<p>Adds a UserMessage to the internally managed list without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:Add( userMessage )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherusermessage.html">TogetherUserMessage</a> userMessage</b></p>
+<p><i>Instance of a UserMessage to add internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findbyusermessageid">
+</div>
+
+<div class="section level3" id="findbyusermessageid-1">
+<h3><a href="#TOC">FindByUserMessageID()</a></h3>
+<p>Finds the UserMessage with the specified UserMessageID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherusermessage">
+<h4><a href="#TOC">Returns <a href="togetherusermessage.html">TogetherUserMessage</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:FindByUserMessageID( userMessageID )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userMessageID</b></p>
+<p><i>The ID of the UserMessage to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getcount">
+</div>
+
+<div class="section level3" id="getcount-1">
+<h3><a href="#TOC">GetCount()</a></h3>
+<p>Gets the number of UserMessages currently managed internally.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:GetCount(  )</code></pre>
+<hr />
+<div id="more_get">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="get-1">
+<h3><a href="#TOC">Get()</a></h3>
+<p>Gets the UserMessage at the specified index if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherusermessage-1">
+<h4><a href="#TOC">Returns <a href="togetherusermessage.html">TogetherUserMessage</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:Get( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the UserMessage to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexof">
+</div>
+
+<div class="section level3" id="indexof-1">
+<h3><a href="#TOC">IndexOf()</a></h3>
+<p>Returns the index of the specified UserMessage if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-number-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:IndexOf( userMessage )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherusermessage.html">TogetherUserMessage</a> userMessage</b></p>
+<p><i>Instance of the UserMessage to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofbyusermessageid">
+</div>
+
+<div class="section level3" id="indexofbyusermessageid-1">
+<h3><a href="#TOC">IndexOfByUserMessageID()</a></h3>
+<p>Returns the index of the UserMessage with the specified UserMessageID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-2">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:IndexOfByUserMessageID( userMessageID )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userMessageID</b></p>
+<p><i>The ID of the UserMessage to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_remove">
+</div>
+
+<div class="section level3" id="remove-1">
+<h3><a href="#TOC">Remove()</a></h3>
+<p>Removes a UserMessage from the internally managed list. This does not delete the message from the user's mailbox persistently.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:Remove( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the UserMessage to remove internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getall">
+</div>
+
+<div class="section level3" id="getall-1">
+<h3><a href="#TOC">GetAll()</a></h3>
+<p>Gets all UserMessages assigned to the User. Upon success, this will automatically update the internal mailbox.</p>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:GetAll( unreadOnly, startID, count, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Boolean.html">boolean</a> unreadOnly</b></p>
+<p><i>A Boolean indicating whether only unread messages should be retrieved.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> startID</b></p>
+<p><i>The ID of the UserMessage to start with when returning UserMessages.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> count</b></p>
+<p><i>The max number of UserMessages to return.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_createmessage">
+</div>
+
+<div class="section level3" id="createmessage-1">
+<h3><a href="#TOC">CreateMessage()</a></h3>
+<p>Sends a message to a specific User. Upon success, this will automatically update the internal mailbox.</p>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:CreateMessage( destinationUserID, title, message, isGameIndependent, messageProperties, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> destinationUserID</b></p>
+<p><i>The ID of the User to send the UserMessage to.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> title</b></p>
+<p><i>The title of the UserMessage.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> message</b></p>
+<p><i>The message of the UserMessage.</p>
+<p></i> <b><a href="../../api/type/Boolean.html">boolean</a> isGameIndependent</b></p>
+<p><i>A boolean indicating whether the generated UserMessage is assigned to the Game being played.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> messageProperties</b></p>
+<p><i>The properties to assign to the UserMessage. Pass in nil to assign no properties.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_markmessageasread">
+</div>
+
+<div class="section level3" id="markmessageasread-1">
+<h3><a href="#TOC">MarkMessageAsRead()</a></h3>
+<p>Marks a UserMessage as read. Upon success, this will automatically update the internal mailbox.</p>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-9">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:MarkMessageAsRead( userMessageID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-8">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userMessageID</b></p>
+<p><i>The ID of the UserMessage to mark as read.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-8">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_deletemessage">
+</div>
+
+<div class="section level3" id="deletemessage-1">
+<h3><a href="#TOC">DeleteMessage()</a></h3>
+<p>Deletes a UserMessage. Upon success, this will automatically update the internal mailbox.</p>
+<div class="section level4" id="returns-void-5">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-10">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>UserMessageManager:DeleteMessage( userMessageID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-9">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userMessageID</b></p>
+<p><i>The ID of the UserMessage to delete.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-9">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.usermessagemanager&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.usermessagemanager&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.usermessagemanager&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

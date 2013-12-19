@@ -1,0 +1,1771 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > CoronaProvider_Enterprise_popup_addressbook > showPopup</title>
+  <meta name="revised" content="23-Aug-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > CoronaProvider_Enterprise_popup_addressbook > showPopup" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#native.showpopup-address-book-plugin">native.showPopup() &gt; (Address Book Plugin)</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#name-required">name <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#params-required">params <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#format-for-params">Format for <code>params</code></a><ul>
+<li><a href="#option-required">option <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#pickcontact">&quot;pickContact&quot;</a></li>
+<li><a href="#viewcontact">&quot;viewContact&quot;</a></li>
+<li><a href="#newcontact">&quot;newContact&quot;</a></li>
+<li><a href="#unknowncontact">&quot;unknownContact&quot;</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">CoronaProvider_native_popup_addressbook</a>  ▸  <a href="showPopup.html">showPopup</a>
+</div>
+<div class="section level1" id="native.showpopup-address-book-plugin">
+<h1><a href="#TOC">native.showPopup() &gt; (Address Book Plugin)</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Function.html">function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left">[native.showPopup][native.showPopup]</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Displays the operating system's default popup window for a specified service.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>native.showPopup( name, params )</code></pre>
+<div class="section level5" id="name-required">
+<h5><a href="#TOC">name <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em> The string name of the popup to be shown. It can be one of the following: <code>addressBook</code></p>
+</div>
+<div class="section level5" id="params-required">
+<h5><a href="#TOC">params <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Table.html">Table</a>.</em> Table of parameters. Each property of the table (except for the option key) is optional. See Format for options below.</p>
+</div>
+<div class="section level3" id="format-for-params">
+<h3><a href="#TOC">Format for <code>params</code></a></h3>
+<p>The <code>params</code> table contains the following properties:</p>
+<div class="section level5" id="option-required">
+<h5><a href="#TOC">option <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em> The string name of the popup to be shown. It can be one of the following: <code>pickContact</code>, <code>viewContact</code>, <code>newContact</code>, <code>unknownContact</code></p>
+</div>
+<div class="section level4" id="pickcontact">
+<h4><a href="#TOC">&quot;pickContact&quot;</a></h4>
+<p>For the <code>&quot;pickContact&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.hideDetails</code> is a boolean. If set to <code>true</code>, then the address book will be dismissed upon selecting a contact.</li>
+<li><code>options.performDefaultAction</code> is a boolean. If set to <code>true</code> then tapping/touching a contacts phone number or email will perform the default iOS action (such as call contact, show the compose email popup).</li>
+<li><code>options.filter</code> is a table. It should contain items (strings) to show in the detail view section of a contact. Eg: filter = { &quot;phone&quot;, &quot;email&quot;, &quot;birthday&quot; }</li>
+<li><code>options.listener</code> is a listener. This is the callback function you want to be called when the popup is dismissed. The onComplete callback function passes back an event table with the following properties: * event.name: <em><a href="../../api/type/String.html">String</a>.</em> <code>contact</code>. * event.type: A <em><a href="../../api/type/String.html">String</a>.</em> which is either: <code>pickContact</code>, <code>viewContact</code>, <code>newContact</code>, <code>unknownContact</code>, depending on the popup shown. * event.data: A <em><a href="../../api/type/Table.html">Table</a>.</em> containing information of the selected contact. i.e. <code>firstName</code>, <code>lastName</code>, <code>email</code>, <code>phone</code>.</li>
+</ul>
+<p>Supported strings for options.filter are:</p>
+<pre><code>`phone`, `email`, `address`
+`birthday`, `relatedNames`,
+`socialProfiles`, `instantMessagingProfiles`,</code></pre>
+<p>Possible key's returned from event.data (via the onComplete listener):</p>
+<pre><code>`picture` (table) - Containing keys `filename` (string) and `baseDir` (userdata)
+`phoneHome` (String )
+`phoneMobile` (String)
+`phoneIphone&#39; (String)
+`phoneMain` (String)
+`phoneWork` (String)
+`phoneOther1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `phoneOther2`
+`faxHome` (String)
+`faxWork` (String)
+`faxOther` (String)
+`pager` (String)
+`homeEmail` (String)
+`workEmail` (String)
+`otherEmail1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherEmail2`
+`firstName` (String)
+`middleName` (String)
+`lastName` (String)
+`suffix` (String)
+`prefix` (String)
+`phoneticFirstName` (String)
+`phoneticMiddleName` (String)
+`phoneticLastName` (String)
+`jobTitle` (String)
+`organization` (String)
+`department` (String)
+`birthday` (String)
+`anniversary` (String)
+`otherDate1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherDate2`
+`nickName` (String)
+`parent` (String)
+`father` (String)
+`mother` (String)
+`sister` (String)
+`brother` (String)
+`child` (String)
+`friend` (String)
+`spouse` (String)
+`partner` (String)
+`assistant` (String)
+`manager` (String)
+`homePageUrl` (String)
+`homeUrl` (String)
+`workUrl` (String)
+`otherUrl1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherUrl2`
+`homeStreet` (String)
+`homeCity` (String)
+`homeState` (String)
+`homeZip` (String)
+`homeCountry` (String)
+`workStreet` (String)
+`workCity` (String)
+`workState` (String)
+`workZip` (String)
+`workCountry` (String)
+`otherStreet1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherStreet2`
+`otherCity1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherCity2`
+`otherState1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherState2`
+`otherZip1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherZip2`
+`otherCountry1` (String) - This key is incremented for each &quot;other&quot; entry. i.e `otherCountry2`
+`Facebook` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`gamecenter` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`linkedin` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`GoogleTalk` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`sinaweibo` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`AIM` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`GaduGadu` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`Skype` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`Jabber` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`flickr` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`myspace` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`twitter` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`MSN` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`ICQ` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`facebook` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`QQ` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.
+`Yahoo` (table) - Contains &quot;username&quot; key. Can also contain &quot;url&quot; key for certain services.</code></pre>
+</div>
+<div class="section level4" id="viewcontact">
+<h4><a href="#TOC">&quot;viewContact&quot;</a></h4>
+<p>For the <code>&quot;viewContact&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.performDefaultAction</code> is a boolean. If set to <code>true</code> then tapping/touching a contacts phone number or email will perform the default iOS action (such as call contact, show the compose email popup).</li>
+<li><code>options.isEditable</code> is a boolean. If set to <code>true</code> the user can edit the person’s information.</li>
+<li><code>options.name</code> is a string. This is the name of the contact you wish to view.</li>
+<li><code>options.filter</code> is a table. It should contain items to show in the detail view section of a contact. e.g.: filter = { &quot;phone&quot;, &quot;email&quot;, &quot;birthday&quot; }</li>
+<li><code>options.listener</code> is a listener. This is the callback function you want to be called when the popup is dismissed. The onComplete callback function passes back an event table with the following properties: * event.name: <em><a href="../../api/type/String.html">String</a>.</em> <code>contact</code>. * event.type: A <em><a href="../../api/type/String.html">String</a>.</em> which is either: <code>pickContact</code>, <code>viewContact</code>, <code>newContact</code>, <code>unknownContact</code>, depending on the popup shown. * event.data: A <em><a href="../../api/type/Table.html">Table</a>.</em> containing information of the selected contact. i.e. <code>firstName</code>, <code>lastName</code>, <code>email</code>, <code>phone</code>.</li>
+</ul>
+</div>
+<div class="section level4" id="newcontact">
+<h4><a href="#TOC">&quot;newContact&quot;</a></h4>
+<p>For the <code>&quot;newContact&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.data</code> is a table. This is a table containing key/value pairs to pre-fill a new contact's details with. e.g.: data = { firstName = &quot;John&quot;, lastName = &quot;Doe&quot;, organization = &quot;Corona Labs&quot;, homePhone = &quot;939222832&quot;, workPhone = &quot;939392832&quot;, homeEmail = &quot;jondoe@someorganization.com&quot;, workEmail = &quot;johndoe@home.com&quot;, }</li>
+<li><code>options.listener</code> is a listener. This is the callback function you want to be called when the popup is dismissed. The onComplete callback function passes back an event table with the following properties: * event.name: <em><a href="../../api/type/String.html">String</a>.</em> <code>contact</code>. * event.type: A <em><a href="../../api/type/String.html">String</a>.</em> which is either: <code>pickContact</code>, <code>viewContact</code>, <code>newContact</code>, <code>unknownContact</code>, depending on the popup shown. * event.data: A <em><a href="../../api/type/Table.html">Table</a>.</em> containing information of the selected contact. i.e. <code>firstName</code>, <code>lastName</code>, <code>email</code>, <code>phone</code>.</li>
+</ul>
+<p>Supported keys for options.data are:</p>
+<pre><code>`firstName`, `middleName`, `lastName`, 
+`organization`, `jobTitle`, `birthday`,
+`phoneticFirstName`, `phoneticMiddleName`, `phoneticLastName`, 
+`prefix`, `suffix`, `nickname`, 
+`phoneIphone`, `phoneMobile`, `phoneMain`, `phoneHome`, `phoneWork`, 
+`faxHome`, `faxWork`, `faxOther`, `pager`,
+`homeEmail`, `workEmail`,
+`homePageUrl`, `workUrl`, `homeUrl`,
+`father`, `mother`, `parent`, `brother`, `sister`, `child`,
+`friend`, `spouse`, `partner`, `assistant`, `manager`,
+`homeStreet`, `homeCity`, `homeState`, `homeZip`, `homeCountry`,
+`workStreet`, `workCity`, `workState`, `workZip`, `workCountry`,
+`socialFacebook`, `socialTwitter`, `socialFlickr`, `socialLinkedIn`, `socialMyspace`, `socialSinaWeibo`, `socialGameCenter`,
+`instantMessagingAim`, `instantMessagingFacebook`, `instantMessagingGaduGadu`, `instantMessagingGoogleTalk`, `instantMessagingICQ`,             
+`instantMessagingJabber`, `instantMessagingMSN`, `instantMessagingQQ`, `instantMessagingSkype`, `instantMessagingYahoo`</code></pre>
+</div>
+<div class="section level4" id="unknowncontact">
+<h4><a href="#TOC">&quot;unknownContact&quot;</a></h4>
+<p>For the <code>&quot;unknownContact&quot;</code> popup, the following properties are supported:</p>
+<ul>
+<li><code>options.performDefaultAction</code> is a boolean. If set to <code>true</code> then tapping/touching a contacts phone number or email will perform the default iOS action (such as call contact, show the compose email popup).</li>
+<li><code>options.allowsActions</code> is a boolean. This specifies whether buttons appear to let the user perform actions such as sharing the contact, initiating a FaceTime call, or sending a text message.</li>
+<li><code>options.allowsAdding</code> is a boolean. If set to <code>true</code> the “Add to Existing Contact” or “Create New Contact” buttons will be available on the contacts overview screen.</li>
+<li><code>options.alternateName</code> is a string. This provides a string that is displayed instead of the contacts first and last name.</li>
+<li><code>options.message</code> is a string. This string is displayed below alternateName.</li>
+<li><code>options.data</code> is a table. This is a table containing key/value pairs to amend to a contact or to create a new contact with. e.g.: data = { organization = &quot;Corona Labs&quot;, homePhone = &quot;939222832&quot;, workPhone = &quot;939392832&quot;, workEmail = &quot;fake@coronalabs.com&quot;, homeEmail = &quot;fake@home.com&quot;, }</li>
+<li><code>options.listener</code> is a listener. This is the callback function you want to be called when the popup is dismissed. The onComplete callback function passes back an event table with the following properties: * event.name: <em><a href="../../api/type/String.html">String</a>.</em> <code>contact</code>. * event.type: A <em><a href="../../api/type/String.html">String</a>.</em> which is either: <code>pickContact</code>, <code>viewContact</code>, <code>newContact</code>, <code>unknownContact</code>, depending on the popup shown. * event.data: A <em><a href="../../api/type/Table.html">Table</a>.</em> containing information of the selected contact. i.e. <code>firstName</code>, <code>lastName</code>, <code>email</code>, <code>phone</code>.</li>
+</ul>
+<p>Supported keys for options.data are:</p>
+<pre><code>`firstName`, `middleName`, `lastName`, 
+`organization`, `jobTitle`, `birthday`,
+`phoneticFirstName`, `phoneticMiddleName`, `phoneticLastName`, 
+`prefix`, `suffix`, `nickname`, 
+`phoneIphone`, `phoneMobile`, `phoneMain`, `phoneHome`, `phoneWork`, 
+`faxHome`, `faxWork`, `faxOther`, `pager`,
+`homeEmail`, `workEmail`,
+`homePageUrl`, `workUrl`, `homeUrl`,
+`father`, `mother`, `parent`, `brother`, `sister`, `child`,
+`friend`, `spouse`, `partner`, `assistant`, `manager`,
+`homeStreet`, `homeCity`, `homeState`, `homeZip`, `homeCountry`,
+`workStreet`, `workCity`, `workState`, `workZip`, `workCountry`,
+`socialFacebook`, `socialTwitter`, `socialFlickr`, `socialLinkedIn`, `socialMyspace`, `socialSinaWeibo`, `socialGameCenter`,
+`instantMessagingAim`, `instantMessagingFacebook`, `instantMessagingGaduGadu`, `instantMessagingGoogleTalk`, `instantMessagingICQ`,             
+`instantMessagingJabber`, `instantMessagingMSN`, `instantMessagingQQ`, `instantMessagingSkype`, `instantMessagingYahoo`</code></pre>
+</div>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua">
+<span class="co">-- Function to execute on completion of the address book ( i.e. when it is dismissed )</span>
+<span class="kw">local</span> <span class="kw">function</span> onComplete<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>  
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;event.name:&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">name</span> <span class="ot">);</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;event.type:&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">);</span>
+
+    <span class="co">-- event.data is either a table or nil depending on the option chosen</span>
+    <span class="fu">print</span> <span class="ot">(</span> <span class="st">&quot;event.data:&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">data</span> <span class="ot">);</span>
+
+    <span class="co">-- If there is event.data print it&#39;s key/value pairs</span>
+    <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">data</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;event.data: {&quot;</span> <span class="ot">);</span>
+
+        <span class="kw">for</span> <span class="kw">k</span>, <span class="kw">v</span> <span class="kw">in</span> <span class="fu">pairs</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">data</span> <span class="ot">)</span> <span class="kw">do</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="kw">k</span> , <span class="st">&quot;:&quot;</span> , <span class="kw">v</span> <span class="ot">);</span>
+        <span class="kw">end</span> 
+
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;}&quot;</span> <span class="ot">);</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">-- Pick contact options</span>
+<span class="kw">local</span> <span class="kw">pickContactOptions</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="kw">option</span> <span class="ot">=</span> <span class="st">&quot;pickContact&quot;</span>,
+    <span class="co">-- If true, then the address book will be dismissed upon selecting a contact. </span>
+    <span class="kw">hideDetails</span> <span class="ot">=</span> <span class="kw">true</span>,
+    <span class="co">-- If true then tapping/touching a contacts phone number or email will perform the default iOS action (such as call contact, show the compose email popup).</span>
+    <span class="kw">performDefaultAction</span> <span class="ot">=</span> <span class="kw">true</span>,
+
+    <span class="co">-- Items to show in the detail view section of a contact.</span>
+    <span class="kw">filter</span> <span class="ot">=</span> 
+    <span class="ot">{</span>
+        <span class="st">&quot;phone&quot;</span>, <span class="st">&quot;email&quot;</span>,
+        <span class="st">&quot;birthday&quot;</span>,
+    <span class="ot">}</span>,
+    <span class="co">-- Function to execute on completion</span>
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">onComplete</span>,
+<span class="ot">}</span>
+
+<span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span> <span class="st">&quot;addressBook&quot;</span>, <span class="kw">pickContactOptions</span> <span class="ot">);</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 23-Aug-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.CoronaProvider_native_popup_addressbook.showPopup&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.CoronaProvider_native_popup_addressbook.showPopup&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.CoronaProvider_native_popup_addressbook.showPopup&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

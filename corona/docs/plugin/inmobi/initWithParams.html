@@ -1,0 +1,1674 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > inmobi > initWithParams</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > inmobi > initWithParams" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#inmobi.initwithparams">inmobi.initWithParams()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#appid-required">appId <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#listener-optional">listener <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#optionalparams-optional">optionalParams <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#format-for-optionalparams">Format for <code>optionalParams</code></a><ul>
+<li><a href="#loglevel-optional">logLevel <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#gender-optional">gender <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#education-optional">education <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#ethnicity-optional">ethnicity <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#maritialstatus-optional">maritialStatus <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#haschildren-optional">hasChildren <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sexualorientation-optional">sexualOrientation <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#dob-optional">dob <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#income-optional">income <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#age-optional">age <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#language-optional">language <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#postalcode-optional">postalCode <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#areacode-optional">areaCode <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#interests-optional">interests <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#postalcode-optional-1">postalCode <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">inmobi</a>  ▸  <a href="initWithParams.html">initWithParams</a>
+</div>
+<div class="section level1" id="inmobi.initwithparams">
+<h1><a href="#TOC">inmobi.initWithParams()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Function.html">function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">inmobi.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../api/type/Boolean.html">boolean</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>inmobi.initWithParams( appId [, listener] [, optionalParams] )</code></pre>
+<div class="section level5" id="appid-required">
+<h5><a href="#TOC">appId <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em> This is a mandatory param before making any ad request. You can get the appId from www.inmobi.com</p>
+</div>
+<div class="section level5" id="listener-optional">
+<h5><a href="#TOC">listener <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Function.html">Function</a>.</em> This function is used to listen to the different inmobi banner/interstitial events.</p>
+</div>
+<div class="section level5" id="optionalparams-optional">
+<h5><a href="#TOC">optionalParams <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Table.html">Table</a>.</em> The optional parameters will help inmobi to fetch more relavent ads.</p>
+</div>
+<div class="section level3" id="format-for-optionalparams">
+<h3><a href="#TOC">Format for <code>optionalParams</code></a></h3>
+<p>The <code>optionalParams</code> table contains the following properties:</p>
+<div class="section level5" id="loglevel-optional">
+<h5><a href="#TOC">logLevel <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> This will print the InMobi logs. Following are the valid values: inmobi.CONSTANTS.LOGLEVEL_NONE inmobi.CONSTANTS.LOGLEVEL_DEBUG inmobi.CONSTANTS.LOGLEVEL_VERBOSE</p>
+</div>
+<div class="section level5" id="gender-optional">
+<h5><a href="#TOC">gender <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> Following are the valid values: inmobi.CONSTANTS.GENDER_MALE inmobi.CONSTANTS.GENDER_FEMALE inmobi.CONSTANTS.UNKNOWN</p>
+</div>
+<div class="section level5" id="education-optional">
+<h5><a href="#TOC">education <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> This will print the InMobi logs. Following are the valid values: Inmobi.CONSTANTS.EDUCATION_HIGHSCHOOLORLESS Inmobi.CONSTANTS.EDUCATION_COLLEGEORGRADUATE Inmobi.CONSTANTS.EDUCATION_POSTGRADUATEORABOVE Inmobi.CONSTANTS.EDUCATION_UNKNOWN</p>
+</div>
+<div class="section level5" id="ethnicity-optional">
+<h5><a href="#TOC">ethnicity <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> This will print the InMobi logs. Following are the valid values: Inmobi.CONSTANTS.ETHNICITY_ASIAN Inmobi.CONSTANTS.ETHNICITY_HISPANIC Inmobi.CONSTANTS.ETHNICITY_AFRICAN_AMERICAN Inmobi.CONSTANTS.ETHNICITY_CAUCASIAN Inmobi.CONSTANTS.ETHNICITY_OTHER Inmobi.CONSTANTS.ETHNICITY_UNKNOWN</p>
+</div>
+<div class="section level5" id="maritialstatus-optional">
+<h5><a href="#TOC">maritialStatus <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> This will print the InMobi logs. Following are the valid values: Inmobi.CONSTANTS.MARITAL_STATUS_SINGLE Inmobi.CONSTANTS.MARITAL_STATUS_DIVORCED Inmobi.CONSTANTS.MARITAL_STATUS_ENGAGED Inmobi.CONSTANTS.MARITAL_STATUS_RELATIONSHIP Inmobi.CONSTANTS.MARITAL_STATUS_UNKNOWN</p>
+</div>
+<div class="section level5" id="haschildren-optional">
+<h5><a href="#TOC">hasChildren <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> This will print the InMobi logs. Following are the valid values: Inmobi.CONSTANTS.TRUE Inmobi.CONSTANTS.FALSE Inmobi.CONSTANTS.UNKNOWN</p>
+</div>
+<div class="section level5" id="sexualorientation-optional">
+<h5><a href="#TOC">sexualOrientation <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Constant.html">Constant</a>.</em> This will print the InMobi logs. Following are the valid values: Inmobi.CONSTANTS.SEXUAL_ORIENTATION_STRAIGHT Inmobi.CONSTANTS.SEXUAL_ORIENTATION_BISEXUAL Inmobi.CONSTANTS.SEXUAL_ORIENTATION_GAY Inmobi.CONSTANTS.SEXUAL_ORIENTATION_UNKNOWN</p>
+</div>
+<div class="section level5" id="dob-optional">
+<h5><a href="#TOC">dob <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em> Format: dd-mm-yyyy</p>
+</div>
+<div class="section level5" id="income-optional">
+<h5><a href="#TOC">income <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Number.html">Number</a>.</em> Numeric (should be in USD)</p>
+</div>
+<div class="section level5" id="age-optional">
+<h5><a href="#TOC">age <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/Number.html">Number</a>.</em> Range: (0-100)</p>
+</div>
+<div class="section level5" id="language-optional">
+<h5><a href="#TOC">language <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em> Eg: eng http://www-01.sil.org/iso639-3/iso-639-3.tab</p>
+</div>
+<div class="section level5" id="postalcode-optional">
+<h5><a href="#TOC">postalCode <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em></p>
+</div>
+<div class="section level5" id="areacode-optional">
+<h5><a href="#TOC">areaCode <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em></p>
+</div>
+<div class="section level5" id="interests-optional">
+<h5><a href="#TOC">interests <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em></p>
+</div>
+<div class="section level5" id="postalcode-optional-1">
+<h5><a href="#TOC">postalCode <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../api/type/String.html">String</a>.</em></p>
+</div>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua">
+<span class="kw">local</span> <span class="kw">inmobi</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;plugin.inmobi&quot;</span>
+
+<span class="co">-- You can get the appId from www.inmobi.com</span>
+<span class="kw">local</span> <span class="kw">appId</span> <span class="ot">=</span> <span class="st">&quot;__APP_ID__&quot;</span>
+
+<span class="kw">local</span> <span class="kw">networkParams</span> <span class="ot">=</span> <span class="ot">{</span>
+        <span class="kw">logLevel</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">LOG_LEVEL_DEBUG</span>,
+        <span class="kw">gender</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">GENDER_MALE</span>,
+        <span class="kw">education</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">EDUCATION_HIGHSCHOOLORLESS</span>,
+        <span class="kw">ethnicity</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">ETHNICITY_HISPANIC</span>,
+        <span class="kw">dob</span> <span class="ot">=</span> <span class="st">&quot;29-11-1984&quot;</span>,
+        <span class="kw">income</span> <span class="ot">=</span> <span class="st">&quot;70000&quot;</span>,
+        <span class="kw">age</span> <span class="ot">=</span> <span class="st">&quot;20&quot;</span>,
+        <span class="kw">maritalStatus</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">MARITAL_STATUS_SINGLE</span>,
+        <span class="kw">hasChildren</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">FALSE</span>,
+        <span class="kw">sexualOrientation</span> <span class="ot">=</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">SEXUAL_ORIENTATION_STRAIGHT</span>,
+        <span class="kw">language</span> <span class="ot">=</span> <span class="st">&quot;ENG&quot;</span>,
+        <span class="kw">postalCode</span> <span class="ot">=</span> <span class="st">&quot;1111&quot;</span>,
+        <span class="kw">areaCode</span> <span class="ot">=</span> <span class="st">&quot;465&quot;</span>,
+        <span class="kw">interests</span> <span class="ot">=</span> <span class="st">&quot;adventure sports, water sports&quot;</span>,
+        <span class="kw">deviceIdMasks</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">inmobi</span><span class="ot">.</span><span class="kw">CONSTANTS</span><span class="ot">.</span><span class="kw">EXCLUDE_VENDOR_ID</span> <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="kw">inmobi</span><span class="ot">.</span>initWithParams<span class="ot">(</span><span class="kw">appId</span>, <span class="kw">adListener</span>, <span class="kw">networkParams</span><span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.inmobi.initWithParams&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.inmobi.initWithParams&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.inmobi.initWithParams&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

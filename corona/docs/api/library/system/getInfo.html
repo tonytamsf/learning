@@ -1,0 +1,1811 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > system > getInfo</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > system > getInfo" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#system.getinfo">system.getInfo()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#property-required">property <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#androidappversioncode">androidAppVersionCode</a></li>
+<li><a href="#androidapppackagename">androidAppPackageName</a></li>
+<li><a href="#androiddisplayapproximatedpi">androidDisplayApproximateDpi</a></li>
+<li><a href="#androiddisplaydensityname">androidDisplayDensityName</a></li>
+<li><a href="#androiddisplaywidthininches">androidDisplayWidthInInches</a></li>
+<li><a href="#androiddisplayheightininches">androidDisplayHeightInInches</a></li>
+<li><a href="#androiddisplayxdpi">androidDisplayXDpi</a></li>
+<li><a href="#androiddisplayydpi">androidDisplayYDpi</a></li>
+<li><a href="#appname">appName</a></li>
+<li><a href="#appversionstring">appVersionString</a></li>
+<li><a href="#architectureinfo">architectureInfo</a></li>
+<li><a href="#build">build</a></li>
+<li><a href="#deviceid">deviceID</a></li>
+<li><a href="#environment">environment</a><ul>
+<li><a href="#gl_vendor"><code>&quot;GL_VENDOR&quot;</code></a></li>
+<li><a href="#gl_renderer"><code>&quot;GL_RENDERER&quot;</code></a></li>
+<li><a href="#gl_version"><code>&quot;GL_VERSION&quot;</code></a></li>
+<li><a href="#gl_shading_language_version"><code>&quot;GL_SHADING_LANGUAGE_VERSION&quot;</code></a></li>
+<li><a href="#gl_extensions"><code>&quot;GL_EXTENSIONS&quot;</code></a></li>
+<li><a href="#gpusupportshighprecisionfragmentshaders"><code>&quot;gpuSupportsHighPrecisionFragmentShaders&quot;</code></a></li>
+<li><a href="#iosadvertisingidentifier"><code>&quot;iosAdvertisingIdentifier&quot;</code></a></li>
+</ul></li>
+<li><a href="#iosadvertisingtrackingenabled">iosAdvertisingTrackingEnabled</a></li>
+<li><a href="#iosidentifierforvendor">iosIdentifierForVendor</a></li>
+<li><a href="#model">model</a></li>
+<li><a href="#name">name</a></li>
+<li><a href="#platformname">platformName</a></li>
+<li><a href="#platformversion">platformVersion</a></li>
+<li><a href="#maxtexturesize">maxTextureSize</a></li>
+<li><a href="#maxtextureunits">maxTextureUnits</a></li>
+<li><a href="#targetappstore">targetAppStore</a></li>
+<li><a href="#texturememoryused">textureMemoryUsed</a></li>
+<li><a href="#version">version</a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">system</a>  ▸  <a href="getInfo.html">getInfo</a>
+</div>
+<div class="section level1" id="system.getinfo">
+<h1><a href="#TOC">system.getInfo()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">system.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left">various</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">system info</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Returns information about the system on which the application is running.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>system.getInfo( property )</code></pre>
+<div class="section level5" id="property-required">
+<h5><a href="#TOC">property <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The name of the property corresponding to the desired information — see <strong>Properties</strong> below.</p>
+</div>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<div class="section level4" id="androidappversioncode">
+<h4><a href="#TOC">androidAppVersionCode</a></h4>
+<p>On Android, <code>&quot;androidAppVersionCode&quot;</code> returns the application's version code as a number. Returns <code>nil</code> on all other platforms.</p>
+</div>
+<div class="section level4" id="androidapppackagename">
+<h4><a href="#TOC">androidAppPackageName</a></h4>
+<p>On Android, <code>&quot;androidAppPackageName&quot;</code> returns the application's unique dot-separated package name. Returns <code>nil</code> on all other platforms.</p>
+</div>
+<div class="section level4" id="androiddisplayapproximatedpi">
+<h4><a href="#TOC">androidDisplayApproximateDpi</a></h4>
+<p>On Android, <code>&quot;androidDisplayApproximateDpi&quot;</code> returns the approximate DPI (dots per inch) of the screen as a number. This DPI value is based on the device's assigned density name, such as <strong>hdp</strong> or <strong>xhdpi</strong>, which provide standardized DPI values on Android. This value is typically not the actual DPI of the display, which you can fetch using the <code>&quot;androidDisplayXDpi&quot;</code> and <code>&quot;androidDisplayYDpi&quot;</code> property names instead.</p>
+<p>The following table lists the DPI values that will be returned for each display density type. This function returns <code>nil</code> on all other platforms.</p>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Density</strong></td>
+<td align="left"><strong>DPI</strong></td>
+</tr>
+<tr class="even">
+<td align="left">ldpi</td>
+<td align="left">120</td>
+</tr>
+<tr class="odd">
+<td align="left">mdpi</td>
+<td align="left">160</td>
+</tr>
+<tr class="even">
+<td align="left">hdpi</td>
+<td align="left">240</td>
+</tr>
+<tr class="odd">
+<td align="left">xhdpi</td>
+<td align="left">320</td>
+</tr>
+<tr class="even">
+<td align="left">xxhdpi</td>
+<td align="left">480</td>
+</tr>
+<tr class="odd">
+<td align="left">tvdpi</td>
+<td align="left">213</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</div>
+<div class="section level4" id="androiddisplaydensityname">
+<h4><a href="#TOC">androidDisplayDensityName</a></h4>
+<p>On Android, <code>&quot;androidDisplayDensityName&quot;</code> returns the device's screen density as a string, which can be one of the following. This function returns <code>nil</code> on all other platforms.</p>
+<ul>
+<li><code>&quot;ldpi&quot;</code></li>
+<li><code>&quot;mdpi&quot;</code></li>
+<li><code>&quot;hdpi&quot;</code></li>
+<li><code>&quot;xhdpi&quot;</code></li>
+<li><code>&quot;xxhdpi&quot;</code></li>
+<li><code>&quot;tvdpi&quot;</code></li>
+<li><code>&quot;unknown&quot;</code></li>
+</ul>
+</div>
+<div class="section level4" id="androiddisplaywidthininches">
+<h4><a href="#TOC">androidDisplayWidthInInches</a></h4>
+<p>On Android, <code>&quot;androidDisplayWidthInInches&quot;</code> returns the width of the application window in inches, relative to the orientation of the application. Returns <code>nil</code> on all other platforms.</p>
+</div>
+<div class="section level4" id="androiddisplayheightininches">
+<h4><a href="#TOC">androidDisplayHeightInInches</a></h4>
+<p>On Android, <code>&quot;androidDisplayHeightInInches&quot;</code> returns the height of the application window in inches, relative to the orientation of the application. Returns <code>nil</code> on all other platforms.</p>
+</div>
+<div class="section level4" id="androiddisplayxdpi">
+<h4><a href="#TOC">androidDisplayXDpi</a></h4>
+<p>On Android, <code>&quot;androidDisplayXDpi&quot;</code> returns the DPI (dots per inch) of the screen along the <strong>x</strong> axis, relative to the orientation of the application. This can be used to convert pixels to inches and vice-versa. Returns <code>nil</code> on all other platforms.</p>
+</div>
+<div class="section level4" id="androiddisplayydpi">
+<h4><a href="#TOC">androidDisplayYDpi</a></h4>
+<p>On Android, <code>&quot;androidDisplayYDpi&quot;</code> returns the DPI (dots per inch) of the screen along the <strong>y</strong> axis, relative to the orientation of the application. This can be used to convert pixels to inches and vice-versa. Returns <code>nil</code> on all other platforms.</p>
+</div>
+<div class="section level4" id="appname">
+<h4><a href="#TOC">appName</a></h4>
+<p><code>&quot;appName&quot;</code> returns the application's name that is displayed to the end user.</p>
+</div>
+<div class="section level4" id="appversionstring">
+<h4><a href="#TOC">appVersionString</a></h4>
+<p><code>&quot;appVersionString&quot;</code> returns the application's version as a string. For Android apps, this is the <strong>Version Name</strong>.</p>
+</div>
+<div class="section level4" id="architectureinfo">
+<h4><a href="#TOC">architectureInfo</a></h4>
+<p><code>&quot;architectureInfo&quot;</code> returns a string describing the underlying CPU architecture of the device you are running on. This API is mostly for internal debugging but may have uses. Strings may be subject to changes in the future depending on the changing landscape of devices and CPUs.</p>
+<p>Android on ARM devices will return <code>&quot;ARM&quot;</code> (typically for ARMv6) or <code>&quot;ARM Neon&quot;</code> (ARMv7). iOS will return values such as <code>&quot;iPhone1,1&quot;</code> or <code>&quot;iPhone1,2&quot;</code>, where mappings are:</p>
+<ul>
+<li><code>&quot;iPhone1,1&quot;</code> = iPhone 1G</li>
+<li><code>&quot;iPhone1,2&quot;</code> = iPhone 3G</li>
+<li><code>&quot;iPhone2,1&quot;</code> = iPhone 3GS</li>
+<li><code>&quot;iPod1,1&quot;</code> = iPod touch 1G</li>
+<li><code>&quot;iPod2,1&quot;</code> = iPod touch 2G</li>
+</ul>
+<p>Mac may return <code>i386</code>, <code>x86\_64</code>, <code>ppc</code>, or <code>ppc64</code> (currently only <code>i386</code> is available). Windows is currently unsupported.</p>
+</div>
+<div class="section level4" id="build">
+<h4><a href="#TOC">build</a></h4>
+<p><code>&quot;build&quot;</code> returns the Corona build string as it appears in the <strong>About</strong> box of the Corona Simulator.</p>
+</div>
+<div class="section level4" id="deviceid">
+<h4><a href="#TOC">deviceID</a></h4>
+<p>On iOS, <code>&quot;deviceID&quot;</code> returns a &quot;unique&quot; id for the device. Per Apple's policies, on iOS 6 and later, <code>&quot;deviceID&quot;</code> returns a MD5 hash of the device's <code>&quot;identifierForVendor&quot;</code> (see below); on iOS 5 it returns a MD5 of a GUID (Globally Unique Identifier) that is unique for each app install.</p>
+<p>On Android, if your app uses the <code>&quot;android.permission.READ\_PHONE\_STATE&quot;</code> permission, the following will be returned:</p>
+<ul>
+<li><code>IMEI</code> for GSM phones.</li>
+<li><code>MEID</code> or <code>ESN</code> for CDMA phones.</li>
+<li>The operating system's unique ID for devices that are not phones.</li>
+</ul>
+<p>If your Android app does <strong>not</strong> use the <code>&quot;android.permission.READ\_PHONE\_STATE&quot;</code> permission, then the operating system's unique ID will be returned for all devices. Note that the operating system's unique ID may change after re-installing the operating system on the device.</p>
+</div>
+<div class="section level4" id="environment">
+<h4><a href="#TOC">environment</a></h4>
+<p><code>&quot;environment&quot;</code> returns the environment that the app is running in. These include:</p>
+<ul>
+<li><code>&quot;simulator&quot;</code> — the Corona Simulator</li>
+<li><code>&quot;device&quot;</code> — iOS, Android device, and Xcode Simulator</li>
+</ul>
+<div class="section level5" id="gl_vendor">
+<h5><a href="#TOC"><code>&quot;GL_VENDOR&quot;</code></a></h5>
+<p>Returns the company responsible for the GL implementation on this device. See <a href="">http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml</a></p>
+</div>
+<div class="section level5" id="gl_renderer">
+<h5><a href="#TOC"><code>&quot;GL_RENDERER&quot;</code></a></h5>
+<p>Returns the name of the GL renderer. See <a href="">http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml</a></p>
+</div>
+<div class="section level5" id="gl_version">
+<h5><a href="#TOC"><code>&quot;GL_VERSION&quot;</code></a></h5>
+<p>Returns the GL version. See <a href="">http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml</a></p>
+</div>
+<div class="section level5" id="gl_shading_language_version">
+<h5><a href="#TOC"><code>&quot;GL_SHADING_LANGUAGE_VERSION&quot;</code></a></h5>
+<p>Returns the GL version or release number for the GLSL shading language. See <a href="">http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml</a></p>
+</div>
+<div class="section level5" id="gl_extensions">
+<h5><a href="#TOC"><code>&quot;GL_EXTENSIONS&quot;</code></a></h5>
+<p>Returns the list of extensions supported on this device. See <a href="">http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml</a></p>
+</div>
+<div class="section level5" id="gpusupportshighprecisionfragmentshaders">
+<h5><a href="#TOC"><code>&quot;gpuSupportsHighPrecisionFragmentShaders&quot;</code></a></h5>
+<p>Returns a boolean indicating whether HIGHP is supported in fragment shaders on this device.</p>
+</div>
+<div class="section level5" id="iosadvertisingidentifier">
+<h5><a href="#TOC"><code>&quot;iosAdvertisingIdentifier&quot;</code></a></h5>
+<p>On iOS, returns the <code>&quot;advertisingIdentifier&quot;</code> for use in advertising logic (see <a href="http://developer.apple.com/library/ios/#documentation/AdSupport/Reference/ASIdentifierManager_Ref/ASIdentifierManager.html">here</a>).</p>
+</div>
+</div>
+<div class="section level4" id="iosadvertisingtrackingenabled">
+<h4><a href="#TOC">iosAdvertisingTrackingEnabled</a></h4>
+<p>On iOS, <code>&quot;iosAdvertisingTrackingEnabled&quot;</code> returns the value of <code>&quot;advertisingTrackingEnabled&quot;</code> for use in advertising logic (see <a href="http://developer.apple.com/library/ios/#documentation/AdSupport/Reference/ASIdentifierManager_Ref/ASIdentifierManager.html">here</a>).</p>
+</div>
+<div class="section level4" id="iosidentifierforvendor">
+<h4><a href="#TOC">iosIdentifierForVendor</a></h4>
+<p>On iOS, <code>&quot;iosIdentifierForVendor&quot;</code> returns the value of <code>&quot;identifierForVendor&quot;</code> for use in advertising logic (see <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIDevice_Class/Reference/UIDevice.html">here</a>).</p>
+</div>
+<div class="section level4" id="model">
+<h4><a href="#TOC">model</a></h4>
+<p><code>&quot;model&quot;</code> returns the device model (as specified by the manufacturer). Note that most Android devices return a model number instead of a model name. Examples include:</p>
+<ul>
+<li><code>&quot;iPhone&quot;</code></li>
+<li><code>&quot;iPad&quot;</code></li>
+<li><code>&quot;iPhone Simulator&quot;</code></li>
+<li><code>&quot;iPad Simulator&quot;</code></li>
+<li><code>&quot;Nexus One&quot;</code></li>
+<li><code>&quot;Droid&quot;</code></li>
+<li><code>&quot;Galaxy Tab&quot;</code></li>
+</ul>
+</div>
+<div class="section level4" id="name">
+<h4><a href="#TOC">name</a></h4>
+<p><code>&quot;name&quot;</code> returns the human-readable model name. On iPhone, this would be the name of the phone as it appears in iTunes, for example <code>&quot;Steve's iPhone&quot;</code>.</p>
+</div>
+<div class="section level4" id="platformname">
+<h4><a href="#TOC">platformName</a></h4>
+<p><code>&quot;platformName&quot;</code> returns the platform name (the OS name), for example:</p>
+<ul>
+<li><code>&quot;Mac OS X&quot;</code> — Corona Simulator on Mac</li>
+<li><code>&quot;Win&quot;</code> — Corona Simulator on Windows</li>
+<li><code>&quot;iPhone OS&quot;</code> — all iOS devices and Xcode Simulator</li>
+<li><code>&quot;Android&quot;</code> — all Android devices</li>
+</ul>
+</div>
+<div class="section level4" id="platformversion">
+<h4><a href="#TOC">platformVersion</a></h4>
+<p><code>&quot;platformVersion&quot;</code> returns a string representation of the platform version. This is sometimes, but not always, a number — for example, a Droid X currently returns <code>2.1-update1</code>.</p>
+</div>
+<div class="section level4" id="maxtexturesize">
+<h4><a href="#TOC">maxTextureSize</a></h4>
+<p><code>&quot;maxTextureSize&quot;</code> returns the maximum texture width or height supported by the device.</p>
+</div>
+<div class="section level4" id="maxtextureunits">
+<h4><a href="#TOC">maxTextureUnits</a></h4>
+<p><code>&quot;maxTextureUnits&quot;</code> returns the maximum number of texture units available on the device. This number is based on the hardware limits of the device itself. Each image, mask, or text object consumes one texture unit. Typically, you'd care about the number of texture units when you want to achieve multiple <strong>nested</strong> masks. In other words, this number determines the depth of the nested masking you can achieve. For example, consider an image with a mask applied to it that is inside a group with a mask applied to it. In this case, 3 texture units are required: one for the image, one for the image's mask, and one for the group's mask.</p>
+</div>
+<div class="section level4" id="targetappstore">
+<h4><a href="#TOC">targetAppStore</a></h4>
+<p><code>&quot;targetAppStore&quot;</code> returns the name of the app store that the application was built for.</p>
+<ul>
+<li><code>&quot;apple&quot;</code> — always returned on iOS</li>
+<li><code>&quot;amazon&quot;</code> — targets the Amazon app store (only returned on Android)</li>
+<li><code>&quot;gameStick&quot;</code> — targets the GameStick console's app store (only returned on Android)</li>
+<li><code>&quot;google&quot;</code> — targets Google Play (only returned on Android)</li>
+<li><code>&quot;nook&quot;</code> — targets Barnes &amp; Noble's Nook app store (only returned on Android)</li>
+<li><code>&quot;ouya&quot;</code> — targets the Ouya game console's app store (only returned on Android)</li>
+<li><code>&quot;samsung&quot;</code> — targets the Samsung app store (only returned on Android)</li>
+<li><code>&quot;none&quot;</code> — indicates that the app is not targeting a specific app store. This is always returned by the Corona Simulator.</li>
+</ul>
+</div>
+<div class="section level4" id="texturememoryused">
+<h4><a href="#TOC">textureMemoryUsed</a></h4>
+<p><code>&quot;textureMemoryUsed&quot;</code> returns the texture memory usage (in bytes). Texture memory for graphics/images tends to be the most sharply limited resource in mobile development since it runs out before normal memory.</p>
+</div>
+<div class="section level4" id="version">
+<h4><a href="#TOC">version</a></h4>
+<p><code>&quot;version&quot;</code> is now deprecated. Use <code>&quot;build&quot;</code> to distinguish between different Corona build versions.</p>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<p>The following checks to see if user is running the app in the simulator:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">environment</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>getInfo<span class="ot">(</span> <span class="st">&quot;environment&quot;</span> <span class="ot">)</span>
+<span class="kw">if</span> <span class="kw">environment</span> <span class="ot">==</span> <span class="st">&quot;simulator&quot;</span> <span class="kw">then</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;You&#39;re in the simulator.&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.system.getInfo&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.system.getInfo&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.system.getInfo&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

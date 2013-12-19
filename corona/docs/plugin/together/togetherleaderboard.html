@@ -1,0 +1,1720 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > togetherleaderboard</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > togetherleaderboard" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.togetherleaderboard">together.TogetherLeaderboard</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#number-leaderboardid"><a href="../../api/type/Number.html">number</a> LeaderboardID</a></li>
+<li><a href="#number-creatoruserid"><a href="../../api/type/Number.html">number</a> CreatorUserID</a></li>
+<li><a href="#number-roomid"><a href="../../api/type/Number.html">number</a> RoomID</a></li>
+<li><a href="#number-secondssincestart"><a href="../../api/type/Number.html">number</a> SecondsSinceStart</a></li>
+<li><a href="#number-secondssincefinish"><a href="../../api/type/Number.html">number</a> SecondsSinceFinish</a></li>
+<li><a href="#number-maxusers"><a href="../../api/type/Number.html">number</a> MaxUsers</a></li>
+<li><a href="#number-turnindex"><a href="../../api/type/Number.html">number</a> TurnIndex</a></li>
+<li><a href="#number-winninguserid"><a href="../../api/type/Number.html">number</a> WinningUserID</a></li>
+<li><a href="#table-leaderboardusers"><a href="../../api/type/Table.html">table</a> LeaderboardUsers</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#getleaderboardusercount"><a href="#more_getleaderboardusercount">GetLeaderboardUserCount()</a></a></li>
+<li><a href="#getleaderboarduser"><a href="#more_getleaderboarduser">GetLeaderboardUser()</a></a></li>
+<li><a href="#sortby"><a href="#more_sortby">SortBy()</a></a></li>
+<li><a href="#getwinningleaderboarduser"><a href="#more_getwinningleaderboarduser">GetWinningLeaderboardUser()</a></a></li>
+<li><a href="#getdetails"><a href="#more_getdetails">GetDetails()</a></a></li>
+<li><a href="#getleaderboardusercount-1">GetLeaderboardUserCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+</ul></li>
+<li><a href="#getleaderboarduser-1">GetLeaderboardUser()</a><ul>
+<li><a href="#returns-togetherleaderboarduser">Returns <a href="togetherleaderboarduser.html">TogetherLeaderboardUser</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#sortby-1">SortBy()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#getwinningleaderboarduser-1">GetWinningLeaderboardUser()</a><ul>
+<li><a href="#returns-togetherleaderboarduser-1">Returns <a href="togetherleaderboarduser.html">TogetherLeaderboardUser</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+</ul></li>
+<li><a href="#getdetails-1">GetDetails()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="togetherleaderboard.html">togetherleaderboard</a>
+</div>
+<div class="section level1" id="together.togetherleaderboard">
+<h1><a href="#TOC">together.TogetherLeaderboard</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">TogetherLeaderboard</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The Leaderboard class represents a together Leaderboard.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="number-leaderboardid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> LeaderboardID</a></h4>
+<p>The ID of the Leaderboard.</p>
+</div>
+<div class="section level4" id="number-creatoruserid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> CreatorUserID</a></h4>
+<p>The ID of the User that created the GameInstance the Leaderboard is based on.</p>
+</div>
+<div class="section level4" id="number-roomid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> RoomID</a></h4>
+<p>The ID of the Room the original GameInstance.</p>
+</div>
+<div class="section level4" id="number-secondssincestart">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> SecondsSinceStart</a></h4>
+<p>The number of seconds since the original GameInstance was started.</p>
+</div>
+<div class="section level4" id="number-secondssincefinish">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> SecondsSinceFinish</a></h4>
+<p>The number of seconds since the original GameInstance was finished.</p>
+</div>
+<div class="section level4" id="number-maxusers">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> MaxUsers</a></h4>
+<p>The max number of users in the original GameInstance.</p>
+</div>
+<div class="section level4" id="number-turnindex">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> TurnIndex</a></h4>
+<p>The index of whose turn it last was.</p>
+</div>
+<div class="section level4" id="number-winninguserid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> WinningUserID</a></h4>
+<p>The ID of the User that won the original GameInstance.</p>
+</div>
+<div class="section level4" id="table-leaderboardusers">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> LeaderboardUsers</a></h4>
+<p>Contains all the LeaderboardUsers that were playing the original GameInstance.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="getleaderboardusercount">
+<h5><a href="#TOC"><a href="#more_getleaderboardusercount">GetLeaderboardUserCount()</a></a></h5>
+</div>
+<div class="section level5" id="getleaderboarduser">
+<h5><a href="#TOC"><a href="#more_getleaderboarduser">GetLeaderboardUser()</a></a></h5>
+</div>
+<div class="section level5" id="sortby">
+<h5><a href="#TOC"><a href="#more_sortby">SortBy()</a></a></h5>
+</div>
+<div class="section level5" id="getwinningleaderboarduser">
+<h5><a href="#TOC"><a href="#more_getwinningleaderboarduser">GetWinningLeaderboardUser()</a></a></h5>
+</div>
+<div class="section level5" id="getdetails">
+<h5><a href="#TOC"><a href="#more_getdetails">GetDetails()</a></a></h5>
+<hr />
+<div id="more_getleaderboardusercount">
+</div>
+
+</div>
+<div class="section level3" id="getleaderboardusercount-1">
+<h3><a href="#TOC">GetLeaderboardUserCount()</a></h3>
+<p>Gets the number of LeaderboardUsers currently managed internally.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherLeaderboard:GetLeaderboardUserCount(  )</code></pre>
+<hr />
+<div id="more_getleaderboarduser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getleaderboarduser-1">
+<h3><a href="#TOC">GetLeaderboardUser()</a></h3>
+<p>Gets the LeaderboardUser at the specified index if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherleaderboarduser">
+<h4><a href="#TOC">Returns <a href="togetherleaderboarduser.html">TogetherLeaderboardUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherLeaderboard:GetLeaderboardUser( index )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the LeaderboardUser to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_sortby">
+</div>
+
+<div class="section level3" id="sortby-1">
+<h3><a href="#TOC">SortBy()</a></h3>
+<p>Sorts the list of LeaderboardUsers by the specified property.</p>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherLeaderboard:SortBy( propertyName )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to sort the list of LeaderboardUsers by</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getwinningleaderboarduser">
+</div>
+
+<div class="section level3" id="getwinningleaderboarduser-1">
+<h3><a href="#TOC">GetWinningLeaderboardUser()</a></h3>
+<p>Gets the LeaderboardUser that had won the original GameInstance if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherleaderboarduser-1">
+<h4><a href="#TOC">Returns <a href="togetherleaderboarduser.html">TogetherLeaderboardUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherLeaderboard:GetWinningLeaderboardUser(  )</code></pre>
+<hr />
+<div id="more_getdetails">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getdetails-1">
+<h3><a href="#TOC">GetDetails()</a></h3>
+<p>Gets the Leaderboard's details.</p>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherLeaderboard:GetDetails( friendsOnly, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Boolean.html">boolean</a> friendsOnly</b></p>
+<p><i>A boolean indicating whether only Together friend Users should be retrieve.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.togetherleaderboard&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.togetherleaderboard&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.togetherleaderboard&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

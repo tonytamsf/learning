@@ -1,0 +1,1852 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > monetization > IAP </title>
+  <meta name="revised" content="30-Jul-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > monetization > IAP " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#in-app-purchases-iap">In-App Purchases (IAP)</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#ios-setup">iOS Setup</a></li>
+<li><a href="#google-play-setup">Google Play Setup</a></li>
+<li><a href="#store-functions">Store Functions</a><ul>
+<li><a href="#initialization">Initialization</a></li>
+<li><a href="#loading-product-information">Loading Product Information</a></li>
+<li><a href="#purchases-enabled">Purchases Enabled?</a></li>
+<li><a href="#purchasing-products">Purchasing Products</a></li>
+<li><a href="#transaction-listener">Transaction Listener</a></li>
+<li><a href="#restoring-purchased-items">Restoring Purchased Items</a></li>
+<li><a href="#handling-refunds">Handling Refunds</a></li>
+</ul></li>
+<li><a href="#platform-detection">Platform Detection</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [monetization][guide.monetization]  ▸  <a href="index.html">IAP</a>
+</div>
+<div class="section level1" id="in-app-purchases-iap">
+<h1><a href="#TOC">In-App Purchases (IAP)</a></h1>
+<p>This guide discusses how to use the Corona <a href="../../../api/library/store/index.html">store</a> APIs for in-app purchases (IAP).</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#setupios">iOS Setup</a></li>
+<li><a href="#setupandroid">Google Play Setup</a></li>
+<li><a href="#api">Store Functions</a></li>
+<li><a href="#platform">Platform Detection</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>In-app purchases (IAP) allow users to purchase additional content from within an app. However, purchasable content cannot be delivered through a marketplace as if it were physical inventory — you must either bundle this content with your app when you build it, anticipating that it will be unlocked upon purchase, or you must download additional content into the app using the <a href="../../../api/library/network/index.html">network</a> APIs.</p>
+<a id="setupios"></a>
+</div>
+<div class="section level2" id="ios-setup">
+<h2><a href="#TOC">iOS Setup</a></h2>
+<p>To use in-app purchases on iOS, you must first configure your iOS certificates, App IDs, and provisioning profiles. Please review our <a href="../../distribution/iOSBuild/index.html">Provisioning and Building</a> guide thoroughly, as this is an essential task and you must complete each step correctly.</p>
+<p>You must also configure in-app purchases in <a href="https://itunesconnect.apple.com/">iTunes Connect</a>, a task which is beyond the scope of this guide. If you need assistance, please review the following:</p>
+<ul>
+<li><a href="http://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/StoreKitGuide/Introduction/Introduction.html">In-App Purchase Programming Guide</a></li>
+<li><a href="http://developer.apple.com/library/ios/#technotes/tn2259/_index.html">Technical Note TN2259: Adding In-App Purchase to your iOS Applications</a></li>
+<li><a href="http://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/13_ManagingIn-AppPurchases/ManagingIn-AppPurchases.html#//apple_ref/doc/uid/TP40011225-CH4-SW1">iTunes Connect Developer Guide: In-App Purchase</a></li>
+</ul>
+<div class="guide-notebox">
+<div class="notebox-title">
+Notes
+</div>
+
+<ul>
+<li><p>Start by submitting you banking and tax information to Apple. In-app purchases will <strong>not</strong> work until these steps are cleared — and you won't get an error message reporting this.</p></li>
+<li><p>In the <a href="https://developer.apple.com/devcenter/ios/">iOS Dev Center</a>, create a new App ID that is unique and fully qualified, for example <code>com.domainname.ExampleInAppPurchase</code>.</p></li>
+<li><p>In <a href="https://itunesconnect.apple.com/">iTunes Connect</a>, create a new app with the same <strong>Bundle ID</strong> as your app in the Dev Center. Then add your purchasable items with their product identifiers and classifications.</p></li>
+</ul>
+</div>
+
+
+
+
+<a id="setupandroid"></a>
+</div>
+<div class="section level2" id="google-play-setup">
+<h2><a href="#TOC">Google Play Setup</a></h2>
+<p>To implement in-app purchases on Google Play, you must first enable the <code>BILLING</code> permission in <code>build.settings</code>. Please see the <a href="../../distribution/buildSettings/index.html">Project Build Settings</a> guide for more information on the <code>build.settings</code> file.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">usesPermissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;com.android.vending.BILLING&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<p>Next, you must <a href="../../distribution/androidBuild/index.html">build</a> your app — even if it's still in development — to create a <strong>.apk</strong> file which can be uploaded to the <a href="https://play.google.com/apps/publish/">Google Play Developer Console</a>. Once it's uploaded, you must <strong>activate</strong> it, but do not publish it yet!</p>
+<p>The final step (at this stage) is to add your in-app purchases, a task which is beyond the scope of this guide. If you need assistance, please review the following:</p>
+<ul>
+<li><a href="http://developer.android.com/guide/market/billing/billing_admin.html">Administering In-app Billing</a></li>
+<li><a href="http://developer.android.com/guide/market/billing/billing_testing.html">Testing In-app Billing</a></li>
+</ul>
+<a id="api"></a>
+</div>
+<div class="section level2" id="store-functions">
+<h2><a href="#TOC">Store Functions</a></h2>
+<div class="section level3" id="initialization">
+<h3><a href="#TOC">Initialization</a></h3>
+<p>First, you must require the Corona <code>store</code> library:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">store</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;store&quot;</span> <span class="ot">)</span></code></pre>
+<p>Next, you must initialize the store using the <code>store.init()</code> function.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">store</span><span class="ot">.</span>init<span class="ot">(</span> <span class="ot">[</span><span class="kw">storeName</span>,<span class="ot">]</span> <span class="kw">listener</span> <span class="ot">)</span></code></pre>
+<p>The first argument (optional) is the store name of either <code>&quot;apple&quot;</code> or <code>&quot;google&quot;</code>. If you do not specify a name, Corona will attempt to guess the correct store. If you're developing a <nobr>cross-platform</nobr> app, you can detect the appropriate marketplace using our APIs — see <a href="#platform">Platform Detection</a> below for more information.</p>
+<p>The second argument, <code>listener</code>, is the function you'll use to handle transaction callbacks (details below).</p>
+<p>After calling <code>store.init()</code>, you may call the <code>store.isActive()</code> function to confirm that the store has successfully initialized (return value of <code>true</code>). Currently, it will return <code>false</code> on a Corona app built for Amazon or Nook.</p>
+</div>
+<div class="section level3" id="loading-product-information">
+<h3><a href="#TOC">Loading Product Information</a></h3>
+<p>iOS supports the loading of product information that you've entered into <a href="https://itunesconnect.apple.com/">iTunes Connect</a>. Corona provides the <code>store.canLoadProducts</code> function which returns <code>true</code> if the initialized store supports the loading of products. Following this check, the <code>store.loadProducts()</code> function will retrieve information about items available for sale. This includes the price of each item, a localized name, and a localized description.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">store</span><span class="ot">.</span>loadProducts<span class="ot">(</span> <span class="kw">arrayOfProductIdentifiers</span>, <span class="kw">listener</span> <span class="ot">)</span></code></pre>
+<ul>
+<li><p><code>arrayOfProductIdentifiers</code> — a Lua table wherein each element is a string representing the product identifier of the item. For iOS, product identifiers must match those you entered in <a href="https://itunesconnect.apple.com/">iTunes Connect</a>, for example <code>&quot;com.domainname.ExampleInAppPurchase.ExampleConsumableItem&quot;</code>. For Google Play, use the same product identifiers that you specified in the <a href="https://play.google.com/apps/publish/">Google Play Developer Console</a>, for example <code>&quot;android.test.purchased&quot;</code>.</p></li>
+<li><p><code>listener</code> — a callback function that is invoked when the store finishes retrieving the product information.</p></li>
+</ul>
+<p>The resulting <code>event</code> table from the callback listener will contain the following properties:</p>
+<ul>
+<li><code>event.products</code> — a table wherein each element is another table containing product information.</li>
+<li><code>event.invalidProducts</code> — a table in which each element is a string representing the product identifier. This table will only be populated by products that don't exist or aren't available.</li>
+</ul>
+<p>In turn, each entry in the <code>event.products</code> table will contain the following fields:</p>
+<ul>
+<li><code>title</code> — the localized name of the item.</li>
+<li><code>description</code> — the localized description of the item.</li>
+<li><code>price</code> — the price of an item (as a number)</li>
+<li><code>productIdentifier</code> — the product identifier.</li>
+</ul>
+<p>The following example shows how to use a callback function to retrieve product information. Typically, you will use this information to create a UI interface that allows users to browse and buy items.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> loadProductsCallback<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">validProducts</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">products</span>
+    <span class="kw">local</span> <span class="kw">invalidProducts</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">invalidProducts</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Valid Products:&quot;</span>, <span class="ot">#</span><span class="kw">validProducts</span> <span class="ot">)</span>
+
+    <span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="ot">#</span><span class="kw">validProducts</span> <span class="kw">do</span>
+        <span class="kw">local</span> <span class="kw">currentItem</span> <span class="ot">=</span> <span class="kw">validProducts</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">currentItem</span><span class="ot">.</span><span class="kw">title</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">currentItem</span><span class="ot">.</span><span class="kw">description</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">currentItem</span><span class="ot">.</span><span class="kw">price</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">currentItem</span><span class="ot">.</span><span class="kw">productIdentifier</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Invalid Products:&quot;</span>, <span class="ot">#</span><span class="kw">invalidProducts</span> <span class="ot">)</span>
+
+    <span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="ot">#</span><span class="kw">invalidProducts</span> <span class="kw">do</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">invalidProducts</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">arrayOfProductIdentifiers</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="st">&quot;com.domainname.ExampleInAppPurchase.ExampleConsumableItem&quot;</span>,
+    <span class="st">&quot;com.domainname.ExampleInAppPurchase.ExampleNonConsumableItem&quot;</span>,
+    <span class="st">&quot;com.domainname.ExampleInAppPurchase.ExampleSubscriptionItem&quot;</span>
+<span class="ot">}</span>
+
+<span class="kw">if</span> <span class="ot">(</span> <span class="kw">store</span><span class="ot">.</span><span class="kw">isActive</span> <span class="ot">)</span> <span class="kw">then</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">store</span><span class="ot">.</span><span class="kw">canLoadProducts</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">store</span><span class="ot">.</span>loadProducts<span class="ot">(</span> <span class="kw">arrayOfProductIdentifiers</span>, <span class="kw">loadProductsCallback</span> <span class="ot">)</span>
+    <span class="kw">else</span>
+        <span class="co">--this store does not support an app fetching products</span>
+    <span class="kw">end</span>
+
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level3" id="purchases-enabled">
+<h3><a href="#TOC">Purchases Enabled?</a></h3>
+<p>iOS devices have a setting which disables in-app purchase. This is commonly used to prevent children from accidentally purchasing items without permission. Corona provides the <code>store.canMakePurchases</code> API to check whether purchasing is enabled. You should use this preemptively to notify your users if purchasing is forbidden. This API returns <code>true</code> if purchases are enabled, <code>false</code> otherwise.</p>
+</div>
+<div class="section level3" id="purchasing-products">
+<h3><a href="#TOC">Purchasing Products</a></h3>
+<p>To initiate a purchase, use the <code>store.purchase()</code> API.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">store</span><span class="ot">.</span>purchase<span class="ot">(</span> <span class="kw">arrayOfProducts</span> <span class="ot">)</span></code></pre>
+<p><code>arrayOfProducts</code> is a Lua table specifying the products to purchase. Each item may contain a string representing the product identifier, or a Lua table with the same fields as the product elements returned to you from the <code>event.products</code> table in the <code>loadProductsCallback</code> listener.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">store</span><span class="ot">.</span>purchase<span class="ot">(</span> <span class="ot">{</span> <span class="st">&quot;com.domainname.ExampleInAppPurchase.ExampleConsumableItem&quot;</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>When called, the <code>store.purchase()</code> API will submit purchase requests to the store. When the store finishes processing the transaction, the listener function you specified in <code>store.init()</code> will be invoked.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>Currently, there is no explicit API to specify quantities for consumable items. However, you may place the product in the table multiple times and Corona will set the quantity behind the scenes.</p>
+</div>
+
+</div>
+<div class="section level3" id="transaction-listener">
+<h3><a href="#TOC">Transaction Listener</a></h3>
+<p>Calling <code>store.init()</code> enables you to handle transaction callbacks from the store using the listener function you provide. This listener should handle all of the following circumstances:</p>
+<ul>
+<li>An item was just <strong>purchased</strong> via <code>store.purchase()</code>.</li>
+<li>A purchase transaction was <strong>cancelled</strong> by the user after <code>store.purchase()</code> was called.</li>
+<li>A purchase transaction <strong>failed</strong> for various reasons.</li>
+<li>Purchase of an item in a previous session was <strong>interrupted</strong> and the store needs to resume/complete the transaction.</li>
+<li>A <strong>restore purchased items</strong> request was initiated via <code>store.restore()</code> (details below).</li>
+</ul>
+<p>In the resulting transaction callback function, <code>event.transaction</code> will contain the following properties:</p>
+<ul>
+<li><code>state</code> — a string representing the state of the transaction: <code>purchased</code>, <code>restored</code>, <code>cancelled</code>, or <code>failed</code>.</li>
+<li><code>productIdentifier</code> — the product identifier associated with the transaction.</li>
+<li><code>receipt</code> — a unique receipt from the store, returned as a JSON packet in string form.</li>
+<li><code>signature</code> — a digital signature string that can be used to verify the purchase. This is the <code>inapp_signature</code> returned by Google Play.</li>
+<li><code>identifier</code> — a unique transaction identifier (string) returned from the store.</li>
+<li><code>date</code> — the date when the transaction occurred.</li>
+<li><code>errorType</code> — the type of error (string) that occurred if the <code>state</code> is <code>failed</code>.</li>
+<li><code>errorString</code> — a (sometimes) more descriptive error message of what went wrong in the <code>failed</code> case.</li>
+</ul>
+<p>On iOS, the following properties are also returned, relevant to a <code>store.restore()</code> call:</p>
+<ul>
+<li><code>originalReceipt</code> — a unique receipt from the original purchase attempt, returned as a hexadecimal string.</li>
+<li><code>originalIdentifier</code> — a unique transaction identifier (string) returned from the original purchase attempt.</li>
+<li><code>originalDate</code> — the date when the original transaction occurred.</li>
+</ul>
+<p>After you receive a transaction event, you should take the appropriate action. For example, if the user successfully purchased an item, you might save this information to a file or local database and unlock the ability to use the item. This file can then be referenced in future sessions so you know that the item has been purchased.</p>
+<p>The following is an example framework for the transaction callback function:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> storeTransaction<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">transaction</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">transaction</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;purchased&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--handle a successful transaction here</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;productIdentifier&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">productIdentifier</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;receipt&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">receipt</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;signature:&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">signature</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;transactionIdentifier&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">identifier</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;date&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">date</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;cancelled&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--handle a cancelled transaction here</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;failed&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--handle a failed transaction here</span>
+    <span class="kw">end</span>
+
+    <span class="co">--tell the store that the transaction is complete!</span>
+    <span class="co">--if you&#39;re providing downloadable content, do not call this until the download has completed</span>
+    <span class="kw">store</span><span class="ot">.</span>finishTransaction<span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">transaction</span> <span class="ot">)</span>
+
+<span class="kw">end</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>As noted above, you must call <code>store.finishTransaction()</code> on the transaction object when the transaction is complete. If you don't, the store will think that the transaction was interrupted and will attempt to resume it on the next application launch. If you're offering the item as downloadable content, do not call this until the download is complete.</p>
+</div>
+
+</div>
+<div class="section level3" id="restoring-purchased-items">
+<h3><a href="#TOC">Restoring Purchased Items</a></h3>
+<p>If a user wipes clean the information on a device or buys a new device, he/she needs a way to restore items previously purchased from your app (without paying for them again). The <code>store.restore()</code> API initiates this process. You can check for <nobr>previously-purchased</nobr> items in the same <code>storeTransaction</code> listener that you use for your successful, failed, and cancelled purchases.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>In iOS, the transaction state of restored items will be <code>&quot;restored&quot;</code> and, in this case, your app may use the <code>originalReceipt</code>, <code>originalIdentifier</code>, and <code>originalDate</code> fields of the transaction object.</p>
+<p>In the Google Play Marketplace, there is no <code>&quot;restored&quot;</code> state for items. All purchased items will be grouped under the <code>&quot;purchased&quot;</code> state. When you do a restore, you should clear all purchases saved to file/database — except for consumable purchases — and treat the returned restored purchases as normal purchases.</p>
+</div>
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> storeTransaction<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">transaction</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">transaction</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;purchased&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--on Google Play, check and update all purchased items here</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;restored&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--handle &quot;restored&quot; transactions here (iOS only)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;productIdentifier&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">productIdentifier</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;originalReceipt&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">originalReceipt</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;originalTransactionIdentifier&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">originalIdentifier</span> <span class="ot">)</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;originalDate&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">originalDate</span> <span class="ot">)</span>
+
+    <span class="kw">end</span>
+
+    <span class="kw">store</span><span class="ot">.</span>finishTransaction<span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">transaction</span> <span class="ot">)</span>
+
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level3" id="handling-refunds">
+<h3><a href="#TOC">Handling Refunds</a></h3>
+<p>The Google Play Marketplace allows for transactions to be refunded. You can check for refunded transactions in the same <code>storeTransaction</code> listener that you use for your successful, failed, and cancelled purchases. The transaction state will be <code>&quot;refunded&quot;</code> and, in this case, you can disable the content that was refunded, or delete it from the app locally if it was downloaded.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> storeTransaction<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">transaction</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">transaction</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;purchased&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--handle a successful transaction here</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">transaction</span><span class="ot">.</span><span class="kw">state</span> <span class="ot">==</span> <span class="st">&quot;refunded&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+        <span class="co">--refunds are only supported by the Google Play Marketplace</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;productIdentifier&quot;</span>, <span class="kw">transaction</span><span class="ot">.</span><span class="kw">productIdentifier</span> <span class="ot">)</span>
+
+    <span class="kw">end</span>
+
+    <span class="kw">store</span><span class="ot">.</span>finishTransaction<span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">transaction</span> <span class="ot">)</span>
+
+<span class="kw">end</span></code></pre>
+<a id="platform"></a>
+</div>
+</div>
+<div class="section level2" id="platform-detection">
+<h2><a href="#TOC">Platform Detection</a></h2>
+<p>To detect which marketplace your app should use, Corona offers the following functions, both of which can be read before you call <code>store.init()</code>.</p>
+<ul>
+<li><p><code>store.availableStores</code> — returns an array of Corona-supported store names available on the device. It will always return <code>{ &quot;apple&quot; }</code> on iOS or <code>{ &quot;google&quot; }</code> on an Android device that has the Google Play app installed, regardless of which store your app is targeting.</p></li>
+<li><p><code>store.target</code> — returns the same string as <code>system.getInfo( &quot;targetAppStore&quot; )</code>. This will return the store name that you are targeting in the Android <strong>Build</strong> dialog. On iOS, it always returns <code>&quot;apple&quot;</code>; in the Corona Simulator it returns <code>&quot;none&quot;</code>.</p></li>
+</ul>
+<p>The following examples show how you can use a different product list for each platform and set <code>currentProductList</code> depending on the available store.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">currentProductList</span> <span class="ot">=</span> <span class="kw">nil</span>
+
+<span class="kw">local</span> <span class="kw">appleProductList</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="st">&quot;com.domainname.ExampleInAppPurchase.ConsumableTier1&quot;</span>,
+    <span class="st">&quot;com.domainname.ExampleInAppPurchase.NonConsumableTier1&quot;</span>,
+    <span class="st">&quot;com.domainname.ExampleInAppPurchase.SubscriptionTier1&quot;</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">googleProductList</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="co">--these product IDs are for testing and are supported by all Android apps (purchasing these products will not bill your account)</span>
+    <span class="st">&quot;android.test.purchased&quot;</span>,
+    <span class="st">&quot;android.test.canceled&quot;</span>,
+    <span class="st">&quot;android.test.item_unavailable&quot;</span>
+<span class="ot">}</span>
+
+<span class="co">--utilize &#39;store.availableStores&#39; function:</span>
+<span class="kw">if</span> <span class="ot">(</span> <span class="kw">store</span><span class="ot">.</span><span class="kw">availableStores</span><span class="ot">.</span><span class="kw">apple</span> <span class="ot">)</span> <span class="kw">then</span>
+
+    <span class="kw">currentProductList</span> <span class="ot">=</span> <span class="kw">appleProductList</span>
+    <span class="kw">store</span><span class="ot">.</span>init<span class="ot">(</span> <span class="st">&quot;apple&quot;</span>, <span class="kw">storeTransaction</span> <span class="ot">)</span>
+
+<span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">store</span><span class="ot">.</span><span class="kw">availableStores</span><span class="ot">.</span><span class="kw">google</span> <span class="ot">)</span> <span class="kw">then</span>
+
+    <span class="kw">currentProductList</span> <span class="ot">=</span> <span class="kw">googleProductList</span>
+    <span class="kw">store</span><span class="ot">.</span>init<span class="ot">(</span> <span class="st">&quot;google&quot;</span>, <span class="kw">storeTransaction</span> <span class="ot">)</span>
+
+<span class="kw">else</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;In-app purchases are not supported on this system/device.&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">--OR utilize &#39;store.target&#39; function:</span>
+<span class="kw">if</span> <span class="ot">(</span> <span class="kw">store</span><span class="ot">.</span><span class="kw">target</span> <span class="ot">==</span> <span class="st">&quot;apple&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+    <span class="kw">currentProductList</span> <span class="ot">=</span> <span class="kw">appleProductList</span>
+    <span class="kw">store</span><span class="ot">.</span>init<span class="ot">(</span> <span class="st">&quot;apple&quot;</span>, <span class="kw">storeTransaction</span> <span class="ot">)</span>
+
+<span class="kw">elseif</span> <span class="ot">(</span> <span class="kw">store</span><span class="ot">.</span><span class="kw">target</span> <span class="ot">==</span> <span class="st">&quot;google&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+
+    <span class="kw">currentProductList</span> <span class="ot">=</span> <span class="kw">googleProductList</span>
+    <span class="kw">store</span><span class="ot">.</span>init<span class="ot">(</span> <span class="st">&quot;google&quot;</span>, <span class="kw">storeTransaction</span> <span class="ot">)</span>
+
+<span class="kw">else</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;In-app purchases are not supported on this system/device.&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 30-Jul-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.monetization.IAP.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.monetization.IAP.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.monetization.IAP.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

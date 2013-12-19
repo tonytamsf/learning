@@ -1,0 +1,1935 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > system > EnterpriseUI </title>
+  <meta name="revised" content="27-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > system > EnterpriseUI " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#native-ui-objects">Native UI Objects</a><ul>
+<li><a href="#text-input-field">Text Input Field</a><ul>
+<li><a href="#user-input-events">User Input Events</a></li>
+<li><a href="#controlling-focus">Controlling Focus</a></li>
+</ul></li>
+<li><a href="#multi-line-text-box">Multi-Line Text Box</a><ul>
+<li><a href="#user-input-events-1">User Input Events</a></li>
+<li><a href="#controlling-focus-1">Controlling Focus</a></li>
+</ul></li>
+<li><a href="#web-view">Web View</a><ul>
+<li><a href="#web-view-events">Web View Events</a></li>
+</ul></li>
+<li><a href="#video-view">Video View</a></li>
+<li><a href="#popup">Popup</a></li>
+<li><a href="#alert">Alert</a><ul>
+<li><a href="#alert-events">Alert Events</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [system][guide.system]  ▸  <a href="index.html">nativeUI</a>
+</div>
+<div class="section level1" id="native-ui-objects">
+<h1><a href="#TOC">Native UI Objects</a></h1>
+<p>The <a href="../../../api/library/native/index.html">native</a> library provides access to platform-specific UI elements. This guide discusses some of the more common among these.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#textfield">Text Input Field</a></li>
+<li><a href="#textbox">Multi-Line Text Box</a></li>
+<li><a href="#webview">Web View</a></li>
+<li><a href="#videoview">Video View</a></li>
+<li><a href="#popup">Popup</a></li>
+<li><a href="#alert">Alert</a></li>
+</ul>
+</div>
+
+<div class="guide-notebox">
+<div class="notebox-title">
+Notes
+</div>
+
+<ul>
+<li><p>Native objects may not appear/work consistently between different devices or even the Corona Simulator. You should <strong>always</strong> test on target devices.</p></li>
+<li><p>Native objects are not part of the OpenGL canvas. They do <strong>not</strong> obey the Corona display hierarchy and they cannot be inserted into <a href="../../start/displayGroups/index.html">display groups</a>. They <strong>can</strong> be manipulated using basic display object methods — setting their position, for example — but they always appear in front of normal display objects.</p></li>
+</ul>
+</div>
+
+
+<a id="textfield"></a>
+<div class="section level2" id="text-input-field">
+<h2><a href="#TOC">Text Input Field</a></h2>
+<p>Single-line text input fields are created using the <code>native.newTextField()</code> API. Please refer to the <a href="../../../api/library/native/newTextField.html">documentation</a> for usage examples.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">textField</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>newTextField<span class="ot">(</span> <span class="kw">left</span>, <span class="kw">top</span>, <span class="kw">width</span>, <span class="kw">height</span> <span class="ot">[</span>, <span class="kw">listener</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<p>The following <a href="../../../api/type/TextField/index.html">properties/methods</a> can be used to modify the appearance:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="95%">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Property/Method
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.align</code>
+</th>
+<th class="itemrow baseline">
+Alignment of the text in the input field, either <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;right&quot;</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.font</code>
+</th>
+<th class="itemrow baseline">
+Font used for the input field. May be set to a font object returned by <a href="../../../api/library/native/newFont.html">native.newFont()</a>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.hasBackground</code>
+</th>
+<th class="itemrow baseline">
+Controls whether the input field has an opaque background. Default is <code>true</code> (opaque).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.inputType</code>
+</th>
+<th class="itemrow baseline">
+The <a href="../../../api/type/TextField/inputType.html">keyboard type</a> for the input field. See the <a href="../../../api/type/TextField/inputType.html">documentation</a> for details.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.isSecure</code>
+</th>
+<th class="itemrow baseline">
+Controls whether text in the input field is obscured, i.e. for passwords. Default is <code>false</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField:setTextColor( r,g,b,a )</code>
+</th>
+<th class="itemrow baseline">
+Sets the color of the text in the input field.
+</th>
+</tr>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.size</code>
+</th>
+<th class="itemrow baseline">
+Sets the size of the text in the input field.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textField.text</code>
+</th>
+<th class="itemrow baseline">
+Sets the text contents of the input field.
+</th>
+</tr>
+</table>
+
+<div class="section level3" id="user-input-events">
+<h3><a href="#TOC">User Input Events</a></h3>
+<p>User input to a text field is monitored by the following <code>event.phase</code> values:</p>
+<ul>
+<li><p><code>&quot;began&quot;</code> — this is the &quot;keyboard has appeared&quot; event.</p></li>
+<li><p><code>&quot;ended&quot;</code> — this event occurs when the text field loses focus (user touches a different field or dismisses the keyboard).</p></li>
+<li><p><code>&quot;submitted&quot;</code> — this event is dispatched when the user presses the &quot;return&quot; key to finish editing.</p></li>
+<li><p><code>&quot;editing&quot;</code> — this event occurs when the user modifies text in the field. During this phase, several <a href="../../../api/event/userInput/index.html">input properties</a> are available.</p></li>
+</ul>
+</div>
+<div class="section level3" id="controlling-focus">
+<h3><a href="#TOC">Controlling Focus</a></h3>
+<p>Setting the <strong>focus</strong> on a specific text field can be accomplished as follows:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">native</span><span class="ot">.</span>setKeyboardFocus<span class="ot">(</span> <span class="kw">textField</span> <span class="ot">)</span></code></pre>
+<p>This sets the keyboard focus on that field and, where appropriate, shows or hides the keyboard. To remove focus on a text field and dismiss (hide) the keyboard, pass <code>nil</code> to the function:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">native</span><span class="ot">.</span>setKeyboardFocus<span class="ot">(</span> <span class="kw">nil</span> <span class="ot">)</span></code></pre>
+<a id="textbox"></a>
+</div>
+</div>
+<div class="section level2" id="multi-line-text-box">
+<h2><a href="#TOC">Multi-Line Text Box</a></h2>
+<p>The <code>native.newTextBox()</code> API creates a scrollable, multi-line text box for displaying text-based content. Text boxes can also be used for text input by setting the <code>isEditable</code> property to <code>true</code>. Please refer to the <a href="../../../api/library/native/newTextBox.html">documentation</a> for usage examples.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">textBox</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>newTextBox<span class="ot">(</span> <span class="kw">left</span>, <span class="kw">top</span>, <span class="kw">width</span>, <span class="kw">height</span> <span class="ot">[</span>,<span class="kw">listener</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<p>The following <a href="../../../api/type/TextBox/index.html">properties/methods</a> can be used to modify the appearance and behavior:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="95%">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Property/Method
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox.align</code>
+</th>
+<th class="itemrow baseline">
+Alignment of the text in the text box, either <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;right&quot;</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox.font</code>
+</th>
+<th class="itemrow baseline">
+Font used for the text box. May be set to a font object returned by <a href="../../../api/library/native/newFont.html">native.newFont()</a>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox.hasBackground</code>
+</th>
+<th class="itemrow baseline">
+Controls whether the text box has an opaque background. Default is <code>true</code> (opaque).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox.isEditable</code>
+</th>
+<th class="itemrow baseline">
+Controls whether the text box is editable. Default is <code>false</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox:setTextColor( r,g,b,a )</code>
+</th>
+<th class="itemrow baseline">
+Sets the color of the text in the text box.
+</th>
+</tr>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox.size</code>
+</th>
+<th class="itemrow baseline">
+Sets the size of the text in the text box.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>textBox.text</code>
+</th>
+<th class="itemrow baseline">
+Sets the contents of the text box.
+</th>
+</tr>
+</table>
+
+<div class="section level3" id="user-input-events-1">
+<h3><a href="#TOC">User Input Events</a></h3>
+<p>User input to an editable text box is monitored by the following <code>event.phase</code> values:</p>
+<ul>
+<li><p><code>&quot;began&quot;</code> — this is the &quot;keyboard has appeared&quot; event.</p></li>
+<li><p><code>&quot;ended&quot;</code> — this event occurs when the text box loses focus (user touches a different field or dismisses the keyboard).</p></li>
+<li><p><code>&quot;editing&quot;</code> — this event occurs when the user modifies text in the box. During this phase, several <a href="../../../api/event/userInput/index.html">input properties</a> are available.</p></li>
+</ul>
+</div>
+<div class="section level3" id="controlling-focus-1">
+<h3><a href="#TOC">Controlling Focus</a></h3>
+<p>Setting the <strong>focus</strong> on a specific text box can be accomplished as follows:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">native</span><span class="ot">.</span>setKeyboardFocus<span class="ot">(</span> <span class="kw">textBox</span> <span class="ot">)</span></code></pre>
+<p>This sets the keyboard focus on that box and, where appropriate, shows or hides the keyboard. To remove focus on a text box and dismiss (hide) the keyboard, pass <code>nil</code> to the function:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">native</span><span class="ot">.</span>setKeyboardFocus<span class="ot">(</span> <span class="kw">nil</span> <span class="ot">)</span></code></pre>
+<a id="webview"></a>
+</div>
+</div>
+<div class="section level2" id="web-view">
+<h2><a href="#TOC">Web View</a></h2>
+<p>The <code>native.newWebView()</code> API loads remote web content or local HTML in a web view container. The web view differs from the older <a href="../../../api/library/native/showWebPopup.html">web popup</a> in that you can move it, rotate it (iOS only), and assign a physical body to it. Please refer to the <a href="../../../api/library/native/newWebView.html">documentation</a> for notes and usage examples.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">webView</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>newWebView<span class="ot">(</span> <span class="kw">left</span>, <span class="kw">top</span>, <span class="kw">width</span>, <span class="kw">height</span> <span class="ot">[</span>,<span class="kw">listener</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<p>The following <a href="../../../api/type/WebView/index.html">properties/methods</a> can be used to control the appearance and behavior:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="95%">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Property/Method
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView:request( url )</code>
+</th>
+<th class="itemrow baseline">
+Loads a specific URL into the web view. See the <a href="../../../api/type/WebView/request.html">documentation</a> for details.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView:back()</code>
+</th>
+<th class="itemrow baseline">
+Takes the web view back one step in its history.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView:forward()</code>
+</th>
+<th class="itemrow baseline">
+Takes the web view forward one step in its history.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView:reload()</code>
+</th>
+<th class="itemrow baseline">
+Reloads the current web view page.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView:stop()</code>
+</th>
+<th class="itemrow baseline">
+Stops loading the current page (if loading).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView.canGoBack</code>
+</th>
+<th class="itemrow baseline">
+Read-only property that is <code>true</code> if the web view can go back a page, <code>false</code> if not.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView.canGoForward</code>
+</th>
+<th class="itemrow baseline">
+Read-only property that is <code>true</code> if the web view can go forward a page, <code>false</code> if not.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>webView.hasBackground</code>
+</th>
+<th class="itemrow baseline">
+Controls whether the web view background is visible or not. Default is <code>true</code> (visible).
+</th>
+</tr>
+</table>
+
+<div class="section level3" id="web-view-events">
+<h3><a href="#TOC">Web View Events</a></h3>
+<p>Status of the web view is monitored by the following <code>event</code> values:</p>
+<ul>
+<li><p><code>event.url</code> — the absolute URL of the request.</p></li>
+<li><p><code>event.type</code> — the type of <code>urlRequest</code> event indicating the action associated with the request. See the <a href="../../../api/event/urlRequest/type.html">documentation</a> for details.</p></li>
+<li><p><code>event.name</code> — the <code>urlRequest</code> string.</p></li>
+<li><p><code>event.errorCode</code> — a platform-specific error code if a problem occurred in the URL request.</p></li>
+<li><p><code>event.errorMessage</code> — description of an error that occurred in the URL request. This property is only defined if an error occurs.</p></li>
+</ul>
+<a id="videoview"></a>
+</div>
+</div>
+<div class="section level2" id="video-view">
+<h2><a href="#TOC">Video View</a></h2>
+<p>The <code>native.newVideo()</code> API displays a video object that can be moved and rotated. You can also add a physical body to it. This API supports local videos (in one of the system directories) or remote videos from a server. Please refer to the <a href="../../../api/library/native/newVideo.html">documentation</a> for notes and usage examples.</p>
+<p>This API is supported on iOS only. If you require video support on other platforms, use <a href="../../../api/library/media/playVideo.html">media.playVideo()</a> instead.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">videoView</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>newVideo<span class="ot">(</span> <span class="kw">left</span>, <span class="kw">top</span>, <span class="kw">width</span>, <span class="kw">height</span> <span class="ot">[</span>,<span class="kw">listener</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<p>The following <a href="../../../api/type/Video/index.html">properties/methods</a> can be used to control the video:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="95%">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Property/Method
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView:load( path )</code>
+</th>
+<th class="itemrow baseline">
+Loads the specified video.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView:play()</code>
+</th>
+<th class="itemrow baseline">
+Plays the currently loaded video.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView:pause()</code>
+</th>
+<th class="itemrow baseline">
+Pauses the currently loaded video.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView:seek( timeInSeconds )</code>
+</th>
+<th class="itemrow baseline">
+Jumps to a specified time in the current video (within its total range).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView.currentTime</code>
+</th>
+<th class="itemrow baseline">
+The current time position of the video in seconds (read-only).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView.totalTime</code>
+</th>
+<th class="itemrow baseline">
+The length of the current video in seconds (read-only).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>videoView.isMuted</code>
+</th>
+<th class="itemrow baseline">
+Controls whether the video's audio channel is muted.
+</th>
+</tr>
+</table>
+
+
+
+
+<a id="popup"></a>
+</div>
+<div class="section level2" id="popup">
+<h2><a href="#TOC">Popup</a></h2>
+<p>The <code>native.showPopup()</code> API displays the operating system's default popup window for a specified service such as email, SMS, etc. It returns a boolean value indicating whether the request is successful or not. If it returns <code>false</code>, the popup is not available or the service is not available for the device.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">popup</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span> <span class="kw">name</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<p>Please refer to the <a href="../../../api/library/native/showPopup.html">documentation</a> for notes and usage examples since the <code>options</code> vary considerably for each popup type.</p>
+<a id="alert"></a>
+</div>
+<div class="section level2" id="alert">
+<h2><a href="#TOC">Alert</a></h2>
+<p>The <code>native.showAlert()</code> API displays a native popup alert box with one or more buttons. Program activity, including animation, will continue in the background, but all other user interactivity will be blocked until the user clicks a button or the alert is cancelled programmatically. Please refer to the <a href="../../../api/library/native/showAlert.html">documentation</a> for notes and usage examples.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">alert</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>showAlert<span class="ot">(</span> <span class="kw">title</span>, <span class="kw">message</span> <span class="ot">[</span>, <span class="ot">{</span> <span class="kw">buttonLabels</span> <span class="ot">}</span> <span class="ot">[</span>, <span class="kw">listener</span><span class="ot">]</span> <span class="ot">]</span> <span class="ot">)</span></code></pre>
+<ul>
+<li><p><code>title</code> — the title string displayed in the alert (required).</p></li>
+<li><p><code>message</code> — the message string displayed in the alert text (required).</p></li>
+<li><p><code>buttonLabels</code> — an optional table of strings, each of which will create a button with the corresponding label. If you provide this argument, include at least one button label or the dialog will not have any buttons. The first button will have a unique color to suggest that the user should choose it by default. The maximum number of buttons in an alert box is five (5).</p></li>
+<li><p><code>listener</code> — the listener function (optional) that will be called when the user clicks a button in the alert box. It can assign an action to each button according to its numerical index: the first button is index 1, the second is index 2, and so on. The listener can be either a function listener or a table listener. If <code>listener</code> is a table, it must have a completion method.</p></li>
+</ul>
+<div class="section level3" id="alert-events">
+<h3><a href="#TOC">Alert Events</a></h3>
+<p>The event dispatched to the listener will be a completion event with the following properties:</p>
+<ul>
+<li><p><code>event.action</code> — this represents how the alert was dismissed. A value of <code>&quot;cancelled&quot;</code> indicates that <a href="../../../api/library/native/cancelAlert.html">native.cancelAlert()</a> was called to close the alert, while <code>&quot;clicked&quot;</code> indicates the user clicked a button to close the alert.</p></li>
+<li><p><code>event.index</code> — the index of the button pressed. It corresponds to the index in the <code>buttonLabels</code> parameter.</p></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 27-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.system.nativeUI.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.system.nativeUI.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.system.nativeUI.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

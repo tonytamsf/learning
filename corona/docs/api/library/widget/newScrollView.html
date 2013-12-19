@@ -1,0 +1,1737 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newScrollView</title>
+  <meta name="revised" content="18-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newScrollView" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newscrollview">widget.newScrollView()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left, top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-height-required">width, height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#scrollwidth-scrollheight-required">scrollWidth, scrollHeight <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#toppadding-bottompadding-optional">topPadding, bottomPadding <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#leftpadding-rightpadding-optional">leftPadding, rightPadding <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#friction-optional">friction <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#backgroundcolor-optional">backgroundColor <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#hidebackground-optional">hideBackground <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#horizontalscrolldisabled-optional">horizontalScrollDisabled <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#verticalscrolldisabled-optional">verticalScrollDisabled <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#islocked-optional">isLocked <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#hidescrollbar-optional">hideScrollBar <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#listener-optional">listener <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#basedir-optional">baseDir <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#maskfile-optional">maskFile <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#isbounceenabled-optional">isBounceEnabled <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#visual-customization">Visual Customization</a><ul>
+<li><a href="#scrollbaroptions-optional">scrollBarOptions <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#format-for-scrollbaroptions">Format for <code>scrollBarOptions</code></a><ul>
+<li><a href="#sheet-required">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#topframe-required">topFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#middleframe-required">middleFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#bottomframe-required">bottomFrame <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newScrollView.html">newScrollView</a>
+</div>
+<div class="section level1" id="widget.newscrollview">
+<h1><a href="#TOC">widget.newScrollView()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/ScrollViewWidget/index.html">ScrollViewWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, scrollview, scrollbox, scrolling content</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/Interface/WidgetDemo</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/ScrollViewWidget/index.html">ScrollViewWidget</a><br/></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><a href="../graphics/newMask.html">graphics.newMask()</a><br/></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> object.</p>
+</div>
+<div class="section level2" id="limitations">
+<h2><a href="#TOC">Limitations</a></h2>
+<p>The ScrollView object uses one mask to define it's shape. You need to consider this if you are adding this object to a container (which also uses a mask) or adding masked items to the object (i.e., text objects). Graphcis 2.0 has a mask nesting limit of three.</p>
+<p>For a walkthrough on how to use image masks, see the <a href="../../../guide/media/imageMask/index.html">Masking Images</a> guide.</p>
+<p>This widget does not support <a href="../../type/DisplayObject/scale.html">scaling</a>.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newScrollView( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This is an optional id to assign to your <a href="../../type/ScrollViewWidget/index.html">ScrollView</a>. Default is &quot;widget_scrollView&quot;.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left, top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the position where the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> will be created. The default values for left and top are 0, 0.</p>
+</div>
+<div class="section level5" id="width-height-required">
+<h5><a href="#TOC">width, height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a>.</p>
+</div>
+<div class="section level5" id="scrollwidth-scrollheight-required">
+<h5><a href="#TOC">scrollWidth, scrollHeight <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the total scrollable content area. This cannot be changed after the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> widget has been created.</p>
+</div>
+<div class="section level5" id="toppadding-bottompadding-optional">
+<h5><a href="#TOC">topPadding, bottomPadding <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> These numbers represent the number of pixels from the top and bottom of the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> in which content will stop when it reaches the top/bottom of scrollable area. The default value for both is 0.</p>
+</div>
+<div class="section level5" id="leftpadding-rightpadding-optional">
+<h5><a href="#TOC">leftPadding, rightPadding <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> These numbers represent the number of pixels from the left and right of the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> in which content will stop when it reaches the left/right of scrollable area. The default value for both is 0.</p>
+</div>
+<div class="section level5" id="friction-optional">
+<h5><a href="#TOC">friction <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This determines how fast the content travels when it is flicked up or down. The default value is 0.972.</p>
+</div>
+<div class="section level5" id="backgroundcolor-optional">
+<h5><a href="#TOC">backgroundColor <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> This is a table that holds the color (in rbga format) of the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> background. Default is white:</p>
+<pre><code>{ 255, 255, 255, 255 }</code></pre>
+</div>
+<div class="section level5" id="hidebackground-optional">
+<h5><a href="#TOC">hideBackground <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the background of the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> will be not be visible.</p>
+</div>
+<div class="section level5" id="horizontalscrolldisabled-optional">
+<h5><a href="#TOC">horizontalScrollDisabled <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> will be unable to scroll horizontally.</p>
+</div>
+<div class="section level5" id="verticalscrolldisabled-optional">
+<h5><a href="#TOC">verticalScrollDisabled <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> will be unable to scroll vertically.</p>
+</div>
+<div class="section level5" id="islocked-optional">
+<h5><a href="#TOC">isLocked <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> will be locked, meaning it cannot be scrolled vertically or horizontally.</p>
+</div>
+<div class="section level5" id="hidescrollbar-optional">
+<h5><a href="#TOC">hideScrollBar <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> Set this to <code>true</code> if you do not want to use a scrollBar in your <a href="../../type/ScrollViewWidget/index.html">ScrollView</a>.</p>
+</div>
+<div class="section level5" id="listener-optional">
+<h5><a href="#TOC">listener <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> Used to listen for <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> events, with the following events: <code>event.limitReached</code> - Indicates that the scrollView has reached one of it's limits. <code>event.direction</code> - Returns the direction the scrollView is moving in.</p>
+<p>Event phases of: <code>began</code>, <code>moved</code> &amp; <code>ended</code>. In your listener, <code>event.target</code> is a reference to the <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> object that the listener is attached to. See the example for how to construct the listener function.</p>
+</div>
+<div class="section level5" id="basedir-optional">
+<h5><a href="#TOC">baseDir <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Constant.html">Constant</a>.</em> This is the path to your maskFile (if using one). Default is <code>system.ResourceDirectory</code>. See <a href="../system/pathForFile.html">system.pathForFile()</a> for valid values.</p>
+</div>
+<div class="section level5" id="maskfile-optional">
+<h5><a href="#TOC">maskFile <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> If you set a custom width/height, you need to provide a maskFile, which is the filename of the image mask which will be used on your <a href="../../type/ScrollViewWidget/index.html">ScrollView</a>.</p>
+</div>
+<div class="section level5" id="isbounceenabled-optional">
+<h5><a href="#TOC">isBounceEnabled <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> Set this to <code>false</code> if you do not want your <a href="../../type/ScrollViewWidget/index.html">ScrollView</a> to bounce back when reaching a limit (top, bottom, left, right), but simply stop scrolling when it reaches that limit. Defaults to true.</p>
+</div>
+</div>
+<div class="section level2" id="visual-customization">
+<h2><a href="#TOC">Visual Customization</a></h2>
+<div class="section level5" id="scrollbaroptions-optional">
+<h5><a href="#TOC">scrollBarOptions <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> This is a table that specifies the <code>imageSheet</code> object for the scrollBar, and it's <code>top</code>, <code>middle</code> and <code>bottom</code> frames. If not specified the scrollBar will be created using the default widget theme.</p>
+</div>
+</div>
+<div class="section level2" id="format-for-scrollbaroptions">
+<h2><a href="#TOC">Format for <code>scrollBarOptions</code></a></h2>
+<p>Scrollbar's are constructed in the form of a 3 slice image. You must specify all of the parameters below if you wish to visually customize your scrollBar.</p>
+<div class="section level5" id="sheet-required">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> This is the image sheet object for your scrollBar.</p>
+</div>
+<div class="section level5" id="topframe-required">
+<h5><a href="#TOC">topFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the top frame index of the scrollBar.</p>
+</div>
+<div class="section level5" id="middleframe-required">
+<h5><a href="#TOC">middleFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the middle frame index of the scrollBar.</p>
+</div>
+<div class="section level5" id="bottomframe-required">
+<h5><a href="#TOC">bottomFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the bottom frame index of the scrollBar.</p>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Our ScrollView listener</span>
+<span class="kw">local</span> <span class="kw">function</span> scrollListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+    <span class="kw">local</span> <span class="kw">direction</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">direction</span>
+
+    <span class="kw">if</span> <span class="st">&quot;began&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Began&quot;</span> <span class="ot">)</span>
+    <span class="kw">elseif</span> <span class="st">&quot;moved&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Moved&quot;</span> <span class="ot">)</span>
+    <span class="kw">elseif</span> <span class="st">&quot;ended&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Ended&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+
+    <span class="co">-- If we have reached one of the scrollViews limits</span>
+    <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">limitReached</span> <span class="kw">then</span>
+        <span class="kw">if</span> <span class="st">&quot;up&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Top Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">elseif</span> <span class="st">&quot;down&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Bottom Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">elseif</span> <span class="st">&quot;left&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Left Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">elseif</span> <span class="st">&quot;right&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Right Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> <span class="kw">true</span>
+<span class="kw">end</span>
+
+<span class="co">-- Create a ScrollView</span>
+<span class="kw">local</span> <span class="kw">scrollView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newScrollView</span>
+<span class="ot">{</span>
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">10</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">300</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">350</span>,
+    <span class="kw">scrollWidth</span> <span class="ot">=</span> <span class="dv">465</span>,
+    <span class="kw">scrollHeight</span> <span class="ot">=</span> <span class="dv">670</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">scrollListener</span>,
+<span class="ot">}</span>
+
+<span class="co">-- Create a image and insert it into the ScrollView</span>
+<span class="kw">local</span> <span class="kw">background</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImageRect<span class="ot">(</span> <span class="st">&quot;assets/scrollimage2.jpg&quot;</span>, <span class="dv">768</span>, <span class="dv">1024</span> <span class="ot">)</span>
+<span class="kw">background</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">bg</span><span class="ot">.</span><span class="kw">contentWidth</span> <span class="ot">*</span> <span class="dv">0.5</span>
+<span class="kw">background</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="kw">bg</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">*</span> <span class="dv">0.5</span>
+<span class="kw">scrollView</span>:insert<span class="ot">(</span> <span class="kw">background</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 18-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newScrollView&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newScrollView&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newScrollView&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

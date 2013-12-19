@@ -1,0 +1,1636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Types > Map > addMarker</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Types > Map > addMarker" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#objectaddmarker">object:addMarker()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#latitude-required">latitude <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#longitude-required">longitude <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#options-optional">options <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#format-for-options">Format for <code>options</code></a><ul>
+<li><a href="#title-optional">title <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#subtitle-optional">subtitle <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#listener-optional">listener <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#imagefile-optional">imageFile <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Types</a>  ▸  <a href="index.html">Map</a>  ▸  <a href="addMarker.html">addMarker</a>
+</div>
+<div class="section level1" id="objectaddmarker">
+<h1><a href="#TOC">object:addMarker()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Object</strong></td>
+<td align="left"><a href="index.html">Map</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="../../library/native/index.html">native.*</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../Number.html">Number</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">addMarker</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/Interface/MapView</em></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="removeAllMarkers.html">object:removeAllMarkers()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Adds a pin to the map at the specified location. The optional title and subtitle will appear on a small popup when the pin is touched. Returns an number for the id of the marker added or nil if there was a failure.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>object:addMarker( latitude, longitude )
+object:addMarker( latitude, longitude, options )</code></pre>
+<div class="section level5" id="latitude-required">
+<h5><a href="#TOC">latitude <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../Number.html">Number</a>.</em> The marker's latitude in degrees.</p>
+</div>
+<div class="section level5" id="longitude-required">
+<h5><a href="#TOC">longitude <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../Number.html">Number</a>.</em> The marker's longitude in degrees.</p>
+</div>
+<div class="section level5" id="options-optional">
+<h5><a href="#TOC">options <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../Table.html">Table</a>.</em> An options table. See <strong>Format for options</strong> below:</p>
+</div>
+<div class="section level3" id="format-for-options">
+<h3><a href="#TOC">Format for <code>options</code></a></h3>
+<div class="section level5" id="title-optional">
+<h5><a href="#TOC">title <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../String.html">String</a>.</em> The title to display on the pop-up that appears when the user taps the marker.</p>
+</div>
+<div class="section level5" id="subtitle-optional">
+<h5><a href="#TOC">subtitle <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../String.html">String</a>.</em> The subtitle to display on the pop-up that appears when the user taps the marker.</p>
+</div>
+<div class="section level5" id="listener-optional">
+<h5><a href="#TOC">listener <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../Function.html">Function</a>.</em> The listener that will be called when the marker is tapped.</p>
+</div>
+<div class="section level5" id="imagefile-optional">
+<h5><a href="#TOC">imageFile <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../String.html">String</a>.</em> The file name of the image to be used for the marker. The default base directory is the resource directory. It can also be a <em><a href="../Table.html">Table</a>.</em> of the form <code>{ baseDir=, filename= }</code> This will use dynamic image selection. The coordinates are returned as a <a href="../../event/mapMarker/index.html">mapMarker</a></p>
+</div>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> markerListener<span class="ot">(</span><span class="kw">event</span><span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;type: &quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span><span class="ot">)</span> <span class="co">-- event type</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;markerId: &quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">markerId</span><span class="ot">)</span> <span class="co">-- id of the marker that was touched</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;lat: &quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">latitude</span><span class="ot">)</span> <span class="co">-- latitude of the marker</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;long: &quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">longitude</span><span class="ot">)</span> <span class="co">-- longitude of the marker</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">myMap</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>newMapView<span class="ot">(</span> <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">300</span>, <span class="dv">220</span> <span class="ot">)</span>
+
+<span class="co">-- This looks in the specified directory for the image file.</span>
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> 
+<span class="ot">{</span> 
+    <span class="kw">title</span> <span class="ot">=</span> <span class="st">&quot;Displayed Title&quot;</span>, 
+    <span class="kw">subtitle</span> <span class="ot">=</span> <span class="st">&quot;subtitle text&quot;</span>, 
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">markerListener</span>, 
+    <span class="kw">imageFile</span> <span class="ot">=</span> 
+    <span class="ot">{</span>
+        <span class="kw">filename</span> <span class="ot">=</span> <span class="st">&quot;someImage.png&quot;</span>,
+        <span class="kw">baseDir</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">TemporaryDirectory</span>
+    <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="co">-- This will look in the resources directory for the image file.</span>
+<span class="kw">local</span> <span class="kw">options1</span> <span class="ot">=</span> 
+<span class="ot">{</span> 
+    <span class="kw">title</span> <span class="ot">=</span> <span class="st">&quot;Displayed Title&quot;</span>, 
+    <span class="kw">subtitle</span> <span class="ot">=</span> <span class="st">&quot;subtitle text&quot;</span>, 
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">markerListener</span>, 
+    <span class="kw">imageFile</span> <span class="ot">=</span>  <span class="st">&quot;someImage.png&quot;</span>,
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">result</span>, <span class="kw">errorMessage</span> <span class="ot">=</span> <span class="kw">myMap</span>:addMarker<span class="ot">(</span> <span class="dv">37.331692</span>, <span class="ot">-</span><span class="dv">122.030456</span>, <span class="kw">options</span> <span class="ot">)</span>
+<span class="kw">if</span> <span class="kw">result</span> <span class="kw">then</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;everything went well&quot;</span><span class="ot">)</span>
+<span class="kw">else</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="kw">errorMessage</span><span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.type.Map.addMarker&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.type.Map.addMarker&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.type.Map.addMarker&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

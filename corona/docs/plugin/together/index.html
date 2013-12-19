@@ -1,0 +1,2889 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together " />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.">together.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#sign-up">Sign Up</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#callbacks">Callbacks</a></li>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#sdk">SDK</a></li>
+</ul></li>
+<li><a href="#sample-code">Sample Code</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#managers">Managers</a><ul>
+<li><a href="#togethercache-togethercache"><a href="togethercache.html">TogetherCache</a> TogetherCache</a></li>
+<li><a href="#togethersocial-social"><a href="togethersocial.html">TogetherSocial</a> Social</a></li>
+<li><a href="#gameinstancemanager-gameinstancemanager"><a href="gameinstancemanager.html">GameInstanceManager</a> GameInstanceManager</a></li>
+<li><a href="#leaderboardmanager-leaderboardmanager"><a href="leaderboardmanager.html">LeaderboardManager</a> LeaderboardManager</a></li>
+<li><a href="#usermessagemanager-usermessagemanager"><a href="usermessagemanager.html">UserMessageManager</a> UserMessageManager</a></li>
+<li><a href="#usernotificationmanager-usernotificationmanager"><a href="usernotificationmanager.html">UserNotificationManager</a> UserNotificationManager</a></li>
+<li><a href="#achievementmanager-achievementmanager"><a href="achievementmanager.html">AchievementManager</a> AchievementManager</a></li>
+<li><a href="#itemmanager-itemmanager"><a href="itemmanager.html">ItemManager</a> ItemManager</a></li>
+<li><a href="#chatroommanager-chatroommanager"><a href="chatroommanager.html">ChatRoomManager</a> ChatRoomManager</a></li>
+<li><a href="#friendmanager-friendmanager"><a href="friendmanager.html">FriendManager</a> FriendManager</a></li>
+<li><a href="#userpurchasemanager-userpurchasemanager"><a href="userpurchasemanager.html">UserPurchaseManager</a> UserPurchaseManager</a></li>
+</ul></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#number-pinginterval"><a href="api.type.Number">number</a> PingInterval</a></li>
+<li><a href="#number-lastpingtime"><a href="api.type.Number">number</a> LastPingTime</a></li>
+<li><a href="#string-apnsdevicetoken"><a href="api.type.String">string</a> ApnsDeviceToken</a></li>
+<li><a href="#boolean-registeredpushenableddevice"><a href="api.type.Boolean">boolean</a> RegisteredPushEnabledDevice</a></li>
+<li><a href="#string-cacheuserguid"><a href="api.type.String">string</a> CacheUserGuid</a></li>
+<li><a href="#string-togetherserverip"><a href="api.type.String">string</a> TogetherServerIP</a></li>
+<li><a href="#string-clientpublickey"><a href="api.type.String">string</a> ClientPublicKey</a></li>
+<li><a href="#string-clientprivatekey"><a href="api.type.String">string</a> ClientPrivateKey</a></li>
+<li><a href="#string-gamekey"><a href="api.type.String">string</a> GameKey</a></li>
+<li><a href="#string-platformname"><a href="api.type.String">string</a> PlatformName</a></li>
+<li><a href="#string-facebookappid"><a href="api.type.String">string</a> FacebookAppID</a></li>
+<li><a href="#string-facebookprivileges"><a href="api.type.String">string</a> FacebookPrivileges</a></li>
+<li><a href="#togetheruser-togetheruser"><a href="togetheruser.html">TogetherUser</a> TogetherUser</a></li>
+<li><a href="#togetherusersession-togetherusersession"><a href="togetherusersession.html">TogetherUserSession</a> TogetherUserSession</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#getinstance"><a href="#more_getinstance">GetInstance()</a></a></li>
+<li><a href="#getuserid"><a href="#more_getuserid">GetUserID()</a></a></li>
+<li><a href="#getusername"><a href="#more_getusername">GetUsername()</a></a></li>
+<li><a href="#getnameofuser"><a href="#more_getnameofuser">GetNameOfUser()</a></a></li>
+<li><a href="#getuserviewname"><a href="#more_getuserviewname">GetUserViewName()</a></a></li>
+<li><a href="#isuserfacebookregistered"><a href="#more_isuserfacebookregistered">IsUserFacebookRegistered()</a></a></li>
+<li><a href="#isusercustomregistered"><a href="#more_isusercustomregistered">IsUserCustomRegistered()</a></a></li>
+<li><a href="#findtogetherfriendbyuserid"><a href="#more_findtogetherfriendbyuserid">FindTogetherFriendByUserID()</a></a></li>
+<li><a href="#findtogetherfriendbysocialid"><a href="#more_findtogetherfriendbysocialid">FindTogetherFriendBySocialID()</a></a></li>
+<li><a href="#getsessiontoken"><a href="#more_getsessiontoken">GetSessionToken()</a></a></li>
+<li><a href="#initialize"><a href="#more_initialize">Initialize()</a></a></li>
+<li><a href="#setapnsdevicetoken"><a href="#more_setapnsdevicetoken">SetApnsDeviceToken()</a></a></li>
+<li><a href="#setserveraddress"><a href="#more_setserveraddress">SetServerAddress()</a></a></li>
+<li><a href="#getserveraddress"><a href="#more_getserveraddress">GetServerAddress()</a></a></li>
+<li><a href="#setfacebookappid"><a href="#more_setfacebookappid">SetFacebookAppID()</a></a></li>
+<li><a href="#getcacheuserguid"><a href="#more_getcacheuserguid">GetCacheUserGuid()</a></a></li>
+<li><a href="#loadtogethercache"><a href="#more_loadtogethercache">LoadTogetherCache()</a></a></li>
+<li><a href="#savetogethercache"><a href="#more_savetogethercache">SaveTogetherCache()</a></a></li>
+<li><a href="#erasetogethercache"><a href="#more_erasetogethercache">EraseTogetherCache()</a></a></li>
+<li><a href="#loginuser"><a href="#more_loginuser">LoginUser()</a></a></li>
+<li><a href="#getservertimeutc"><a href="#more_getservertimeutc">GetServerTimeUTC()</a></a></li>
+<li><a href="#getglobalprofile"><a href="#more_getglobalprofile">GetGlobalProfile()</a></a></li>
+<li><a href="#getgameprofile"><a href="#more_getgameprofile">GetGameProfile()</a></a></li>
+<li><a href="#getuserprofile"><a href="#more_getuserprofile">GetUserProfile()</a></a></li>
+<li><a href="#addatomic"><a href="#more_addatomic">AddAtomic()</a></a></li>
+<li><a href="#incrementatomic"><a href="#more_incrementatomic">IncrementAtomic()</a></a></li>
+<li><a href="#incrementatomicwithlimit"><a href="#more_incrementatomicwithlimit">IncrementAtomicWithLimit()</a></a></li>
+<li><a href="#incrementatomicwithlimitref"><a href="#more_incrementatomicwithlimitref">IncrementAtomicWithLimitRef()</a></a></li>
+<li><a href="#registerfacebook"><a href="#more_registerfacebook">RegisterFacebook()</a></a></li>
+<li><a href="#registercustom"><a href="#more_registercustom">RegisterCustom()</a></a></li>
+<li><a href="#logout"><a href="#more_logout">Logout()</a></a></li>
+<li><a href="#registerpushenableddevice"><a href="#more_registerpushenableddevice">RegisterPushEnabledDevice()</a></a></li>
+<li><a href="#sendpushnotification"><a href="#more_sendpushnotification">SendPushNotification()</a></a></li>
+<li><a href="#ping"><a href="#more_ping">Ping()</a></a></li>
+<li><a href="#addanalytic"><a href="#more_addanalytic">AddAnalytic()</a></a></li>
+<li><a href="#addanalyticex"><a href="#more_addanalyticex">AddAnalyticEx()</a></a></li>
+<li><a href="#getinstance-1">GetInstance()</a><ul>
+<li><a href="#returns-together">Returns <a href="together.html">Together</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+</ul></li>
+<li><a href="#getuserid-1">GetUserID()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+</ul></li>
+<li><a href="#getusername-1">GetUsername()</a><ul>
+<li><a href="#returns-string">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+</ul></li>
+<li><a href="#getnameofuser-1">GetNameOfUser()</a><ul>
+<li><a href="#returns-string-1">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+</ul></li>
+<li><a href="#getuserviewname-1">GetUserViewName()</a><ul>
+<li><a href="#returns-string-2">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+</ul></li>
+<li><a href="#isuserfacebookregistered-1">IsUserFacebookRegistered()</a><ul>
+<li><a href="#returns-boolean">Returns <a href="../../api/type/Boolean.html">boolean</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+</ul></li>
+<li><a href="#isusercustomregistered-1">IsUserCustomRegistered()</a><ul>
+<li><a href="#returns-boolean-1">Returns <a href="../../api/type/Boolean.html">boolean</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+</ul></li>
+<li><a href="#findtogetherfriendbyuserid-1">FindTogetherFriendByUserID()</a><ul>
+<li><a href="#returns-togetherfriend">Returns <a href="togetherfriend.html">TogetherFriend</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#findtogetherfriendbysocialid-1">FindTogetherFriendBySocialID()</a><ul>
+<li><a href="#returns-togetherfriend-1">Returns <a href="togetherfriend.html">TogetherFriend</a></a></li>
+<li><a href="#syntax-9">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#getsessiontoken-1">GetSessionToken()</a><ul>
+<li><a href="#returns-string-3">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-10">Syntax</a></li>
+</ul></li>
+<li><a href="#initialize-1">Initialize()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-11">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#setapnsdevicetoken-1">SetApnsDeviceToken()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-12">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#setserveraddress-1">SetServerAddress()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-13">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#getserveraddress-1">GetServerAddress()</a><ul>
+<li><a href="#returns-string-4">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-14">Syntax</a></li>
+</ul></li>
+<li><a href="#setfacebookappid-1">SetFacebookAppID()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-15">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#getcacheuserguid-1">GetCacheUserGuid()</a><ul>
+<li><a href="#returns-string-5">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax-16">Syntax</a></li>
+</ul></li>
+<li><a href="#loadtogethercache-1">LoadTogetherCache()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-17">Syntax</a></li>
+</ul></li>
+<li><a href="#savetogethercache-1">SaveTogetherCache()</a><ul>
+<li><a href="#returns-void-5">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-18">Syntax</a></li>
+</ul></li>
+<li><a href="#erasetogethercache-1">EraseTogetherCache()</a><ul>
+<li><a href="#returns-void-6">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-19">Syntax</a></li>
+</ul></li>
+<li><a href="#loginuser-1">LoginUser()</a><ul>
+<li><a href="#returns-void-7">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-20">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#getservertimeutc-1">GetServerTimeUTC()</a><ul>
+<li><a href="#returns-void-8">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-21">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a><ul>
+<li><a href="#getglobalprofile-1">GetGlobalProfile()</a><ul>
+<li><a href="#returns-void-9">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-22">Syntax</a></li>
+<li><a href="#parameters-8">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-8"></i></a><ul>
+<li><a href="#getgameprofile-1">GetGameProfile()</a><ul>
+<li><a href="#returns-void-10">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-23">Syntax</a></li>
+<li><a href="#parameters-9">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-9"></i></a><ul>
+<li><a href="#getuserprofile-1">GetUserProfile()</a><ul>
+<li><a href="#returns-void-11">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-24">Syntax</a></li>
+<li><a href="#parameters-10">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-10"></i></a><ul>
+<li><a href="#addatomic-1">AddAtomic()</a><ul>
+<li><a href="#returns-void-12">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-25">Syntax</a></li>
+<li><a href="#parameters-11">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-11"></i></a><ul>
+<li><a href="#incrementatomic-1">IncrementAtomic()</a><ul>
+<li><a href="#returns-void-13">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-26">Syntax</a></li>
+<li><a href="#parameters-12">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-12"></i></a><ul>
+<li><a href="#incrementatomicwithlimit-1">IncrementAtomicWithLimit()</a><ul>
+<li><a href="#returns-void-14">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-27">Syntax</a></li>
+<li><a href="#parameters-13">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-13"></i></a><ul>
+<li><a href="#incrementatomicwithlimitref-1">IncrementAtomicWithLimitRef()</a><ul>
+<li><a href="#returns-void-15">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-28">Syntax</a></li>
+<li><a href="#parameters-14">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-14"></i></a><ul>
+<li><a href="#registerfacebook-1">RegisterFacebook()</a><ul>
+<li><a href="#returns-void-16">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-29">Syntax</a></li>
+<li><a href="#parameters-15">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-15"></i></a><ul>
+<li><a href="#registercustom-1">RegisterCustom()</a><ul>
+<li><a href="#returns-void-17">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-30">Syntax</a></li>
+<li><a href="#parameters-16">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-16"></i></a><ul>
+<li><a href="#logout-1">Logout()</a><ul>
+<li><a href="#returns-void-18">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-31">Syntax</a></li>
+<li><a href="#parameters-17">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-17"></i></a><ul>
+<li><a href="#registerpushenableddevice-1">RegisterPushEnabledDevice()</a><ul>
+<li><a href="#returns-void-19">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-32">Syntax</a></li>
+<li><a href="#parameters-18">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-18"></i></a><ul>
+<li><a href="#sendpushnotification-1">SendPushNotification()</a><ul>
+<li><a href="#returns-void-20">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-33">Syntax</a></li>
+<li><a href="#parameters-19">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-19"></i></a><ul>
+<li><a href="#ping-1">Ping()</a><ul>
+<li><a href="#returns-void-21">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-34">Syntax</a></li>
+<li><a href="#parameters-20">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-20"></i></a><ul>
+<li><a href="#addanalytic-1">AddAnalytic()</a><ul>
+<li><a href="#returns-void-22">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-35">Syntax</a></li>
+<li><a href="#parameters-21">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-21"></i></a><ul>
+<li><a href="#addanalyticex-1">AddAnalyticEx()</a><ul>
+<li><a href="#returns-void-23">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-36">Syntax</a></li>
+<li><a href="#parameters-22">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-22"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>
+</div>
+<div class="section level1" id="together.">
+<h1><a href="#TOC">together.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Library.html">library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version 1.1</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">together</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left">http://playstogether.com</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Availability</strong></td>
+<td align="left">Starter, Basic, Pro</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The Together class is the root class in the Together api. It contains essential configuration settings, an object representing the logged in User, and various Managers for creating, deleting, and retrieving various Together objects.</p>
+</div>
+<div class="section level2" id="sign-up">
+<h2><a href="#TOC">Sign Up</a></h2>
+<p>To use the Together service, please <a href="https://developer.playstogether.com/developers">sign up</a> for an account.</p>
+</div>
+<div class="section level2" id="platforms">
+<h2><a href="#TOC">Platforms</a></h2>
+<ul>
+<li>Android: Yes</li>
+<li>iOS: Yes</li>
+<li>Mac: Yes</li>
+<li>Win: Yes</li>
+<li>Kindle: No</li>
+<li>NOOK: No</li>
+</ul>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<p>It is best to assign the GetInstance call to a global either you have created or to the declared global in the library, &quot;g_Together&quot;. After signing up you can connect/login by passing your generated keys to the initialization call of the created instance.</p>
+<pre><code>local together = require(&quot;plugin.together&quot;);
+g_Together = together:GetInstance();
+g_Together:Initialize(yourPublicKey, yourPrivateKey, yourGameKey, yourPlatform);</code></pre>
+</div>
+<div class="section level2" id="callbacks">
+<h2><a href="#TOC">Callbacks</a></h2>
+<p>All network methods that require a callback function will invoke your callback with the same object. Details about this &quot;Event&quot; object can be found <a href="togethercallback.html">here</a>.</p>
+</div>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>When you build using the Corona Simulator, the server automatically takes care of integrating the plugin into your project.</p>
+<p>All you need to do is add an entry into a <code>plugins</code> table of your <code>build.settings</code>. The following is an example of a minimal <code>build.settings</code> file:</p>
+<pre><code>settings =
+{
+    plugins =
+    {
+        -- key is the name passed to Lua&#39;s &#39;require()&#39;
+        [&quot;plugin.together&quot;] =
+        {
+            -- required
+            publisherId = &quot;com.playstogether&quot;,
+        },
+    },      
+}</code></pre>
+</div>
+</div>
+<div class="section level2" id="sample-code">
+<h2><a href="#TOC">Sample Code</a></h2>
+<p>You can access sample projects from the Git repository <a href="https://github.com/TogetherGames/Public-Corona-Lua">here</a>.</p>
+<p>Follow <a href="https://github.com/TogetherGames/Public-Corona-Lua/wiki/Creating-a-Simple-Memory-Game-[Tutorial]">this tutorial</a> for getting started quickly and making your own memory game.</p>
+</div>
+<div class="section level2" id="support">
+<h2><a href="#TOC">Support</a></h2>
+<p>More support is available from the Playstogether team:</p>
+<ul>
+<li><script type="text/javascript">
+<!--
+h='&#112;&#108;&#x61;&#x79;&#x73;&#116;&#x6f;&#x67;&#x65;&#116;&#104;&#x65;&#114;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x2f;&#x2f;&#x73;&#x75;&#112;&#112;&#x6f;&#114;&#116;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'E-mail'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x45;&#x2d;&#x6d;&#x61;&#x69;&#108;&#32;&#40;&#x2f;&#x2f;&#x73;&#x75;&#112;&#112;&#x6f;&#114;&#116;&#32;&#x61;&#116;&#32;&#112;&#108;&#x61;&#x79;&#x73;&#116;&#x6f;&#x67;&#x65;&#116;&#104;&#x65;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></li>
+<li><a href="http://forums.coronalabs.com/forum/629-together/">Forum</a></li>
+<li><a href="http://playstogether.com">Plugin Publisher</a></li>
+</ul>
+</div>
+<div class="section level2" id="managers">
+<h2><a href="#TOC">Managers</a></h2>
+<div class="section level5" id="togethercache-togethercache">
+<h5><a href="#TOC"><a href="togethercache.html">TogetherCache</a> TogetherCache</a></h5>
+<p>A TogetherCache class instance used to Load and Save the together cache on the Device.</p>
+</div>
+<div class="section level5" id="togethersocial-social">
+<h5><a href="#TOC"><a href="togethersocial.html">TogetherSocial</a> Social</a></h5>
+<p>A TogetherSocial class instance containing various social apis.</p>
+</div>
+<div class="section level5" id="gameinstancemanager-gameinstancemanager">
+<h5><a href="#TOC"><a href="gameinstancemanager.html">GameInstanceManager</a> GameInstanceManager</a></h5>
+<p>A GameInstanceManager class instance useful for storing GameInstances the logged in User is a member of.</p>
+</div>
+<div class="section level5" id="leaderboardmanager-leaderboardmanager">
+<h5><a href="#TOC"><a href="leaderboardmanager.html">LeaderboardManager</a> LeaderboardManager</a></h5>
+<p>A LeaderboardManager class instance useful for storing Leaderboards.</p>
+</div>
+<div class="section level5" id="usermessagemanager-usermessagemanager">
+<h5><a href="#TOC"><a href="usermessagemanager.html">UserMessageManager</a> UserMessageManager</a></h5>
+<p>A UserMessageManager class instance for sending and receiving in game messages or emails</p>
+</div>
+<div class="section level5" id="usernotificationmanager-usernotificationmanager">
+<h5><a href="#TOC"><a href="usernotificationmanager.html">UserNotificationManager</a> UserNotificationManager</a></h5>
+<p>A UserNotificationManager class instance useful for storing UserNotifications.</p>
+</div>
+<div class="section level5" id="achievementmanager-achievementmanager">
+<h5><a href="#TOC"><a href="achievementmanager.html">AchievementManager</a> AchievementManager</a></h5>
+<p>A AchievementManager class instance useful for storing Achievements.</p>
+</div>
+<div class="section level5" id="itemmanager-itemmanager">
+<h5><a href="#TOC"><a href="itemmanager.html">ItemManager</a> ItemManager</a></h5>
+<p>A ItemManager class instance useful for storing Items.</p>
+</div>
+<div class="section level5" id="chatroommanager-chatroommanager">
+<h5><a href="#TOC"><a href="chatroommanager.html">ChatRoomManager</a> ChatRoomManager</a></h5>
+<p>A ChatRoomManager class instance useful for storing ChatRooms.</p>
+</div>
+<div class="section level5" id="friendmanager-friendmanager">
+<h5><a href="#TOC"><a href="friendmanager.html">FriendManager</a> FriendManager</a></h5>
+<p>A FriendManager class instance useful for storing together Friends.</p>
+</div>
+<div class="section level5" id="userpurchasemanager-userpurchasemanager">
+<h5><a href="#TOC"><a href="userpurchasemanager.html">UserPurchaseManager</a> UserPurchaseManager</a></h5>
+<p>A UserPurchaseManager class instance useful for storing UserPurchases.</p>
+</div>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level5" id="number-pinginterval">
+<h5><a href="#TOC"><a href="api.type.Number">number</a> PingInterval</a></h5>
+<p>How often the ping message is sent to the server.</p>
+</div>
+<div class="section level5" id="number-lastpingtime">
+<h5><a href="#TOC"><a href="api.type.Number">number</a> LastPingTime</a></h5>
+<p>The last time a ping message was sent to the server.</p>
+</div>
+<div class="section level5" id="string-apnsdevicetoken">
+<h5><a href="#TOC"><a href="api.type.String">string</a> ApnsDeviceToken</a></h5>
+<p>The DeviceToken for Apple push notifications.</p>
+</div>
+<div class="section level5" id="boolean-registeredpushenableddevice">
+<h5><a href="#TOC"><a href="api.type.Boolean">boolean</a> RegisteredPushEnabledDevice</a></h5>
+<p>A boolean indicates whether the push enabled Device has been registered with the server.</p>
+</div>
+<div class="section level5" id="string-cacheuserguid">
+<h5><a href="#TOC"><a href="api.type.String">string</a> CacheUserGuid</a></h5>
+<p>The cached UserGuid of the last logged in User.</p>
+</div>
+<div class="section level5" id="string-togetherserverip">
+<h5><a href="#TOC"><a href="api.type.String">string</a> TogetherServerIP</a></h5>
+<p>The IP address of the together server.</p>
+</div>
+<div class="section level5" id="string-clientpublickey">
+<h5><a href="#TOC"><a href="api.type.String">string</a> ClientPublicKey</a></h5>
+<p>The PublicKey of the Together Client the Game belongs to.</p>
+</div>
+<div class="section level5" id="string-clientprivatekey">
+<h5><a href="#TOC"><a href="api.type.String">string</a> ClientPrivateKey</a></h5>
+<p>The PrivateKey of the Together Client that Game belongs to.</p>
+</div>
+<div class="section level5" id="string-gamekey">
+<h5><a href="#TOC"><a href="api.type.String">string</a> GameKey</a></h5>
+<p>The Key of the Together Game.</p>
+</div>
+<div class="section level5" id="string-platformname">
+<h5><a href="#TOC"><a href="api.type.String">string</a> PlatformName</a></h5>
+<p>The name of the platform the Game is running on. (IOS, Android, Mac OS, Unity, HTML5/JS)</p>
+</div>
+<div class="section level5" id="string-facebookappid">
+<h5><a href="#TOC"><a href="api.type.String">string</a> FacebookAppID</a></h5>
+<p>The ApplicationID of the Facebook application.</p>
+</div>
+<div class="section level5" id="string-facebookprivileges">
+<h5><a href="#TOC"><a href="api.type.String">string</a> FacebookPrivileges</a></h5>
+<p>The Facebook privileges to ask for when logging into Facebook.</p>
+</div>
+<div class="section level5" id="togetheruser-togetheruser">
+<h5><a href="#TOC"><a href="togetheruser.html">TogetherUser</a> TogetherUser</a></h5>
+<p>A TogetherUser class instance representing the logged in User.</p>
+</div>
+<div class="section level5" id="togetherusersession-togetherusersession">
+<h5><a href="#TOC"><a href="togetherusersession.html">TogetherUserSession</a> TogetherUserSession</a></h5>
+<p>A TogetherUserSession class instance representing the logged in UserSession.</p>
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="getinstance">
+<h5><a href="#TOC"><a href="#more_getinstance">GetInstance()</a></a></h5>
+</div>
+<div class="section level5" id="getuserid">
+<h5><a href="#TOC"><a href="#more_getuserid">GetUserID()</a></a></h5>
+</div>
+<div class="section level5" id="getusername">
+<h5><a href="#TOC"><a href="#more_getusername">GetUsername()</a></a></h5>
+</div>
+<div class="section level5" id="getnameofuser">
+<h5><a href="#TOC"><a href="#more_getnameofuser">GetNameOfUser()</a></a></h5>
+</div>
+<div class="section level5" id="getuserviewname">
+<h5><a href="#TOC"><a href="#more_getuserviewname">GetUserViewName()</a></a></h5>
+</div>
+<div class="section level5" id="isuserfacebookregistered">
+<h5><a href="#TOC"><a href="#more_isuserfacebookregistered">IsUserFacebookRegistered()</a></a></h5>
+</div>
+<div class="section level5" id="isusercustomregistered">
+<h5><a href="#TOC"><a href="#more_isusercustomregistered">IsUserCustomRegistered()</a></a></h5>
+</div>
+<div class="section level5" id="findtogetherfriendbyuserid">
+<h5><a href="#TOC"><a href="#more_findtogetherfriendbyuserid">FindTogetherFriendByUserID()</a></a></h5>
+</div>
+<div class="section level5" id="findtogetherfriendbysocialid">
+<h5><a href="#TOC"><a href="#more_findtogetherfriendbysocialid">FindTogetherFriendBySocialID()</a></a></h5>
+</div>
+<div class="section level5" id="getsessiontoken">
+<h5><a href="#TOC"><a href="#more_getsessiontoken">GetSessionToken()</a></a></h5>
+</div>
+<div class="section level5" id="initialize">
+<h5><a href="#TOC"><a href="#more_initialize">Initialize()</a></a></h5>
+</div>
+<div class="section level5" id="setapnsdevicetoken">
+<h5><a href="#TOC"><a href="#more_setapnsdevicetoken">SetApnsDeviceToken()</a></a></h5>
+</div>
+<div class="section level5" id="setserveraddress">
+<h5><a href="#TOC"><a href="#more_setserveraddress">SetServerAddress()</a></a></h5>
+</div>
+<div class="section level5" id="getserveraddress">
+<h5><a href="#TOC"><a href="#more_getserveraddress">GetServerAddress()</a></a></h5>
+</div>
+<div class="section level5" id="setfacebookappid">
+<h5><a href="#TOC"><a href="#more_setfacebookappid">SetFacebookAppID()</a></a></h5>
+</div>
+<div class="section level5" id="getcacheuserguid">
+<h5><a href="#TOC"><a href="#more_getcacheuserguid">GetCacheUserGuid()</a></a></h5>
+</div>
+<div class="section level5" id="loadtogethercache">
+<h5><a href="#TOC"><a href="#more_loadtogethercache">LoadTogetherCache()</a></a></h5>
+</div>
+<div class="section level5" id="savetogethercache">
+<h5><a href="#TOC"><a href="#more_savetogethercache">SaveTogetherCache()</a></a></h5>
+</div>
+<div class="section level5" id="erasetogethercache">
+<h5><a href="#TOC"><a href="#more_erasetogethercache">EraseTogetherCache()</a></a></h5>
+</div>
+<div class="section level5" id="loginuser">
+<h5><a href="#TOC"><a href="#more_loginuser">LoginUser()</a></a></h5>
+</div>
+<div class="section level5" id="getservertimeutc">
+<h5><a href="#TOC"><a href="#more_getservertimeutc">GetServerTimeUTC()</a></a></h5>
+</div>
+<div class="section level5" id="getglobalprofile">
+<h5><a href="#TOC"><a href="#more_getglobalprofile">GetGlobalProfile()</a></a></h5>
+</div>
+<div class="section level5" id="getgameprofile">
+<h5><a href="#TOC"><a href="#more_getgameprofile">GetGameProfile()</a></a></h5>
+</div>
+<div class="section level5" id="getuserprofile">
+<h5><a href="#TOC"><a href="#more_getuserprofile">GetUserProfile()</a></a></h5>
+</div>
+<div class="section level5" id="addatomic">
+<h5><a href="#TOC"><a href="#more_addatomic">AddAtomic()</a></a></h5>
+</div>
+<div class="section level5" id="incrementatomic">
+<h5><a href="#TOC"><a href="#more_incrementatomic">IncrementAtomic()</a></a></h5>
+</div>
+<div class="section level5" id="incrementatomicwithlimit">
+<h5><a href="#TOC"><a href="#more_incrementatomicwithlimit">IncrementAtomicWithLimit()</a></a></h5>
+</div>
+<div class="section level5" id="incrementatomicwithlimitref">
+<h5><a href="#TOC"><a href="#more_incrementatomicwithlimitref">IncrementAtomicWithLimitRef()</a></a></h5>
+</div>
+<div class="section level5" id="registerfacebook">
+<h5><a href="#TOC"><a href="#more_registerfacebook">RegisterFacebook()</a></a></h5>
+</div>
+<div class="section level5" id="registercustom">
+<h5><a href="#TOC"><a href="#more_registercustom">RegisterCustom()</a></a></h5>
+</div>
+<div class="section level5" id="logout">
+<h5><a href="#TOC"><a href="#more_logout">Logout()</a></a></h5>
+</div>
+<div class="section level5" id="registerpushenableddevice">
+<h5><a href="#TOC"><a href="#more_registerpushenableddevice">RegisterPushEnabledDevice()</a></a></h5>
+</div>
+<div class="section level5" id="sendpushnotification">
+<h5><a href="#TOC"><a href="#more_sendpushnotification">SendPushNotification()</a></a></h5>
+</div>
+<div class="section level5" id="ping">
+<h5><a href="#TOC"><a href="#more_ping">Ping()</a></a></h5>
+</div>
+<div class="section level5" id="addanalytic">
+<h5><a href="#TOC"><a href="#more_addanalytic">AddAnalytic()</a></a></h5>
+</div>
+<div class="section level5" id="addanalyticex">
+<h5><a href="#TOC"><a href="#more_addanalyticex">AddAnalyticEx()</a></a></h5>
+<hr />
+<div id="more_getinstance">
+</div>
+
+</div>
+<div class="section level3" id="getinstance-1">
+<h3><a href="#TOC">GetInstance()</a></h3>
+<p>Gets or creates the instance of global 'g_Together'</p>
+<div class="section level4" id="returns-together">
+<h4><a href="#TOC">Returns <a href="together.html">Together</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetInstance(  )</code></pre>
+<hr />
+<div id="more_getuserid">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getuserid-1">
+<h3><a href="#TOC">GetUserID()</a></h3>
+<p>Shorthand for fetching the TogetherUser.UserID property.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetUserID(  )</code></pre>
+<hr />
+<div id="more_getusername">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getusername-1">
+<h3><a href="#TOC">GetUsername()</a></h3>
+<p>Shorthand for fetching the TogetherUser.Username property.</p>
+<div class="section level4" id="returns-string">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetUsername(  )</code></pre>
+<hr />
+<div id="more_getnameofuser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getnameofuser-1">
+<h3><a href="#TOC">GetNameOfUser()</a></h3>
+<p>Shorthand for fetching the TogetherUser.Name property.</p>
+<div class="section level4" id="returns-string-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetNameOfUser(  )</code></pre>
+<hr />
+<div id="more_getuserviewname">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getuserviewname-1">
+<h3><a href="#TOC">GetUserViewName()</a></h3>
+<p>Shorthand for calling the TogetherUser:GetViewName method.</p>
+<div class="section level4" id="returns-string-2">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetUserViewName(  )</code></pre>
+<hr />
+<div id="more_isuserfacebookregistered">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="isuserfacebookregistered-1">
+<h3><a href="#TOC">IsUserFacebookRegistered()</a></h3>
+<p>Checks to see if the User is registered via Facebook.</p>
+<div class="section level4" id="returns-boolean">
+<h4><a href="#TOC">Returns <a href="../../api/type/Boolean.html">boolean</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:IsUserFacebookRegistered(  )</code></pre>
+<hr />
+<div id="more_isusercustomregistered">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="isusercustomregistered-1">
+<h3><a href="#TOC">IsUserCustomRegistered()</a></h3>
+<p>Checks to see if the User is registered via Custom.</p>
+<div class="section level4" id="returns-boolean-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Boolean.html">boolean</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:IsUserCustomRegistered(  )</code></pre>
+<hr />
+<div id="more_findtogetherfriendbyuserid">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="findtogetherfriendbyuserid-1">
+<h3><a href="#TOC">FindTogetherFriendByUserID()</a></h3>
+<p>Finds the TogetherFriend with the specified UserID.</p>
+<div class="section level4" id="returns-togetherfriend">
+<h4><a href="#TOC">Returns <a href="togetherfriend.html">TogetherFriend</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:FindTogetherFriendByUserID( userID )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of User to retrieve.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findtogetherfriendbysocialid">
+</div>
+
+<div class="section level3" id="findtogetherfriendbysocialid-1">
+<h3><a href="#TOC">FindTogetherFriendBySocialID()</a></h3>
+<p>Finds the TogetherFriend with the specified SocialID (FacebookID). Finds the FacebookFriend with the specified SocialID (FacebookID).</p>
+<div class="section level4" id="returns-togetherfriend-1">
+<h4><a href="#TOC">Returns <a href="togetherfriend.html">TogetherFriend</a></a></h4>
+</div>
+<div class="section level4" id="syntax-9">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:FindTogetherFriendBySocialID( userID, userID )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of User to retrieve.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of User to retrieve.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getsessiontoken">
+</div>
+
+<div class="section level3" id="getsessiontoken-1">
+<h3><a href="#TOC">GetSessionToken()</a></h3>
+<p>Gets the session token returned when the User logged in.</p>
+<div class="section level4" id="returns-string-3">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-10">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetSessionToken(  )</code></pre>
+<hr />
+<div id="more_initialize">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="initialize-1">
+<h3><a href="#TOC">Initialize()</a></h3>
+<p>Initializes the Together class so it's ready to make API requests.</p>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-11">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:Initialize( clientPublicKey, clientPrivateKey, gameKey, platformName )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> clientPublicKey</b></p>
+<p><i>The PublicKey assigned to your account. This is accessible from the <a href="https://developer.playstogether.com">playstogether developer portal</a>.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> clientPrivateKey</b></p>
+<p><i>The PrivateKey assigned to your account. This is accessible from the <a href="https://developer.playstogether.com">playstogether developer portal</a>.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameKey</b></p>
+<p><i>The GameKey of the game you are connecting to. This is accessible from the <a href="https://developer.playstogether.com">playstogether developer portal</a>.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> platformName</b></p>
+<p><i>The Name of the Platform the game is running on. Supported Platforms are:<br>(&quot;IOS&quot;, &quot;Android&quot;, &quot;Mac OS&quot;, &quot;Unity&quot;, &quot;HTML5/JS&quot;)</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_setapnsdevicetoken">
+</div>
+
+<div class="section level3" id="setapnsdevicetoken-1">
+<h3><a href="#TOC">SetApnsDeviceToken()</a></h3>
+<p>Sets the ApnsDeviceToken that will be used when registering the device for push notifications.</p>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-12">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:SetApnsDeviceToken( apnsDeviceToken )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> apnsDeviceToken</b></p>
+<p><i>The device token.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_setserveraddress">
+</div>
+
+<div class="section level3" id="setserveraddress-1">
+<h3><a href="#TOC">SetServerAddress()</a></h3>
+<p>Sets the ServerAddress all network messages will be sent to when talking to the together servers. This defaults to the primary Together servers and does not need to be called unless you are working with a form of private/local server instance. If you are interested in private hosting and want more information, contact <script type="text/javascript">
+<!--
+h='&#112;&#108;&#x61;&#x79;&#x73;&#116;&#x6f;&#x67;&#x65;&#116;&#104;&#x65;&#114;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x73;&#x61;&#108;&#x65;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x73;&#x61;&#108;&#x65;&#x73;&#32;&#x61;&#116;&#32;&#112;&#108;&#x61;&#x79;&#x73;&#116;&#x6f;&#x67;&#x65;&#116;&#104;&#x65;&#114;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript>.</p>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-13">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:SetServerAddress( serverAddress )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> serverAddress</b></p>
+<p><i>The server address of the together server.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getserveraddress">
+</div>
+
+<div class="section level3" id="getserveraddress-1">
+<h3><a href="#TOC">GetServerAddress()</a></h3>
+<p>Gets the ServerAddress all requests are being sent to.</p>
+<div class="section level4" id="returns-string-4">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-14">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetServerAddress(  )</code></pre>
+<hr />
+<div id="more_setfacebookappid">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="setfacebookappid-1">
+<h3><a href="#TOC">SetFacebookAppID()</a></h3>
+<p>Sets the Facebook ApplicationID all Facebook related calls will use.</p>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-15">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:SetFacebookAppID( facebookAppID, facebookPrivileges )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> facebookAppID</b></p>
+<p><i>The ApplicationID of the Facebook application.</p>
+<p></i> <b><a href="../../api/type/Table.html">table</a> facebookPrivileges</b></p>
+<p><i>A table full of Facebook privileges to ask for when logging into Facebook.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getcacheuserguid">
+</div>
+
+<div class="section level3" id="getcacheuserguid-1">
+<h3><a href="#TOC">GetCacheUserGuid()</a></h3>
+<p>Gets the cached UserGuid.</p>
+<div class="section level4" id="returns-string-5">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax-16">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetCacheUserGuid(  )</code></pre>
+<hr />
+<div id="more_loadtogethercache">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="loadtogethercache-1">
+<h3><a href="#TOC">LoadTogetherCache()</a></h3>
+<p>Loads the Together Cache from the Device. The only thing stored in the TogetherCache currently is the UserGuid of the last logged in user for the application.</p>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-17">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:LoadTogetherCache(  )</code></pre>
+<hr />
+<div id="more_savetogethercache">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="savetogethercache-1">
+<h3><a href="#TOC">SaveTogetherCache()</a></h3>
+<p>Saves the Together Cache to the Device. The only thing stored in the TogetherCache currently is the UserGuid of the last logged in user for the application.</p>
+<div class="section level4" id="returns-void-5">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-18">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:SaveTogetherCache(  )</code></pre>
+<hr />
+<div id="more_erasetogethercache">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="erasetogethercache-1">
+<h3><a href="#TOC">EraseTogetherCache()</a></h3>
+<p>Erases the Together Cache from the Device. The only thing stored in the TogetherCache currently is the UserGuid of the last logged in user for the application.</p>
+<div class="section level4" id="returns-void-6">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-19">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:EraseTogetherCache(  )</code></pre>
+<hr />
+<div id="more_loginuser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="loginuser-1">
+<h3><a href="#TOC">LoginUser()</a></h3>
+<p>Logs in the User. This should always be the first Together network message called. If no User GUID is provided, a new user account will be created anonymously and assigned a GUID which can be used to log the user in again later or register them with Facebook or via Custom form.</p>
+<blockquote>
+<p><b>Note</b> Currently anonymous users will NOT be deleted. However it is possible that a user cleansing system will be implemented in the future that removes <i>unregistered</i> accounts after 3 to 6 months of <i>inactivity</i>.</p>
+</blockquote>
+<div class="section level4" id="returns-void-7">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-20">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:LoginUser( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getservertimeutc">
+</div>
+
+<div class="section level3" id="getservertimeutc-1">
+<h3><a href="#TOC">GetServerTimeUTC()</a></h3>
+<p>Gets the Server Timestamp(UTC+0). The timestamp will be returned in the data member of the callback as a long.</p>
+<div class="section level4" id="returns-void-8">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-21">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetServerTimeUTC( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getglobalprofile">
+</div>
+
+<div class="section level3" id="getglobalprofile-1">
+<h3><a href="#TOC">GetGlobalProfile()</a></h3>
+<p>Fetches your developer global profile of data set through the portal or by atomic operations. The callback object will contain the profile in the data member as a PropertyCollection type.</p>
+<div class="section level4" id="returns-void-9">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-22">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetGlobalProfile( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-8">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-8">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getgameprofile">
+</div>
+
+<div class="section level3" id="getgameprofile-1">
+<h3><a href="#TOC">GetGameProfile()</a></h3>
+<p>Fetches the game's profile of data set through the portal or by atomic operations. The callback object will contain the profile in the data member as a PropertyCollection type.</p>
+<div class="section level4" id="returns-void-10">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-23">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetGameProfile( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-9">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-9">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getuserprofile">
+</div>
+
+<div class="section level3" id="getuserprofile-1">
+<h3><a href="#TOC">GetUserProfile()</a></h3>
+<p>Fetches the current, logged in user's profile for the game. The callback object will contain the profile in the data member as a PropertyCollection type. This is also retrieved when the User object for the local player is fetched and can be modified with the User.Modify() call.</p>
+<div class="section level4" id="returns-void-11">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-24">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:GetUserProfile( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-10">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-10">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_addatomic">
+</div>
+
+<div class="section level3" id="addatomic-1">
+<h3><a href="#TOC">AddAtomic()</a></h3>
+<p>Adds an atomic field to either the game profile or the global profile. The callback object will contain a Property type in the data field.</p>
+<div class="section level4" id="returns-void-12">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-25">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:AddAtomic( global, parentName, propertyName, propertyValue, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-11">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Boolean.html">boolean</a> global</b></p>
+<p><i>Pass TRUE to add the atomic entry to the global profile, FALSE to add it to the game profile</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> parentName</b></p>
+<p><i>The name of an existing parent collection in which to add the atomic entry to</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the atomic field to add</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propertyValue</b></p>
+<p><i>The value of the atomic entry to apply</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-11">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_incrementatomic">
+</div>
+
+<div class="section level3" id="incrementatomic-1">
+<h3><a href="#TOC">IncrementAtomic()</a></h3>
+<p>Increments an existing atomic property in either the game profile or global profile without an upper limit. The callback object will contain a Property type in the data field.</p>
+<div class="section level4" id="returns-void-13">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-26">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:IncrementAtomic( global, parentName, propertyName, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-12">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Boolean.html">boolean</a> global</b></p>
+<p><i>Pass TRUE to increment an entry in the global profile, FALSE to increment an entry in the game profile</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> parentName</b></p>
+<p><i>The name of an existing parent collection containing the property</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to increment</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-12">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_incrementatomicwithlimit">
+</div>
+
+<div class="section level3" id="incrementatomicwithlimit-1">
+<h3><a href="#TOC">IncrementAtomicWithLimit()</a></h3>
+<p>Increments an existing atomic property in either the game profile or global profile with a passed upper limit. The callback object will contain a Property type in the data field.</p>
+<div class="section level4" id="returns-void-14">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-27">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:IncrementAtomicWithLimit( global, parentName, propertyName, limit, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-13">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Boolean.html">boolean</a> global</b></p>
+<p><i>Pass TRUE to increment an entry in the global profile, FALSE to increment an entry in the game profile</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> parentName</b></p>
+<p><i>The name of an existing parent collection containing the property</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to increment</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> limit</b></p>
+<p><i>The upper limit of the atomic operation as an integer</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-13">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_incrementatomicwithlimitref">
+</div>
+
+<div class="section level3" id="incrementatomicwithlimitref-1">
+<h3><a href="#TOC">IncrementAtomicWithLimitRef()</a></h3>
+<p>Increments an existing atomic property in either the game profile or global profile with a reference to a limit elsewhere in the profile. The callback object will contain a Property type in the data field.</p>
+<div class="section level4" id="returns-void-15">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-28">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:IncrementAtomicWithLimitRef( global, parentName, propertyName, refParent, refProperty, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-14">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Boolean.html">boolean</a> global</b></p>
+<p><i>Pass TRUE to increment an entry in the global profile, FALSE to increment an entry in the game profile</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> parentName</b></p>
+<p><i>The name of an existing parent collection containing the property</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propertyName</b></p>
+<p><i>The name of the property to increment</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> refParent</b></p>
+<p><i>The name of the parent collection containing the property to be used as the limit</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> refProperty</b></p>
+<p><i>The name of the property in the referenced parent to be used as the limit</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-14">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_registerfacebook">
+</div>
+
+<div class="section level3" id="registerfacebook-1">
+<h3><a href="#TOC">RegisterFacebook()</a></h3>
+<p>Registers the User with Facebook. TogetherSocialFacebook:Login() calls this method upon successfully logging into facebook.</p>
+<div class="section level4" id="returns-void-16">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-29">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:RegisterFacebook( facebookID, name, firstName, lastName, link, username, gender, locale, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-15">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> facebookID</b></p>
+<p><i>The FacebookID of the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> name</b></p>
+<p><i>The name of the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> firstName</b></p>
+<p><i>The first name of the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> lastName</b></p>
+<p><i>The last name of the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> link</b></p>
+<p><i>The link to the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> username</b></p>
+<p><i>The username of the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gender</b></p>
+<p><i>The gender of the facebook user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> locale</b></p>
+<p><i>The locale of the facebook user.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-15">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_registercustom">
+</div>
+
+<div class="section level3" id="registercustom-1">
+<h3><a href="#TOC">RegisterCustom()</a></h3>
+<p>Registers the User with the custom registration system.</p>
+<div class="section level4" id="returns-void-17">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-30">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:RegisterCustom( email, password, name, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-16">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> email</b></p>
+<p><i>The email of the Custom user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> password</b></p>
+<p><i>The password of the Custom user.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> name</b></p>
+<p><i>The name of the Custom user.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-16">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_logout">
+</div>
+
+<div class="section level3" id="logout-1">
+<h3><a href="#TOC">Logout()</a></h3>
+<p>Logs out the User. If the user did not registered, this will mark the account inactive but is reactivated at the next login with the same user GUID.</p>
+<blockquote>
+<p><b>Note</b> Currently anonymous users will NOT be deleted. However it is possible that a user cleansing system will be implemented in the future that removes <i>unregistered</i> accounts after 3 to 6 months of <i>inactivity</i>.</p>
+</blockquote>
+<div class="section level4" id="returns-void-18">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-31">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:Logout( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-17">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-17">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_registerpushenableddevice">
+</div>
+
+<div class="section level3" id="registerpushenableddevice-1">
+<h3><a href="#TOC">RegisterPushEnabledDevice()</a></h3>
+<p>Registers a push enabled Device. Use by setting ApnsDeviceToken and/or GcmDeviceToken and/or WnsDeviceToken first then calling.</p>
+<div class="section level4" id="returns-void-19">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-32">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:RegisterPushEnabledDevice( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-18">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-18">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_sendpushnotification">
+</div>
+
+<div class="section level3" id="sendpushnotification-1">
+<h3><a href="#TOC">SendPushNotification()</a></h3>
+<p>Sends a push notification message.</p>
+<blockquote>
+<p><b>Note</b> This counts towards Push Notifications on your developer account and does not count as a System Request.</p>
+</blockquote>
+<div class="section level4" id="returns-void-20">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-33">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:SendPushNotification( destUserID, notificationMessage, platform, data, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-19">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> destUserID</b></p>
+<p><i>The ID of the User to send the push notification to.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> notificationMessage</b></p>
+<p><i>The message to send.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> platform</b></p>
+<p><i>the platform that the message is being sent to: ios or android</p>
+<p></i> <b><a href="togethernotification.html">TogetherNotification</a> data</b></p>
+<p><i>the TogetherNotification to be sent to the server</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-19">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_ping">
+</div>
+
+<div class="section level3" id="ping-1">
+<h3><a href="#TOC">Ping()</a></h3>
+<p>Pings the Server for the User as a keep-alive.</p>
+<div class="section level4" id="returns-void-21">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-34">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:Ping( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-20">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-20">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_addanalytic">
+</div>
+
+<div class="section level3" id="addanalytic-1">
+<h3><a href="#TOC">AddAnalytic()</a></h3>
+<p>Adds an Analytic event for the User with simple options.</p>
+<div class="section level4" id="returns-void-22">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-35">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:AddAnalytic( eventName, propName, propValue, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-21">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> eventName</b></p>
+<p><i>The name of the event to assign to the analytic record.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propName</b></p>
+<p><i>The name of the property to assign to the analytic record.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> propValue</b></p>
+<p><i>The value of the property to assign to the analytic record.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-21">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_addanalyticex">
+</div>
+
+<div class="section level3" id="addanalyticex-1">
+<h3><a href="#TOC">AddAnalyticEx()</a></h3>
+<p>Adds an Analytic event for the User with extended options.</p>
+<div class="section level4" id="returns-void-23">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-36">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>Together:AddAnalyticEx( eventName, propertyCollection, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-22">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> eventName</b></p>
+<p><i>The name of the event to assign to the analytic record.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> propertyCollection</b></p>
+<p><i>Collection of data to add to the event record</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-22">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

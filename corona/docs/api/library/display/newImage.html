@@ -1,0 +1,1647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > display > newImage</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > display > newImage" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#display.newimage">display.newImage()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#parent-optional">parent <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#filename-required">filename <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#basedirectory-optional">baseDirectory <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left, top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#isfullresolution-optional">isFullResolution <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#texture-sampling">Texture sampling</a></li>
+<li><a href="#gotchas">Gotchas</a><ul>
+<li><a href="#image-guidelines">Image Guidelines</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">display</a>  ▸  <a href="newImage.html">newImage</a>
+</div>
+
+<div class="section level1" id="display.newimage">
+<h1><a href="#TOC">display.newImage()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">display.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left">[RectObject][api.type.RectObject]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">images, objects, display object, graphics</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/Graphics/Fishies</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="newRect.html">display.newRect()</a><br/><a href="newImageRect.html">display.newImageRect()</a><br/><a href="loadRemoteImage.html">display.loadRemoteImage()</a></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><a href="http://www.coronalabs.com/blog/2012/03/06/image-sheets-image-groups-and-sprites/">Image Sheets, Image Groups, and Sprites</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><a href="loadRemoteImage.html">display.loadRemoteImage()</a></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><a href="../../../guide/media/imageSheets/index.html">Image Sheets (Sprite Sheets)</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Displays an image on the screen from a file (supports tinting via <a href="../../type/ShapeObject/setFillColor.html">object:setFillColor</a>)</p>
+<p>Image objects are the same as <a href="newRect.html">rect objects</a> in which the <code>object.fill</code> property is set to be an image.</p>
+<p><strong>NOTE:</strong> <a href="newImageRect.html">display.newImageRect()</a> should be used instead to load images when dynamic content scaling is enabled.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<p>Single image file objects:</p>
+<pre><code>display.newImage( filename [,baseDirectory] [, left, top ] )
+display.newImage( [parent,] filename [,baseDirectory] [,left,top] [,isFullResolution])</code></pre>
+<p>ImageSheet-based objects:</p>
+<pre><code>display.newImage( imageSheet, frameIndex )
+display.newImage( parent, imageSheet, frameIndex )</code></pre>
+<div class="section level5" id="parent-optional">
+<h5><a href="#TOC">parent <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/GroupObject/index.html">GroupObject</a>.</em> Specify an optional display group in which to insert the image object. By default, uses the current stage (as returned from <a href="getCurrentStage.html">display.getCurrentStage()</a>) if no parent is specified.</p>
+</div>
+<div class="section level5" id="filename-required">
+<h5><a href="#TOC">filename <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The name of the image file to load, relative to <code>baseDirectory</code> (or <code>system.ResourceDirectory</code> by default).</p>
+</div>
+<div class="section level5" id="basedirectory-optional">
+<h5><a href="#TOC">baseDirectory <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Constant.html">Constant</a>.</em> Path to load the image data from filename. Default is <code>system.ResourceDirectory</code> (project folder; same location as <code>main.lua</code>). See <a href="../system/pathForFile.html">system.pathForFile()</a> for valid values).</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left, top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The left and top coordinates of the image.</p>
+</div>
+<div class="section level5" id="isfullresolution-optional">
+<h5><a href="#TOC">isFullResolution <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> To override autoscaling and show the image at its full-resolution, set this value to <code>true</code>. By default, it is <code>false</code>, but if you specify true, then the new image is loaded at its full resolution (maximum of 2048 x 2048).</p>
+</div>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<p><em>(Inherits properties from <a href="../../type/ShapeObject/index.html">ShapeObject</a>)</em></p>
+<p>Also, see 'Properties -&gt; Shape' under <a href="newRect.html">display.newRect()</a>.</p>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;image.png&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- position the image</span>
+<span class="kw">myImage</span>:translate<span class="ot">(</span> <span class="dv">100</span>, <span class="dv">100</span> <span class="ot">)</span>
+
+<span class="co">-- tint the image red</span>
+<span class="kw">myImage</span>:setFillColor<span class="ot">(</span> <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span>
+
+<span class="co">-- hide the image</span>
+<span class="kw">myImage</span><span class="ot">.</span><span class="kw">isVisible</span> <span class="ot">=</span> <span class="kw">false</span>
+
+<span class="co">-- remove the image</span>
+<span class="kw">myImage</span>:removeSelf<span class="ot">()</span>
+<span class="kw">myImage</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+</div>
+<div class="section level2" id="texture-sampling">
+<h2><a href="#TOC">Texture sampling</a></h2>
+<p>By default, new image sheets will use a linear sampling filter, so that the image will look smooth when the actual rendered region is larger or smaller than the pixel dimensions of the loaded texture.</p>
+<p>You can change the default texture filter by calling <a href="setDefault.html">display.setDefault()</a>. Once an image is loaded the first time, the same sampling filter will be applied for any subsequent loads of the same file. This is because textures are loaded once per file.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>All loaded images are cached. To save texture memory the image in the cache memory is used when it detects an image with the same file name is displayed. This means that loading the same image multiple times doesn't increase the amount of texture memory used on the device.</p>
+<p>A negative side-effect to the image caching is the comparison is based on the file name and not the file content. This means if an image file is displayed and then deleted from the directory, any file loaded after that with the same file name will still display the previous cached image. Use a different file name to avoid this problem.</p>
+<p>On Android, images are limited (downsized) to 2048 x 2048, even though the maximum texture memory size is higher on the device. The reason is most Android devices don't have enough heap memory to load the image. It's recommended that you don't load image files larger than 2048 x 2048.</p>
+<p>There is a different between Mac/iOS and Windows/Android when displaying images with <strong>display.newImage</strong>. If the image to be loaded exceeds the resolution of the device, it will be autoscaled to fit on Mac and iOS. On Windows and Android it will load full resolution (up to the maximum texture size of the device). This can cause apps to display differently between the platforms. You can set the <strong>isFullResolution</strong> flag to <strong>true</strong> to load the full resolution on all platforms. If you know the image size before loading, use <strong>display.newImageRect</strong> API instead. The <strong>display.newImageRect</strong> API also handles loading the proper image resolution based on the device's resolution.</p>
+<div class="section level3" id="image-guidelines">
+<h3><a href="#TOC">Image Guidelines</a></h3>
+<ul>
+<li>Images should not contain an embedded ICC profile. Use &quot;Save for Web&quot; when exporting images to be used on the device.</li>
+<li>To avoid images from using too much texture memory, make sure the image is between 72 and 170 DPI.</li>
+<li>Be aware of the gamma and color differences between your development system (Mac and Windows machines) and the device. * For best results color calibrate the display used for creating the images.</li>
+<li>Grayscale images are not supported; images must currently be RGB.</li>
+<li>Indexed PNG images are not supported.</li>
+<li>The maximum full-resolution image supported is 2048 x 2048. This value may be less on older devices.</li>
+<li>You should NOT use progressive JPGs since they will take much longer to load.</li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.display.newImage&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.display.newImage&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.display.newImage&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

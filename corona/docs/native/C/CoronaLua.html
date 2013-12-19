@@ -1,0 +1,1699 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Enterprise > C > CoronaLua</title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Enterprise > C > CoronaLua" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#coronalua.h">CoronaLua.h</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#getcoronathread">GetCoronaThread()</a></li>
+<li><a href="#new">New()</a></li>
+<li><a href="#delete">Delete()</a></li>
+<li><a href="#normalize">Normalize()</a></li>
+<li><a href="#getcontext">GetContext()</a></li>
+<li><a href="#initializecontext">InitializeContext()</a></li>
+<li><a href="#newref">NewRef()</a></li>
+<li><a href="#deleteref">DeleteRef()</a></li>
+<li><a href="#equalref">EqualRef()</a></li>
+<li><a href="#newevent">NewEvent()</a></li>
+<li><a href="#dispatchevent">DispatchEvent()</a></li>
+<li><a href="#islistener">IsListener()</a></li>
+<li><a href="#pushruntime">PushRuntime()</a></li>
+<li><a href="#runtimedispatchevent">RuntimeDispatchEvent()</a></li>
+<li><a href="#newgcmetatable">NewGCMetatable()</a></li>
+<li><a href="#newmetatable">NewMetatable()</a></li>
+<li><a href="#initializegcmetatable">InitializeGCMetatable()</a></li>
+<li><a href="#initializemetatable">InitializeMetatable()</a></li>
+<li><a href="#pushuserdata">PushUserdata()</a></li>
+<li><a href="#touserdata">ToUserdata()</a></li>
+<li><a href="#checkuserdata">CheckUserdata()</a></li>
+<li><a href="#registermoduleloader">RegisterModuleLoader()</a></li>
+<li><a href="#registermoduleloaders">RegisterModuleLoaders()</a></li>
+<li><a href="#coronaluainsertpackageloader">CoronaLuaInsertPackageLoader()</a></li>
+<li><a href="#geterrorhandler">GetErrorHandler()</a></li>
+<li><a href="#seterrorhandler">SetErrorHandler()</a></li>
+<li><a href="#docall">DoCall()</a></li>
+<li><a href="#dobuffer">DoBuffer()</a></li>
+<li><a href="#dofile">DoFile()</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Enterprise</a>  ▸  <a href="index.html">C</a>  ▸  <a href="CoronaLua.html">CoronaLua</a>
+</div>
+<div class="section level1" id="coronalua.h">
+<h1><a href="#TOC">CoronaLua.h</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">C header</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">iOS, enterprise, C</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p><code>CoronaLua.h</code> contains C and C++ convenience functions to simplify how you deal with Lua's C API.</p>
+<p>The C++ functions are just thin wrappers around the C functions. The header is designed to work correctly with both C and C++ compilers.</p>
+<p>All C functions are prefixed with <code>CoronaLua</code>. All C++ methods mirror the C functions but instead of the prefix, they are in the <code>Corona::Lua</code> namespace.</p>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<div class="section level4" id="getcoronathread">
+<h4><a href="#TOC">GetCoronaThread()</a></h4>
+<p><code>lua_State* CoronaLuaGetCoronaThread( lua_State *coroutine )</code></p>
+<p>Gives you the main Lua state used by Corona given the Lua state corresponding to a <code>coroutine</code>. Returns NULL if the coroutine is not a coroutine that belongs to Corona's main Lua state. If <code>coroutine</code> happens to be Corona's main Lua state, then it returns <code>coroutine</code>.</p>
+<p>NOTE: Lua uses the word 'thread' to mean coroutine, e.g. a cooperative (not pre-emptive) thread.</p>
+</div>
+<div class="section level4" id="new">
+<h4><a href="#TOC">New()</a></h4>
+<p><code>lua_State* CoronaLuaNew()</code></p>
+<p>Creates a new <code>lua_State</code> context. Typically, you just use the <code>lua_State</code> from [CoronaRuntime][native.enterprise.ios.CoronaRuntime].</p>
+</div>
+<div class="section level4" id="delete">
+<h4><a href="#TOC">Delete()</a></h4>
+<p><code>void CoronaLuaDelete( lua_State *L )</code></p>
+<p>Deletes a <code>lua_State</code> created by <code>Corona::Lua::New()</code></p>
+</div>
+<div class="section level4" id="normalize">
+<h4><a href="#TOC">Normalize()</a></h4>
+<p><code>int CoronaLuaNormalize( lua_State *L, int index )</code></p>
+<p>Returns an absolute index location on the Lua stack for the passed <code>index</code>. This is useful if you have negative stack indices, as these are relative to the top of the stack.</p>
+</div>
+<div class="section level4" id="getcontext">
+<h4><a href="#TOC">GetContext()</a></h4>
+<p><code>void *CoronaLuaGetContext( lua_State *L )</code></p>
+<p>Returns a platform-specific pointer.</p>
+</div>
+<div class="section level4" id="initializecontext">
+<h4><a href="#TOC">InitializeContext()</a></h4>
+<p><code>void CoronaLuaInitializeContext( lua_State *L, void *context, const char *metatableName )</code></p>
+<p>Initializes a platform-specific pointer. The <code>metatableName</code> argument may be NULL. However, if you want the pointer to be freed, you must specify a valid metatable contain a <code>__gc</code> method which gives you a way to finalize the pointer.</p>
+</div>
+<div class="section level4" id="newref">
+<h4><a href="#TOC">NewRef()</a></h4>
+<p><code>CoronaLuaRef CoronaLuaNewRef( lua_State *L, int index )</code></p>
+<p>Returns a new <code>CoronaLuaRef</code> object which holds a reference to the Lua object on the Lua stack at <code>index</code>. You can use this to store and access Lua objects from native code.</p>
+</div>
+<div class="section level4" id="deleteref">
+<h4><a href="#TOC">DeleteRef()</a></h4>
+<p><code>void CoronaLuaDeleteRef( lua_State *L, CoronaLuaRef ref )</code></p>
+<p>Deletes a <code>CoronaLuaRef</code> reference, and frees the referene to the underlying Lua object.</p>
+</div>
+<div class="section level4" id="equalref">
+<h4><a href="#TOC">EqualRef()</a></h4>
+<p><code>int CoronaLuaEqualRef( lua_State *L, CoronaLuaRef ref, int index )</code></p>
+<p>Returns 1 if the Lua value represented by <code>ref</code> is equal to the value at <code>index</code> following the semantices of the Lua <code>==</code> operator (that is, may call metamethods). Otherwise returns 0. Also returns 0 if <code>index</code> is non valid.</p>
+</div>
+<div class="section level4" id="newevent">
+<h4><a href="#TOC">NewEvent()</a></h4>
+<p><code>void CoronaLuaNewEvent( lua_State *L, const char *eventName )</code></p>
+<p>Creates a Lua table with the <code>name</code> property set to <code>eventName</code> and pushes it to the top of the Lua stack.</p>
+</div>
+<div class="section level4" id="dispatchevent">
+<h4><a href="#TOC">DispatchEvent()</a></h4>
+<p><code>void CoronaLuaDispatchEvent( lua_State *L, CoronaLuaRef listenerRef, int nresults )</code></p>
+<p>Invokes the listener corresponding to <code>listenerRef</code> passing the value at the top of the stack as the Corona event table. You should use <code>CoronaLuaNewEvent()</code> to create this event. This function pops the value from the top of the stack.</p>
+</div>
+<div class="section level4" id="islistener">
+<h4><a href="#TOC">IsListener()</a></h4>
+<p><code>bool CoronaLuaIsListener( lua_State *L, int index, const char *eventName )</code></p>
+<p>Returns whether the function at <code>index</code> is a Corona <a href="../../api/type/Listener.html">listener</a>.</p>
+</div>
+<div class="section level4" id="pushruntime">
+<h4><a href="#TOC">PushRuntime()</a></h4>
+<p><code>void CoronaLuaPushRuntime( lua_State *L )</code></p>
+<p>Pushes the global <a href="../../api/type/Runtime/index.html">Runtime</a> object on the stack.</p>
+</div>
+<div class="section level4" id="runtimedispatchevent">
+<h4><a href="#TOC">RuntimeDispatchEvent()</a></h4>
+<p><code>void CoronaLuaRuntimeDispatchEvent( lua_State *L, int index )</code></p>
+<p>Invokes the equivalent of <code>Runtime:dispatchEvent( event )</code> with the event object at <code>index</code>. The object at <code>index</code> must be a Lua table with the <code>name</code> property set to the event type.</p>
+<p><strong>Gotcha:</strong> The event object at <code>index</code> is left on the stack.</p>
+<p><em>NOTE: This is available starting in build 843</em></p>
+</div>
+<div class="section level4" id="newgcmetatable">
+<h4><a href="#TOC">NewGCMetatable()</a></h4>
+<p><code>void CoronaLuaNewGCMetatable( lua_State* L, const char name[], lua_CFunction __gc1 )</code></p>
+<p>Creates a metatable called <code>name</code> with a finalizer function <code>__gc1</code></p>
+</div>
+<div class="section level4" id="newmetatable">
+<h4><a href="#TOC">NewMetatable()</a></h4>
+<p><code>void CoronaLuaNewMetatable( lua_State* L, const char name[], const luaL_Reg vtable[] )</code></p>
+<p>Creates a metatable called <code>name</code> with the functions in <code>vtable</code></p>
+</div>
+<div class="section level4" id="initializegcmetatable">
+<h4><a href="#TOC">InitializeGCMetatable()</a></h4>
+<p><code>void CoronaLuaInitializeGCMetatable( lua_State* L, const char name[], lua_CFunction __gc1 )</code></p>
+<p>Same as <code>CoronaLuaNewGCMetatable()</code>, but doesn't leave anything on stack.</p>
+</div>
+<div class="section level4" id="initializemetatable">
+<h4><a href="#TOC">InitializeMetatable()</a></h4>
+<p><code>void CoronaLuaInitializeMetatable( lua_State* L, const char name[], const luaL_Reg vtable[] )</code></p>
+<p>Same as <code>CoronaLuaNewMetatable()</code>, but doesn't leave anything on stack.</p>
+</div>
+<div class="section level4" id="pushuserdata">
+<h4><a href="#TOC">PushUserdata()</a></h4>
+<p><code>void CoronaLuaPushUserdata( lua_State* L, void* ud, const char metatableName[] )</code></p>
+<p>Wraps the pointer <code>ud</code> in a Lua userdata object and sets the userdata's metatable to <code>metatableName</code>.</p>
+<p>NOTE: Assumes there will be only one Lua instance of the userdata. In other words, when the GC collects the ud, ud will get deleted!</p>
+</div>
+<div class="section level4" id="touserdata">
+<h4><a href="#TOC">ToUserdata()</a></h4>
+<p><code>void* CoronaLuaToUserdata( lua_State* L, int index )</code></p>
+<p>Returns the pointer wrapped by the Lua userdata at <code>index</code></p>
+</div>
+<div class="section level4" id="checkuserdata">
+<h4><a href="#TOC">CheckUserdata()</a></h4>
+<p><code>void* CoronaLuaCheckUserdata( lua_State* L, int index, const char metatableName[] )</code></p>
+<p>Same as <code>CoronaLuaToUserdata()</code> except it returns <code>NULL</code> if the userdata at <code>index</code> doesn't have a metatable that matches <code>metatableName</code>.</p>
+</div>
+<div class="section level4" id="registermoduleloader">
+<h4><a href="#TOC">RegisterModuleLoader()</a></h4>
+<p><code>void CoronaLuaRegisterModuleLoader( lua_State *L, const char *name, lua_CFunction loader, int nupvalues = 0 )</code></p>
+<p>Registers <code>loader</code> corresponding to module <code>name</code>. You can pass state variables to the loader by pushing those values on to the Lua stack and specifying the number of values via <code>nupvalues</code>.</p>
+<p>Similar to <code>lua_pushcclosure()</code>, this function will pop <code>nupvalues</code> from the stack. Note: Prior to build 869, these values were not popped.</p>
+</div>
+<div class="section level4" id="registermoduleloaders">
+<h4><a href="#TOC">RegisterModuleLoaders()</a></h4>
+<p><code>void CoronaLuaRegisterModuleLoaders( lua_State *L, const luaL_Reg moduleLoaders[], int nupvalues = 0 )</code></p>
+<p>Same as <code>CoronaLuaRegisterModuleLoader()</code> but you register multiple name/loader pairs.</p>
+</div>
+<div class="section level4" id="coronaluainsertpackageloader">
+<h4><a href="#TOC">CoronaLuaInsertPackageLoader()</a></h4>
+<p><code>void CoronaLuaInsertPackageLoader( lua_State *L, lua_CFunction loader, int index )</code></p>
+<p>Performs the equivalent of the following Lua code:</p>
+<pre><code>table.insert( package.loaders, index, loader )</code></pre>
+</div>
+<div class="section level4" id="geterrorhandler">
+<h4><a href="#TOC">GetErrorHandler()</a></h4>
+<p><code>lua_CFunction CoronaLuaGetErrorHandler()</code></p>
+<p>Returns the error handler invoked on a Lua exception. By default, this is <code>NULL</code>, which means an internal Corona handler is called.</p>
+</div>
+<div class="section level4" id="seterrorhandler">
+<h4><a href="#TOC">SetErrorHandler()</a></h4>
+<p><code>void CoronaLuaSetErrorHandler( lua_CFunction newValue )</code></p>
+<p>Sets the error handler invoked on a Lua exception. By default, an internal Corona handler is called.</p>
+</div>
+<div class="section level4" id="docall">
+<h4><a href="#TOC">DoCall()</a></h4>
+<p><code>int CoronaLuaDoCall( lua_State* L, int narg, int nresults )</code></p>
+<p>Does a protected call (see <a href="http://www.lua.org/manual/5.1/manual.html#lua_pcall">lua_pcall</a>) on a function that's on the stack. <code>narg</code> includes the total function and the number of arguments passed to it.</p>
+</div>
+<div class="section level4" id="dobuffer">
+<h4><a href="#TOC">DoBuffer()</a></h4>
+<p><code>int CoronaLuaDoBuffer( lua_State *L, lua_CFunction loader, lua_CFunction pushargs )</code></p>
+</div>
+<div class="section level4" id="dofile">
+<h4><a href="#TOC">DoFile()</a></h4>
+<p><code>int CoronaLuaDoFile( lua_State *L, const char* file, int narg, bool clear )</code></p>
+<p>Same as <code>DoCall()</code> except the function is the chunk contained in <code>file</code>.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=native.C.CoronaLua&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=native.C.CoronaLua&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=native.C.CoronaLua&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

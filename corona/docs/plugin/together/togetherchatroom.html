@@ -1,0 +1,2405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > togetherchatroom</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > togetherchatroom" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.togetherchatroom">together.TogetherChatRoom</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#number-chatroomid"><a href="../../api/type/Number.html">number</a> ChatRoomID</a></li>
+<li><a href="#number-roomid"><a href="../../api/type/Number.html">number</a> RoomID</a></li>
+<li><a href="#number-creatoruserid"><a href="../../api/type/Number.html">number</a> CreatorUserID</a></li>
+<li><a href="#string-creatorusername"><a href="../../api/type/String.html">string</a> CreatorUsername</a></li>
+<li><a href="#number-secondssincecreated"><a href="../../api/type/Number.html">number</a> SecondsSinceCreated</a></li>
+<li><a href="#number-secondssincemodified"><a href="../../api/type/Number.html">number</a> SecondsSinceModified</a></li>
+<li><a href="#string-name"><a href="../../api/type/String.html">string</a> Name</a></li>
+<li><a href="#string-description"><a href="../../api/type/String.html">string</a> Description</a></li>
+<li><a href="#propertycollection-properties"><a href="propertycollection.html">PropertyCollection</a> Properties</a></li>
+<li><a href="#table-chatroomusers"><a href="../../api/type/Table.html">table</a> ChatRoomUsers</a></li>
+<li><a href="#table-chatmessages"><a href="../../api/type/Table.html">table</a> ChatMessages</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#addchatroomuser"><a href="#more_addchatroomuser">AddChatRoomUser()</a></a></li>
+<li><a href="#findchatroomuserbyuserid"><a href="#more_findchatroomuserbyuserid">FindChatRoomUserByUserID()</a></a></li>
+<li><a href="#findchatroomuserbychatroomuserid"><a href="#more_findchatroomuserbychatroomuserid">FindChatRoomUserByChatRoomUserID()</a></a></li>
+<li><a href="#getchatroomusercount"><a href="#more_getchatroomusercount">GetChatRoomUserCount()</a></a></li>
+<li><a href="#getchatroomuser"><a href="#more_getchatroomuser">GetChatRoomUser()</a></a></li>
+<li><a href="#indexofchatroomuser"><a href="#more_indexofchatroomuser">IndexOfChatRoomUser()</a></a></li>
+<li><a href="#indexofchatroomuserbyuserid"><a href="#more_indexofchatroomuserbyuserid">IndexOfChatRoomUserByUserID()</a></a></li>
+<li><a href="#indexofchatroomuserbychatroomuserid"><a href="#more_indexofchatroomuserbychatroomuserid">IndexOfChatRoomUserByChatRoomUserID()</a></a></li>
+<li><a href="#removechatroomuser"><a href="#more_removechatroomuser">RemoveChatRoomUser()</a></a></li>
+<li><a href="#addchatmessage"><a href="#more_addchatmessage">AddChatMessage()</a></a></li>
+<li><a href="#findchatmessagebychatmessageid"><a href="#more_findchatmessagebychatmessageid">FindChatMessageByChatMessageID()</a></a></li>
+<li><a href="#getchatmessagecount"><a href="#more_getchatmessagecount">GetChatMessageCount()</a></a></li>
+<li><a href="#getchatmessage"><a href="#more_getchatmessage">GetChatMessage()</a></a></li>
+<li><a href="#indexofchatmessage"><a href="#more_indexofchatmessage">IndexOfChatMessage()</a></a></li>
+<li><a href="#indexofchatmessagebychatmessageid"><a href="#more_indexofchatmessagebychatmessageid">IndexOfChatMessageByChatMessageID()</a></a></li>
+<li><a href="#removechatmessage"><a href="#more_removechatmessage">RemoveChatMessage()</a></a></li>
+<li><a href="#getdetails"><a href="#more_getdetails">GetDetails()</a></a></li>
+<li><a href="#join"><a href="#more_join">Join()</a></a></li>
+<li><a href="#leave"><a href="#more_leave">Leave()</a></a></li>
+<li><a href="#createmessage"><a href="#more_createmessage">CreateMessage()</a></a></li>
+<li><a href="#deletemessage"><a href="#more_deletemessage">DeleteMessage()</a></a></li>
+<li><a href="#markmessageasread"><a href="#more_markmessageasread">MarkMessageAsRead()</a></a></li>
+<li><a href="#modify"><a href="#more_modify">Modify()</a></a></li>
+<li><a href="#inviteuser"><a href="#more_inviteuser">InviteUser()</a></a></li>
+<li><a href="#addchatroomuser-1">AddChatRoomUser()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#findchatroomuserbyuserid-1">FindChatRoomUserByUserID()</a><ul>
+<li><a href="#returns-togetherchatroomuser">Returns <a href="togetherchatroomuser.html">TogetherChatRoomUser</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#findchatroomuserbychatroomuserid-1">FindChatRoomUserByChatRoomUserID()</a><ul>
+<li><a href="#returns-togetherchatroomuser-1">Returns <a href="togetherchatroomuser.html">TogetherChatRoomUser</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#getchatroomusercount-1">GetChatRoomUserCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+</ul></li>
+<li><a href="#getchatroomuser-1">GetChatRoomUser()</a><ul>
+<li><a href="#returns-togetherchatroomuser-2">Returns <a href="togetherchatroomuser.html">TogetherChatRoomUser</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#indexofchatroomuser-1">IndexOfChatRoomUser()</a><ul>
+<li><a href="#returns-number-1">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#indexofchatroomuserbyuserid-1">IndexOfChatRoomUserByUserID()</a><ul>
+<li><a href="#returns-number-2">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#indexofchatroomuserbychatroomuserid-1">IndexOfChatRoomUserByChatRoomUserID()</a><ul>
+<li><a href="#returns-number-3">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#removechatroomuser-1">RemoveChatRoomUser()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a><ul>
+<li><a href="#addchatmessage-1">AddChatMessage()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-9">Syntax</a></li>
+<li><a href="#parameters-8">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-8"></i></a><ul>
+<li><a href="#findchatmessagebychatmessageid-1">FindChatMessageByChatMessageID()</a><ul>
+<li><a href="#returns-togetherchatmessage">Returns <a href="togetherchatmessage.html">TogetherChatMessage</a></a></li>
+<li><a href="#syntax-10">Syntax</a></li>
+<li><a href="#parameters-9">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-9"></i></a><ul>
+<li><a href="#getchatmessagecount-1">GetChatMessageCount()</a><ul>
+<li><a href="#returns-number-4">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-11">Syntax</a></li>
+</ul></li>
+<li><a href="#getchatmessage-1">GetChatMessage()</a><ul>
+<li><a href="#returns-togetherchatmessage-1">Returns <a href="togetherchatmessage.html">TogetherChatMessage</a></a></li>
+<li><a href="#syntax-12">Syntax</a></li>
+<li><a href="#parameters-10">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-10"></i></a><ul>
+<li><a href="#indexofchatmessage-1">IndexOfChatMessage()</a><ul>
+<li><a href="#returns-number-5">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-13">Syntax</a></li>
+<li><a href="#parameters-11">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-11"></i></a><ul>
+<li><a href="#indexofchatmessagebychatmessageid-1">IndexOfChatMessageByChatMessageID()</a><ul>
+<li><a href="#returns-number-6">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-14">Syntax</a></li>
+<li><a href="#parameters-12">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-12"></i></a><ul>
+<li><a href="#removechatmessage-1">RemoveChatMessage()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-15">Syntax</a></li>
+<li><a href="#parameters-13">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-13"></i></a><ul>
+<li><a href="#getdetails-1">GetDetails()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-16">Syntax</a></li>
+<li><a href="#parameters-14">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-14"></i></a><ul>
+<li><a href="#join-1">Join()</a><ul>
+<li><a href="#returns-void-5">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-17">Syntax</a></li>
+<li><a href="#parameters-15">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-15"></i></a><ul>
+<li><a href="#leave-1">Leave()</a><ul>
+<li><a href="#returns-void-6">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-18">Syntax</a></li>
+<li><a href="#parameters-16">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-16"></i></a><ul>
+<li><a href="#createmessage-1">CreateMessage()</a><ul>
+<li><a href="#returns-void-7">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-19">Syntax</a></li>
+<li><a href="#parameters-17">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-17"></i></a><ul>
+<li><a href="#deletemessage-1">DeleteMessage()</a><ul>
+<li><a href="#returns-void-8">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-20">Syntax</a></li>
+<li><a href="#parameters-18">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-18"></i></a><ul>
+<li><a href="#markmessageasread-1">MarkMessageAsRead()</a><ul>
+<li><a href="#returns-void-9">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-21">Syntax</a></li>
+<li><a href="#parameters-19">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-19"></i></a><ul>
+<li><a href="#modify-1">Modify()</a><ul>
+<li><a href="#returns-void-10">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-22">Syntax</a></li>
+<li><a href="#parameters-20">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-20"></i></a><ul>
+<li><a href="#inviteuser-1">InviteUser()</a><ul>
+<li><a href="#returns-void-11">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-23">Syntax</a></li>
+<li><a href="#parameters-21">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-21"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="togetherchatroom.html">togetherchatroom</a>
+</div>
+<div class="section level1" id="together.togetherchatroom">
+<h1><a href="#TOC">together.TogetherChatRoom</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">TogetherChatRoom</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The ChatRoom class represents a ChatRoom and manages a list internally of ChatRoomUsers and ChatMessages</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="number-chatroomid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> ChatRoomID</a></h4>
+<p>The ID of the ChatRoom.</p>
+</div>
+<div class="section level4" id="number-roomid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> RoomID</a></h4>
+<p>The ID of the Room the ChatRoom is in.</p>
+</div>
+<div class="section level4" id="number-creatoruserid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> CreatorUserID</a></h4>
+<p>The ID of the User that created the ChatRoom.</p>
+</div>
+<div class="section level4" id="string-creatorusername">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> CreatorUsername</a></h4>
+<p>The username of the User that created the ChatRoom.</p>
+</div>
+<div class="section level4" id="number-secondssincecreated">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> SecondsSinceCreated</a></h4>
+<p>The number of seconds since the ChatRoom was created.</p>
+</div>
+<div class="section level4" id="number-secondssincemodified">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> SecondsSinceModified</a></h4>
+<p>The number of seconds since the ChatRoom was last modified.</p>
+</div>
+<div class="section level4" id="string-name">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> Name</a></h4>
+<p>The name of the ChatRoom.</p>
+</div>
+<div class="section level4" id="string-description">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> Description</a></h4>
+<p>A textual description for the ChatRoom.</p>
+</div>
+<div class="section level4" id="propertycollection-properties">
+<h4><a href="#TOC"><a href="propertycollection.html">PropertyCollection</a> Properties</a></h4>
+<p>A property collection containing all custom properties for the ChatRoom.</p>
+</div>
+<div class="section level4" id="table-chatroomusers">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> ChatRoomUsers</a></h4>
+<p>Contains all the ChatRoomUsers that are in the ChatRoom.</p>
+</div>
+<div class="section level4" id="table-chatmessages">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> ChatMessages</a></h4>
+<p>Contains all the ChatMessages belonging to the ChatRoom.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="addchatroomuser">
+<h5><a href="#TOC"><a href="#more_addchatroomuser">AddChatRoomUser()</a></a></h5>
+</div>
+<div class="section level5" id="findchatroomuserbyuserid">
+<h5><a href="#TOC"><a href="#more_findchatroomuserbyuserid">FindChatRoomUserByUserID()</a></a></h5>
+</div>
+<div class="section level5" id="findchatroomuserbychatroomuserid">
+<h5><a href="#TOC"><a href="#more_findchatroomuserbychatroomuserid">FindChatRoomUserByChatRoomUserID()</a></a></h5>
+</div>
+<div class="section level5" id="getchatroomusercount">
+<h5><a href="#TOC"><a href="#more_getchatroomusercount">GetChatRoomUserCount()</a></a></h5>
+</div>
+<div class="section level5" id="getchatroomuser">
+<h5><a href="#TOC"><a href="#more_getchatroomuser">GetChatRoomUser()</a></a></h5>
+</div>
+<div class="section level5" id="indexofchatroomuser">
+<h5><a href="#TOC"><a href="#more_indexofchatroomuser">IndexOfChatRoomUser()</a></a></h5>
+</div>
+<div class="section level5" id="indexofchatroomuserbyuserid">
+<h5><a href="#TOC"><a href="#more_indexofchatroomuserbyuserid">IndexOfChatRoomUserByUserID()</a></a></h5>
+</div>
+<div class="section level5" id="indexofchatroomuserbychatroomuserid">
+<h5><a href="#TOC"><a href="#more_indexofchatroomuserbychatroomuserid">IndexOfChatRoomUserByChatRoomUserID()</a></a></h5>
+</div>
+<div class="section level5" id="removechatroomuser">
+<h5><a href="#TOC"><a href="#more_removechatroomuser">RemoveChatRoomUser()</a></a></h5>
+</div>
+<div class="section level5" id="addchatmessage">
+<h5><a href="#TOC"><a href="#more_addchatmessage">AddChatMessage()</a></a></h5>
+</div>
+<div class="section level5" id="findchatmessagebychatmessageid">
+<h5><a href="#TOC"><a href="#more_findchatmessagebychatmessageid">FindChatMessageByChatMessageID()</a></a></h5>
+</div>
+<div class="section level5" id="getchatmessagecount">
+<h5><a href="#TOC"><a href="#more_getchatmessagecount">GetChatMessageCount()</a></a></h5>
+</div>
+<div class="section level5" id="getchatmessage">
+<h5><a href="#TOC"><a href="#more_getchatmessage">GetChatMessage()</a></a></h5>
+</div>
+<div class="section level5" id="indexofchatmessage">
+<h5><a href="#TOC"><a href="#more_indexofchatmessage">IndexOfChatMessage()</a></a></h5>
+</div>
+<div class="section level5" id="indexofchatmessagebychatmessageid">
+<h5><a href="#TOC"><a href="#more_indexofchatmessagebychatmessageid">IndexOfChatMessageByChatMessageID()</a></a></h5>
+</div>
+<div class="section level5" id="removechatmessage">
+<h5><a href="#TOC"><a href="#more_removechatmessage">RemoveChatMessage()</a></a></h5>
+</div>
+<div class="section level5" id="getdetails">
+<h5><a href="#TOC"><a href="#more_getdetails">GetDetails()</a></a></h5>
+</div>
+<div class="section level5" id="join">
+<h5><a href="#TOC"><a href="#more_join">Join()</a></a></h5>
+</div>
+<div class="section level5" id="leave">
+<h5><a href="#TOC"><a href="#more_leave">Leave()</a></a></h5>
+</div>
+<div class="section level5" id="createmessage">
+<h5><a href="#TOC"><a href="#more_createmessage">CreateMessage()</a></a></h5>
+</div>
+<div class="section level5" id="deletemessage">
+<h5><a href="#TOC"><a href="#more_deletemessage">DeleteMessage()</a></a></h5>
+</div>
+<div class="section level5" id="markmessageasread">
+<h5><a href="#TOC"><a href="#more_markmessageasread">MarkMessageAsRead()</a></a></h5>
+</div>
+<div class="section level5" id="modify">
+<h5><a href="#TOC"><a href="#more_modify">Modify()</a></a></h5>
+</div>
+<div class="section level5" id="inviteuser">
+<h5><a href="#TOC"><a href="#more_inviteuser">InviteUser()</a></a></h5>
+<hr />
+<div id="more_addchatroomuser">
+</div>
+
+</div>
+<div class="section level3" id="addchatroomuser-1">
+<h3><a href="#TOC">AddChatRoomUser()</a></h3>
+<p>Adds a ChatRoomUser to the internally managed list without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:AddChatRoomUser( chatRoomUser )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherchatroomuser.html">TogetherChatRoomUser</a> chatRoomUser</b></p>
+<p><i>Instance of the ChatRoomUser to add internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findchatroomuserbyuserid">
+</div>
+
+<div class="section level3" id="findchatroomuserbyuserid-1">
+<h3><a href="#TOC">FindChatRoomUserByUserID()</a></h3>
+<p>Finds the ChatRoomUser with the specified UserID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatroomuser">
+<h4><a href="#TOC">Returns <a href="togetherchatroomuser.html">TogetherChatRoomUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:FindChatRoomUserByUserID( userID )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of the User to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findchatroomuserbychatroomuserid">
+</div>
+
+<div class="section level3" id="findchatroomuserbychatroomuserid-1">
+<h3><a href="#TOC">FindChatRoomUserByChatRoomUserID()</a></h3>
+<p>Finds the ChatRoomUser with the specified ChatRoomUserID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatroomuser-1">
+<h4><a href="#TOC">Returns <a href="togetherchatroomuser.html">TogetherChatRoomUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:FindChatRoomUserByChatRoomUserID( chatRoomUserID )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatRoomUserID</b></p>
+<p><i>The ID of the ChatRoomUser to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getchatroomusercount">
+</div>
+
+<div class="section level3" id="getchatroomusercount-1">
+<h3><a href="#TOC">GetChatRoomUserCount()</a></h3>
+<p>Gets the number of ChatRoomUsers currently managed internally.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:GetChatRoomUserCount(  )</code></pre>
+<hr />
+<div id="more_getchatroomuser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getchatroomuser-1">
+<h3><a href="#TOC">GetChatRoomUser()</a></h3>
+<p>Gets the ChatRoomUser at the specified index if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatroomuser-2">
+<h4><a href="#TOC">Returns <a href="togetherchatroomuser.html">TogetherChatRoomUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:GetChatRoomUser( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the ChatRoomUser to retrieve internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofchatroomuser">
+</div>
+
+<div class="section level3" id="indexofchatroomuser-1">
+<h3><a href="#TOC">IndexOfChatRoomUser()</a></h3>
+<p>Returns the index of the specified ChatRoomUser if it exists internally, otherwise returns nil.</p>
+<div class="section level4" id="returns-number-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:IndexOfChatRoomUser( chatRoomUser )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherchatroomuser.html">TogetherChatRoomUser</a> chatRoomUser</b></p>
+<p><i>Instance of the chatRoomUser to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofchatroomuserbyuserid">
+</div>
+
+<div class="section level3" id="indexofchatroomuserbyuserid-1">
+<h3><a href="#TOC">IndexOfChatRoomUserByUserID()</a></h3>
+<p>Returns the index of the ChatRoomUser with the specified UserID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-2">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:IndexOfChatRoomUserByUserID( userID )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of the User to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofchatroomuserbychatroomuserid">
+</div>
+
+<div class="section level3" id="indexofchatroomuserbychatroomuserid-1">
+<h3><a href="#TOC">IndexOfChatRoomUserByChatRoomUserID()</a></h3>
+<p>Returns the index of the ChatRoomUser with the specified ChatRoomUserID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-3">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:IndexOfChatRoomUserByChatRoomUserID( chatRoomUserID )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatRoomUserID</b></p>
+<p><i>The ID of the ChatRoomUser to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_removechatroomuser">
+</div>
+
+<div class="section level3" id="removechatroomuser-1">
+<h3><a href="#TOC">RemoveChatRoomUser()</a></h3>
+<p>Removes a ChatRoomUser from the internal list without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:RemoveChatRoomUser( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the ChatRoomUser to remove</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_addchatmessage">
+</div>
+
+<div class="section level3" id="addchatmessage-1">
+<h3><a href="#TOC">AddChatMessage()</a></h3>
+<p>Adds a ChatMessage to the internal list without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-9">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:AddChatMessage( chatMessage )</code></pre>
+</div>
+<div class="section level4" id="parameters-8">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherchatmessage.html">TogetherChatMessage</a> chatMessage</b></p>
+<p><i>Instance of a ChatMessage to add internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-8">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findchatmessagebychatmessageid">
+</div>
+
+<div class="section level3" id="findchatmessagebychatmessageid-1">
+<h3><a href="#TOC">FindChatMessageByChatMessageID()</a></h3>
+<p>Returns the ChatMessage with the specified ChatMessageID if it exists internally, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatmessage">
+<h4><a href="#TOC">Returns <a href="togetherchatmessage.html">TogetherChatMessage</a></a></h4>
+</div>
+<div class="section level4" id="syntax-10">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:FindChatMessageByChatMessageID( chatMessageID )</code></pre>
+</div>
+<div class="section level4" id="parameters-9">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatMessageID</b></p>
+<p><i>The ID of the ChatMessage to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-9">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getchatmessagecount">
+</div>
+
+<div class="section level3" id="getchatmessagecount-1">
+<h3><a href="#TOC">GetChatMessageCount()</a></h3>
+<p>Gets the number of ChatMessages currently managed in the internal list.</p>
+<div class="section level4" id="returns-number-4">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-11">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:GetChatMessageCount(  )</code></pre>
+<hr />
+<div id="more_getchatmessage">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getchatmessage-1">
+<h3><a href="#TOC">GetChatMessage()</a></h3>
+<p>Gets the ChatMessage at the specified index if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatmessage-1">
+<h4><a href="#TOC">Returns <a href="togetherchatmessage.html">TogetherChatMessage</a></a></h4>
+</div>
+<div class="section level4" id="syntax-12">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:GetChatMessage( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-10">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the ChatMessage to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-10">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofchatmessage">
+</div>
+
+<div class="section level3" id="indexofchatmessage-1">
+<h3><a href="#TOC">IndexOfChatMessage()</a></h3>
+<p>Returns the index of the specified ChatMessage if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-number-5">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-13">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:IndexOfChatMessage( chatMessage )</code></pre>
+</div>
+<div class="section level4" id="parameters-11">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherchatmessage.html">TogetherChatMessage</a> chatMessage</b></p>
+<p><i>Instance of the ChatMessage to retrieve the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-11">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofchatmessagebychatmessageid">
+</div>
+
+<div class="section level3" id="indexofchatmessagebychatmessageid-1">
+<h3><a href="#TOC">IndexOfChatMessageByChatMessageID()</a></h3>
+<p>Returns the index of the ChatMessage with the specified ChatMessageID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-6">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-14">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:IndexOfChatMessageByChatMessageID( chatMessageID )</code></pre>
+</div>
+<div class="section level4" id="parameters-12">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatMessageID</b></p>
+<p><i>The ID of the ChatMessage to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-12">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_removechatmessage">
+</div>
+
+<div class="section level3" id="removechatmessage-1">
+<h3><a href="#TOC">RemoveChatMessage()</a></h3>
+<p>Removes a ChatMessage from the internal list without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-15">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:RemoveChatMessage( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-13">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the ChatMessage to remove</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-13">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getdetails">
+</div>
+
+<div class="section level3" id="getdetails-1">
+<h3><a href="#TOC">GetDetails()</a></h3>
+<p>Gets the details on a ChatRoom.</p>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-16">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:GetDetails( chatRoomID, startWithChatMessageID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-14">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatRoomID</b></p>
+<p><i>The ID of the ChatRoom to get details on.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> startWithChatMessageID</b></p>
+<p><i>ID of the ChatMessage to start with when the server retrieves chat messages.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-14">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_join">
+</div>
+
+<div class="section level3" id="join-1">
+<h3><a href="#TOC">Join()</a></h3>
+<p>Joins the current session and user to this ChatRoom. Upon success, this will automatically update the internal list.</p>
+<blockquote>
+<p><b>Note</b> Be sure to set the class's ChatRoomID member to the ID of the ChatRoom you wish to join.</p>
+</blockquote>
+<div class="section level4" id="returns-void-5">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-17">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:Join( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-15">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-15">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_leave">
+</div>
+
+<div class="section level3" id="leave-1">
+<h3><a href="#TOC">Leave()</a></h3>
+<p>Disconnects the current session and user from this ChatRoom.</p>
+<blockquote>
+<p><b>Note</b> Be sure to set the class's ChatRoomID member to the ID of the ChatRoom you wish to leave.</p>
+</blockquote>
+<div class="section level4" id="returns-void-6">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-18">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:Leave( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-16">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-16">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_createmessage">
+</div>
+
+<div class="section level3" id="createmessage-1">
+<h3><a href="#TOC">CreateMessage()</a></h3>
+<p>Creates a new ChatMessage and adds it to this ChatRoom. Upon success, this will automatically update the internal list.</p>
+<blockquote>
+<p><b>Note</b> Be sure to set the class's ChatRoomID member to the ID of the ChatRoom you wish to join.</p>
+</blockquote>
+<div class="section level4" id="returns-void-7">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-19">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:CreateMessage( parentChatMessageID, message, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-17">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> parentChatMessageID</b></p>
+<p><i>The ID of the ChatMessage that is to be the parent of the newly created ChatMessage. Pass in 0 if the ChatMessage is not to have a parent.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> message</b></p>
+<p><i>The message to assign to the ChatMessage.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-17">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_deletemessage">
+</div>
+
+<div class="section level3" id="deletemessage-1">
+<h3><a href="#TOC">DeleteMessage()</a></h3>
+<p>Deletes a ChatMessage from the ChatRoom. Upon success, this will automatically update the internal list.</p>
+<blockquote>
+<p><b>Note</b> Be sure to set the class's ChatRoomID member to the ID of the ChatRoom you wish to delete.</p>
+</blockquote>
+<div class="section level4" id="returns-void-8">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-20">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:DeleteMessage( chatMessageID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-18">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatMessageID</b></p>
+<p><i>The ID of the ChatMessage to delete</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-18">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_markmessageasread">
+</div>
+
+<div class="section level3" id="markmessageasread-1">
+<h3><a href="#TOC">MarkMessageAsRead()</a></h3>
+<p>Marks a Message as Read. Upon success, this will automatically update the ChatMessage internally.</p>
+<div class="section level4" id="returns-void-9">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-21">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:MarkMessageAsRead( chatMessageID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-19">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatMessageID</b></p>
+<p><i>The ID of the ChatMessage to mark as read</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-19">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_modify">
+</div>
+
+<div class="section level3" id="modify-1">
+<h3><a href="#TOC">Modify()</a></h3>
+<p>Modifies the ChatRoom. Upon success, this will automatically update the ChatRoom internally. With this method, you can modify the following parameters of the ChatRoom: RoomID, Name, Description, ChatRoomProps.</p>
+<blockquote>
+<p><b>Note</b> Be sure to set the class's ChatRoomID member to the ID of the ChatRoom you wish to modify.</p>
+</blockquote>
+<div class="section level4" id="returns-void-10">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-22">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:Modify( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-20">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-20">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_inviteuser">
+</div>
+
+<div class="section level3" id="inviteuser-1">
+<h3><a href="#TOC">InviteUser()</a></h3>
+<p>Invites a User to this ChatRoom. You must either specify a valid inviteeUserID or valid inviteeSocialType and inviteeSocialID. For Facebook, pass in &quot;FB&quot; for inviteeSocialType and the friend's FacebookID for inviteeSocialID.</p>
+<blockquote>
+<p><b>Note</b> Be sure to set the class's ChatRoomID member to the ID of the ChatRoom you wish the User to be invited to.</p>
+</blockquote>
+<div class="section level4" id="returns-void-11">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-23">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherChatRoom:InviteUser( inviteeUserID, inviteeSocialType, inviteeSocialID, notificationMessage, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-21">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> inviteeUserID</b></p>
+<p><i>The ID of the User to invite. Pass in 0 if not specified.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> inviteeSocialType</b></p>
+<p><i>The type of social network. Pass in &quot;&quot; if not specified. &quot;FB&quot; for Facebook.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> inviteeSocialID</b></p>
+<p><i>The ID of the social friend. Pass in &quot;&quot; if not specified. Friends's FacebookID otherwise.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> notificationMessage</b></p>
+<p><i>The message to use when creating a UserNotification for the User being invite. Pass in &quot;&quot; if no notification is to be sent.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-21">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.togetherchatroom&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.togetherchatroom&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.togetherchatroom&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

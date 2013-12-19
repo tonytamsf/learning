@@ -1,0 +1,1732 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: tutorial > fileIO</title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  tutorial > fileIO" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../api/index.html">SDK APIs</a></li>
+<li><a href="../native/index.html">Enterprise APIs</a></li>
+<li><a href="../plugin/index.html">Plugins</a></li>
+<li><a href="../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#reading-and-writing-files-in-corona">Reading and Writing Files in Corona</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#writing-files">Writing Files</a><ul>
+<li><a href="#system.pathforfile">system.pathForFile()</a></li>
+<li><a href="#system.pathforfile-1">system.pathForFile()</a></li>
+<li><a href="#io.open">io.open()</a></li>
+<li><a href="#filewrite">file:write()</a></li>
+<li><a href="#io.close">io.close()</a></li>
+</ul></li>
+<li><a href="#reading-files">Reading Files</a></li>
+<li><a href="#system-directory-constants">System Directory Constants</a><ul>
+<li><a href="#system.resourcedirectory">system.ResourceDirectory</a></li>
+<li><a href="#system.documentsdirectory">system.DocumentsDirectory</a></li>
+<li><a href="#system.temporarydirectory">system.TemporaryDirectory</a></li>
+<li><a href="#system.cachesdirectory">system.CachesDirectory</a></li>
+</ul></li>
+<li><a href="#easy-saving-and-loading-functions">Easy Saving and Loading Functions</a><ul>
+<li><a href="#writetofile">writeToFile()</a></li>
+<li><a href="#readfromfile">readFromFile()</a></li>
+<li><a href="#getfilehandle">getFileHandle</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="index.html">tutorial</a>  ▸  <a href="fileIO.html">fileIO</a>
+</div>
+<div class="section level1" id="reading-and-writing-files-in-corona">
+<h1><a href="#TOC">Reading and Writing Files in Corona</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="index.html">Tutorial</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Updated on</strong></td>
+<td align="left">February 15, 2012</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">files, input, output, io, tutorials, how to</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../guide/index.html">Guides</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Due to its extremely wide range of use-cases, one of the most common tasks that you'll perform when developing apps is reading and writing files (e.g. saving and loading data).</p>
+<p>So that—as you've undoubtedly guessed by now—is <em>exactly</em> the topic I'll be covering in this week's &quot;Tutorial Tuesday&quot;. I'll be going over basic reading and writing files in Corona, some of the common IO &quot;modes&quot; you'll be using, Corona's system directory constants, and even share a function that you can use in your own projects to make the whole process <em>even easier</em> for you.</p>
+<p>There are countless reasons <em>why</em> your app may need to read and/or write a file, so I can't possibly list them all here, but here are a few &quot;use cases&quot; to give you a few ideas:</p>
+<ul>
+<li>Saving/loading games and other player stats (in either a plain text file, or a database file).</li>
+<li>Save app state (and read the same file at a later time to load) so your user's can pick up exactly where they left off in your app (even if the app is exited).</li>
+<li>Generate a local HTML file and load it in a <a href="http://developer.anscamobile.com/reference/index%20nativenewwebview">native webView</a>.</li>
+<li>Load data from a file downloaded from a remote server (that's in the form of plain text, JSON, XML, or just about anything).</li>
+<li>Just about a million other reasons that are specific to <strong>your</strong> app.</li>
+</ul>
+</div>
+<div class="section level2" id="writing-files">
+<h2><a href="#TOC">Writing Files</a></h2>
+<p>Since we'll need a file to work with when I cover &quot;reading&quot; files, I'll go over writing files first. And for the sake of clarity, the term &quot;writing' is synonymous with &quot;saving&quot; in this article.</p>
+<div class="section level4" id="system.pathforfile">
+<h4><a href="#TOC">system.pathForFile()</a></h4>
+<p>This function is the starting point for all file operations in Corona. Lua requires that you specify the entire path of a file when reading and writing, but mobile operating systems—such as iOS—obsure the filesystem and implement things like &quot;sandboxing&quot; which makes knowing <em>exactly</em> where specific files are a very difficult task. Thankfully, with Corona, the process has been made easy. The function <strong>system.pathForFile</strong> does all the heavy lifting for you, and returns a path that is compatible with Lua's file I/O functions. Here's the syntax:</p>
+<pre><code>  system.pathForFile( filename [, baseDirectory] )</code></pre>
+<p><strong>NOTE:</strong> If not specified, <em>baseDirectory</em> is <strong>system.ResourceDirectory</strong> by default, which refers to your project folder (e.g. where &quot;main.lua&quot; resides). Files may only be <em>read</em> (e.g. &quot;loaded&quot;) from this location and not written to. And here's a quick example of how we'd open a file for writing:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">saveData</span> <span class="ot">=</span> <span class="st">&quot;My app state data&quot;</span>
+
+<span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;myfile.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;w&quot;</span> <span class="ot">)</span>
+<span class="kw">file</span>:<span class="fu">write</span><span class="ot">(</span> <span class="kw">saveData</span> <span class="ot">)</span>
+<span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span>
+<span class="kw">file</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<p>And here's a breakdown of the above code:</p>
+</div>
+<div class="section level4" id="system.pathforfile-1">
+<h4><a href="#TOC">system.pathForFile()</a></h4>
+<p>I already covered this function, but pay close attention to how I specified <strong>system.DocumentsDirectory</strong> as the base directory in the example. This is because when it comes to writing/saving data, you can't use system.ResourceDirectory (the default). More on system directory constants in a moment.</p>
+</div>
+<div class="section level4" id="io.open">
+<h4><a href="#TOC">io.open()</a></h4>
+<p>On the 4th line of the example, you see that we call <strong>io.open</strong> and store its return value (the file handle) into a variable called <strong>file</strong>. This function handles the actual opening of the file, and is needed to get an object that will be written to. The second argument of the function, &quot;w&quot;, corresponds to the &quot;mode&quot; that the file will be opened in. The mode is where you specify what you'll be doing with the file. In this case, &quot;w&quot; will create a new file, or overwrite the file if it exists. For a complete list of I/O modes, see the <a href="http://developer.anscamobile.com/reference/index/ioopen">io.open() documentation</a>.</p>
+<p>Personally, as a general rule of thumb, if I want to write to a file I'll use the &quot;w&quot; (write) mode. If I just need to add something to the end of an existing file, I'll use &quot;a&quot; (append). There are a few other writing modes available, but &quot;w&quot; and &quot;a&quot; will cover 90% of use-cases when it comes to saving data.</p>
+</div>
+<div class="section level4" id="filewrite">
+<h4><a href="#TOC">file:write()</a></h4>
+<p>If the file is opened in a write-compatible mode (see above), then the file:write() method will write the specified string to the file handle. In our example, we write the contents of the <strong>saveData</strong> variable to the specified file.</p>
+</div>
+<div class="section level4" id="io.close">
+<h4><a href="#TOC">io.close()</a></h4>
+<p>The last two lines of the example is the equivalent of calling <strong>removeSelf()</strong> on a display object and then <em>nil'ing</em> out the reference. Whenever you perform file operations, whenever you're finished with the file handle, never forget to call io.close(). Think of it like mayonnaise. When you're finished with it, you don't just leave it on the counter with the lid off. You close the lid and put it back in the refrigerator! If you don't, bad things will happen.</p>
+</div>
+</div>
+<div class="section level2" id="reading-files">
+<h2><a href="#TOC">Reading Files</a></h2>
+<p>Saving data wouldn't be of much use to you if you couldn't read that data back in at some point, so here's how you open a file for basic reading:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;myfile.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;r&quot;</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">saveData</span> <span class="ot">=</span> <span class="kw">file</span>:<span class="fu">read</span><span class="ot">(</span> <span class="st">&quot;*a&quot;</span> <span class="ot">)</span>
+<span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span></code></pre>
+<p>Once again, we're opening the same file we saved in the previous example, but this time, we're reading it <em>into</em> the <strong>saveData</strong> variable instead of writing from it. Reading is handled by the <strong>file:read()</strong> function, and has its own modes associated with it. If you want to read the entire contents of a file (newline characters preserved and all), you'll use &quot;*a&quot;.</p>
+<p>For a complete listing of the different modes associated with the read() function, see the <a href="http://developer.anscamobile.com/reference/index/fileread">file:read() documentation</a>. Another common task when loading data is to do something with each line. In that case, you can use the <a href="http://developer.anscamobile.com/reference/index/filelines">file:lines()</a> function in conjunction with a for-loop:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="st">&quot;myfile.txt&quot;</span>, <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span> <span class="ot">)</span>
+<span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;r&quot;</span> <span class="ot">)</span>
+
+<span class="kw">for</span> <span class="kw">line</span> <span class="kw">in</span> <span class="kw">file</span>:<span class="fu">lines</span><span class="ot">()</span> <span class="kw">do</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">line</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span></code></pre>
+<p>In the above example, no read mode needs to be specified. Instead, the for-loop iterates over each line of the file and provides a reference via the <strong>line</strong> variable we specified. In many scenarios, this is a much more useful way of reading saved data than the former example. And that covers the basics of writing-to and reading-from files in Corona!</p>
+<p>The three examples I showed you should suffice for most of your file reading/writing needs, but if you want more technical details, as well as a complete listing of everything you can do with files in Corona, see the <a href="http://developer.anscamobile.com/content/file-io">File I/O documentation</a>. Next, I'll go over a concept that is absolutely essential that you understand when dealing with any kind of external file in Corona, whether it's for file I/O, or loading images using some of the common display functions.</p>
+</div>
+<div class="section level2" id="system-directory-constants">
+<h2><a href="#TOC">System Directory Constants</a></h2>
+<p>As I mentioned a few times already, Corona's <strong>system.pathForFile()</strong> function is important to returning a valid path for use with Lua's file reading/writing functions. I also touched on the need to specify a <strong>system directory constant</strong> as a base directory if you're referring to a file that's not in your project folder, or whenever you plan on writing a file (because once again, you <em>cannot</em> write to files in your project directory). Here's a listing of all four available system directory constants for reading/writing (with descriptions):</p>
+<div class="section level4" id="system.resourcedirectory">
+<h4><a href="#TOC">system.ResourceDirectory</a></h4>
+<p><strong>Read-only</strong>. This directory refers to the files in your project directory, which is the same place your &quot;main.lua&quot; file is located. This is the default base directory for any Corona function that takes a file as a parameter.</p>
+<p><strong>NOTE:</strong> A very common mistake is to place an &quot;s&quot; after the word &quot;Resource&quot;, which is not valid. Ensure the word &quot;Resource&quot; before &quot;Directory&quot; is singular or you'll run into some nasty, hard-to-pinpoint errors.</p>
+</div>
+<div class="section level4" id="system.documentsdirectory">
+<h4><a href="#TOC">system.DocumentsDirectory</a></h4>
+<p><strong>Read/write</strong>. The documents directory is where you'll place files that your app cannot regenerate on it's own (e.g. user-specific data, such as save game data, app state data, anything data that your app relies on the user to generate). This is the most common place you'll be writing files to, because it is the only &quot;safe&quot; location you can place files that you can know 100% will always be there when users leave and come back to your app(unless you explicitly delete it).</p>
+<p><strong>NOTE:</strong> For iOS apps, if your users are on version 5.0 or later, this is the same &quot;Documents&quot; directory that will be backed up to the user's iCloud account.</p>
+</div>
+<div class="section level4" id="system.temporarydirectory">
+<h4><a href="#TOC">system.TemporaryDirectory</a></h4>
+<p><strong>Read/write</strong>. This is where you'll save any temporary data. Files written to the temporary directory will be there as long as your app is running, but the operating system reserves the right to delete this data at any moment—so be sure not to put important data that you don't want deleted here. Usually, this data is removed when your app is closed. On the other hand, this is the perfect spot for data you want to write real quick and trash later (but you never have to delete the files from this directory manually as the operating system will handle that).</p>
+</div>
+<div class="section level4" id="system.cachesdirectory">
+<h4><a href="#TOC">system.CachesDirectory</a></h4>
+<p>This is similar to the temporary directory (almost identical in-fact), and is the official &quot;Caches&quot; directory specified in Apple's documentation (though you can use this in Android as well). The actual on-device location of this directory is different than that of <code>system.TemporaryDirectory</code>, so that's something you'll also want to keep in mind. The files in Caches directory tend to have a little longer lifespan than that of system.TemporaryDirectory, but the &quot;lifespan&quot; of files in these directories are not reliable by any means.</p>
+<p>As a general rule of thumb, you should use the <code>system.CachesDirectory</code> for just that: cached data. If the cached data exists, I'll use it. If not, I'll generate new data. This could save you some of the overhead of not having to regenerate temporary files every single time your app is launched.</p>
+</div>
+</div>
+<div class="section level2" id="easy-saving-and-loading-functions">
+<h2><a href="#TOC">Easy Saving and Loading Functions</a></h2>
+<p>Getting the paths, working with file handles, and remembering to close the mayo... err... file handles when done using them isn't all <em>that</em> difficult, but any reduced friction is always welcome. For that reason, I've constructed a few functions that should help reduce <em>some</em> time when it comes to working with files. The following functions should help in saving/loading simple files, and will cover many use-cases but is not intended to replace all file operations. The first two handle the most basic file saving/loading cases, while the third case is a more &quot;general purpose&quot; function that returns a file handle for you to work with.</p>
+<p><strong>NOTE:</strong> When using the third function (getFileHandle), you'll need to manually call io.close() when you're finished using it.</p>
+<div class="section level4" id="writetofile">
+<h4><a href="#TOC">writeToFile()</a></h4>
+<p>Writes a string to the specified filename under the &quot;w&quot; write mode.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--[[</span>
+<span class="co">    SYNTAX:</span>
+
+<span class="co">    writeToFile( data, filename [, baseDirectory ] )</span>
+
+<span class="co">    USAGE:</span>
+
+<span class="co">    local saveData = &quot;example data to save&quot;</span>
+<span class="co">    writeToFile( saveData, &quot;myFile.txt&quot;, system.TemporaryDirectory )</span>
+<span class="co">]]--</span>
+
+<span class="kw">function</span> writeToFile<span class="ot">(</span> <span class="kw">data</span>, <span class="kw">filename</span>, <span class="kw">baseDirectory</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">baseDirectory</span> <span class="ot">=</span> <span class="kw">baseDirectory</span> <span class="kw">or</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>
+    <span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">filename</span>, <span class="kw">baseDirectory</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;w&quot;</span> <span class="ot">)</span>
+    <span class="kw">file</span>:<span class="fu">write</span><span class="ot">(</span> <span class="kw">data</span> <span class="ot">)</span>
+    <span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level4" id="readfromfile">
+<h4><a href="#TOC">readFromFile()</a></h4>
+<p>Reads specified filename into a variable under the &quot;r&quot; and &quot;*a&quot; modes.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--[[</span>
+<span class="co">    SYNTAX:</span>
+
+<span class="co">    readFromFile( filename [, baseDirectory ] )</span>
+
+<span class="co">    USAGE:</span>
+
+<span class="co">    local loadedData = readFromFile( &quot;myFile.txt&quot;, system.DocumentsDirectory )</span>
+<span class="co">]]--</span>
+
+<span class="kw">function</span> readFromFile<span class="ot">(</span> <span class="kw">filename</span>, <span class="kw">baseDirectory</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">baseDirectory</span> <span class="ot">=</span> <span class="kw">baseDirectory</span> <span class="kw">or</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">ResourceDirectory</span>
+    <span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">filename</span>, <span class="kw">baseDirectory</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">file</span> <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="st">&quot;r&quot;</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">data</span> <span class="ot">=</span> <span class="kw">file</span>:<span class="fu">read</span><span class="ot">(</span> <span class="st">&quot;*a&quot;</span> <span class="ot">)</span>
+    <span class="fu">io.close</span><span class="ot">(</span> <span class="kw">file</span> <span class="ot">)</span>
+    <span class="kw">return</span> <span class="kw">data</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level4" id="getfilehandle">
+<h4><a href="#TOC">getFileHandle</a></h4>
+<p>General-purpose function that returns a file handle to perform I/O operations with in Corona. If no mode is specified, the default &quot;r&quot; will be used.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--[[</span>
+<span class="co">    SYNTAX:</span>
+
+<span class="co">    getFileHandle( filename [, mode ] )   </span><span class="al">--</span><span class="co"> assumes system.ResourceDirectory as base</span>
+<span class="co">    getFileHandle( filename [, baseDirectory ] ) </span><span class="al">--</span><span class="co"> assumes &quot;r&quot; mode</span>
+<span class="co">    getFileHandle( filename [, mode, baseDirectory ] )</span>
+
+<span class="co">    USAGE:</span>
+
+<span class="co">    local saveData = &quot;example data to save&quot;</span>
+<span class="co">    local file = getFileHandle( &quot;myFile&quot;, &quot;w&quot;, system.DocumentsDirectory )</span>
+<span class="co">    file:write( saveData )</span>
+<span class="co">    io.close( file )</span>
+<span class="co">]]--</span>
+
+<span class="kw">function</span> getFileHandle<span class="ot">(</span> <span class="kw">arg1</span>, <span class="kw">arg2</span>, <span class="kw">arg3</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">filename</span>, <span class="kw">mode</span>, <span class="kw">baseDirectory</span>
+
+    <span class="kw">if</span> <span class="kw">arg1</span> <span class="kw">then</span> <span class="kw">filename</span> <span class="ot">=</span> <span class="kw">arg1</span><span class="ot">;</span> <span class="kw">end</span>
+
+    <span class="kw">if</span> <span class="kw">not</span> <span class="kw">arg2</span> <span class="kw">and</span> <span class="kw">not</span> <span class="kw">arg3</span> <span class="kw">then</span>
+        <span class="kw">mode</span> <span class="ot">=</span> <span class="st">&quot;r&quot;</span>
+        <span class="kw">baseDirectory</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">ResourceDirectory</span>
+
+    <span class="kw">elseif</span> <span class="kw">arg2</span> <span class="kw">and</span> <span class="kw">not</span> <span class="kw">arg3</span> <span class="kw">then</span>
+        <span class="kw">if</span> <span class="fu">type</span><span class="ot">(</span><span class="kw">arg2</span><span class="ot">)</span> <span class="ot">==</span> <span class="st">&quot;userdata&quot;</span> <span class="kw">then</span>
+            <span class="kw">mode</span> <span class="ot">=</span> <span class="st">&quot;r&quot;</span>
+            <span class="kw">baseDirectory</span> <span class="ot">=</span> <span class="kw">arg2</span>
+        <span class="kw">else</span>
+            <span class="kw">mode</span> <span class="ot">=</span> <span class="kw">arg2</span>
+            <span class="kw">baseDirectory</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">ResourceDirectory</span>
+        <span class="kw">end</span>
+    <span class="kw">elseif</span> <span class="kw">arg2</span> <span class="kw">and</span> <span class="kw">arg3</span> <span class="kw">then</span>
+        <span class="kw">mode</span> <span class="ot">=</span> <span class="kw">arg2</span>
+        <span class="kw">baseDirectory</span> <span class="ot">=</span> <span class="kw">arg3</span>
+    <span class="kw">end</span>
+
+    <span class="kw">local</span> <span class="kw">path</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>pathForFile<span class="ot">(</span> <span class="kw">filename</span>, <span class="kw">baseDirectory</span> <span class="ot">)</span>
+    <span class="kw">return</span> <span class="fu">io.open</span><span class="ot">(</span> <span class="kw">path</span>, <span class="kw">mode</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<p>Once again, when using the <strong>getFileHandle()</strong> function, you must remember to use io.close() when you're finished. See the usage example in the comments section for more details on how to use the functions. For further information on file input and output in Corona, please see the <a href="http://developer.anscamobile.com/content/file-io">File I/O Documentation</a> as well as the previously published <a href="">Files Guide</a> to get a more complete understanding of the concepts discussed in this tutorial.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=tutorial.fileIO&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=tutorial.fileIO&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=tutorial.fileIO&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

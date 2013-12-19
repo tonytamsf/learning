@@ -1,0 +1,2317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > migration</title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > migration" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#v2.0-migration-guide">V2.0 Migration guide</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#additions-removals-changes">Additions, removals &amp; changes</a><ul>
+<li><a href="#widget.newbutton"><a href="newButton.html">widget.newButton()</a></a></li>
+<li><a href="#widget.newpickerwheel"><a href="newPickerWheel.html">widget.newPickerWheel()</a></a></li>
+<li><a href="#widget.newscrollview"><a href="newScrollView.html">widget.newScrollView()</a></a></li>
+<li><a href="#widget.newtabbar"><a href="newTabBar.html">widget.newTabBar()</a></a></li>
+<li><a href="#widget.newtableview"><a href="newTableView.html">widget.newTableView()</a></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="migration.html">migration</a>
+</div>
+<div class="section level1" id="v2.0-migration-guide">
+<h1><a href="#TOC">V2.0 Migration guide</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Library.html">Library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, migration, guide</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>This guide aims to ease your migration from widgets v1.0 to widgets v2.0</p>
+</div>
+<div class="section level2" id="notes">
+<h2><a href="#TOC">Notes</a></h2>
+<p>Please see the updated widget sample code to see examples of widgets 2.0 in use. You can find these samples in the following folder: CoronaSDK/SampleCode/Interface/WidgetDemo</p>
+</div>
+<div class="section level2" id="additions-removals-changes">
+<h2><a href="#TOC">Additions, removals &amp; changes</a></h2>
+<div class="section level4" id="widget.newbutton">
+<h4><a href="#TOC"><a href="newButton.html">widget.newButton()</a></a></h4>
+<blockquote>
+<h5><a href="#TOC">Removed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>defaultColor, overColor</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>strokeColor</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>strokeWidth</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>cornerRadius</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>onDrag</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Changed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>xOffset, yOffset → labelXOffset, labelYOffset</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>defaultIndex, overIndex → defaultFrame, overFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>default, over → defaultFile, overFile</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Added</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>labelAlign</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>isEnabled</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>button:setEnabled()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>topLeftFrame, topLeftFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>middleLeftFrame, middleLeftFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bottomLeftFrame, bottomLeftFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>topRightFrame, topRightFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>middleRightFrame, middleRightFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bottomRightFrame, bottomRightFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>topMiddleFrame, topMiddleFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>middleFrame, middleOverFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bottomMiddleFrame, bottomMiddleFrameOver</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Example</a></h5>
+</blockquote>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Create the button</span>
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newButton</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">id</span> <span class="ot">=</span> <span class="st">&quot;button_1&quot;</span>,
+    <span class="kw">defaultFile</span> <span class="ot">=</span> <span class="st">&quot;default.png&quot;</span>,    <span class="co">-- default =&gt; defaultFile</span>
+    <span class="kw">overFile</span> <span class="ot">=</span> <span class="st">&quot;over.png&quot;</span>,          <span class="co">-- over =&gt; overFile</span>
+    <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;Button&quot;</span>,
+    <span class="kw">onEvent</span> <span class="ot">=</span> <span class="kw">handleButtonEvent</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level4" id="widget.newpickerwheel">
+<h4><a href="#TOC"><a href="newPickerWheel.html">widget.newPickerWheel()</a></a></h4>
+<blockquote>
+<h5><a href="#TOC">Removed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>totalWidth</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>selectionHeight</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>glassFile</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>glassWidth, glassHeight</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Changed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>background → backgroundFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>seperator → seperatorFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Added</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>overlayFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>overlayFrameWidth, overlayFrameHeight</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>separatorFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>separatorWidth, separatorHeight</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>labels ( columns )</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Example</a></h5>
+</blockquote>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;widget&quot;</span>
+
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+<span class="co">-- Old Column Data construction</span>
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+
+<span class="co">-- Create table to hold all column data</span>
+<span class="kw">local</span> <span class="kw">columnData</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="co">-- Create first column</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">1</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;January&quot;</span>, <span class="st">&quot;February&quot;</span>, <span class="st">&quot;March&quot;</span>, <span class="st">&quot;April&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;June&quot;</span>, <span class="st">&quot;July&quot;</span>, <span class="st">&quot;August&quot;</span>, <span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>, <span class="st">&quot;November&quot;</span>, <span class="st">&quot;December&quot;</span>  <span class="ot">}</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">1</span><span class="ot">].</span><span class="kw">alignment</span> <span class="ot">=</span> <span class="st">&quot;right&quot;</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">1</span><span class="ot">].</span><span class="kw">width</span> <span class="ot">=</span> <span class="dv">150</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">1</span><span class="ot">].</span><span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">5</span>
+
+<span class="co">-- Create second column</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">2</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="co">-- Create 31 days</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">31</span> <span class="kw">do</span>
+   <span class="kw">columnData</span><span class="ot">[</span><span class="dv">2</span><span class="ot">][</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">2</span><span class="ot">].</span><span class="kw">alignment</span> <span class="ot">=</span> <span class="st">&quot;left&quot;</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">2</span><span class="ot">].</span><span class="kw">width</span> <span class="ot">=</span> <span class="dv">60</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">2</span><span class="ot">].</span><span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">18</span>
+
+<span class="co">-- Create third column</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">3</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="co">-- Create 44 years</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">44</span> <span class="kw">do</span>
+   <span class="kw">columnData</span><span class="ot">[</span><span class="dv">3</span><span class="ot">][</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">1969</span> <span class="ot">+</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">2</span><span class="ot">].</span><span class="kw">alignment</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">3</span><span class="ot">].</span><span class="kw">width</span> <span class="ot">=</span> <span class="dv">80</span>
+<span class="kw">columnData</span><span class="ot">[</span><span class="dv">3</span><span class="ot">].</span><span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">10</span>
+
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+<span class="co">-- New Column Data construction</span>
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+
+<span class="co">-- Create two tables to hold our days &amp; years      </span>
+<span class="kw">local</span> <span class="kw">days</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">years</span> <span class="ot">=</span> <span class="ot">{}</span>
+
+<span class="co">-- Populate the days table</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">31</span> <span class="kw">do</span>
+    <span class="kw">days</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="co">-- Populate the years table</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">44</span> <span class="kw">do</span>
+    <span class="kw">years</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">1969</span> <span class="ot">+</span> <span class="kw">i</span>
+<span class="kw">end</span>
+
+<span class="co">-- Set up the Picker Wheel&#39;s columns</span>
+<span class="kw">local</span> <span class="kw">columnData</span> <span class="ot">=</span> 
+<span class="ot">{</span> 
+    <span class="ot">{</span> 
+        <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;right&quot;</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">150</span>,
+        <span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">5</span>,
+        <span class="kw">labels</span> <span class="ot">=</span> <span class="co">-- NEW</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;January&quot;</span>, <span class="st">&quot;February&quot;</span>, <span class="st">&quot;March&quot;</span>, <span class="st">&quot;April&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;June&quot;</span>, <span class="st">&quot;July&quot;</span>, <span class="st">&quot;August&quot;</span>, <span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>, <span class="st">&quot;November&quot;</span>, <span class="st">&quot;December&quot;</span> 
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+
+    <span class="ot">{</span>
+        <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;left&quot;</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">60</span>,
+        <span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">18</span>,
+        <span class="kw">labels</span> <span class="ot">=</span> <span class="kw">days</span>, <span class="co">-- NEW</span>
+    <span class="ot">}</span>,
+
+    <span class="ot">{</span>
+        <span class="kw">align</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">80</span>,
+        <span class="kw">startIndex</span> <span class="ot">=</span> <span class="dv">10</span>,
+        <span class="kw">labels</span> <span class="ot">=</span> <span class="kw">years</span>, <span class="co">-- NEW</span>
+    <span class="ot">}</span>,
+<span class="ot">}</span>
+
+<span class="co">-- Create the PickerWheel</span>
+<span class="kw">local</span> <span class="kw">picker</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newPickerWheel</span>
+<span class="ot">{</span>
+    <span class="kw">top</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">-</span> <span class="dv">222</span>,
+    <span class="kw">font</span> <span class="ot">=</span> <span class="st">&quot;Helvetica-Bold&quot;</span>,
+    <span class="kw">columns</span> <span class="ot">=</span> <span class="kw">columnData</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level4" id="widget.newscrollview">
+<h4><a href="#TOC"><a href="newScrollView.html">widget.newScrollView()</a></a></h4>
+<blockquote>
+<h5><a href="#TOC">Removed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView.content</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView.isLocked</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView.content.horizontalScrollDisabled</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView.content.verticalScrollDisabled</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView:takeFocus()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView:scrollToTop()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView:scrollToBottom()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView:scrollToLeft()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView:scrollToRight()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Changed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bgColor → backgroundColor</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Added</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>leftPadding, rightPadding</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>horizontalScrollDisabled, verticalScrollDisabled</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>scrollView:scrollTo()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Example</a></h5>
+</blockquote>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+<span class="co">-- Old ScrollView Listener</span>
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+
+<span class="kw">local</span> <span class="kw">function</span> scrollListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span> 
+    <span class="kw">if</span> <span class="st">&quot;beganScroll&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;beganScroll event type&quot;</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="st">&quot;endedScroll&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;endedScroll event type&quot;</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="st">&quot;movingToTopLimit&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;movingToTopLimit event type&quot;</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="st">&quot;movingToBottomLimit&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;movingToBottomLimit event type&quot;</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="st">&quot;movingToLeftLimit&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;movingToLeftLimit event type&quot;</span> <span class="ot">)</span>
+
+    <span class="kw">elseif</span> <span class="st">&quot;movingToRightLimit&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;movingToRightLimit event type&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+<span class="co">-- New ScrollView Listener</span>
+<span class="co">--</span><span class="al">------------------------------------</span><span class="co">-</span>
+
+<span class="co">-- Our ScrollView listener</span>
+<span class="kw">local</span> <span class="kw">function</span> scrollListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+    <span class="kw">local</span> <span class="kw">direction</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">direction</span>
+
+    <span class="kw">if</span> <span class="st">&quot;began&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Began&quot;</span> <span class="ot">)</span>
+    <span class="kw">elseif</span> <span class="st">&quot;moved&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Moved&quot;</span> <span class="ot">)</span>
+    <span class="kw">elseif</span> <span class="st">&quot;ended&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Ended&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+
+    <span class="co">-- If we have reached one of the scrollViews limits</span>
+    <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">limitReached</span> <span class="kw">then</span>
+        <span class="kw">if</span> <span class="st">&quot;up&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Top Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">elseif</span> <span class="st">&quot;down&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Bottom Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">elseif</span> <span class="st">&quot;left&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Left Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">elseif</span> <span class="st">&quot;right&quot;</span> <span class="ot">==</span> <span class="kw">direction</span> <span class="kw">then</span>
+            <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Reached Right Limit&quot;</span> <span class="ot">)</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> <span class="kw">true</span>
+<span class="kw">end</span>
+
+<span class="co">-- Create a ScrollView</span>
+<span class="kw">local</span> <span class="kw">scrollView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newScrollView</span>
+<span class="ot">{</span>
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">10</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">300</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">350</span>,
+    <span class="kw">scrollWidth</span> <span class="ot">=</span> <span class="dv">465</span>,
+    <span class="kw">scrollHeight</span> <span class="ot">=</span> <span class="dv">670</span>,
+    <span class="kw">backgroundColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span>,    <span class="co">-- bgColor =&gt; backgroundColor</span>
+    <span class="kw">horizontalScrollDisabled</span> <span class="ot">=</span> <span class="kw">false</span>,       <span class="co">-- scrollView.content.horizontalScrollDisabled =&gt; horizontalScrollDisabled</span>
+    <span class="kw">verticalScrollDisabled</span> <span class="ot">=</span> <span class="kw">false</span>,         <span class="co">-- scrollView.content.verticallScrollDisabled =&gt; verticalScrollDisabled</span>
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">scrollListener</span>,
+<span class="ot">}</span>
+
+<span class="co">-- Scroll the scrollView to the bottom</span>
+<span class="kw">scrollView</span>:scrollTo<span class="ot">(</span> <span class="st">&quot;bottom&quot;</span>, <span class="ot">{</span> <span class="kw">time</span> <span class="ot">=</span> <span class="dv">1200</span>, <span class="kw">onComplete</span> <span class="ot">=</span> <span class="kw">onScrollToComplete</span> <span class="ot">}</span> <span class="ot">)</span>   <span class="co">-- scrollView:scrollToTop() / scrollView:scrollToBottom() / scrollView:scrollToLeft() / scrollView:scrollToRight() =&gt; scrollView:scrollTo()</span></code></pre>
+</div>
+<div class="section level4" id="widget.newtabbar">
+<h4><a href="#TOC"><a href="newTabBar.html">widget.newTabBar()</a></a></h4>
+<blockquote>
+<h5><a href="#TOC">Removed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>topGradient</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bottomFill</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>cornerRadius</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tabBar:deselectAll()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Changed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>background → backgroundFile</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>up, down → defaultFile, overFile</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tabBar:pressButton() → tabBar:setSelected()</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Added</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>labelXOffset, labelYOffset</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>backgroundFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>backgroundFrameWidth, backgroundFrameHeight</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tabSelectedLeftFrame, tabSelectedRightFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tabSelectedMiddleFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tabSelectedFrameWidth, tabSelectedFrameHeight</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>defaultFrame, overFrame</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Example</a></h5>
+</blockquote>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+
+<span class="co">-- Create the tabBar&#39;s buttons</span>
+<span class="kw">local</span> <span class="kw">tabButtons</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">32</span>, 
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">32</span>,
+        <span class="kw">defaultFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabIcon.png&quot;</span>,     <span class="co">-- up =&gt; defaultFile</span>
+        <span class="kw">overFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabIcon-down.png&quot;</span>,   <span class="co">-- down =&gt; overFile</span>
+        <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;Tab1&quot;</span>,
+        <span class="kw">labelColor</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">default</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">}</span>,
+            <span class="kw">over</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span>,
+        <span class="ot">}</span>,
+        <span class="kw">labelXOffset</span> <span class="ot">=</span> <span class="dv">0</span>,                       <span class="co">-- New</span>
+        <span class="kw">labelYOffset</span> <span class="ot">=</span> <span class="dv">0</span>,                       <span class="co">-- New</span>
+        <span class="kw">font</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFontBold</span>,
+        <span class="kw">size</span> <span class="ot">=</span> <span class="dv">8</span>,
+        <span class="kw">onPress</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">()</span> <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Tab 1 pressed&quot;</span> <span class="ot">)</span> <span class="kw">end</span>,
+        <span class="kw">selected</span> <span class="ot">=</span> <span class="kw">false</span>
+    <span class="ot">}</span>,
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">32</span>, 
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">32</span>,
+        <span class="kw">defaultFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabIcon.png&quot;</span>,     <span class="co">-- up =&gt; defaultFile</span>
+        <span class="kw">overFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabIcon-down.png&quot;</span>,   <span class="co">-- down =&gt; overFile</span>
+        <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;Tab2&quot;</span>,
+        <span class="kw">labelColor</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">default</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">}</span>,
+            <span class="kw">over</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span>,
+        <span class="ot">}</span>,
+        <span class="kw">labelXOffset</span> <span class="ot">=</span> <span class="dv">0</span>,                       <span class="co">-- New</span>
+        <span class="kw">labelYOffset</span> <span class="ot">=</span> <span class="dv">0</span>,                       <span class="co">-- New</span>
+        <span class="kw">font</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFontBold</span>,
+        <span class="kw">size</span> <span class="ot">=</span> <span class="dv">8</span>,
+        <span class="kw">onPress</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span> <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Tab 2 pressed&quot;</span> <span class="ot">);</span> <span class="fu">print</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">target</span><span class="ot">.</span><span class="kw">_id</span> <span class="ot">)</span> <span class="kw">end</span>,
+        <span class="kw">selected</span> <span class="ot">=</span> <span class="kw">true</span>
+    <span class="ot">}</span>,
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">32</span>, 
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">32</span>,
+        <span class="kw">defaultFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabIcon.png&quot;</span>,     <span class="co">-- up =&gt; defaultFile</span>
+        <span class="kw">overFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabIcon-down.png&quot;</span>,   <span class="co">-- down =&gt; overFile</span>
+        <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;Tab3&quot;</span>,
+        <span class="kw">labelColor</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">default</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">}</span>,
+            <span class="kw">over</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span>,
+        <span class="ot">}</span>,
+        <span class="kw">labelXOffset</span> <span class="ot">=</span> <span class="dv">0</span>,                       <span class="co">-- New</span>
+        <span class="kw">labelYOffset</span> <span class="ot">=</span> <span class="dv">0</span>,                       <span class="co">-- New</span>
+        <span class="kw">font</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFontBold</span>,
+        <span class="kw">size</span> <span class="ot">=</span> <span class="dv">8</span>,
+        <span class="kw">onPress</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">()</span> <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Tab 3 pressed&quot;</span> <span class="ot">)</span> <span class="kw">end</span>,
+        <span class="kw">selected</span> <span class="ot">=</span> <span class="kw">false</span>
+    <span class="ot">}</span>,
+<span class="ot">}</span>
+
+<span class="co">-- Create a tabBar</span>
+<span class="kw">local</span> <span class="kw">tabBar</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newTabBar</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">0</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">-</span> <span class="dv">52</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentWidth</span>,
+    <span class="kw">backgroundFile</span> <span class="ot">=</span> <span class="st">&quot;assets/woodbg.png&quot;</span>,                               <span class="co">-- New</span>
+    <span class="kw">tabSelectedLeftFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabBar_tabSelectedLeftEdge.png&quot;</span>,      <span class="co">-- New</span>
+    <span class="kw">tabSelectedRightFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabBar_tabSelectedRightEdge.png&quot;</span>,    <span class="co">-- New</span>
+    <span class="kw">tabSelectedMiddleFile</span> <span class="ot">=</span> <span class="st">&quot;assets/tabBar_tabSelectedMiddle.png&quot;</span>,      <span class="co">-- New</span>
+    <span class="kw">tabSelectedFrameWidth</span> <span class="ot">=</span> <span class="dv">20</span>,                                         <span class="co">-- New</span>
+    <span class="kw">tabSelectedFrameHeight</span> <span class="ot">=</span> <span class="dv">52</span>,                                        <span class="co">-- New</span>
+    <span class="kw">buttons</span> <span class="ot">=</span> <span class="kw">tabButtons</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level4" id="widget.newtableview">
+<h4><a href="#TOC"><a href="newTableView.html">widget.newTableView()</a></a></h4>
+<blockquote>
+<h5><a href="#TOC">Removed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>renderThresh</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tableView.content</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>tableView.isLocked</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Changed</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bgColor → backgroundColor</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Added</a></h5>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>onRowRender</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>onRowUpdate</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>onRowTouch</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h5><a href="#TOC">Example</a></h5>
+</blockquote>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Listen for tableView events</span>
+<span class="kw">local</span> <span class="kw">function</span> tableViewListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Handle row rendering</span>
+<span class="kw">local</span> <span class="kw">function</span> onRowRender<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+    <span class="kw">local</span> <span class="kw">row</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">row</span>
+
+    <span class="kw">local</span> <span class="kw">rowTitle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="kw">row</span>, <span class="st">&quot;Row &quot;</span> <span class="ot">..</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">index</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">nil</span>, <span class="dv">14</span> <span class="ot">)</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">-</span> <span class="ot">(</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentWidth</span> <span class="ot">*</span> <span class="dv">0.5</span> <span class="ot">)</span> <span class="ot">+</span> <span class="ot">(</span> <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">contentWidth</span> <span class="ot">*</span> <span class="dv">0.5</span> <span class="ot">)</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">*</span> <span class="dv">0.5</span>
+    <span class="kw">rowTitle</span>:setTextColor<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Handle row&#39;s becoming visible on screen</span>
+<span class="kw">local</span> <span class="kw">function</span> onRowUpdate<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">row</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">row</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Row:&quot;</span>, <span class="kw">row</span><span class="ot">.</span><span class="kw">index</span>, <span class="st">&quot; is now visible&quot;</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Handle touches on the row</span>
+<span class="kw">local</span> <span class="kw">function</span> onRowTouch<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+
+    <span class="kw">if</span> <span class="st">&quot;press&quot;</span> <span class="ot">==</span> <span class="kw">phase</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Touched row:&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">target</span><span class="ot">.</span><span class="kw">index</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">-- Create a tableView</span>
+<span class="kw">local</span> <span class="kw">tableView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newTableView</span>
+<span class="ot">{</span>
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">320</span>, 
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">366</span>,
+    <span class="kw">maskFile</span> <span class="ot">=</span> <span class="st">&quot;assets/mask-320x366.png&quot;</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">tableViewListener</span>,
+    <span class="kw">onRowRender</span> <span class="ot">=</span> <span class="kw">onRowRender</span>,          <span class="co">-- Now part of the constructor</span>
+    <span class="kw">onRowUpdate</span> <span class="ot">=</span> <span class="kw">onRowUpdate</span>,          <span class="co">-- Now part of the constructor  </span>
+    <span class="kw">onRowTouch</span> <span class="ot">=</span> <span class="kw">onRowTouch</span>,            <span class="co">-- Now part of the constructor</span>
+<span class="ot">}</span>
+<span class="kw">group</span>:insert<span class="ot">(</span> <span class="kw">tableView</span> <span class="ot">)</span>
+
+<span class="co">--</span><span class="al">----------------------------------</span><span class="co">-</span>
+<span class="co">-- Old row insertion method</span>
+<span class="co">--</span><span class="al">----------------------------------</span><span class="co">-</span>
+
+<span class="co">-- Create 100 rows</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">100</span> <span class="kw">do</span>
+    <span class="kw">local</span> <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">false</span>
+    <span class="kw">local</span> <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">40</span>
+    <span class="kw">local</span> <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span>
+    <span class="kw">local</span> <span class="kw">lineColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">220</span>, <span class="dv">220</span>, <span class="dv">220</span> <span class="ot">}</span>
+
+    <span class="co">-- Make some rows categories</span>
+    <span class="kw">if</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">25</span> <span class="kw">or</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">50</span> <span class="kw">or</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">75</span> <span class="kw">then</span>
+        <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">true</span>
+        <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">24</span>
+        <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">150</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span> <span class="ot">}</span>
+    <span class="kw">end</span>
+
+    <span class="co">-- Insert the row into the tableView</span>
+    <span class="kw">tableView</span>:<span class="kw">insertRow</span>
+    <span class="ot">{</span>
+        <span class="kw">onEvent</span> <span class="ot">=</span> <span class="kw">onRowTouch</span>,       <span class="co">-- Now part of the constructor (see above)</span>
+        <span class="kw">onRender</span> <span class="ot">=</span> <span class="kw">onRowRender</span>,     <span class="co">-- Now part of the constructor (see above)</span>
+        <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">isCategory</span>,
+        <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="kw">rowHeight</span>,
+        <span class="kw">rowColor</span> <span class="ot">=</span> <span class="kw">rowColor</span>,
+        <span class="kw">lineColor</span> <span class="ot">=</span> <span class="kw">lineColor</span>,
+    <span class="ot">}</span>
+<span class="kw">end</span>
+
+<span class="co">--</span><span class="al">----------------------------------</span><span class="co">-</span>
+<span class="co">-- New row insertion method</span>
+<span class="co">--</span><span class="al">----------------------------------</span><span class="co">-</span>
+
+<span class="co">-- Create 100 rows</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">100</span> <span class="kw">do</span>
+    <span class="kw">local</span> <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">false</span>
+    <span class="kw">local</span> <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">40</span>
+    <span class="kw">local</span> <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span>
+    <span class="kw">local</span> <span class="kw">lineColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">220</span>, <span class="dv">220</span>, <span class="dv">220</span> <span class="ot">}</span>
+
+    <span class="co">-- Make some rows categories</span>
+    <span class="kw">if</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">25</span> <span class="kw">or</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">50</span> <span class="kw">or</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">75</span> <span class="kw">then</span>
+        <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">true</span>
+        <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">24</span>
+        <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">150</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">200</span> <span class="ot">}</span>
+    <span class="kw">end</span>
+
+    <span class="co">-- Insert the row into the tableView</span>
+    <span class="kw">tableView</span>:<span class="kw">insertRow</span>
+    <span class="ot">{</span>
+        <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">isCategory</span>,
+        <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="kw">rowHeight</span>,
+        <span class="kw">rowColor</span> <span class="ot">=</span> <span class="kw">rowColor</span>,
+        <span class="kw">lineColor</span> <span class="ot">=</span> <span class="kw">lineColor</span>,
+    <span class="ot">}</span>
+<span class="kw">end</span> </code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.migration&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.migration&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.migration&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

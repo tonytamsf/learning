@@ -1,0 +1,1708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: template > advanced_API</title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  template > advanced_API" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../api/index.html">SDK APIs</a></li>
+<li><a href="../native/index.html">Enterprise APIs</a></li>
+<li><a href="../plugin/index.html">Plugins</a></li>
+<li><a href="../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#graphics.newimagesheet">graphics.newImageSheet()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#filename-required">filename <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#basedir-optional">baseDir <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#options-required">options <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#formats-for-options">Formats for <code>options</code></a><ul>
+<li><a href="#basic">Basic</a><ul>
+<li><a href="#width-required">width <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#height-required">height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#numframes-required">numFrames <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#sourcewidth-optional">sourceWidth <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourceheight-optional">sourceHeight <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourcex-optional">sourceX <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourcey-optional">sourceY <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#advanced">Advanced</a><ul>
+<li><a href="#x-required">x <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#y-required">y <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#width-required-1">width <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#height-required-1">height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#sourcewidth-optional-1">sourceWidth <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourceheight-optional-1">sourceHeight <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourcex-optional-1">sourceX <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sourcey-optional-1">sourceY <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#example-title">Example title</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="index.html">template</a>  ▸  <a href="advanced_api.html">advanced_api</a>
+</div>
+
+<div class="section level1" id="graphics.newimagesheet">
+<h1><a href="#TOC">graphics.newImageSheet()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../api/type/Function.html">function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left">[graphics.*][api.graphics]</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../api/type/ImageSheet/index.html">ImageSheet</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/...</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left">[display.newImageGroup()][api.display.newImageGroup]<br /><a href="http://link-to-blog-tutorial">Creating Button Widgets</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Description here.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>graphics.newImageSheet( filename, [baseDir, ] options )</code></pre>
+<div class="section level5" id="filename-required">
+<h5><a href="#TOC">filename <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/String.html">String</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="basedir-optional">
+<h5><a href="#TOC">baseDir <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Constant.html">Constant</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="options-required">
+<h5><a href="#TOC">options <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Table.html">Table</a>.</em> Short description here.</p>
+</div>
+</div>
+<div class="section level2" id="formats-for-options">
+<h2><a href="#TOC">Formats for <code>options</code></a></h2>
+<div class="section level3" id="basic">
+<h3><a href="#TOC">Basic</a></h3>
+<p>This configuration assumes all frames in the image sheet texture share identical properties. All table parameters below belong directly to the options table (above).</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">3</span>
+<span class="ot">}</span></code></pre>
+<div class="section level5" id="width-required">
+<h5><a href="#TOC">width <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="height-required">
+<h5><a href="#TOC">height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="numframes-required">
+<h5><a href="#TOC">numFrames <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourcewidth-optional">
+<h5><a href="#TOC">sourceWidth <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourceheight-optional">
+<h5><a href="#TOC">sourceHeight <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourcex-optional">
+<h5><a href="#TOC">sourceX <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourcey-optional">
+<h5><a href="#TOC">sourceY <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+</div>
+<div class="section level3" id="advanced">
+<h3><a href="#TOC">Advanced</a></h3>
+<p>This configuration is required if the image sheet has frames of varying sizes. In this configuration, options is an array of tables that each represent a single frame in the image sheet texture. All parameters below belong to a table within the options array.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="co">-- FRAME 1:</span>
+    <span class="ot">{</span>
+        <span class="kw">x</span> <span class="ot">=</span> <span class="dv">00</span>,
+        <span class="kw">y</span> <span class="ot">=</span> <span class="dv">70</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">50</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">50</span>
+    <span class="ot">}</span>,
+
+    <span class="co">-- FRAME 2:</span>
+    <span class="ot">{</span>    
+        <span class="kw">x</span> <span class="ot">=</span> <span class="dv">50</span>,
+        <span class="kw">y</span> <span class="ot">=</span> <span class="dv">70</span>,
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">45</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">55</span>
+    <span class="ot">}</span>,
+
+    <span class="co">-- FRAME 3... and so on...</span>
+<span class="ot">}</span></code></pre>
+<div class="section level5" id="x-required">
+<h5><a href="#TOC">x <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="y-required">
+<h5><a href="#TOC">y <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="width-required-1">
+<h5><a href="#TOC">width <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="height-required-1">
+<h5><a href="#TOC">height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourcewidth-optional-1">
+<h5><a href="#TOC">sourceWidth <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourceheight-optional-1">
+<h5><a href="#TOC">sourceHeight <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourcex-optional-1">
+<h5><a href="#TOC">sourceX <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+<div class="section level5" id="sourcey-optional-1">
+<h5><a href="#TOC">sourceY <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../api/type/Number.html">Number</a>.</em> Short description here.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level3" id="example-title">
+<h3><a href="#TOC">Example title</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span> <span class="st">&quot;widget&quot;</span>
+
+<span class="kw">local</span> <span class="kw">function</span> onButtonRelease<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">button</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">target</span>  <span class="co">-- direct reference to &#39;btn1&#39; object below</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;You pressed and released button &quot;</span> <span class="ot">..</span> <span class="kw">button</span><span class="ot">.</span><span class="kw">id</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">btn1</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span>newButton<span class="ot">{</span>
+    <span class="kw">id</span> <span class="ot">=</span> <span class="st">&quot;button1&quot;</span>,
+    <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;Button&quot;</span>,
+    <span class="kw">default</span> <span class="ot">=</span> <span class="st">&quot;buttonexample.png&quot;</span>,
+    <span class="kw">over</span> <span class="ot">=</span> <span class="st">&quot;buttonexample-over.png&quot;</span>,
+    <span class="kw">onRelease</span> <span class="ot">=</span> <span class="kw">onButtonRelease</span>
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=template.advanced_api&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=template.advanced_api&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=template.advanced_api&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

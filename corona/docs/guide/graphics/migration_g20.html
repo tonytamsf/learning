@@ -1,0 +1,1694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > graphics > migration_g20</title>
+  <meta name="revised" content="20-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > graphics > migration_g20" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#graphics-2.0-migrating-from-graphics-1.0-to-2.0">Graphics 2.0: Migrating from Graphics 1.0 to 2.0</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#display-objects">Display Objects</a><ul>
+<li><a href="#constructors">Constructors</a></li>
+<li><a href="#reference-points-anchor-points">Reference points → Anchor Points</a></li>
+<li><a href="#color-definition">Color Definition</a></li>
+</ul></li>
+<li><a href="#widgets">Widgets</a><ul>
+<li><a href="#widget-alignment">Widget Alignment</a></li>
+<li><a href="#tableview">TableView</a><ul>
+<li><a href="#widget-positioning">Widget Positioning</a></li>
+<li><a href="#row-positioning">Row Positioning</a></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#removed-libraries-and-apis">Removed Libraries and APIs</a><ul>
+<li><a href="#sprite-library">sprite library</a></li>
+<li><a href="#display.newimagegroup">display.newImageGroup()</a></li>
+<li><a href="#setreferencepoint-xreference-yreference-xorigin-yorigin">setReferencePoint() / xReference / yReference / xOrigin / yOrigin</a></li>
+</ul></li>
+<li><a href="#deprecated-apis">Deprecated APIs</a><ul>
+<li><a href="#textobjectsettextcolor">textObject:setTextColor()</a></li>
+<li><a href="#line.width">line.width</a></li>
+<li><a href="#linesetcolor">line:setColor</a></li>
+<li><a href="#graphics.newgradient">graphics.newGradient()</a></li>
+</ul></li>
+<li><a href="#graphics-features">2.0 Graphics Features</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">guide</a>  ▸  [graphics][guide.graphics]  ▸  <a href="migration_g20.html">migration_g20</a>
+</div>
+<div class="section level1" id="graphics-2.0-migrating-from-graphics-1.0-to-2.0">
+<h1><a href="#TOC">Graphics 2.0: Migrating from Graphics 1.0 to 2.0</a></h1>
+<p>Updated: 2013.11.18</p>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>This guide explains the changes required to modify existing Graphics 1.0 code to handle some behavioral changes introduced in <a href="http://www.coronalabs.com/2d/">Graphics 2.0</a>. By migrating your projects, you'll be able to take advantage of all the new graphics features which are not actively supported in <a href="migration_v1.html">Graphics 1.0 Compatibility Mode</a>.</p>
+<p>Guides for the new Graphics 2.0 features are available in <a href="http://www.coronalabs.com/resources/tutorials/images-audio-video-animation/">Corona University</a>. For a list of tutorials, see the <a href="http://www.coronalabs.com/blog/2013/11/06/graphics-2-0-tutorial-roundup/">Graphics 2.0 Tutorial Roundup</a>.</p>
+</div>
+<div class="section level2" id="display-objects">
+<h2><a href="#TOC">Display Objects</a></h2>
+<p>The following are behavioral changes to Graphics 2.0 APIs:</p>
+<div class="section level3" id="constructors">
+<h3><a href="#TOC">Constructors</a></h3>
+<p>In Graphics 1.0, display object constructors had a top/left parameter. These have been reinterpreted as <strong>x</strong> and <strong>y</strong> values that specify the object's center point. The original behavior of interpreting the <strong>x</strong> and <strong>y</strong> parameter as top/left is available if using V1 Compatibility Mode. You can see the difference by comparing the <code>HelloWorld_v1</code> and <code>HelloWorld_v2</code> samples.</p>
+</div>
+<div class="section level3" id="reference-points-anchor-points">
+<h3><a href="#TOC">Reference points → Anchor Points</a></h3>
+<p>The following methods and properties have been removed:</p>
+<ul>
+<li><code>setReferencePoint</code></li>
+<li><code>xReference</code></li>
+<li><code>yReference</code></li>
+<li><code>xOrigin</code></li>
+<li><code>yOrigin</code></li>
+</ul>
+<p>These have been replaced by <strong>anchor points</strong>, set via <a href="../../api/type/DisplayObject/anchorX.html">object.anchorX</a> and <a href="../../api/type/DisplayObject/anchorY.html">object.anchorY</a>. Anchors have some behavioral differences — see <a href="transform-anchor.html">Understanding Transforms and Anchors</a> for details.</p>
+<p>Note that groups do not have anchor points. All operations are based around the group's fixed origin point.</p>
+</div>
+<div class="section level3" id="color-definition">
+<h3><a href="#TOC">Color Definition</a></h3>
+<p>For properties like <a href="../../api/type/ShapeObject/setFillColor.html">object:setFillColor()</a> and <a href="../../api/type/ShapeObject/setStrokeColor.html">object:setStrokeColor()</a>, RGBA color settings range between <code>0.0</code> and <code>1.0</code>, not between <code>0</code> and <code>255</code>. In addition, APIs that were available in Graphics 1.0 will adopt the new range by default, unless you enable V1 Compatibility Mode.</p>
+<p>Also note that <code>object:setTextColor()</code> has been deprecated. You should use <a href="../../api/type/ShapeObject/setFillColor.html">object:setFillColor()</a> on text objects instead.</p>
+</div>
+</div>
+<div class="section level2" id="widgets">
+<h2><a href="#TOC">Widgets</a></h2>
+<p>This section aims to ease the migration of projects containing widgets.</p>
+<!---
+
+<div class="guide-notebox">
+<div class="notebox-title">Note</div>
+
+Please see the updated widget sample code to see examples of how the widgets work in Graphics 2.0. You can find these samples in the following folder:
+
+&nbsp;&nbsp;&nbsp;CoronaSDK &rarr; SampleCode &rarr; Interface
+
+The samples are __ScrollView__, __WidgetDemo__, __ListView1__, __ListView2__, and __ListView3__.
+
+</div>
+
+-->
+
+<div class="section level3" id="widget-alignment">
+<h3><a href="#TOC">Widget Alignment</a></h3>
+<p>In Graphics 1.0, all widgets were top-left aligned, except for <a href="../../api/library/widget/newPickerWheel.html">newPickerWheel()</a>.</p>
+<p>In Graphics 2.0, all widgets are <strong>center</strong> aligned for consistency. The default anchoring for all widgets is <code>0.5</code> for both the <strong>x</strong> and <strong>y</strong> coordinates.</p>
+</div>
+<div class="section level3" id="tableview">
+<h3><a href="#TOC">TableView</a></h3>
+<p>The following changes relate to <a href="../../api/library/widget/newTableView.html">widget.newTableView()</a>:</p>
+<div class="section level5" id="widget-positioning">
+<h5><a href="#TOC">Widget Positioning</a></h5>
+<p>In Graphics 2.0, the <strong>x</strong> and <strong>y</strong> properties of the table view refer to the <strong>center</strong> of the widget. This is a change from Graphics 1.0 in which the <strong>x</strong> and <strong>y</strong> properties were aligned to the top left.</p>
+</div>
+<div class="section level5" id="row-positioning">
+<h5><a href="#TOC">Row Positioning</a></h5>
+<p>In Graphics 2.0, the <strong>x</strong> and <strong>y</strong> position of the rows — when inserting objects into a row via the <code>onRowRender</code> method — will refer to the <strong>center</strong> of the row.</p>
+</div>
+<div class="section level5" id="example">
+<h5><a href="#TOC">Example</a></h5>
+<p>The following example shows how your Graphics 1.0 code might look, followed by what it should look like in Graphics 2.0:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Graphics 1.0</span>
+<span class="kw">local</span> <span class="kw">function</span> onRowRender<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+    <span class="kw">local</span> <span class="kw">row</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">row</span>
+
+    <span class="co">-- We cache the row contentWidth and contentHeight because the row bounds can change as we add children</span>
+    <span class="kw">local</span> <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentHeight</span>
+    <span class="kw">local</span> <span class="kw">rowWidth</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentWidth</span>
+
+    <span class="kw">local</span> <span class="kw">rowTitle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="kw">row</span>, <span class="st">&quot;Row &quot;</span> <span class="ot">..</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">index</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">nil</span>, <span class="dv">14</span> <span class="ot">)</span>
+
+    <span class="co">-- Left-align the label</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">-</span> <span class="ot">(</span> <span class="kw">rowWidth</span> <span class="ot">*</span> <span class="dv">0.5</span> <span class="ot">)</span> <span class="ot">+</span> <span class="ot">(</span> <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">contentWidth</span> <span class="ot">*</span> <span class="dv">0.5</span> <span class="ot">)</span>
+
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="kw">rowHeight</span> <span class="ot">*</span> <span class="dv">0.5</span>
+    <span class="kw">rowTitle</span>:setTextColor<span class="ot">(</span> <span class="dv">0</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Graphics 2.0 (even in V1 Compatibility Mode)</span>
+<span class="kw">local</span> <span class="kw">function</span> onRowRender<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">phase</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span>
+    <span class="kw">local</span> <span class="kw">row</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">row</span>
+
+    <span class="co">-- We cache the row contentWidth and contentHeight because the row bounds can change as we add children</span>
+    <span class="kw">local</span> <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentHeight</span>
+    <span class="kw">local</span> <span class="kw">rowWidth</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentWidth</span>
+
+    <span class="kw">local</span> <span class="kw">rowTitle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="kw">row</span>, <span class="st">&quot;Row &quot;</span> <span class="ot">..</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">index</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">nil</span>, <span class="dv">14</span> <span class="ot">)</span>
+
+    <span class="co">-- Left-align the label</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">0</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">anchorX</span> <span class="ot">=</span> <span class="dv">0</span>
+
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="kw">rowHeight</span> <span class="ot">*</span> <span class="dv">0.5</span>
+    <span class="kw">rowTitle</span>:setFillColor<span class="ot">(</span> <span class="dv">0</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+</div>
+</div>
+</div>
+<div class="section level2" id="removed-libraries-and-apis">
+<h2><a href="#TOC">Removed Libraries and APIs</a></h2>
+<p>The following libraries and APIs have been removed in Graphics 2.0 and are <strong>not</strong> available, even in V1 Compatibility Mode:</p>
+<div class="section level5" id="sprite-library">
+<h5><a href="#TOC">sprite library</a></h5>
+<ul>
+<li>The legacy sprite library has been removed. Use <a href="../../api/library/display/newSprite.html">display.newSprite()</a> instead.</li>
+<li>If you rely on the old sprite library, a legacy sprite module is available <a href="https://github.com/coronalabs/framework-sprite-legacy">here</a>.</li>
+<li>If your project uses <a href="http://www.x-pressive.com/ParticleCandy_Corona/">Particle Candy</a>, you must download and <code>require()</code> this legacy sprite module.</li>
+</ul>
+</div>
+<div class="section level5" id="display.newimagegroup">
+<h5><a href="#TOC">display.newImageGroup()</a></h5>
+<ul>
+<li>Use <a href="../../api/library/display/newGroup.html">display.newGroup()</a> instead.</li>
+</ul>
+</div>
+<div class="section level5" id="setreferencepoint-xreference-yreference-xorigin-yorigin">
+<h5><a href="#TOC">setReferencePoint() / xReference / yReference / xOrigin / yOrigin</a></h5>
+<ul>
+<li>Use <a href="../../api/type/DisplayObject/anchorX.html">object.anchorX</a> and <a href="../../api/type/DisplayObject/anchorY.html">object.anchorY</a> instead.</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="deprecated-apis">
+<h2><a href="#TOC">Deprecated APIs</a></h2>
+<div class="section level5" id="textobjectsettextcolor">
+<h5><a href="#TOC">textObject:setTextColor()</a></h5>
+<ul>
+<li>Use <a href="../../api/type/ShapeObject/setFillColor.html">object:setFillColor()</a> on text objects.</li>
+</ul>
+</div>
+<div class="section level5" id="line.width">
+<h5><a href="#TOC">line.width</a></h5>
+<ul>
+<li>Use <a href="../../api/type/ShapeObject/strokeWidth.html">line.strokeWidth</a> instead.</li>
+</ul>
+</div>
+<div class="section level5" id="linesetcolor">
+<h5><a href="#TOC">line:setColor</a></h5>
+<ul>
+<li>Use <a href="../../api/type/LineObject/setColor.html">line:setStrokeColor()</a> instead.</li>
+</ul>
+</div>
+<div class="section level5" id="graphics.newgradient">
+<h5><a href="#TOC">graphics.newGradient()</a></h5>
+<ul>
+<li>Create a table of parameters instead. Please see <a href="../../api/type/ShapeObject/setFillColor.html">object:setFillColor()</a> for an example.</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="graphics-features">
+<h2><a href="#TOC">2.0 Graphics Features</a></h2>
+<p>To learn about the new Graphics 2.0 features, please read the guides in <a href="http://www.coronalabs.com/resources/tutorials/images-audio-video-animation/">Corona University</a> or see the <a href="http://www.coronalabs.com/blog/2013/11/06/graphics-2-0-tutorial-roundup/">Graphics 2.0 Tutorial Roundup</a>.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 20-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.graphics.migration_g20&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.graphics.migration_g20&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.graphics.migration_g20&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

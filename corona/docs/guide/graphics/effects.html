@@ -1,0 +1,2193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > graphics > effects</title>
+  <meta name="revised" content="25-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > graphics > effects" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../plugin/index.html">Plugins</a></li>
+<li><a href="../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#effects">Effects</a><ul>
+<li><a href="#generator-effects">Generator Effects</a><ul>
+<li><a href="#generator.checkerboardgenerator">&quot;generator.checkerboardGenerator&quot;</a></li>
+<li><a href="#generator.lenticularhalogenerator">&quot;generator.lenticularHaloGenerator&quot;</a></li>
+<li><a href="#generator.marchingants">&quot;generator.marchingAnts&quot;</a></li>
+<li><a href="#generator.perlinnoise">&quot;generator.perlinNoise&quot;</a></li>
+<li><a href="#generator.radialgradient">&quot;generator.radialGradient&quot;</a></li>
+<li><a href="#generator.random">&quot;generator.random&quot;</a></li>
+<li><a href="#generator.stripes">&quot;generator.stripes&quot;</a></li>
+<li><a href="#generator.sunbeams">&quot;generator.sunbeams&quot;</a></li>
+</ul></li>
+<li><a href="#filter-effects">Filter Effects</a><ul>
+<li><a href="#filter.bloom">&quot;filter.bloom&quot;</a></li>
+<li><a href="#filter.blur">&quot;filter.blur&quot;</a></li>
+<li><a href="#filter.blurgaussian">&quot;filter.blurGaussian&quot;</a></li>
+<li><a href="#filter.blurhorizontal">&quot;filter.blurHorizontal&quot;</a></li>
+<li><a href="#filter.blurvertical">&quot;filter.blurVertical&quot;</a></li>
+<li><a href="#filter.brightness">&quot;filter.brightness&quot;</a></li>
+<li><a href="#filter.bulge">&quot;filter.bulge&quot;</a></li>
+<li><a href="#filter.chromakey">&quot;filter.chromaKey&quot;</a></li>
+<li><a href="#filter.colorchanneloffset">&quot;filter.colorChannelOffset&quot;</a></li>
+<li><a href="#filter.colormatrix">&quot;filter.colorMatrix&quot;</a></li>
+<li><a href="#filter.colorpolynomial">&quot;filter.colorPolynomial&quot;</a></li>
+<li><a href="#filter.contrast">&quot;filter.contrast&quot;</a></li>
+<li><a href="#filter.crosshatch">&quot;filter.crosshatch&quot;</a></li>
+<li><a href="#filter.crystallize">&quot;filter.crystallize&quot;</a></li>
+<li><a href="#filter.desaturate">&quot;filter.desaturate&quot;</a></li>
+<li><a href="#filter.dissolve">&quot;filter.dissolve&quot;</a></li>
+<li><a href="#filter.duotone">&quot;filter.duotone&quot;</a></li>
+<li><a href="#filter.emboss">&quot;filter.emboss&quot;</a></li>
+<li><a href="#filter.exposure">&quot;filter.exposure&quot;</a></li>
+<li><a href="#filter.frostedglass">&quot;filter.frostedGlass&quot;</a></li>
+<li><a href="#filter.grayscale">&quot;filter.grayscale&quot;</a></li>
+<li><a href="#filter.hue">&quot;filter.hue&quot;</a></li>
+<li><a href="#filter.invert">&quot;filter.invert&quot;</a></li>
+<li><a href="#filter.iris">&quot;filter.iris&quot;</a></li>
+<li><a href="#filter.levels">&quot;filter.levels&quot;</a></li>
+<li><a href="#filter.lineargradient">&quot;filter.linearGradient&quot;</a></li>
+<li><a href="#filter.linearwipe">&quot;filter.linearWipe&quot;</a></li>
+<li><a href="#filter.median">&quot;filter.median&quot;</a></li>
+<li><a href="#filter.monotone">&quot;filter.monotone&quot;</a></li>
+<li><a href="#filter.optile">&quot;filter.opTile&quot;</a></li>
+<li><a href="#filter.pixelate">&quot;filter.pixelate&quot;</a></li>
+<li><a href="#filter.polkadots">&quot;filter.polkaDots&quot;</a></li>
+<li><a href="#filter.posterize">&quot;filter.posterize&quot;</a></li>
+<li><a href="#filter.radialwipe">&quot;filter.radialWipe&quot;</a></li>
+<li><a href="#filter.saturate">&quot;filter.saturate&quot;</a></li>
+<li><a href="#filter.scatter">&quot;filter.scatter&quot;</a></li>
+<li><a href="#filter.sepia">&quot;filter.sepia&quot;</a></li>
+<li><a href="#filter.sharpenluminance">&quot;filter.sharpenLuminance&quot;</a></li>
+<li><a href="#filter.sobel">&quot;filter.sobel&quot;</a></li>
+<li><a href="#filter.straighten">&quot;filter.straighten&quot;</a></li>
+<li><a href="#filter.swirl">&quot;filter.swirl&quot;</a></li>
+<li><a href="#filter.vignette">&quot;filter.vignette&quot;</a></li>
+<li><a href="#filter.wobble">&quot;filter.wobble&quot;</a></li>
+<li><a href="#filter.woodcut">&quot;filter.woodCut&quot;</a></li>
+<li><a href="#filter.zoomblur">&quot;filter.zoomBlur&quot;</a></li>
+</ul></li>
+<li><a href="#composite-effects">Composite Effects</a><ul>
+<li><a href="#composite.add">&quot;composite.add&quot;</a></li>
+<li><a href="#composite.average">&quot;composite.average&quot;</a></li>
+<li><a href="#composite.colorburn">&quot;composite.colorBurn&quot;</a></li>
+<li><a href="#composite.colordodge">&quot;composite.colorDodge&quot;</a></li>
+<li><a href="#composite.darken">&quot;composite.darken&quot;</a></li>
+<li><a href="#composite.difference">&quot;composite.difference&quot;</a></li>
+<li><a href="#composite.exclusion">&quot;composite.exclusion&quot;</a></li>
+<li><a href="#composite.glow">&quot;composite.glow&quot;</a></li>
+<li><a href="#composite.hardlight">&quot;composite.hardLight&quot;</a></li>
+<li><a href="#composite.hardmix">&quot;composite.hardMix&quot;</a></li>
+<li><a href="#composite.lighten">&quot;composite.lighten&quot;</a></li>
+<li><a href="#composite.linearlight">&quot;composite.linearLight&quot;</a></li>
+<li><a href="#composite.multiply">&quot;composite.multiply&quot;</a></li>
+<li><a href="#composite.negation">&quot;composite.negation&quot;</a></li>
+<li><a href="#composite.normalmapwith1dirlight">&quot;composite.normalMapWith1DirLight&quot;</a></li>
+<li><a href="#composite.normalmapwith1pointlight">&quot;composite.normalMapWith1PointLight&quot;</a></li>
+<li><a href="#composite.overlay">&quot;composite.overlay&quot;</a></li>
+<li><a href="#composite.phoenix">&quot;composite.phoenix&quot;</a></li>
+<li><a href="#composite.pinlight">&quot;composite.pinLight&quot;</a></li>
+<li><a href="#composite.reflect">&quot;composite.reflect&quot;</a></li>
+<li><a href="#composite.screen">&quot;composite.screen&quot;</a></li>
+<li><a href="#composite.softlight">&quot;composite.softLight&quot;</a></li>
+<li><a href="#composite.subtract">&quot;composite.subtract&quot;</a></li>
+<li><a href="#composite.vividlight">&quot;composite.vividLight&quot;</a></li>
+</ul></li>
+<li><a href="#android">Android</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">guide</a>  ▸  [graphics][guide.graphics]  ▸  <a href="effects.html">effects</a>
+</div>
+<div class="section level1" id="effects">
+<h1><a href="#TOC">Effects</a></h1>
+<p>In Corona, you can apply visual effects to display objects with unprecendented ease.</p>
+<p>Effects are set by setting the <code>effect</code> parameter of a fill or stroke to the name of the effect. The name is a combination of the type of effect and the name. For example, blur is a filter, so here's how you would apply it to an image:</p>
+<p><code>local bkgd = display.newImage( &quot;bkgd.png&quot; ) bkgd.fill.effect = &quot;filter.blur&quot;</code> There are 3 types of effects available to you:</p>
+<ul>
+<li>Generators</li>
+<li>Filters</li>
+<li>Composites</li>
+</ul>
+<p>These effects are categorized based on the number of textures required for them to operate correctly. These are described in more detail below.</p>
+<div class="section level2" id="generator-effects">
+<h2><a href="#TOC">Generator Effects</a></h2>
+<p>Generators are procedurally-generated effects. They don't operate on any textures/images. Instead, they generate textures in the fragment shader.</p>
+<div class="section level3" id="generator.checkerboardgenerator">
+<h3><a href="#TOC">&quot;generator.checkerboardGenerator&quot;</a></h3>
+<ul>
+<li><p><code>color1</code> default = { 1, 0, 0, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>color2</code> default = { 0, 0, 1, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>xStep</code> default = 3, min = 0, max = none,</p></li>
+<li><p><code>yStep</code> default = 3, min = 0, max = none,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="generator.lenticularhalogenerator">
+<h3><a href="#TOC">&quot;generator.lenticularHaloGenerator&quot;</a></h3>
+<ul>
+<li><p><code>posX</code> default = 0.5, min = 0, max = 1,</p></li>
+<li><p><code>posY</code> default = 0.5, min = 0, max = 1,</p></li>
+<li><p><code>aspectRatio</code> default = 1, min = 0, max = none,</p></li>
+<li><p><code>seed</code> default = 0, min = 0, max = none,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="generator.marchingants">
+<h3><a href="#TOC">&quot;generator.marchingAnts&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">This <em>may</em> not be functional under Windows.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="generator.perlinnoise">
+<h3><a href="#TOC">&quot;generator.perlinNoise&quot;</a></h3>
+<ul>
+<li><p><code>color1</code> default = { 1, 0, 0, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>color2</code> default = { 0, 0, 1, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>scale</code> default = 8, min = 0, max = none,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="generator.radialgradient">
+<h3><a href="#TOC">&quot;generator.radialGradient&quot;</a></h3>
+<ul>
+<li><p><code>aspectRatio</code> default = 1, min = 0, max = none,</p></li>
+<li><p><code>center_and_radiuses</code> [0] is center.x. [1] is center.y. [2] is innerRadius. [3] is outerRadius. default = { 0.5, 0.5, 0.125, 0.25 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>color1</code> default = { 1, 0, 0, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>color2</code> default = { 0, 0, 1, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+</ul>
+</div>
+<div class="section level3" id="generator.random">
+<h3><a href="#TOC">&quot;generator.random&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="generator.stripes">
+<h3><a href="#TOC">&quot;generator.stripes&quot;</a></h3>
+<ul>
+<li><p><code>periods</code> [1] is pixelOnPeriod1. [2] is pixelOffPeriod1. [3] is pixelOnPeriod2. [4] is pixelOffPeriod2. default = { 1, 1, 1, 1 }, min = { 0, 0, 0, 0 }, max = { none, none, none, none },</p></li>
+<li><p><code>angle</code> default = 0, min = 0, max = 360,</p></li>
+<li><p><code>translation</code> default = 0, min = none, max = none,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">This <em>may</em> not be functional under Windows.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="generator.sunbeams">
+<h3><a href="#TOC">&quot;generator.sunbeams&quot;</a></h3>
+<ul>
+<li><p><code>posX</code> default = 0.5, min = 0, max = 1,</p></li>
+<li><p><code>posY</code> default = 0.5, min = 0, max = 1,</p></li>
+<li><p><code>aspectRatio</code> default = 1, min = 0, max = none,</p></li>
+<li><p><code>seed</code> default = 0, min = 0, max = none,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+</div>
+<div class="section level2" id="filter-effects">
+<h2><a href="#TOC">Filter Effects</a></h2>
+<p>Filters effects operate on a single texture/image.</p>
+<div class="section level3" id="filter.bloom">
+<h3><a href="#TOC">&quot;filter.bloom&quot;</a></h3>
+<ul>
+<li><code>levels</code> See filter.levels</li>
+<li><code>horizontal</code> See filter.blurHorizontal</li>
+<li><code>vertical</code> See filter.blurVertical</li>
+<li><code>add</code> See composite.add</li>
+</ul>
+</div>
+<div class="section level3" id="filter.blur">
+<h3><a href="#TOC">&quot;filter.blur&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+</div>
+<div class="section level3" id="filter.blurgaussian">
+<h3><a href="#TOC">&quot;filter.blurGaussian&quot;</a></h3>
+<ul>
+<li><code>horizontal</code> See filter.blurHorizontal</li>
+<li><code>vertical</code> See filter.blurVertical</li>
+</ul>
+</div>
+<div class="section level3" id="filter.blurhorizontal">
+<h3><a href="#TOC">&quot;filter.blurHorizontal&quot;</a></h3>
+<ul>
+<li><p><code>blurSize</code> default = 8, min = 2, max = 512,</p></li>
+<li><p><code>sigma</code> default = 128, min = 2, max = 512,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.blurvertical">
+<h3><a href="#TOC">&quot;filter.blurVertical&quot;</a></h3>
+<ul>
+<li><p><code>blurSize</code> default = 8, min = 2, max = 512,</p></li>
+<li><p><code>sigma</code> default = 128, min = 2, max = 512,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.brightness">
+<h3><a href="#TOC">&quot;filter.brightness&quot;</a></h3>
+<ul>
+<li><code>intensity</code> Controls the intensity of the brightness. Ranges from 0 to 1. default = 0, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.bulge">
+<h3><a href="#TOC">&quot;filter.bulge&quot;</a></h3>
+<ul>
+<li><code>intensity</code> Controls the distortion of the bulge. Ranges from 0 to 1. default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.chromakey">
+<h3><a href="#TOC">&quot;filter.chromaKey&quot;</a></h3>
+<ul>
+<li><p><code>sensitivity</code> 0..1, default: 0.4 default = 0.4, min = 0, max = 1,</p></li>
+<li><p><code>smoothing</code> 0..1, default: 0.1 default = 0.1, min = 0, max = 1,</p></li>
+<li><p><code>color</code> vec4 rgba 0..1, default: white default = { 1, 1, 1, 1 }, -- ?? min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.colorchanneloffset">
+<h3><a href="#TOC">&quot;filter.colorChannelOffset&quot;</a></h3>
+<ul>
+<li><p><code>xTexels</code> default = 8, min = 0, max = none,</p></li>
+<li><p><code>yTexels</code> default = 8, min = 0, max = none,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.colormatrix">
+<h3><a href="#TOC">&quot;filter.colorMatrix&quot;</a></h3>
+<p>This multiplies a source color and adds an offset to each color component of a source image.</p>
+<ul>
+<li><p><code>coefficients</code> default = { 1.0, 0.0, 0.0, 0.0, -- The red coefficients. 0.0, 1.0, 0.0, 0.0, -- The green coefficients. 0.0, 0.0, 1.0, 0.0, -- The blue coefficients. 0.0, 0.0, 0.0, 1.0 } -- The alpha coefficients.</p></li>
+<li><p><code>bias</code> default = { 0.0, 0.0, 0.0, 0.0 } min = { -1.0, -1.0, -1.0, -1.0 } max = { 1.0, 1.0, 1.0, 1.0 }</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.colorpolynomial">
+<h3><a href="#TOC">&quot;filter.colorPolynomial&quot;</a></h3>
+<p>This applies a set of cubic polynomials to a source image.</p>
+<p>default = { 1.0, 0.0, 0.0, 0.0, -- The red coefficients. 0.0, 1.0, 0.0, 0.0, -- The green coefficients. 0.0, 0.0, 1.0, 0.0, -- The blue coefficients. 0.0, 0.0, 0.0, 1.0 } -- The alpha coefficients.</p>
+</div>
+<div class="section level3" id="filter.contrast">
+<h3><a href="#TOC">&quot;filter.contrast&quot;</a></h3>
+<ul>
+<li><code>contrast</code> 0..4, default: 1 default = 1, min = 0, max = 4,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.crosshatch">
+<h3><a href="#TOC">&quot;filter.crosshatch&quot;</a></h3>
+<ul>
+<li><code>grain</code> default = 0, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.crystallize">
+<h3><a href="#TOC">&quot;filter.crystallize&quot;</a></h3>
+<ul>
+<li><code>numTiles</code> default = 16, min = 2, max = none,</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="filter.desaturate">
+<h3><a href="#TOC">&quot;filter.desaturate&quot;</a></h3>
+<ul>
+<li><code>intensity</code> default = 0.5, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.dissolve">
+<h3><a href="#TOC">&quot;filter.dissolve&quot;</a></h3>
+<ul>
+<li><code>threshold</code> Controls the dissolve progress. Ranges from 0 (opaque) to 1 (transparent). default = 1,</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="filter.duotone">
+<h3><a href="#TOC">&quot;filter.duotone&quot;</a></h3>
+<ul>
+<li><code>darkColor</code> default = { 0.0, 0.0, 0.5, 1.0 }</li>
+<li><code>lightColor</code> default = { 1.0, 0.0, 0.0, 1.0 }</li>
+</ul>
+</div>
+<div class="section level3" id="filter.emboss">
+<h3><a href="#TOC">&quot;filter.emboss&quot;</a></h3>
+<ul>
+<li><code>intensity</code> 0..4, default: 1 default = 1, min = 0, max = 4,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.exposure">
+<h3><a href="#TOC">&quot;filter.exposure&quot;</a></h3>
+<ul>
+<li><code>exposure</code> -10..10, default: 0 default = 0, min = -10, max = 10,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.frostedglass">
+<h3><a href="#TOC">&quot;filter.frostedGlass&quot;</a></h3>
+<ul>
+<li><code>scale</code> default = 64, min = 1, max = none,</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="filter.grayscale">
+<h3><a href="#TOC">&quot;filter.grayscale&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+</div>
+<div class="section level3" id="filter.hue">
+<h3><a href="#TOC">&quot;filter.hue&quot;</a></h3>
+<ul>
+<li><code>angle</code> 0..360, default: 0</li>
+</ul>
+</div>
+<div class="section level3" id="filter.invert">
+<h3><a href="#TOC">&quot;filter.invert&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+</div>
+<div class="section level3" id="filter.iris">
+<h3><a href="#TOC">&quot;filter.iris&quot;</a></h3>
+<ul>
+<li><p><code>center</code> This is the position of the origin of the iris. default = { 0.5, 0.5 }, min = { 0, 0 }, max = { 1, 1 },</p></li>
+<li><p><code>aperture</code> default = 0, min = 0, -- full coverage (closed) max = 1, -- no coverage (open)</p></li>
+<li><p><code>aspectRatio</code> default = 1, min = 0, max = none,</p></li>
+<li><p><code>smoothness</code> default = 0, min = 0, max = 1,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.levels">
+<h3><a href="#TOC">&quot;filter.levels&quot;</a></h3>
+<ul>
+<li><p><code>white</code> default = 215/255, min = 0, max = 255,</p></li>
+<li><p><code>black</code> default = 144/255, min = 0, max = 255,</p></li>
+<li><p><code>gamma</code> default = 1.06, min = 0, max = 1,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.lineargradient">
+<h3><a href="#TOC">&quot;filter.linearGradient&quot;</a></h3>
+<ul>
+<li><p><code>color1</code> name = &quot;color1&quot;, default = { 1, 0, 0, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>position1</code> default = { 0, 0 }, min = { 0, 0 }, max = { 1, 1 },</p></li>
+<li><p><code>color2</code> default = { 0, 0, 1, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>position2</code> default = { 1, 1 }, min = { 0, 0 }, max = { 1, 1 },</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.linearwipe">
+<h3><a href="#TOC">&quot;filter.linearWipe&quot;</a></h3>
+<ul>
+<li><p><code>direction</code> default = { 1, 0 }, -- Doesn't need to be normalized. min = { 0, 0 }, max = { 1, 1 },</p></li>
+<li><p><code>smoothness</code> default = 0, min = 0, -- hard max = 1, -- smooth</p></li>
+<li><p><code>progress</code> default = 0, min = 0, max = 1,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.median">
+<h3><a href="#TOC">&quot;filter.median&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+</div>
+<div class="section level3" id="filter.monotone">
+<h3><a href="#TOC">&quot;filter.monotone&quot;</a></h3>
+<ul>
+<li><p><code>r</code> default = 0, min = 0, max = 1,</p></li>
+<li><p><code>g</code> default = 0, min = 0, max = 1,</p></li>
+<li><p><code>b</code> default = 0, min = 0, max = 1,</p></li>
+<li><p><code>a</code> default = 1, min = 0, max = 1,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.optile">
+<h3><a href="#TOC">&quot;filter.opTile&quot;</a></h3>
+<ul>
+<li><p><code>numPixels</code> default = 8, min = 0, max = none,</p></li>
+<li><p><code>angle</code> default = 0, min = 0, max = 360,</p></li>
+<li><p><code>scale</code> default = 2.8, min = 0, max = none,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.pixelate">
+<h3><a href="#TOC">&quot;filter.pixelate&quot;</a></h3>
+<ul>
+<li><code>numPixels</code> default = 4,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.polkadots">
+<h3><a href="#TOC">&quot;filter.polkaDots&quot;</a></h3>
+<ul>
+<li><p><code>numPixels</code> default = 4, min = 4, max = none,</p></li>
+<li><p><code>dotRadius</code> default = 1, min = 0, max = 1,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="filter.posterize">
+<h3><a href="#TOC">&quot;filter.posterize&quot;</a></h3>
+<ul>
+<li><code>colorsPerChannel</code> default = 4, min = 2, max = none,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.radialwipe">
+<h3><a href="#TOC">&quot;filter.radialWipe&quot;</a></h3>
+<ul>
+<li><p><code>center</code> default = { 0.5, 0.5 }, min = { 0, 0 }, max = { 1, 1 },</p></li>
+<li><p><code>progress</code> default = 0, min = 0, max = 1,</p></li>
+<li><p><code>axisOrientation</code> default = 0, min = 0, max = 1,</p></li>
+<li><p><code>smoothness</code> default = 0, min = 0, max = 1,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.saturate">
+<h3><a href="#TOC">&quot;filter.saturate&quot;</a></h3>
+<ul>
+<li><code>intensity</code> default = 1, min = 0, max = 8,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.scatter">
+<h3><a href="#TOC">&quot;filter.scatter&quot;</a></h3>
+<ul>
+<li><code>intensity</code> default = 0.5, min = 0, max = 1,</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="filter.sepia">
+<h3><a href="#TOC">&quot;filter.sepia&quot;</a></h3>
+<ul>
+<li><code>intensity</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.sharpenluminance">
+<h3><a href="#TOC">&quot;filter.sharpenLuminance&quot;</a></h3>
+<ul>
+<li><code>sharpness</code> default = 0, min = 0, max = 1,</li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="filter.sobel">
+<h3><a href="#TOC">&quot;filter.sobel&quot;</a></h3>
+<ul>
+<li>No parameters.</li>
+</ul>
+</div>
+<div class="section level3" id="filter.straighten">
+<h3><a href="#TOC">&quot;filter.straighten&quot;</a></h3>
+<ul>
+<li><p><code>width</code> default = 1, min = 1, max = none,</p></li>
+<li><p><code>height</code> default = 1, min = 1, max = none,</p></li>
+<li><p><code>angle</code> default = 0, min = 0, max = 360,</p></li>
+</ul>
+</div>
+<div class="section level3" id="filter.swirl">
+<h3><a href="#TOC">&quot;filter.swirl&quot;</a></h3>
+<ul>
+<li><code>intensity</code> default = 0</li>
+</ul>
+</div>
+<div class="section level3" id="filter.vignette">
+<h3><a href="#TOC">&quot;filter.vignette&quot;</a></h3>
+<ul>
+<li><code>radius</code> default = 0.1</li>
+</ul>
+</div>
+<div class="section level3" id="filter.wobble">
+<h3><a href="#TOC">&quot;filter.wobble&quot;</a></h3>
+<ul>
+<li><code>amplitude</code> default = 10,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.woodcut">
+<h3><a href="#TOC">&quot;filter.woodCut&quot;</a></h3>
+<ul>
+<li><code>intensity</code> default = 0.5, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="filter.zoomblur">
+<h3><a href="#TOC">&quot;filter.zoomBlur&quot;</a></h3>
+<ul>
+<li><p><code>effect.u</code> default = 0.5, min = 0, max = 1,</p></li>
+<li><p><code>effect.v</code> default = 0.5, min = 0, max = 1,</p></li>
+<li><p><code>effect.intensity</code> Controls the intensity of the blur. Ranges from 0 (no blur) to 1. Default is 0.5. default = 0.5, min = 0, -- No blur. max = 1,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">This <em>may</em> not be functional under Windows.</a></h4>
+</blockquote>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+</div>
+<div class="section level2" id="composite-effects">
+<h2><a href="#TOC">Composite Effects</a></h2>
+<p>Composite effects operate on multiple textures/images.</p>
+<div class="section level3" id="composite.add">
+<h3><a href="#TOC">&quot;composite.add&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.average">
+<h3><a href="#TOC">&quot;composite.average&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.colorburn">
+<h3><a href="#TOC">&quot;composite.colorBurn&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.colordodge">
+<h3><a href="#TOC">&quot;composite.colorDodge&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.darken">
+<h3><a href="#TOC">&quot;composite.darken&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.difference">
+<h3><a href="#TOC">&quot;composite.difference&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.exclusion">
+<h3><a href="#TOC">&quot;composite.exclusion&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.glow">
+<h3><a href="#TOC">&quot;composite.glow&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.hardlight">
+<h3><a href="#TOC">&quot;composite.hardLight&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.hardmix">
+<h3><a href="#TOC">&quot;composite.hardMix&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.lighten">
+<h3><a href="#TOC">&quot;composite.lighten&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.linearlight">
+<h3><a href="#TOC">&quot;composite.linearLight&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.multiply">
+<h3><a href="#TOC">&quot;composite.multiply&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.negation">
+<h3><a href="#TOC">&quot;composite.negation&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.normalmapwith1dirlight">
+<h3><a href="#TOC">&quot;composite.normalMapWith1DirLight&quot;</a></h3>
+<ul>
+<li><p><code>dirLightColor</code> : A vec4 containing RGBA values from 0 to 1. default = { 1, 1, 1, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>dirLightDirection</code> : A vec3 containing the light direction in texture-space. The origin and the growth direction of each axes is the same as described for &quot;pointLightPos&quot; in &quot;composite.normalMapWith1PointLight&quot;. We expect this direction vector to be the orientation from where the light is coming from. Not the direction in which it's going. There's no need to normalize this parameter, it's already done internally. default = { 1, 0, 0 }, min = { 0, 0, 0 }, max = { 1, 1, 1 },</p></li>
+<li><p><code>ambientLightIntensity</code> : A 0 (dark) to 1 (full brightness) float containing the brightness of the ambient light. default = 0, min = 0, max = 1,</p></li>
+</ul>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="composite.normalmapwith1pointlight">
+<h3><a href="#TOC">&quot;composite.normalMapWith1PointLight&quot;</a></h3>
+<ul>
+<li><p><code>pointLightColor</code> : A vec4 containing RGBA values from 0 to 1. default = { 1, 1, 1, 1 }, min = { 0, 0, 0, 0 }, max = { 1, 1, 1, 1 },</p></li>
+<li><p><code>pointLightPos</code> : A vec3 containing the light position in textures-space. In other words, this is the position where the light is coming from. The XYZ origin is the upper left corner (0,0,0). Positive X grow to the right, positive Y grows towards the bottom, and positive Z grows out of the screen (towards us, the viewer). The XY for the bottom right corder is (1,1). The Z value is the distance from the surface. 0 means the light is flush with the surface. Larger values means it's farther away from the surface. There's no maximum value for Z, but commonly, the user will keep the value between 0 and 1. default = { 1, 0, 0 }, min = { 0, 0, 0 }, max = { 1, 1, 1 },</p></li>
+<li><p><code>ambientLightIntensity</code> : A 0 (dark) to 1 (full brightness) float containing the brightness of the ambient light. default = 0, min = 0, max = 1,</p></li>
+<li><p><code>attenuationFactors</code> : A vec3 containing the diffuse light's distance attenuation factors. XYZ are the constant, linear, and quadratic attenuation factors. Read these for a better understanding of the attenuation factors:</p></li>
+</ul>
+<p><a href="https://developer.valvesoftware.com/wiki/Constant-Linear-Quadratic_Falloff">https://developer.valvesoftware.com/wiki/Constant-Linear-Quadratic_Falloff</a> <a href="http://www.felixgers.de/teaching/jogl/lightAttenuation.html">http://www.felixgers.de/teaching/jogl/lightAttenuation.html</a></p>
+<p>Note: Distance attenuation DOESN'T affect ambient light intensity.</p>
+<p>default = { 0.4, 3, 20 }, min = { 0, 0, 0 }, max = { none, none, none },</p>
+<blockquote>
+<h4><a href="#TOC">NOT supported on older Android devices. See &quot;Android&quot; below.</a></h4>
+</blockquote>
+</div>
+<div class="section level3" id="composite.overlay">
+<h3><a href="#TOC">&quot;composite.overlay&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.phoenix">
+<h3><a href="#TOC">&quot;composite.phoenix&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.pinlight">
+<h3><a href="#TOC">&quot;composite.pinLight&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.reflect">
+<h3><a href="#TOC">&quot;composite.reflect&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.screen">
+<h3><a href="#TOC">&quot;composite.screen&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.softlight">
+<h3><a href="#TOC">&quot;composite.softLight&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.subtract">
+<h3><a href="#TOC">&quot;composite.subtract&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+<div class="section level3" id="composite.vividlight">
+<h3><a href="#TOC">&quot;composite.vividLight&quot;</a></h3>
+<ul>
+<li><code>alpha</code> default = 1, min = 0, max = 1,</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="android">
+<h2><a href="#TOC">Android</a></h2>
+<p>Certain effects have problems on older Android devices. Most commonly, devices made before 2013, and devices using the <a href="http://en.wikipedia.org/wiki/Mali_(GPU)">ARM Mali 400 GPU</a>). For example, Google Nexus 7, Samsung Galaxy S3, and Amazon Kindle Fire.</p>
+<p>To determine if the current device might have problems, use:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">if</span> <span class="kw">system</span><span class="ot">.</span>getInfo<span class="ot">(</span> <span class="st">&quot;gpuSupportsHighPrecisionFragmentShaders&quot;</span> <span class="ot">)</span> <span class="kw">then</span>
+    <span class="co">-- This device is ok.</span>
+    <span class="co">-- This device WON&#39;T have problems.</span>
+<span class="kw">else</span>
+    <span class="co">-- This device ISN&#39;T ok.</span>
+    <span class="co">-- This device WILL have problems.</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 25-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.graphics.effects&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.graphics.effects&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.graphics.effects&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

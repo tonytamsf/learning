@@ -1,0 +1,1654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newProgressView</title>
+  <meta name="revised" content="26-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newProgressView" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newprogressview">widget.newProgressView()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left, top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-required">width <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#isanimated-optional">isAnimated <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#fillxoffset-optional">fillXOffset <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#fillyoffset-optional">fillYOffset <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#visual-customization">Visual Customization</a><ul>
+<li><a href="#sheet-required">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillouterleftframe-required">fillOuterLeftFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#filloutermiddleframe-required">fillOuterMiddleFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillouterrightframe-required">fillOuterRightFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillinnerleftframe-required">fillInnerLeftFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillinnermiddleframe-required">fillInnerMiddleFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillinnerrightframe-required">fillInnerRightFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillouterwidth-fillouterheight-required">fillOuterWidth, fillOuterHeight <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fillwidth-fillheight-required">fillWidth, fillHeight <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newProgressView.html">newProgressView</a>
+</div>
+<div class="section level1" id="widget.newprogressview">
+<h1><a href="#TOC">widget.newProgressView()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/ProgressViewWidget/index.html">ProgressViewWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, progress, progressView, progressIndicator</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/ProgressViewWidget/index.html">ProgressViewWidget</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<!---
+
+![][images.sdk.widget.newProgressView]
+
+-->
+
+<p>Creates a <a href="../../type/ProgressViewWidget/index.html">ProgressView</a> object.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>To conserve texture memory, a <a href="../../type/ProgressViewWidget/index.html">Progress view</a> can only be created from an imageSheet.</p>
+<p><a href="../../type/ProgressViewWidget/index.html">Progress views</a> do not support <a href="../../type/DisplayObject/scale.html">Scaling</a> nor changing it's width/height via <a href="../../type/DisplayObject/width.html">.width</a>/<a href="../../type/DisplayObject/height.html">.height</a>.</p>
+<p><a href="../../type/ProgressViewWidget/index.html">Progress views</a> also do not support changing <a href="../../type/DisplayObject/setReferencePoint.html">Reference Point's</a> after creation.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newProgressView( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Can be set to anything you want, for easier identification of your widget. Default is &quot;widget_progressView&quot;.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left, top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the position where you want your <a href="../../type/ProgressViewWidget/index.html">Progress view</a> to be created. The default values for left and top are 0, 0.</p>
+</div>
+<div class="section level5" id="width-required">
+<h5><a href="#TOC">width <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the overall width of your <a href="../../type/ProgressViewWidget/index.html">Progress view</a>.</p>
+</div>
+<div class="section level5" id="isanimated-optional">
+<h5><a href="#TOC">isAnimated <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> Set this to true if the progress change should be animated, false (or omitted) if the progress change should happen immediately.</p>
+</div>
+<div class="section level5" id="fillxoffset-optional">
+<h5><a href="#TOC">fillXOffset <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Set this if you wish to position your <a href="../../type/ProgressViewWidget/index.html">Progress view's</a> fill image with a horizontal offset. Default is 0.</p>
+</div>
+<div class="section level5" id="fillyoffset-optional">
+<h5><a href="#TOC">fillYOffset <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Set this if you wish to position your <a href="../../type/ProgressViewWidget/index.html">Progress view's</a> fill image with a vertical offset. Default is 0.</p>
+</div>
+</div>
+<div class="section level2" id="visual-customization">
+<h2><a href="#TOC">Visual Customization</a></h2>
+<div class="section level5" id="sheet-required">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> This is the image sheet object for your <a href="../../type/ProgressViewWidget/index.html">Progress view</a>.</p>
+</div>
+<div class="section level5" id="fillouterleftframe-required">
+<h5><a href="#TOC">fillOuterLeftFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the frame index for the <a href="../../type/ProgressViewWidget/index.html">Progress view</a> outer left frame (this frame is the progress view's container/background left edge segment).</p>
+</div>
+<div class="section level5" id="filloutermiddleframe-required">
+<h5><a href="#TOC">fillOuterMiddleFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the frame index for the <a href="../../type/ProgressViewWidget/index.html">Progress view</a> outer left frame (this frame is the progress view's container/background middle segment).</p>
+</div>
+<div class="section level5" id="fillouterrightframe-required">
+<h5><a href="#TOC">fillOuterRightFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the frame index for the <a href="../../type/ProgressViewWidget/index.html">Progress view</a> outer left frame (this frame is the progress view's container/background right edge segment).</p>
+</div>
+<div class="section level5" id="fillinnerleftframe-required">
+<h5><a href="#TOC">fillInnerLeftFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the frame index for the <a href="../../type/ProgressViewWidget/index.html">Progress view</a> inner left fill frame (this frame is the left edge segment of the progress view's fill).</p>
+</div>
+<div class="section level5" id="fillinnermiddleframe-required">
+<h5><a href="#TOC">fillInnerMiddleFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the frame index for the <a href="../../type/ProgressViewWidget/index.html">Progress view</a> inner middle fill frame (this frame is the middle edge segment of the progress view's fill).</p>
+</div>
+<div class="section level5" id="fillinnerrightframe-required">
+<h5><a href="#TOC">fillInnerRightFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the frame index for the <a href="../../type/ProgressViewWidget/index.html">Progress view</a> inner right fill frame (this frame is the right edge segment of the progress view's fill).</p>
+</div>
+<div class="section level5" id="fillouterwidth-fillouterheight-required">
+<h5><a href="#TOC">fillOuterWidth, fillOuterHeight <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the outer frame of your <a href="../../type/ProgressViewWidget/index.html">Progress view</a>. All fill frames should be equal width/height.</p>
+</div>
+<div class="section level5" id="fillwidth-fillheight-required">
+<h5><a href="#TOC">fillWidth, fillHeight <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> This is the width/height of the fill frames of your <a href="../../type/ProgressViewWidget/index.html">Progress view</a>. All fill frames should be equal width/height.</p>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Create a new progressView</span>
+<span class="kw">local</span> <span class="kw">newProgressView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newProgressView</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">150</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">400</span>,
+    <span class="kw">isAnimated</span> <span class="ot">=</span> <span class="kw">true</span>,
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newProgressView&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newProgressView&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newProgressView&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

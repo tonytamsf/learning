@@ -1,0 +1,1648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > system > scheduleNotification</title>
+  <meta name="revised" content="28-Oct-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > system > scheduleNotification" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#system.schedulenotification">system.scheduleNotification()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#secondsfromnow-required">secondsFromNow <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#coordinateduniversaltime-required">coordinatedUniversalTime <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#options-optional">options <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#format-for-options">Format for <code>options</code></a><ul>
+<li><a href="#alert-optional">alert <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#badge-optional">badge <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#sound-optional">sound <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#custom-optional">custom <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#gotchas">Gotchas</a><ul>
+<li><a href="#android-notification-handling">Android Notification Handling</a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">system</a>  ▸  <a href="scheduleNotification.html">scheduleNotification</a>
+</div>
+<div class="section level1" id="system.schedulenotification">
+<h1><a href="#TOC">system.scheduleNotification()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">system.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left">Object (notification Id)</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">notification</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../../guide/events/appNotification/index.html">Local/Push Notifications</a><br/><a href="cancelNotification.html">system.cancelNotification()</a><br/><a href="../native/setProperty.html">native.setProperty()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Schedule a local notification event to be delivered in the future. Returns a reference ID that can be used to cancel the notification.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>system.scheduleNotification( secondsFromNow [, options] )
+system.scheduleNotification( coordinatedUniversalTime [, options] )</code></pre>
+<p>The first argument must be either be one of the following:</p>
+<div class="section level5" id="secondsfromnow-required">
+<h5><a href="#TOC">secondsFromNow <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Number of seconds from now when the notification should be delivered.</p>
+</div>
+<div class="section level5" id="coordinateduniversaltime-required">
+<h5><a href="#TOC">coordinatedUniversalTime <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table containing same properties as returned by <code>os.date( &quot;!*t&quot; )</code>. A common pitfall is to pass <code>&quot;*t&quot;</code> (instead of <code>&quot;!*t&quot;</code>) resulting in a time given in your current time zone instead of a UTC time.</p>
+<p>The second argument is optional:</p>
+</div>
+<div class="section level5" id="options-optional">
+<h5><a href="#TOC">options <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table specifying details about the notification to be delivered (See <strong>Format for options</strong> below)</p>
+</div>
+<div class="section level3" id="format-for-options">
+<h3><a href="#TOC">Format for <code>options</code></a></h3>
+<p>The following keys can be specified:</p>
+<div class="section level5" id="alert-optional">
+<h5><a href="#TOC">alert <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a></em> The notification message to be displayed to the user. If the application is not currently running, a system alert will display this message.</p>
+</div>
+<div class="section level5" id="badge-optional">
+<h5><a href="#TOC">badge <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a></em> The badge number to be displayed on the application icon when the scheduled notification triggers. Replaces the last badge number that was applied. Set to zero to not show a badge number. (This is not supported on Android.)</p>
+</div>
+<div class="section level5" id="sound-optional">
+<h5><a href="#TOC">sound <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a></em> Name of the sound file in the Resource directory to be played when the scheduled notification triggers. This sound is only played if the app is not currently in the foreground. On iOS, there are limitations on the kinds of sound that can be played (consult Apple's <a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1">documentation</a> for more details).</p>
+</div>
+<div class="section level5" id="custom-optional">
+<h5><a href="#TOC">custom <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> A table that will be delivered with the notification event to pass custom information with it.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<div class="section level3" id="android-notification-handling">
+<h3><a href="#TOC">Android Notification Handling</a></h3>
+<p>Unlike iOS, local notifications on Android are managed by the application and not by the operating system. This means that all scheduled notifications and status bar notifications will be cleared when the application process terminates. However, pressing the <strong>Back</strong> key to exit the application window will not terminate the application process. This only destroys the application window that hosts the Corona runtime, which runs your project's Lua scripts and will receive the <code>&quot;applicationExit&quot;</code> system event just before being destroyed. The application process will continue to run in the background. This is standard Android application behavior and allows its notifications to continue to be available. If the application process does get terminated, then Corona will automatically restore all pending notifications when the application restarts.</p>
+<p>That said, calling <a href="../os/exit.html">os.exit()</a> will terminate the application process and clear all notifications. If you need to close the application window, then you should call <a href="../native/requestExit.html">native.requestExit()</a> instead, which only exits the application window and keeps the application process alive, which in turn keeps your notifications alive.</p>
+<p>Also note that all scheduled notifications and status bar notifications will be cleared after rebooting the Android device. In order to restore all notifications, you must set the following permission in your <code>build.settings</code> file to set up your application to be started in the background after the Android device boots up.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">usesPermissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+</div>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Get the app&#39;s launch arguments in case it was started when the user tapped on a notification.</span>
+<span class="kw">local</span> <span class="kw">launchArgs</span> <span class="ot">=</span> <span class="ot">...</span>
+
+<span class="co">-- Set up notification options.</span>
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">alert</span> <span class="ot">=</span> <span class="st">&quot;Wake up!&quot;</span>,
+    <span class="kw">badge</span> <span class="ot">=</span> <span class="dv">2</span>,
+    <span class="kw">sound</span> <span class="ot">=</span> <span class="st">&quot;alarm.caf&quot;</span>,
+    <span class="kw">custom</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">foo</span> <span class="ot">=</span> <span class="st">&quot;bar&quot;</span> <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="co">-- Schedule a notification to occur 60 seconds from now.</span>
+<span class="kw">local</span> <span class="kw">notificationId</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>scheduleNotification<span class="ot">(</span> <span class="dv">60</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="co">-- Schedule a notification using UTC (Coordinated Universal Time).</span>
+<span class="kw">local</span> <span class="kw">utcTime</span> <span class="ot">=</span> <span class="fu">os.date</span><span class="ot">(</span> <span class="st">&quot;!*t&quot;</span>, <span class="fu">os.time</span><span class="ot">()</span> <span class="ot">+</span> <span class="dv">60</span> <span class="ot">)</span>
+<span class="kw">notificationId</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>scheduleNotification<span class="ot">(</span> <span class="kw">utcTime</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="co">-- Listen for notifications.</span>
+<span class="kw">local</span> <span class="kw">onNotification</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">name</span> <span class="ot">)</span> <span class="co">-- ==&gt; &quot;notification&quot;</span>
+    <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">custom</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">custom</span><span class="ot">.</span><span class="kw">foo</span> <span class="ot">)</span> <span class="co">-- ==&gt; &quot;bar&quot;</span>
+    <span class="kw">end</span>
+<span class="kw">end</span> 
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;notification&quot;</span>, <span class="kw">onNotification</span> <span class="ot">)</span>
+
+<span class="co">-- The app&#39;s launch arguments will provide a notification event if this app was started</span>
+<span class="co">-- when the user tapped on a notification. You must call the notification listener manually.</span>
+<span class="kw">if</span> <span class="kw">launchArgs</span> <span class="kw">and</span> <span class="kw">launchArgs</span><span class="ot">.</span><span class="kw">notification</span> <span class="kw">then</span>
+    onNotification<span class="ot">(</span> <span class="kw">launchArgs</span><span class="ot">.</span><span class="kw">notification</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 28-Oct-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.system.scheduleNotification&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.system.scheduleNotification&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.system.scheduleNotification&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

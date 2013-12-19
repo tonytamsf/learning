@@ -1,0 +1,1856 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newTableView</title>
+  <meta name="revised" content="26-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newTableView" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newtableview">widget.newTableView()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left / top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-height-optional">width / height <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#friction-optional">friction <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#maxvelocity-optional">maxVelocity <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#islocked-optional">isLocked <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#isbounceenabled-optional">isBounceEnabled <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onrowrender-optional">onRowRender <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onrowtouch-optional">onRowTouch <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#listener-optional">listener <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#objectinsertrow"><a href="../../type/TableViewWidget/insertRow.html">object:insertRow()</a></a></li>
+<li><a href="#objectreloaddata"><a href="../../type/TableViewWidget/reloadData.html">object:reloadData()</a></a></li>
+<li><a href="#objectdeleterow"><a href="../../type/TableViewWidget/deleteRow.html">object:deleteRow()</a></a></li>
+<li><a href="#objectdeleteallrows"><a href="../../type/TableViewWidget/deleteAllRows.html">object:deleteAllRows()</a></a></li>
+<li><a href="#objectscrolltoy"><a href="../../type/TableViewWidget/scrollToY.html">object:scrollToY()</a></a></li>
+<li><a href="#objectgetcontentposition"><a href="../../type/TableViewWidget/getContentPosition.html">object:getContentPosition()</a></a></li>
+<li><a href="#objectgetnumrows"><a href="../../type/TableViewWidget/getNumRows.html">object:getNumRows()</a></a></li>
+<li><a href="#objectgetrowatindex"><a href="../../type/TableViewWidget/getRowAtIndex.html">object:getRowAtIndex()</a></a></li>
+</ul></li>
+<li><a href="#visual-options">Visual Options</a><ul>
+<li><a href="#nolines-optional">noLines <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#backgroundcolor-optional">backgroundColor <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#hidebackground-optional">hideBackground <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#hidescrollbar-optional">hideScrollBar <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#scrollbaroptions-optional">scrollBarOptions <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#toppadding-bottompadding-optional">topPadding / bottomPadding <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#inserting-rows">Inserting Rows</a></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#basic-tableview">Basic TableView</a></li>
+<li><a href="#tableview-with-category-rows">TableView with Category Rows</a></li>
+<li><a href="#tableview-with-custom-scroll-bar">TableView with Custom Scroll Bar</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newTableView.html">newTableView</a>
+</div>
+<div class="section level1" id="widget.newtableview">
+<h1><a href="#TOC">widget.newTableView()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/TableViewWidget/index.html">TableView</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, tableview, lists, listview</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/TableViewWidget/index.html">TableView</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a <a href="../../type/TableViewWidget/index.html">TableView</a> object.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>The <a href="../../type/TableViewWidget/index.html">TableView</a> widget does not support <a href="../../type/DisplayObject/scale.html">scaling</a>.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newTableView( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> An optional identification string to assign to the table view. Default is <code>widget_tableView</code>.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left / top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The position where the table view will be created. The default values are <code>0,0</code>.</p>
+</div>
+<div class="section level5" id="width-height-optional">
+<h5><a href="#TOC">width / height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The width and height of the table view.</p>
+</div>
+<div class="section level5" id="friction-optional">
+<h5><a href="#TOC">friction <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Determines how fast the content travels when it is flicked up or down. The default value is <code>0.972</code>.</p>
+</div>
+<div class="section level5" id="maxvelocity-optional">
+<h5><a href="#TOC">maxVelocity <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Limits the maximum scrolling speed of the table view. The default value is <code>2</code>.</p>
+</div>
+<div class="section level5" id="islocked-optional">
+<h5><a href="#TOC">isLocked <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the table view will be locked, meaning it cannot be scrolled vertically.</p>
+</div>
+<div class="section level5" id="isbounceenabled-optional">
+<h5><a href="#TOC">isBounceEnabled <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>false</code>, the table view will simply stop scrolling when it reaches the upper or lower limit. Default is <code>true</code>.</p>
+<!---
+
+##### rowTouchDelay ~^(optional)^~
+_[Number][api.type.Number]._ Specifies the delay, in milliseconds, until the row touch event is propagated.
+
+-->
+
+</div>
+<div class="section level5" id="onrowrender-optional">
+<h5><a href="#TOC">onRowRender <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> The function used to listen for <a href="../../type/TableViewWidget/index.html">TableView</a> row rendering events. This function is called when a row is added via <a href="../../type/TableViewWidget/insertRow.html">object:insertRow()</a>, when all visible rows are <nobr>re-rendered</nobr> via <a href="../../type/TableViewWidget/reloadData.html">object:reloadData()</a>, or when an <nobr>off-screen</nobr> row moves back on screen. In this function, <code>event.row</code> is a reference to the row that was rendered.</p>
+</div>
+<div class="section level5" id="onrowtouch-optional">
+<h5><a href="#TOC">onRowTouch <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> The function used to listen for <a href="../../type/TableViewWidget/index.html">TableView</a> touch/tap events. In this listener function, the <code>event.phase</code> values include <code>&quot;tap&quot;</code>, <code>&quot;press&quot;</code>, <code>&quot;release&quot;</code>, <code>&quot;swipeLeft&quot;</code>, and <code>&quot;swipeRight&quot;</code>. In addition, <code>event.target</code> is a reference to the row that was interacted with and <code>event.target.index</code> is the index number of that row.</p>
+</div>
+<div class="section level5" id="listener-optional">
+<h5><a href="#TOC">listener <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> The function used to listen for <a href="../../type/TableViewWidget/index.html">TableView</a> motion/scroll events. In this listener function, <code>event.phase</code> returns the expected touch interaction phases of <code>&quot;began&quot;</code>, <code>&quot;moved&quot;</code>, or <code>&quot;ended&quot;</code>. In addition, the scroll limit in either direction can be detected by <code>event.limitReached</code>. If this occurs, <code>event.direction</code> returns either <code>&quot;up&quot;</code> or <code>&quot;down&quot;</code> depending on the direction the table view was moving when the limit was reached.</p>
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level4" id="objectinsertrow">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/insertRow.html">object:insertRow()</a></a></h4>
+</div>
+<div class="section level4" id="objectreloaddata">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/reloadData.html">object:reloadData()</a></a></h4>
+</div>
+<div class="section level4" id="objectdeleterow">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/deleteRow.html">object:deleteRow()</a></a></h4>
+</div>
+<div class="section level4" id="objectdeleteallrows">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/deleteAllRows.html">object:deleteAllRows()</a></a></h4>
+</div>
+<div class="section level4" id="objectscrolltoy">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/scrollToY.html">object:scrollToY()</a></a></h4>
+<!---
+
+#### [object:scrollToIndex()][api.type.TableViewWidget.scrollToIndex]
+
+-->
+
+</div>
+<div class="section level4" id="objectgetcontentposition">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/getContentPosition.html">object:getContentPosition()</a></a></h4>
+</div>
+<div class="section level4" id="objectgetnumrows">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/getNumRows.html">object:getNumRows()</a></a></h4>
+</div>
+<div class="section level4" id="objectgetrowatindex">
+<h4><a href="#TOC"><a href="../../type/TableViewWidget/getRowAtIndex.html">object:getRowAtIndex()</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="visual-options">
+<h2><a href="#TOC">Visual Options</a></h2>
+<p>The table view widget can be visually customized using the following parameters within the <code>options</code> table:</p>
+<div class="section level5" id="nolines-optional">
+<h5><a href="#TOC">noLines <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, lines will not separate individual rows. The default value is <code>false</code>.</p>
+</div>
+<div class="section level5" id="backgroundcolor-optional">
+<h5><a href="#TOC">backgroundColor <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table containing the RGB+A background color setting. Default is white.</p>
+<div class="code-indent" style="width:500px;">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">backgroundColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0.8</span>, <span class="dv">0.8</span>, <span class="dv">0.8</span> <span class="ot">}</span></code></pre>
+</div>
+
+</div>
+<div class="section level5" id="hidebackground-optional">
+<h5><a href="#TOC">hideBackground <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If <code>true</code>, the background of the table view will be hidden, but it still receives touches.</p>
+</div>
+<div class="section level5" id="hidescrollbar-optional">
+<h5><a href="#TOC">hideScrollBar <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the scroll bar will not appear for the table view.</p>
+</div>
+<div class="section level5" id="scrollbaroptions-optional">
+<h5><a href="#TOC">scrollBarOptions <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table containing the <a href="../graphics/newImageSheet.html">image sheet</a> specifications for a custom scroll bar. Customizing the scroll bar requires 3 frames from an image sheet. Each frame needs to be a square of equal size. These frames represent the top of the bar (red), the middle of the bar (green), and the bottom of the bar (yellow).</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-scrollbar.png" /><p class="caption"></p>
+</div>
+<p>Inside the <code>scrollBarOptions</code> table, you must specify 4 required parameters: <code>sheet</code>, <code>topFrame</code>, <code>middleFrame</code>, and <code>bottomFrame</code>.</p>
+<div class="code-indent" style="width:500px;">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">scrollBarOptions</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">scrollBarSheet</span>,  <span class="co">--reference to the image sheet</span>
+    <span class="kw">topFrame</span> <span class="ot">=</span> <span class="dv">1</span>,            <span class="co">--number of the &quot;top&quot; frame</span>
+    <span class="kw">middleFrame</span> <span class="ot">=</span> <span class="dv">2</span>,         <span class="co">--number of the &quot;middle&quot; frame</span>
+    <span class="kw">bottomFrame</span> <span class="ot">=</span> <span class="dv">3</span>          <span class="co">--number of the &quot;bottom&quot; frame</span>
+<span class="ot">}</span></code></pre>
+</div>
+
+</div>
+<div class="section level5" id="toppadding-bottompadding-optional">
+<h5><a href="#TOC">topPadding / bottomPadding <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> These numbers represent the number of pixels from the top and bottom of the table view at which the content will stop when it reaches the respective limit. The default value for both is <code>0</code>.</p>
+</div>
+</div>
+<div class="section level2" id="inserting-rows">
+<h2><a href="#TOC">Inserting Rows</a></h2>
+<p>When you create a table view, it simply creates an empty region of the specified width and height. The actual rows are &quot;rendered&quot; via the <a href="../../type/TableViewWidget/insertRow.html">object:insertRow()</a> function.</p>
+<p>To accomplish this, some basic setup is required. First, write a target listener function to render new rows, for example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> onRowRender<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="co">-- Get reference to the row group</span>
+    <span class="kw">local</span> <span class="kw">row</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">row</span>
+
+    <span class="co">-- Cache the row &quot;contentWidth&quot; and &quot;contentHeight&quot; because the row bounds can change as children objects are added</span>
+    <span class="kw">local</span> <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentHeight</span>
+    <span class="kw">local</span> <span class="kw">rowWidth</span> <span class="ot">=</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">contentWidth</span>
+
+    <span class="kw">local</span> <span class="kw">rowTitle</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="kw">row</span>, <span class="st">&quot;Row &quot;</span> <span class="ot">..</span> <span class="kw">row</span><span class="ot">.</span><span class="kw">index</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">nil</span>, <span class="dv">14</span> <span class="ot">)</span>
+    <span class="kw">rowTitle</span>:setFillColor<span class="ot">(</span> <span class="dv">0</span> <span class="ot">)</span>
+
+    <span class="co">-- Align the label left and vertically centered</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">anchorX</span> <span class="ot">=</span> <span class="dv">0</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">0</span>
+    <span class="kw">rowTitle</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="kw">rowHeight</span> <span class="ot">*</span> <span class="dv">0.5</span>
+<span class="kw">end</span></code></pre>
+<p>Next, specify the function in the <code>onRowRender</code> parameter of the table view declaration. At this point, you can call <a href="../../type/TableViewWidget/insertRow.html">object:insertRow()</a> to insert a new row, or execute the call in a loop to render several rows at once. Please refer to the usage examples below.</p>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level5" id="basic-tableview">
+<h5><a href="#TOC">Basic TableView</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- The &quot;onRowRender&quot; function may go here (see example under &quot;Inserting Rows&quot;, above)</span>
+
+<span class="co">-- Create the TableView</span>
+<span class="kw">local</span> <span class="kw">tableView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newTableView</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">330</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">300</span>,
+    <span class="kw">onRowRender</span> <span class="ot">=</span> <span class="kw">onRowRender</span>,
+    <span class="kw">onRowTouch</span> <span class="ot">=</span> <span class="kw">onRowTouch</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">scrollListener</span>
+<span class="ot">}</span>
+
+<span class="co">-- Insert 40 rows</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">40</span> <span class="kw">do</span>
+    <span class="co">-- Insert a row into the tableView</span>
+    <span class="kw">tableView</span>:insertRow<span class="ot">{}</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level5" id="tableview-with-category-rows">
+<h5><a href="#TOC">TableView with Category Rows</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- The &quot;onRowRender&quot; function may go here (see example under &quot;Inserting Rows&quot;, above)</span>
+
+<span class="co">-- Create the TableView</span>
+<span class="kw">local</span> <span class="kw">tableView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newTableView</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">330</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">300</span>,
+    <span class="kw">onRowRender</span> <span class="ot">=</span> <span class="kw">onRowRender</span>,
+    <span class="kw">onRowTouch</span> <span class="ot">=</span> <span class="kw">onRowTouch</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">scrollListener</span>
+<span class="ot">}</span>
+
+<span class="co">-- Insert 40 rows</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">40</span> <span class="kw">do</span>
+
+    <span class="kw">local</span> <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">false</span>
+    <span class="kw">local</span> <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">36</span>
+    <span class="kw">local</span> <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">default</span><span class="ot">={</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span> <span class="ot">}</span>, <span class="kw">over</span><span class="ot">={</span> <span class="dv">1</span>, <span class="dv">0.5</span>, <span class="dv">0</span>, <span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">}</span>
+    <span class="kw">local</span> <span class="kw">lineColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0.5</span>, <span class="dv">0.5</span>, <span class="dv">0.5</span> <span class="ot">}</span>
+
+    <span class="co">-- Make some rows categories</span>
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">1</span> <span class="kw">or</span> <span class="kw">i</span> <span class="ot">==</span> <span class="dv">21</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">true</span>
+        <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">40</span>
+        <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">default</span><span class="ot">={</span> <span class="dv">0.8</span>, <span class="dv">0.8</span>, <span class="dv">0.8</span>, <span class="dv">0.8</span> <span class="ot">}</span> <span class="ot">}</span>
+        <span class="kw">lineColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">}</span>
+    <span class="kw">end</span>
+
+    <span class="co">-- Insert a row into the tableView</span>
+    <span class="kw">tableView</span>:insertRow<span class="ot">(</span>
+        <span class="ot">{</span>
+            <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">isCategory</span>,
+            <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="kw">rowHeight</span>,
+            <span class="kw">rowColor</span> <span class="ot">=</span> <span class="kw">rowColor</span>,
+            <span class="kw">lineColor</span> <span class="ot">=</span> <span class="kw">lineColor</span>
+        <span class="ot">}</span>
+    <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level5" id="tableview-with-custom-scroll-bar">
+<h5><a href="#TOC">TableView with Custom Scroll Bar</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- The &quot;onRowRender&quot; function may go here (see example under &quot;Inserting Rows&quot;, above)</span>
+
+<span class="co">-- Create image sheet for custom scroll bar</span>
+<span class="kw">local</span> <span class="kw">scrollBarOpt</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">20</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">20</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">3</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">20</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">60</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">scrollBarSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;scrollBar.png&quot;</span>, <span class="kw">scrollBarOpt</span> <span class="ot">)</span>
+
+<span class="co">-- Create the TableView</span>
+<span class="kw">local</span> <span class="kw">tableView</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newTableView</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">330</span>,
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">300</span>,
+    <span class="kw">onRowRender</span> <span class="ot">=</span> <span class="kw">onRowRender</span>,
+    <span class="kw">onRowTouch</span> <span class="ot">=</span> <span class="kw">onRowTouch</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">scrollListener</span>,
+    <span class="kw">scrollBarOptions</span> <span class="ot">=</span> <span class="ot">{</span>
+        <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">scrollBarSheet</span>,
+        <span class="kw">topFrame</span> <span class="ot">=</span> <span class="dv">1</span>,
+        <span class="kw">middleFrame</span> <span class="ot">=</span> <span class="dv">2</span>,
+        <span class="kw">bottomFrame</span> <span class="ot">=</span> <span class="dv">3</span>
+    <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="co">-- Insert 40 rows</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="dv">40</span> <span class="kw">do</span>
+
+    <span class="co">-- Insert a row into the tableView</span>
+    <span class="kw">tableView</span>:insertRow<span class="ot">(</span>
+        <span class="ot">{</span>
+            <span class="kw">isCategory</span> <span class="ot">=</span> <span class="kw">false</span>,
+            <span class="kw">rowHeight</span> <span class="ot">=</span> <span class="dv">36</span>,
+            <span class="kw">rowColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">default</span><span class="ot">={</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span> <span class="ot">}</span>, <span class="kw">over</span><span class="ot">={</span> <span class="dv">1</span>, <span class="dv">0.5</span>, <span class="dv">0</span>, <span class="dv">0.2</span> <span class="ot">}</span> <span class="ot">}</span>,
+            <span class="kw">lineColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="dv">0.5</span>, <span class="dv">0.5</span>, <span class="dv">0.5</span> <span class="ot">}</span>
+        <span class="ot">}</span>
+    <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newTableView&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newTableView&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newTableView&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

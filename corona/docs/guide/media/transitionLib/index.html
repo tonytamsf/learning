@@ -1,0 +1,2235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > media > transitionLib </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > media > transitionLib " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#transitionstweens">Transitions/Tweens</a><ul>
+<li><a href="#library-features">Library Features</a></li>
+<li><a href="#basic-transitions">Basic Transitions</a><ul>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+<li><a href="#controlling-transitions">Controlling Transitions</a><ul>
+<li><a href="#pause">Pause</a></li>
+<li><a href="#resume">Resume</a></li>
+<li><a href="#cancel">Cancel</a></li>
+</ul></li>
+<li><a href="#easing-functions">Easing Functions</a></li>
+<li><a href="#transition-events">Transition Events</a></li>
+<li><a href="#convenience-functions">Convenience Functions</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [media][guide.media]  ▸  <a href="index.html">transitionLib</a>
+</div>
+<div class="section level1" id="transitionstweens">
+<h1><a href="#TOC">Transitions/Tweens</a></h1>
+<p>This guide discusses how to use the Corona <a href="../../../api/library/transition/index.html">transition</a> library to move, rotate, fade, or scale a display object/group over a specific period of time.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>This guide pertains to the <strong>Transition 2.0</strong> library, included in Daily Build <a href="http://developer.coronalabs.com/downloads/daily-builds">2013.1207</a> and later. If you are currently using public build 2013.1202, please refer to the <a href="http://docs.coronalabs.com/guide/media/transitionLib/index.html">Transition 1.0</a> guide.</p>
+</div>
+
+<div class="guides-toc">
+
+<ul>
+<li><a href="#features">Library Features</a></li>
+<li><a href="#standard">Basic Transitions</a> <!---
+* [Standard Transitions](#standard)
+* [Sequenced Transitions](#sequenced)
+--></li>
+<li><a href="#control">Controlling Transitions</a></li>
+<li><a href="#easing">Easing Functions</a></li>
+<li><a href="#transevents">Transition Events</a></li>
+<li><a href="#convenience">Convenience Functions</a></li>
+</ul>
+</div>
+
+
+<a id="features"></a>
+<div class="section level2" id="library-features">
+<h2><a href="#TOC">Library Features</a></h2>
+<ul>
+<li>Ability to pause, resume, or cancel a transition (or all transitions).</li>
+</ul>
+<!---
+
+* Ability to chain a __sequence__ of transitions together in one declaration. Sequenced transitions can be paused, resumed, and cancelled. Please see [Sequenced&nbsp;Transitions](#sequence) for details.
+
+-->
+
+<ul>
+<li><p>Ability to <strong>tag</strong> several transitions by name and then pause, resume, or cancel all transitions sharing the same tag. For example, you may tag multiple transitions as <code>&quot;menuTransition&quot;</code> and then control all of these transitions at once. See <a href="#control">Controlling Transitions</a> for more information on tagging.</p></li>
+<li><p>Ability to pause, resume, or cancel all transitions on an object-wide basis. For example, if you have applied a separate movement and fade transition to an object, this allows you to control both transitions at once. See <a href="#control">Controlling Transitions</a> for more information.</p></li>
+<li><p>42 <a href="../../../api/library/easing/index.html">easing</a> methods based on <a href="http://www.robertpenner.com/easing/">Robert Penner's easing functions</a>. These allow you to interpolate tweens across the transition time using methods such as quadratic, exponential, elastic, bounce, etc.</p></li>
+<li><p>Various convenience functions such as <code>blink()</code>, <code>moveTo()</code>, <code>moveBy()</code>, etc. See <a href="#convenience">Convenience Functions</a> for usage details.</p></li>
+</ul>
+<a id="standard"></a>
+</div>
+<div class="section level2" id="basic-transitions">
+<h2><a href="#TOC">Basic Transitions</a></h2>
+<!---
+
+## Standard Transitions
+
+-->
+
+<p>A basic transition can be initiated using one of these functions:</p>
+<!---
+
+A standard non-sequenced transition can be initiated using one of these functions:
+
+-->
+
+<ul>
+<li><p><code>transition.to( target, params )</code> — this function transitions (animates) a <a href="../displayObjects/index.html">display object</a> or <a href="../../../api/library/display/newGroup.html">display group</a> using an optional easing function. Use this to move, rotate, fade, or scale an object over a specific period of time.</p></li>
+<li><p><code>transition.from( target, params )</code> — this is similar to <code>transition.to()</code> except that the starting property values are specified in the parameters table and the final values are the corresponding property values of the object prior to the call.</p></li>
+</ul>
+<p>The first argument in either function, <code>target</code>, is the display object or group that you wish to transition. The second argument, <code>params</code>, is a table of key-value pairs. Inside this table, specify the appropriate <strong>control parameters</strong> for the transition:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;" width="95%">
+<tr>
+<th class="width15 headerfirst headerrow notebox-title">
+Control
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>time</code>
+</th>
+<th class="itemrow baseline">
+Specifies the duration of the transition in milliseconds.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>delay</code>
+</th>
+<th class="itemrow baseline">
+Specifies the delay, in milliseconds, before the transition begins. Default is 0 (none).
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>delta</code>
+</th>
+<th class="itemrow baseline">
+Specifies whether the final object properties are specific values or changes in value. The default is <code>nil</code> meaning <code>false</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>iterations</code>
+</th>
+<th class="itemrow baseline">
+The number of times (integer) that the transition should repeat. <code>0</code> or <code>-1</code> will cause the transition to repeat forever.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>tag</code>
+</th>
+<th class="itemrow baseline">
+String value which allows you to categorize transitions and control them together. See <a href="#control">Controlling Transitions</a>.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>transition</code>
+</th>
+<th class="itemrow baseline">
+Specifies the <a href="../../../api/library/easing/index.html">easing</a> function used for the transition. See <a href="#easing">Easing Functions</a>.
+</th>
+</tr>
+</table><div style="clear:both;">
+ 
+</div>
+
+<p>To affect the final object properties, the following methods are available. In the <code>params</code> table, specify each appropriate <a href="../../../api/type/DisplayObject/index.html">property</a> along with its final value.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:6px;">
+<tr>
+<th class="width15 headerfirst headerrow notebox-title">
+Method
+</th>
+<th class="width20 headerrow notebox-title">
+Properties (key)
+</th>
+<th class="width45 headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<strong>move</strong>
+</th>
+<th class="itemrow baseline">
+<code>x</code>, <code>y</code>
+</th>
+<th class="itemrow baseline">
+Moves an object from its current <strong>x/y</strong> coordinate to another
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<strong>rotate</strong>
+</th>
+<th class="itemrow baseline">
+<code>rotation</code>
+</th>
+<th class="itemrow baseline">
+Rotates an object from its current angle to another
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<strong>fade</strong>
+</th>
+<th class="itemrow baseline">
+<code>alpha</code>
+</th>
+<th class="itemrow baseline">
+Fades an object from its current alpha value to another
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<strong>scale</strong>
+</th>
+<th class="itemrow baseline">
+<code>xScale</code>, <code>yScale</code>
+</th>
+<th class="itemrow baseline">
+Scales an object to a specific <strong>x</strong> ratio or <strong>y</strong> ratio
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<strong>resize</strong>
+</th>
+<th class="itemrow baseline">
+<code>width</code>, <code>height</code>
+</th>
+<th class="itemrow baseline">
+Resizes an object from its current width/height to another
+</th>
+</tr>
+</table><div style="clear:both;">
+ 
+</div>
+
+<p>Note that transitions support the full range of <strong>transition events</strong> listed below. These flags will trigger the specified listener function when that event occurs on the transition. When invoked, the <strong>object</strong> reference is passed to the listener function as the sole parameter. Please see <a href="#transevents">Transition Events</a> for details.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;" width="80%">
+<tr>
+<th class="width15 headerfirst headerrow notebox-title">
+Event
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>onStart</code>
+</th>
+<th class="itemrow baseline">
+Listener function called when the transition begins.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>onComplete</code>
+</th>
+<th class="itemrow baseline">
+Listener function called after the transition completes.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>onPause</code>
+</th>
+<th class="itemrow baseline">
+Listener function called when an active transition is paused.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>onResume</code>
+</th>
+<th class="itemrow baseline">
+Listener function called when a paused transition is resumed.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>onCancel</code>
+</th>
+<th class="itemrow baseline">
+Listener function called when an active transition is cancelled.
+</th>
+</tr>
+<tr>
+<th class="itemrow headerfirst baseline">
+<code>onRepeat</code>
+</th>
+<th class="itemrow baseline">
+Listener function called when an active transition has completed an iteration cycle.
+</th>
+</tr>
+</table><div style="clear:both;"></div>
+
+<div class="section level3" id="examples">
+<h3><a href="#TOC">Examples</a></h3>
+<ol style="list-style-type: decimal">
+<li>The following transition <strong>moves</strong> an object from its current position to the <strong>y</strong> coordinate of 100 over the timespan of 2000 milliseconds. In this case, the <strong>y</strong> value is the specific value in content area coordinates.</li>
+</ol>
+<div class="image-indent">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">100</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+
+<ol start="2" style="list-style-type: decimal">
+<li>To apply a property value as a <strong>change</strong> relative to the object's starting value, simply set the <code>delta</code> property to <code>true</code>. In the following example, the object will move down 100 pixels from its starting <strong>y</strong> position. Note that the same principle can be applied to any property change.</li>
+</ol>
+<div class="image-indent">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">100</span>, <span class="kw">delta</span><span class="ot">=</span><span class="kw">true</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+
+<ol start="3" style="list-style-type: decimal">
+<li>The next transition moves an object from its current position to the <strong>y</strong> coordinate of 400 over the timespan of 2000 milliseconds. It repeats 4 times using the <code>iteration</code> parameter and an elastic interpolation effect is applied with the <code>transition</code> parameter.</li>
+</ol>
+<div class="image-indent">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">400</span>, <span class="kw">iterations</span><span class="ot">=</span><span class="dv">4</span>, <span class="kw">transition</span><span class="ot">=</span><span class="kw">easing</span><span class="ot">.</span><span class="kw">outElastic</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+
+<ol start="4" style="list-style-type: decimal">
+<li>The next transition moves an object from its current position to the <strong>x</strong> coordinate of 200 and then <strong>returns</strong> it to the starting position because of the <code>continuousLoop</code> easing parameter. The entire transition back and forth occurs over the timespan of 4000 milliseconds.</li>
+</ol>
+<div class="image-indent">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">4000</span>, <span class="kw">x</span><span class="ot">=</span><span class="dv">200</span>, <span class="kw">transition</span><span class="ot">=</span><span class="kw">easing</span><span class="ot">.</span><span class="kw">continuousLoop</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+</div>
+
+<ol start="5" style="list-style-type: decimal">
+<li>Transitions can also be combined using just one transition call. For example, if you want to rotate an object 45 degrees, scale it vertically to 200%, and fade its alpha to 50%, you do <strong>not</strong> need to make three separate transition calls. Instead, just declare all three property changes in the <code>params</code> table:</li>
+</ol>
+<div class="image-indent">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">rotation</span><span class="ot">=</span><span class="dv">45</span>, <span class="kw">yScale</span><span class="ot">=</span><span class="dv">2</span>, <span class="kw">alpha</span><span class="ot">=</span><span class="dv">0.5</span> <span class="ot">}</span> <span class="ot">)</span> </code></pre>
+</div>
+
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>Some objects will not behave as you may expect during or following a transition. For instance, many <a href="../../../api/library/widget/index.html">widgets</a> do not support scaling or <nobr>post-declaration</nobr> resizing, so you should not attempt to perform an <code>xScale</code>, <code>yScale</code>, <code>width</code>, or <code>height</code> transition upon them. Another example is <a href="../../../api/library/physics/addBody.html">physics</a> bodies: if you scale or resize the physics object using a transition, the actual physics body will <strong>not</strong> scale along with that transition.</p>
+<p>If in doubt, check the <a href="../../../api/index.html">documentation</a> associated with the object or library to confirm that it doesn't have any property restrictions related to transitions.</p>
+</div>
+
+
+
+<!---
+
+<a id="sequenced"></a>
+
+## Sequenced Transitions
+
+For more complex transitions, the library supports __sequenced__ transitions in one declaration. To set up a sequenced transition, begin with a table of ordered <nobr>sub-tables,</nobr> each of which defines an individual transition within the sequence. These ordered transitions should be structured like the `params` table in [standard&nbsp;transitions](#standard).
+
+``````lua
+local sequenceTable = {
+    { time=1000, y=220 },
+    { time=1200, x=200, mode="afterPrevious" },
+    { time=1000, y=430, rotation=90, mode="afterPrevious" },
+    { time=2000, y=50, rotation=0, mode="afterPrevious" },
+    { time=1000, y=200, x=300, mode="afterPrevious" }
+}
+``````
+
+The obvious addition to these transition specifications is the `mode` parameter, set to one of two values:
+
+* `"afterPrevious"` — this is the most common mode and it will be used by default if you don't specify otherwise. It tells Corona to start the transition __after__ the previous transition has completed. In this manner, you can chain together a logical sequence where each transition executes immediately on completion of the previous one.
+
+* `"withPrevious"` — this mode allows you to start a transition __in&nbsp;unison__ with the previous one. For example, if you want an object to move down a certain distance over the timespan of 2000 milliseconds, but fade to alpha 50% in just 400 milliseconds, you can specify the alpha transition with a `"withPrevious"` mode immediately after the movement transition. This will cause the two transitions to begin in unison but complete after distinct timespans.
+
+Once the sequence is correctly set up, initialize it using `transition.createSequence()`. In this call, provide a `name` for the sequence and specify the sequence table that you created as `transitions`:
+
+``````lua
+transition.newSequence( myObject, { name="sequence1", transitions=sequenceTable } )
+``````
+
+This configures the transition sequence for the object, but it does not start running it. To begin the sequence, call `runSequence()` and pass the assigned name:
+
+``````lua
+transition.runSequence( "sequence1" )
+``````
+
+<div class="guide-notebox">
+<div class="notebox-title">Note</div>
+
+* Sequenced transitions support the full range of transition events such as `onStart`, `onPause`, and `onComplete`, but these event flags must be specified in the `createSequence()` function instead of within a specific transition <nobr>sub-table.</nobr> Please see [Transition&nbsp;Events](#transevents) for details.
+
+</div>
+
+-->
+
+
+
+<a id="control"></a>
+</div>
+</div>
+<div class="section level2" id="controlling-transitions">
+<h2><a href="#TOC">Controlling Transitions</a></h2>
+<p>Transitions can be paused, resumed, or cancelled before completion. The parameter passed to the control function determines the scope of the action.</p>
+<!---
+
+All transitions — standard and sequenced — can be paused, resumed, or cancelled before completion. The parameter passed to the control function determines the scope of the action.
+
+-->
+
+<div class="section level3" id="pause">
+<h3><a href="#TOC">Pause</a></h3>
+<p>Transitions can be paused with the <a href="../../../api/library/transition/pause.html">transition.pause()</a> function. This only effects transitions that are running.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;" width="75%">
+<tr>
+<th class="width25 headerrow notebox-title">
+Parameter
+</th>
+<th class="headerrow notebox-title">
+Scope
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+(none)
+</th>
+<th class="itemrow baseline">
+Pauses all running transitions.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+transition reference
+</th>
+<th class="itemrow baseline">
+Pauses a specific running transition.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+object reference
+</th>
+<th class="itemrow baseline">
+Pauses all running transitions on a specific object.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+tag name (string)
+</th>
+<th class="itemrow baseline">
+Pauses all running transitions sharing the same tag name.
+</th>
+</tr>
+
+<!---
+<tr>
+<th class="itemrow baseline">sequence name (string)</th>
+<th class="itemrow baseline">Pauses all transitions contained in a specific sequence.</th>
+</tr>
+-->
+
+</table>
+
+</div>
+<div class="section level3" id="resume">
+<h3><a href="#TOC">Resume</a></h3>
+<p>Transitions can be resumed with the <a href="../../../api/library/transition/resume.html">transition.resume()</a> function. This only effects transitions that are paused.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;" width="75%">
+<tr>
+<th class="width25 headerrow notebox-title">
+Parameter
+</th>
+<th class="headerrow notebox-title">
+Scope
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+(none)
+</th>
+<th class="itemrow baseline">
+Resumes all paused transitions.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+transition reference
+</th>
+<th class="itemrow baseline">
+Resumes a specific paused transition.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+object reference
+</th>
+<th class="itemrow baseline">
+Resumes all paused transitions on a specific object.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+tag name (string)
+</th>
+<th class="itemrow baseline">
+Resumes all paused transitions sharing the same tag name.
+</th>
+</tr>
+
+<!---
+<tr>
+<th class="itemrow baseline">sequence name (string)</th>
+<th class="itemrow baseline">Resumes all transitions contained in a specific sequence.</th>
+</tr>
+-->
+
+</table>
+
+</div>
+<div class="section level3" id="cancel">
+<h3><a href="#TOC">Cancel</a></h3>
+<p>Transitions can be cancelled with the <a href="../../../api/library/transition/cancel.html">transition.cancel()</a> function. Note that the transition(s) will stop in place — they will not revert to the beginning state or skip to the ending state. This function only effects transitions that are currently running or paused.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;" width="75%">
+<tr>
+<th class="width25 headerrow notebox-title">
+Parameter
+</th>
+<th class="headerrow notebox-title">
+Scope
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+(none)
+</th>
+<th class="itemrow baseline">
+Cancels all running/paused transitions.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+transition reference
+</th>
+<th class="itemrow baseline">
+Cancels a specific running/paused transition.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+object reference
+</th>
+<th class="itemrow baseline">
+Cancels all running/paused transitions on a specific object.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+tag name (string)
+</th>
+<th class="itemrow baseline">
+Cancels all running/paused transitions sharing the same tag name.
+</th>
+</tr>
+
+<!---
+<tr>
+<th class="itemrow baseline">sequence name (string)</th>
+<th class="itemrow baseline">Cancels all transitions contained in a specific sequence.</th>
+</tr>
+-->
+
+</table>
+
+
+
+
+<a id="easing"></a>
+</div>
+</div>
+<div class="section level2" id="easing-functions">
+<h2><a href="#TOC">Easing Functions</a></h2>
+<p>By default, transitions occur on a consistent, linear rate of change from the starting value to the ending value. However, you may wish to use an <a href="../../../api/library/easing/index.html">easing</a> effect to achieve a different result, for example, to make an object move quickly at the start and gradually slow down as it reaches its destination. This behavior can be achieved using the <a href="../../../api/library/easing/index.html">easing library</a> functions in conjunction with the transition call.</p>
+<p>To set an easing effect on a transition, simply provide the <code>transition</code> key in the <code>params</code> table with a value equal to one of the <a href="../../../api/library/easing/index.html">easing library</a> functions:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--transition the object out with quadratic interpolation</span>
+<span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">100</span>, <span class="kw">transition</span><span class="ot">=</span><span class="kw">easing</span><span class="ot">.</span><span class="kw">outQuad</span> <span class="ot">}</span> <span class="ot">)</span>
+
+<span class="co">--transition the object in, then back out, with exponential interpolation</span>
+<span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">100</span>, <span class="kw">transition</span><span class="ot">=</span><span class="kw">easing</span><span class="ot">.</span><span class="kw">inOutExpo</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<a id="transevents"></a>
+</div>
+<div class="section level2" id="transition-events">
+<h2><a href="#TOC">Transition Events</a></h2>
+<p>Corona supports a full range of transition events, including:</p>
+<ul>
+<li><code>onStart</code></li>
+<li><code>onComplete</code></li>
+<li><code>onPause</code></li>
+<li><code>onResume</code></li>
+<li><code>onCancel</code></li>
+<li><code>onRepeat</code></li>
+</ul>
+<!---
+
+### Standard Transition
+
+-->
+
+<p>To trigger an event response from a transition, add the desired event key(s) to the <code>params</code> table along with the listener function(s) which should be called:</p>
+<!---
+
+To trigger an event response from a standard transition, add the desired event key(s) to the `params` table along with the listener function(s) which should be called:
+
+-->
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myObject</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">100</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">function</span> completeListener <span class="ot">(</span> <span class="kw">obj</span> <span class="ot">)</span>
+    <span class="co">--when this function is invoked, the object reference is passed instead of an &#39;event&#39; table</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Transition completed on object: &quot;</span> <span class="ot">..</span> <span class="fu">tostring</span><span class="ot">(</span> <span class="kw">obj</span> <span class="ot">)</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="kw">transition</span><span class="ot">.</span>to<span class="ot">(</span> <span class="kw">myObject</span>, <span class="ot">{</span> <span class="kw">time</span><span class="ot">=</span><span class="dv">2000</span>, <span class="kw">alpha</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">onComplete</span><span class="ot">=</span><span class="kw">completeListener</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<!---
+
+### Sequenced Transition
+
+To use transition events with [sequenced&nbsp;transitions](#sequenced), ??????????
+
+``````lua
+local myObject = display.newRect( 0, 0, 100, 100 )
+
+local function completeListener ( obj )
+    --when this function is invoked, the object reference is passed instead of an 'event' table
+    print( "Transition completed on object: " .. tostring( obj ) )
+end
+
+local sequenceTable = {
+    { time=1000, y=220 },
+    { time=1200, x=200, mode="afterPrevious" }
+}
+--specify event listener(s) in ''
+transition.createSequence( myObject, { name="sequence1", transitions=sequenceTable, onComplete=completeListener } )
+transition.runSequence( "sequence1" )
+``````
+
+-->
+
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>If you remove or clear a transitioning object from memory, and the transition has an <code>onComplete</code> event, the listener will still be invoked even though the object no longer exists on the screen. Other transition events may even crash the program if the object has been prematurely removed. Thus, it's good practice to cancel all transitions on a specific object before removing it. Passing the object reference to <a href="../../../api/library/transition/cancel.html">transition.cancel()</a> is useful for this purpose.</p>
+<p>In a wider scope, you may consider using <a href="../../../api/library/transition/cancel.html">transition.cancel()</a> with no params to cancel <strong>all</strong> transitions before exiting a <a href="../../../api/library/storyboard/index.html">Storyboard</a> scene or clearing a module.</p>
+</div>
+
+
+
+
+<a id="convenience"></a>
+</div>
+<div class="section level2" id="convenience-functions">
+<h2><a href="#TOC">Convenience Functions</a></h2>
+<p>Corona provides several convenience functions which let you perform simple transitions with recognizable names. The following function accept the object/group to transition as the first parameter and, like standard transitions, a <code>params</code> table containing key-values appropriate to the transition type.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="100%">
+<tr>
+<th class="width25 headerfirst headerrow notebox-title">
+Function
+</th>
+<th class="width15 headerrow notebox-title">
+ 
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.blink()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/blink.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Repeatedly oscillates the alpha value of an object in and out over the timespan.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.fadeIn()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/fadeIn.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Fades an object to alpha of 1.0 over the specified time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.fadeOut()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/fadeOut.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Fades an object to alpha of 0.0 over the specified time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.moveBy()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/moveBy.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Moves an object by the specified x and y coordinate amount over a specified time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.moveTo()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/moveTo.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Moves an object to the specified x and y coordinates over a specified time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.scaleBy()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/scaleBy.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Scales an object by the specified xScale and yScale amounts over a specified time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>transition.scaleTo()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/transition/scaleTo.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Scales an object to the specified xScale and yScale amounts over a specified time.
+</th>
+</tr>
+</table>
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.media.transitionLib.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.media.transitionLib.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.media.transitionLib.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

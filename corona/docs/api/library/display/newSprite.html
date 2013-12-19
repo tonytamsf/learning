@@ -1,0 +1,1699 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > display > newSprite</title>
+  <meta name="revised" content="28-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > display > newSprite" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#display.newsprite">display.newSprite()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#imagesheet-required">imageSheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#sequencedata-required">sequenceData <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#parent-optional">parent <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#format-for-sequencedata">Format for <code>sequenceData</code></a><ul>
+<li><a href="#name-required">name <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#start-required-consecutive-frames">start <sub><sup>(required)</sup></sub> (Consecutive frames)</a></li>
+<li><a href="#count-required-consecutive-frames">count <sub><sup>(required)</sup></sub> (Consecutive frames)</a></li>
+<li><a href="#frames-optional-non-consecutive-frames">frames <sub><sup>(optional)</sup></sub> (Non-consecutive frames)</a></li>
+<li><a href="#sheet-optional">sheet <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#time-optional">time <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#loopcount-optional">loopCount <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#loopdirection-optional">loopDirection <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#single-sequence-consecutive-frames">Single Sequence (Consecutive Frames)</a></li>
+<li><a href="#single-sequence-non-consecutive-frames">Single Sequence (Non-Consecutive Frames)</a></li>
+<li><a href="#multiple-sequences">Multiple Sequences</a></li>
+<li><a href="#multiple-image-sheets">Multiple image sheets</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">display</a>  ▸  <a href="newSprite.html">newSprite</a>
+</div>
+<div class="section level1" id="display.newsprite">
+<h1><a href="#TOC">display.newSprite()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">display.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/SpriteObject/index.html">SpriteObject</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">sprite, animation</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/Sprites/</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="http://www.coronalabs.com/blog/2012/10/02/animated-sprites-and-methods/">Animated Sprites &amp; Methods</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Sprites allow animated sequences of image frames that reside on <strong>image sheets</strong>. Please see the <a href="../../../guide/media/imageSheets/index.html">Image Sheets (Sprite Sheets)</a> guide for more information.</p>
+<p>By default, sprites use image frames that come from a single image sheet. This corresponds to the image sheet you pass to the contructor <code>display.newSprite()</code>.</p>
+<p>For each sequence, you can specify a different image sheet instead of using the default image sheet. You do this by using the optional <code>sheet</code> parameter in a <code>sequenceData</code> table (see 'Format for sequenceData' below).</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>display.newSprite( imageSheet, sequenceData )
+display.newSprite( parent, imageSheet, sequenceData )</code></pre>
+<div class="section level5" id="imagesheet-required">
+<h5><a href="#TOC">imageSheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> Specifies the default image sheet.</p>
+</div>
+<div class="section level5" id="sequencedata-required">
+<h5><a href="#TOC">sequenceData <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> A table that holds data for a specific sequence. Or, if you have more than one animation sequence for a single object, sequenceData is then an array of tables that hold data for each sequence. For instance, you might have a character object with several different animation sequences such as: &quot;walking&quot;, &quot;jumping&quot;, &quot;swimming&quot;. Frames in a given sequence may be consecutive (1,2,3,4,…) or non-consecutive (1,3,4,6,9,…) within the image sheet. See 'Format for sequenceData' below.</p>
+</div>
+<div class="section level5" id="parent-optional">
+<h5><a href="#TOC">parent <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/GroupObject/index.html">GroupObject</a>.</em> Parent display object.</p>
+</div>
+</div>
+<div class="section level2" id="format-for-sequencedata">
+<h2><a href="#TOC">Format for <code>sequenceData</code></a></h2>
+<div class="section level5" id="name-required">
+<h5><a href="#TOC">name <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This is a unique name for your sequence, and is used to load the sequence when it is time to play the animation (I’ll go over this in a moment).</p>
+</div>
+<div class="section level5" id="start-required-consecutive-frames">
+<h5><a href="#TOC">start <sub><sup>(required)</sup></sub> (Consecutive frames)</a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> For consecutive-frame sequences, <code>start</code> represents the starting frame.</p>
+</div>
+<div class="section level5" id="count-required-consecutive-frames">
+<h5><a href="#TOC">count <sub><sup>(required)</sup></sub> (Consecutive frames)</a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> For consecutive-frame sequences, <code>count</code> represents how many frames from the start that the sequence should end.</p>
+</div>
+<div class="section level5" id="frames-optional-non-consecutive-frames">
+<h5><a href="#TOC">frames <sub><sup>(optional)</sup></sub> (Non-consecutive frames)</a></h5>
+<p><em><a href="../../type/Array.html">Array</a>.</em> For non-consecutive-frame sequences, this is an array that holds the frameIndex in the exact order animation should be played.</p>
+</div>
+<div class="section level5" id="sheet-optional">
+<h5><a href="#TOC">sheet <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> You can specify a per-sequence image sheet. Typically you would do this if you wanted to use a different image sheet. If none is provided, it defaults to the image sheet you provided to <code>display.newSprite()</code>.</p>
+</div>
+<div class="section level5" id="time-optional">
+<h5><a href="#TOC">time <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is the time (in milliseconds) between each frame. If this is not specified, then animation will be based on the framerate of your app.</p>
+</div>
+<div class="section level5" id="loopcount-optional">
+<h5><a href="#TOC">loopCount <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> This is a number that represents how many times you want the sequence to loop when it is played. Setting this to 1 will play the sequence once and then stop. The default is 0, which will loop the sequence indefinitely.</p>
+</div>
+<div class="section level5" id="loopdirection-optional">
+<h5><a href="#TOC">loopDirection <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This can either be “forward” or “bounce”, with “forward” being the default if don’t set this parameter. The “bounce” option will play forward, then backwards through the sequence of frames.</p>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<p>A tutorial on using sprites can be found here. <a href="http://www.coronalabs.com/blog/2012/10/02/animated-sprites-and-methods/">Animated Sprites &amp; Methods</a></p>
+<div class="section level3" id="single-sequence-consecutive-frames">
+<h3><a href="#TOC">Single Sequence (Consecutive Frames)</a></h3>
+<p>This type of sequence is when the animation frames in your image sheet are in consecutive order.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Example assumes &#39;imageSheet&#39; already created from graphics.newImageSheet()</span>
+
+<span class="co">-- consecutive frames</span>
+<span class="kw">local</span> <span class="kw">sequenceData</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;walking&quot;</span>,
+    <span class="kw">start</span><span class="ot">=</span><span class="dv">3</span>,
+    <span class="kw">count</span><span class="ot">=</span><span class="dv">6</span>,
+    <span class="kw">time</span><span class="ot">=</span><span class="dv">100</span>,        <span class="co">-- Optional. In ms.  If not supplied, then sprite is frame-based.</span>
+    <span class="kw">loopCount</span> <span class="ot">=</span> <span class="dv">0</span>    <span class="co">-- Optional. Default is 0 (loop indefinitely)</span>
+    <span class="kw">loopDirection</span> <span class="ot">=</span> <span class="st">&quot;bounce&quot;</span>    <span class="co">-- Optional. Values include: &quot;forward&quot;,&quot;bounce&quot;</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">character</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newSprite<span class="ot">(</span> <span class="kw">imageSheet</span>, <span class="kw">sequenceData</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="single-sequence-non-consecutive-frames">
+<h3><a href="#TOC">Single Sequence (Non-Consecutive Frames)</a></h3>
+<p>This is essentially the same as the previous example, but instead, you pass a <code>frames</code> array that specifies the non-consecutive frameIndex order in which the animation will play.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Example assumes &#39;imageSheet&#39; already created using graphics.newImageSheet()</span>
+
+<span class="co">-- non-consecutive frames</span>
+<span class="kw">local</span> <span class="kw">sequenceData</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;walking&quot;</span>,
+    <span class="kw">frames</span><span class="ot">=</span> <span class="ot">{</span> <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span> <span class="ot">}</span>, <span class="co">-- frame indexes of animation, in image sheet</span>
+    <span class="kw">time</span> <span class="ot">=</span> <span class="dv">50</span>,           <span class="co">-- Optional. In ms.  If not supplied, then sprite is frame-based.</span>
+    <span class="kw">loopCount</span> <span class="ot">=</span> <span class="dv">0</span>        <span class="co">-- Optional. Default is 0.</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">character</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newSprite<span class="ot">(</span> <span class="kw">imageSheet</span>, <span class="kw">sequenceData</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="multiple-sequences">
+<h3><a href="#TOC">Multiple Sequences</a></h3>
+<p>The example below shows how to have several animation sequences for a single sprite object. Notice how you can have both consecutive and non-consecutive frame sequences in the sequenceData array.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Example assumes &#39;imageSheet&#39; already created using graphics.newImageSheet()</span>
+
+<span class="kw">local</span> <span class="kw">sequenceData</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;walking&quot;</span>, <span class="kw">start</span><span class="ot">=</span><span class="dv">1</span>, <span class="kw">count</span><span class="ot">=</span><span class="dv">3</span> <span class="ot">}</span>,
+    <span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;running&quot;</span>, <span class="kw">frames</span><span class="ot">={</span> <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span> <span class="ot">}</span>, <span class="kw">time</span><span class="ot">=</span><span class="dv">50</span>, <span class="kw">loopCount</span><span class="ot">=</span><span class="dv">4</span> <span class="ot">}</span>,
+    <span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;jumping&quot;</span>, <span class="kw">start</span><span class="ot">=</span><span class="dv">9</span>, <span class="kw">count</span><span class="ot">=</span><span class="dv">13</span>, <span class="kw">time</span><span class="ot">=</span><span class="dv">300</span> <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">character</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newSprite<span class="ot">(</span> <span class="kw">imageSheet</span>, <span class="kw">sequenceData</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="multiple-image-sheets">
+<h3><a href="#TOC">Multiple image sheets</a></h3>
+<p>The example below shows how to use multiple unique image sheets for a single sprite object. This is achieved by adding a <code>sheet</code> parameter to each sequence declaration, specifying which image sheet it should pull its frames from.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- 1st image sheet</span>
+<span class="kw">local</span> <span class="kw">sheetData1</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">width</span><span class="ot">=</span><span class="dv">64</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">64</span>, <span class="kw">numFrames</span><span class="ot">=</span><span class="dv">6</span>, <span class="kw">sheetContentWidth</span><span class="ot">=</span><span class="dv">384</span>, <span class="kw">sheetContentHeight</span><span class="ot">=</span><span class="dv">64</span> <span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">sheet1</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet1.png&quot;</span>, <span class="kw">sheetData1</span> <span class="ot">)</span>
+
+<span class="co">-- 2nd image sheet</span>
+<span class="kw">local</span> <span class="kw">sheetData2</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">width</span><span class="ot">=</span><span class="dv">64</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">64</span>, <span class="kw">numFrames</span><span class="ot">=</span><span class="dv">6</span>, <span class="kw">sheetContentWidth</span><span class="ot">=</span><span class="dv">384</span>, <span class="kw">sheetContentHeight</span><span class="ot">=</span><span class="dv">64</span> <span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">sheet2</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;mySheet2.png&quot;</span>, <span class="kw">sheetData2</span> <span class="ot">)</span>
+
+<span class="co">-- In your sequences, add the parameter &#39;sheet=&#39; referencing which image sheet the sequence should use</span>
+<span class="kw">local</span> <span class="kw">sequenceData</span> <span class="ot">=</span> <span class="ot">{</span>
+                <span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;seq1&quot;</span>, <span class="kw">sheet</span><span class="ot">=</span><span class="kw">sheet1</span>, <span class="kw">start</span><span class="ot">=</span><span class="dv">1</span>, <span class="kw">count</span><span class="ot">=</span><span class="dv">6</span>, <span class="kw">time</span><span class="ot">=</span><span class="dv">220</span>, <span class="kw">loopCount</span><span class="ot">=</span><span class="dv">0</span> <span class="ot">}</span>,
+                <span class="ot">{</span> <span class="kw">name</span><span class="ot">=</span><span class="st">&quot;seq2&quot;</span>, <span class="kw">sheet</span><span class="ot">=</span><span class="kw">sheet2</span>, <span class="kw">start</span><span class="ot">=</span><span class="dv">1</span>, <span class="kw">count</span><span class="ot">=</span><span class="dv">6</span>, <span class="kw">time</span><span class="ot">=</span><span class="dv">220</span>, <span class="kw">loopCount</span><span class="ot">=</span><span class="dv">0</span> <span class="ot">}</span>
+                <span class="ot">}</span>
+
+<span class="kw">local</span> <span class="kw">myAnimation</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newSprite<span class="ot">(</span> <span class="kw">sheet1</span>, <span class="kw">sequenceData</span> <span class="ot">)</span>
+<span class="kw">myAnimation</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentWidth</span><span class="ot">/</span><span class="dv">2</span> <span class="ot">;</span> <span class="kw">myAnimation</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentHeight</span><span class="ot">/</span><span class="dv">2</span>
+<span class="kw">myAnimation</span>:play<span class="ot">()</span>
+
+<span class="co">-- After a short time, swap the sequence to &#39;seq2&#39; which uses the second image sheet</span>
+<span class="kw">local</span> <span class="kw">function</span> swapSheet<span class="ot">()</span>
+        <span class="kw">myAnimation</span>:setSequence<span class="ot">(</span> <span class="st">&quot;seq2&quot;</span> <span class="ot">)</span>
+        <span class="kw">myAnimation</span>:play<span class="ot">()</span>
+<span class="kw">end</span>
+<span class="kw">timer</span><span class="ot">.</span>performWithDelay<span class="ot">(</span> <span class="dv">2000</span>, <span class="kw">swapSheet</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 28-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.display.newSprite&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.display.newSprite&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.display.newSprite&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2005 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Types > Joint </title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Types > Joint " />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#joint">Joint</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#box2d-2.1.1-2.2.1">Box2D 2.1.1 =&gt; 2.2.1</a><ul>
+<li><a href="#behavioral-differences">Behavioral Differences</a></li>
+<li><a href="#api-changes">API Changes</a></li>
+</ul></li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#common">Common</a><ul>
+<li><a href="#joint.isactive"><a href="isActive.html">joint.isActive</a></a></li>
+<li><a href="#joint.iscollideconnected"><a href="isCollideConnected.html">joint.isCollideConnected</a></a></li>
+<li><a href="#joint.reactiontorque"><a href="reactionTorque.html">joint.reactionTorque</a></a></li>
+</ul></li>
+<li><a href="#distance-joint">Distance Joint</a><ul>
+<li><a href="#joint.dampingratio"><a href="dampingRatio.html">joint.dampingRatio</a></a></li>
+<li><a href="#joint.frequency"><a href="frequency.html">joint.frequency</a></a></li>
+<li><a href="#joint.length"><a href="length.html">joint.length</a></a></li>
+</ul></li>
+<li><a href="#friction-joint">Friction Joint</a><ul>
+<li><a href="#joint.maxforce"><a href="maxForce.html">joint.maxForce</a></a></li>
+<li><a href="#joint.maxtorque"><a href="maxTorque.html">joint.maxTorque</a></a></li>
+</ul></li>
+<li><a href="#gear-joint">Gear Joint</a><ul>
+<li><a href="#joint.joint1"><a href="joint1.html">joint.joint1</a></a></li>
+<li><a href="#joint.joint2"><a href="joint2.html">joint.joint2</a></a></li>
+<li><a href="#joint.ratio"><a href="ratio.html">joint.ratio</a></a></li>
+</ul></li>
+<li><a href="#piston-joint">Piston Joint</a><ul>
+<li><a href="#joint.islimitenabled"><a href="isLimitEnabled.html">joint.isLimitEnabled</a></a></li>
+<li><a href="#joint.ismotorenabled"><a href="isMotorEnabled.html">joint.isMotorEnabled</a></a></li>
+<li><a href="#joint.jointspeed"><a href="jointSpeed.html">joint.jointSpeed</a></a></li>
+<li><a href="#joint.jointtranslation"><a href="jointTranslation.html">joint.jointTranslation</a></a></li>
+<li><a href="#joint.maxmotorforce"><a href="maxMotorForce.html">joint.maxMotorForce</a></a></li>
+<li><a href="#joint.motorspeed"><a href="motorSpeed.html">joint.motorSpeed</a></a></li>
+<li><a href="#joint.motorforce"><a href="motorForce.html">joint.motorForce</a></a></li>
+<li><a href="#joint.referenceangle"><a href="referenceAngle.html">joint.referenceAngle</a></a></li>
+</ul></li>
+<li><a href="#pivot-joint">Pivot Joint</a><ul>
+<li><a href="#joint.islimitenabled-1"><a href="isLimitEnabled.html">joint.isLimitEnabled</a></a></li>
+<li><a href="#joint.ismotorenabled-1"><a href="isMotorEnabled.html">joint.isMotorEnabled</a></a></li>
+<li><a href="#joint.jointangle"><a href="jointAngle.html">joint.jointAngle</a></a></li>
+<li><a href="#joint.jointspeed-1"><a href="jointSpeed.html">joint.jointSpeed</a></a></li>
+<li><a href="#joint.maxmotortorque"><a href="maxMotorTorque.html">joint.maxMotorTorque</a></a></li>
+<li><a href="#joint.motorspeed-1"><a href="motorSpeed.html">joint.motorSpeed</a></a></li>
+<li><a href="#joint.motortorque"><a href="motorTorque.html">joint.motorTorque</a></a></li>
+<li><a href="#joint.referenceangle-1"><a href="referenceAngle.html">joint.referenceAngle</a></a></li>
+</ul></li>
+<li><a href="#pulley-joint">Pulley Joint</a><ul>
+<li><a href="#joint.length1"><a href="length1.html">joint.length1</a></a></li>
+<li><a href="#joint.length2"><a href="length2.html">joint.length2</a></a></li>
+<li><a href="#joint.ratio-1"><a href="ratio.html">joint.ratio</a></a></li>
+</ul></li>
+<li><a href="#touch-joint">Touch Joint</a><ul>
+<li><a href="#joint.dampingratio-1"><a href="dampingRatio.html">joint.dampingRatio</a></a></li>
+<li><a href="#joint.frequency-1"><a href="frequency.html">joint.frequency</a></a></li>
+<li><a href="#joint.maxforce-1"><a href="maxForce.html">joint.maxForce</a></a></li>
+</ul></li>
+<li><a href="#wheel-joint">Wheel Joint</a><ul>
+<li><a href="#joint.ismotorenabled-2"><a href="isMotorEnabled.html">joint.isMotorEnabled</a></a></li>
+<li><a href="#joint.jointspeed-2"><a href="jointSpeed.html">joint.jointSpeed</a></a></li>
+<li><a href="#joint.jointtranslation-1"><a href="jointTranslation.html">joint.jointTranslation</a></a></li>
+<li><a href="#joint.maxmotortorque-1"><a href="maxMotorTorque.html">joint.maxMotorTorque</a></a></li>
+<li><a href="#joint.motorspeed-2"><a href="motorSpeed.html">joint.motorSpeed</a></a></li>
+<li><a href="#joint.motortorque-1"><a href="motorTorque.html">joint.motorTorque</a></a></li>
+<li><a href="#joint.referenceangle-2"><a href="referenceAngle.html">joint.referenceAngle</a></a></li>
+<li><a href="#joint.springfrequency"><a href="springFrequency.html">joint.springFrequency</a></a></li>
+<li><a href="#joint.springdampingratio"><a href="springDampingRatio.html">joint.springDampingRatio</a></a></li>
+</ul></li>
+<li><a href="#weld-joint">Weld Joint</a><ul>
+<li><a href="#joint.dampingratio-2"><a href="dampingRatio.html">joint.dampingRatio</a></a></li>
+<li><a href="#joint.frequency-2"><a href="frequency.html">joint.frequency</a></a></li>
+<li><a href="#joint.referenceangle-3"><a href="referenceAngle.html">joint.referenceAngle</a></a></li>
+</ul></li>
+<li><a href="#rope-joint">Rope Joint</a><ul>
+<li><a href="#joint.limitstate"><a href="limitState.html">joint.limitState</a></a></li>
+<li><a href="#joint.maxlength"><a href="maxLength.html">joint.maxLength</a></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#common-1">Common</a><ul>
+<li><a href="#jointgetanchora"><a href="getAnchorA.html">joint:getAnchorA()</a></a></li>
+<li><a href="#jointgetanchorb"><a href="getAnchorB.html">joint:getAnchorB()</a></a></li>
+<li><a href="#jointgetreactionforce"><a href="getReactionForce.html">joint:getReactionForce()</a></a></li>
+<li><a href="#jointremoveself"><a href="removeSelf.html">joint:removeSelf()</a></a></li>
+</ul></li>
+<li><a href="#distance-joint-1">Distance Joint</a><ul>
+<li><a href="#jointgetlocalanchora"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+</ul></li>
+<li><a href="#friction-joint-1">Friction Joint</a><ul>
+<li><a href="#jointgetlocalanchora-1"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb-1"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+</ul></li>
+<li><a href="#touch-joint-1">Touch Joint</a><ul>
+<li><a href="#jointgettarget"><a href="getTarget.html">joint:getTarget()</a></a></li>
+<li><a href="#jointsettarget"><a href="setTarget.html">joint:setTarget()</a></a></li>
+</ul></li>
+<li><a href="#piston-joint-1">Piston Joint</a><ul>
+<li><a href="#jointgetlimits"><a href="getLimits.html">joint:getLimits()</a></a></li>
+<li><a href="#jointgetlocalanchora-2"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb-2"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+<li><a href="#jointgetlocalaxisa"><a href="getLocalAxisA.html">joint:getLocalAxisA()</a></a></li>
+<li><a href="#jointsetlimits"><a href="setLimits.html">joint:setLimits()</a></a></li>
+</ul></li>
+<li><a href="#pivot-joint-1">Pivot Joint</a><ul>
+<li><a href="#jointgetlocalanchora-3"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb-3"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+<li><a href="#jointgetrotationlimits"><a href="getRotationLimits.html">joint:getRotationLimits()</a></a></li>
+<li><a href="#jointsetrotationlimits"><a href="setRotationLimits.html">joint:setRotationLimits()</a></a></li>
+</ul></li>
+<li><a href="#pulley-joint-1">Pulley Joint</a><ul>
+<li><a href="#jointgetgroundanchora"><a href="getGroundAnchorA.html">joint:getGroundAnchorA()</a></a></li>
+<li><a href="#jointgetgroundanchorb"><a href="getGroundAnchorB.html">joint:getGroundAnchorB()</a></a></li>
+</ul></li>
+<li><a href="#rope-joint-1">Rope Joint</a><ul>
+<li><a href="#jointgetlocalanchora-4"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb-4"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+</ul></li>
+<li><a href="#wheel-joint-1">Wheel Joint</a><ul>
+<li><a href="#jointgetlocalanchora-5"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb-5"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+<li><a href="#jointgetlocalaxisa-1"><a href="getLocalAxisA.html">joint:getLocalAxisA()</a></a></li>
+</ul></li>
+<li><a href="#weld-joint-1">Weld Joint</a><ul>
+<li><a href="#jointgetlocalanchora-6"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></li>
+<li><a href="#jointgetlocalanchorb-6"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Types</a>  ▸  <a href="index.html">Joint</a>
+</div>
+<div class="section level1" id="joint">
+<h1><a href="#TOC">Joint</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Parent</strong></td>
+<td align="left"><a href="../Userdata.html">Userdata</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="../../library/physics/index.html">physics.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">physics, joints</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../library/physics/newJoint.html">physics.newJoint()</a><br/><a href="http://developer.anscamobile.com/content/game-edition-physics-joints">Joints Guide</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Joint objects are used to join two physics bodies together and are created using <a href="../../library/physics/newJoint.html">physics.newJoint()</a>.</p>
+</div>
+<div class="section level2" id="box2d-2.1.1-2.2.1">
+<h2><a href="#TOC">Box2D 2.1.1 =&gt; 2.2.1</a></h2>
+<div class="section level3" id="behavioral-differences">
+<h3><a href="#TOC">Behavioral Differences</a></h3>
+<ul>
+<li>Version 2.2.1 is much more sensitive to relative mass ratios. You should take care not to have masses exceed 10:1 or some joints may be unstable. For example, in the 'Bridge' sample, we had to increase the density of the bridge segments from 0.8 to 2 or else the rocks would fall in between the segments joints.</li>
+</ul>
+</div>
+<div class="section level3" id="api-changes">
+<h3><a href="#TOC">API Changes</a></h3>
+<p>Certain methods and properties for joint types have changed slightly due to changes in the Box2D engine:</p>
+<ul>
+<li>The following new properties and methods are available to all joints:
+<ul>
+<li><code>joint.isActive</code></li>
+<li><code>joint.isCollideConnected</code> (read-only)</li>
+</ul></li>
+<li><code>joint:getLocalAnchorA()</code> and <code>joint:getLocalAnchorB()</code> is available to the following joint types
+<ul>
+<li>Distance</li>
+<li>Pivot</li>
+<li>Piston</li>
+<li>friction</li>
+<li>Wheel</li>
+<li>Weld</li>
+<li>Rope</li>
+</ul></li>
+<li>Pivot joints
+<ul>
+<li><code>joint.maxMotorTorque</code> values can be accessed. Previously they could only be written.</li>
+<li><code>joint.referenceAngle</code> has been added</li>
+</ul></li>
+<li>Piston joints
+<ul>
+<li><code>joint:getLocalAxisA()</code> has been added</li>
+<li><code>joint.referenceAngle</code> has been added</li>
+</ul></li>
+<li>Wheel joints
+<ul>
+<li><code>joint.motorForce</code> has been changed to <code>joint.motorTorque</code></li>
+<li><code>joint.maxMotorForce</code> has been changed to <code>joing.maxMotorTorque</code></li>
+<li><code>joint:getLocalAxisA()</code> has been added</li>
+<li><code>joint.springFrequency</code> has been added</li>
+<li><code>joint.springDampingRatio</code> has been added</li>
+<li><code>joint.isLimitEnabled</code> has been removed</li>
+<li><code>joint:getLimits()</code> has been removed</li>
+<li><code>joint:setLimits()</code> has been removed</li>
+</ul></li>
+<li>Pulley joints
+<ul>
+<li><code>joint.groundAnchorA</code> has been added</li>
+<li><code>joint.groundAnchorB</code> has been added</li>
+</ul></li>
+<li>Weld joints
+<ul>
+<li><code>joint.dampingRatio</code> has been added</li>
+<li><code>joint.frequency</code> has been added</li>
+<li><code>joint.referenceAngle</code> has been added</li>
+</ul></li>
+<li>Gear joints have been added</li>
+<li>Rope joints have been added</li>
+</ul>
+</div>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<div class="section level3" id="common">
+<h3><a href="#TOC">Common</a></h3>
+<div class="section level5" id="joint.isactive">
+<h5><a href="#TOC"><a href="isActive.html">joint.isActive</a></a></h5>
+</div>
+<div class="section level5" id="joint.iscollideconnected">
+<h5><a href="#TOC"><a href="isCollideConnected.html">joint.isCollideConnected</a></a></h5>
+</div>
+<div class="section level5" id="joint.reactiontorque">
+<h5><a href="#TOC"><a href="reactionTorque.html">joint.reactionTorque</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="distance-joint">
+<h3><a href="#TOC">Distance Joint</a></h3>
+<div class="section level5" id="joint.dampingratio">
+<h5><a href="#TOC"><a href="dampingRatio.html">joint.dampingRatio</a></a></h5>
+</div>
+<div class="section level5" id="joint.frequency">
+<h5><a href="#TOC"><a href="frequency.html">joint.frequency</a></a></h5>
+</div>
+<div class="section level5" id="joint.length">
+<h5><a href="#TOC"><a href="length.html">joint.length</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="friction-joint">
+<h3><a href="#TOC">Friction Joint</a></h3>
+<div class="section level5" id="joint.maxforce">
+<h5><a href="#TOC"><a href="maxForce.html">joint.maxForce</a></a></h5>
+</div>
+<div class="section level5" id="joint.maxtorque">
+<h5><a href="#TOC"><a href="maxTorque.html">joint.maxTorque</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="gear-joint">
+<h3><a href="#TOC">Gear Joint</a></h3>
+<div class="section level5" id="joint.joint1">
+<h5><a href="#TOC"><a href="joint1.html">joint.joint1</a></a></h5>
+</div>
+<div class="section level5" id="joint.joint2">
+<h5><a href="#TOC"><a href="joint2.html">joint.joint2</a></a></h5>
+</div>
+<div class="section level5" id="joint.ratio">
+<h5><a href="#TOC"><a href="ratio.html">joint.ratio</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="piston-joint">
+<h3><a href="#TOC">Piston Joint</a></h3>
+<div class="section level5" id="joint.islimitenabled">
+<h5><a href="#TOC"><a href="isLimitEnabled.html">joint.isLimitEnabled</a></a></h5>
+</div>
+<div class="section level5" id="joint.ismotorenabled">
+<h5><a href="#TOC"><a href="isMotorEnabled.html">joint.isMotorEnabled</a></a></h5>
+</div>
+<div class="section level5" id="joint.jointspeed">
+<h5><a href="#TOC"><a href="jointSpeed.html">joint.jointSpeed</a></a></h5>
+</div>
+<div class="section level5" id="joint.jointtranslation">
+<h5><a href="#TOC"><a href="jointTranslation.html">joint.jointTranslation</a></a></h5>
+</div>
+<div class="section level5" id="joint.maxmotorforce">
+<h5><a href="#TOC"><a href="maxMotorForce.html">joint.maxMotorForce</a></a></h5>
+</div>
+<div class="section level5" id="joint.motorspeed">
+<h5><a href="#TOC"><a href="motorSpeed.html">joint.motorSpeed</a></a></h5>
+</div>
+<div class="section level5" id="joint.motorforce">
+<h5><a href="#TOC"><a href="motorForce.html">joint.motorForce</a></a></h5>
+</div>
+<div class="section level5" id="joint.referenceangle">
+<h5><a href="#TOC"><a href="referenceAngle.html">joint.referenceAngle</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="pivot-joint">
+<h3><a href="#TOC">Pivot Joint</a></h3>
+<div class="section level5" id="joint.islimitenabled-1">
+<h5><a href="#TOC"><a href="isLimitEnabled.html">joint.isLimitEnabled</a></a></h5>
+</div>
+<div class="section level5" id="joint.ismotorenabled-1">
+<h5><a href="#TOC"><a href="isMotorEnabled.html">joint.isMotorEnabled</a></a></h5>
+</div>
+<div class="section level5" id="joint.jointangle">
+<h5><a href="#TOC"><a href="jointAngle.html">joint.jointAngle</a></a></h5>
+</div>
+<div class="section level5" id="joint.jointspeed-1">
+<h5><a href="#TOC"><a href="jointSpeed.html">joint.jointSpeed</a></a></h5>
+</div>
+<div class="section level5" id="joint.maxmotortorque">
+<h5><a href="#TOC"><a href="maxMotorTorque.html">joint.maxMotorTorque</a></a></h5>
+</div>
+<div class="section level5" id="joint.motorspeed-1">
+<h5><a href="#TOC"><a href="motorSpeed.html">joint.motorSpeed</a></a></h5>
+</div>
+<div class="section level5" id="joint.motortorque">
+<h5><a href="#TOC"><a href="motorTorque.html">joint.motorTorque</a></a></h5>
+</div>
+<div class="section level5" id="joint.referenceangle-1">
+<h5><a href="#TOC"><a href="referenceAngle.html">joint.referenceAngle</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="pulley-joint">
+<h3><a href="#TOC">Pulley Joint</a></h3>
+<div class="section level5" id="joint.length1">
+<h5><a href="#TOC"><a href="length1.html">joint.length1</a></a></h5>
+</div>
+<div class="section level5" id="joint.length2">
+<h5><a href="#TOC"><a href="length2.html">joint.length2</a></a></h5>
+</div>
+<div class="section level5" id="joint.ratio-1">
+<h5><a href="#TOC"><a href="ratio.html">joint.ratio</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="touch-joint">
+<h3><a href="#TOC">Touch Joint</a></h3>
+<div class="section level5" id="joint.dampingratio-1">
+<h5><a href="#TOC"><a href="dampingRatio.html">joint.dampingRatio</a></a></h5>
+</div>
+<div class="section level5" id="joint.frequency-1">
+<h5><a href="#TOC"><a href="frequency.html">joint.frequency</a></a></h5>
+</div>
+<div class="section level5" id="joint.maxforce-1">
+<h5><a href="#TOC"><a href="maxForce.html">joint.maxForce</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="wheel-joint">
+<h3><a href="#TOC">Wheel Joint</a></h3>
+<div class="section level5" id="joint.ismotorenabled-2">
+<h5><a href="#TOC"><a href="isMotorEnabled.html">joint.isMotorEnabled</a></a></h5>
+</div>
+<div class="section level5" id="joint.jointspeed-2">
+<h5><a href="#TOC"><a href="jointSpeed.html">joint.jointSpeed</a></a></h5>
+</div>
+<div class="section level5" id="joint.jointtranslation-1">
+<h5><a href="#TOC"><a href="jointTranslation.html">joint.jointTranslation</a></a></h5>
+</div>
+<div class="section level5" id="joint.maxmotortorque-1">
+<h5><a href="#TOC"><a href="maxMotorTorque.html">joint.maxMotorTorque</a></a></h5>
+</div>
+<div class="section level5" id="joint.motorspeed-2">
+<h5><a href="#TOC"><a href="motorSpeed.html">joint.motorSpeed</a></a></h5>
+</div>
+<div class="section level5" id="joint.motortorque-1">
+<h5><a href="#TOC"><a href="motorTorque.html">joint.motorTorque</a></a></h5>
+</div>
+<div class="section level5" id="joint.referenceangle-2">
+<h5><a href="#TOC"><a href="referenceAngle.html">joint.referenceAngle</a></a></h5>
+</div>
+<div class="section level5" id="joint.springfrequency">
+<h5><a href="#TOC"><a href="springFrequency.html">joint.springFrequency</a></a></h5>
+</div>
+<div class="section level5" id="joint.springdampingratio">
+<h5><a href="#TOC"><a href="springDampingRatio.html">joint.springDampingRatio</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="weld-joint">
+<h3><a href="#TOC">Weld Joint</a></h3>
+<div class="section level5" id="joint.dampingratio-2">
+<h5><a href="#TOC"><a href="dampingRatio.html">joint.dampingRatio</a></a></h5>
+</div>
+<div class="section level5" id="joint.frequency-2">
+<h5><a href="#TOC"><a href="frequency.html">joint.frequency</a></a></h5>
+</div>
+<div class="section level5" id="joint.referenceangle-3">
+<h5><a href="#TOC"><a href="referenceAngle.html">joint.referenceAngle</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="rope-joint">
+<h3><a href="#TOC">Rope Joint</a></h3>
+<div class="section level5" id="joint.limitstate">
+<h5><a href="#TOC"><a href="limitState.html">joint.limitState</a></a></h5>
+</div>
+<div class="section level5" id="joint.maxlength">
+<h5><a href="#TOC"><a href="maxLength.html">joint.maxLength</a></a></h5>
+</div>
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<p><em>(Inherits methods from <a href="../Userdata.html">Userdata</a>)</em></p>
+<div class="section level3" id="common-1">
+<h3><a href="#TOC">Common</a></h3>
+<div class="section level5" id="jointgetanchora">
+<h5><a href="#TOC"><a href="getAnchorA.html">joint:getAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetanchorb">
+<h5><a href="#TOC"><a href="getAnchorB.html">joint:getAnchorB()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetreactionforce">
+<h5><a href="#TOC"><a href="getReactionForce.html">joint:getReactionForce()</a></a></h5>
+</div>
+<div class="section level5" id="jointremoveself">
+<h5><a href="#TOC"><a href="removeSelf.html">joint:removeSelf()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="distance-joint-1">
+<h3><a href="#TOC">Distance Joint</a></h3>
+<div class="section level5" id="jointgetlocalanchora">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="friction-joint-1">
+<h3><a href="#TOC">Friction Joint</a></h3>
+<div class="section level5" id="jointgetlocalanchora-1">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb-1">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="touch-joint-1">
+<h3><a href="#TOC">Touch Joint</a></h3>
+<div class="section level5" id="jointgettarget">
+<h5><a href="#TOC"><a href="getTarget.html">joint:getTarget()</a></a></h5>
+</div>
+<div class="section level5" id="jointsettarget">
+<h5><a href="#TOC"><a href="setTarget.html">joint:setTarget()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="piston-joint-1">
+<h3><a href="#TOC">Piston Joint</a></h3>
+<div class="section level5" id="jointgetlimits">
+<h5><a href="#TOC"><a href="getLimits.html">joint:getLimits()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchora-2">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb-2">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalaxisa">
+<h5><a href="#TOC"><a href="getLocalAxisA.html">joint:getLocalAxisA()</a></a></h5>
+</div>
+<div class="section level5" id="jointsetlimits">
+<h5><a href="#TOC"><a href="setLimits.html">joint:setLimits()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="pivot-joint-1">
+<h3><a href="#TOC">Pivot Joint</a></h3>
+<div class="section level5" id="jointgetlocalanchora-3">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb-3">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetrotationlimits">
+<h5><a href="#TOC"><a href="getRotationLimits.html">joint:getRotationLimits()</a></a></h5>
+</div>
+<div class="section level5" id="jointsetrotationlimits">
+<h5><a href="#TOC"><a href="setRotationLimits.html">joint:setRotationLimits()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="pulley-joint-1">
+<h3><a href="#TOC">Pulley Joint</a></h3>
+<div class="section level5" id="jointgetgroundanchora">
+<h5><a href="#TOC"><a href="getGroundAnchorA.html">joint:getGroundAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetgroundanchorb">
+<h5><a href="#TOC"><a href="getGroundAnchorB.html">joint:getGroundAnchorB()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="rope-joint-1">
+<h3><a href="#TOC">Rope Joint</a></h3>
+<div class="section level5" id="jointgetlocalanchora-4">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb-4">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="wheel-joint-1">
+<h3><a href="#TOC">Wheel Joint</a></h3>
+<div class="section level5" id="jointgetlocalanchora-5">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb-5">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalaxisa-1">
+<h5><a href="#TOC"><a href="getLocalAxisA.html">joint:getLocalAxisA()</a></a></h5>
+</div>
+</div>
+<div class="section level3" id="weld-joint-1">
+<h3><a href="#TOC">Weld Joint</a></h3>
+<div class="section level5" id="jointgetlocalanchora-6">
+<h5><a href="#TOC"><a href="getLocalAnchorA.html">joint:getLocalAnchorA()</a></a></h5>
+</div>
+<div class="section level5" id="jointgetlocalanchorb-6">
+<h5><a href="#TOC"><a href="getLocalAnchorB.html">joint:getLocalAnchorB()</a></a></h5>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.type.Joint.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.type.Joint.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.type.Joint.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

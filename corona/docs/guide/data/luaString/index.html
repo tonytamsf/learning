@@ -1,0 +1,1829 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > data > luaString </title>
+  <meta name="revised" content="17-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > data > luaString " />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#lua-string-manipulation">Lua String Manipulation</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#string-functions">String Functions</a></li>
+<li><a href="#string-patterns">String Patterns</a><ul>
+<li><a href="#character-classes">Character Classes</a></li>
+<li><a href="#patterns-and-pattern-items">Patterns and Pattern Items</a></li>
+<li><a href="#captures">Captures</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [data][guide.data]  ▸  <a href="index.html">luaString</a>
+</div>
+<div class="section level1" id="lua-string-manipulation">
+<h1><a href="#TOC">Lua String Manipulation</a></h1>
+<p>This guide discusses how to manipulate and match strings in Lua.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#functions">String Functions</a></li>
+<li><a href="#patterns">String Patterns</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The Corona <a href="../../../api/library/string/index.html">string</a> library provides generic functions for string manipulation, such as pattern matching and finding/extracting substrings. When indexing a string in Lua, the first character is at position 1, not at position 0 as in C. Indices are allowed to be negative and are interpreted as indexing backwards from the end of the string. Thus, the last character is at position -1, and so on.</p>
+<p>The string library provides all of its functions inside the table string. It also sets a metatable for strings where the <code>__index</code> field points to the string table. Therefore, you can use the string functions in object-oriented style. For instance, <code>string.byte(s,i)</code> can be written as <code>s:byte(i)</code>.</p>
+<p>The string library assumes one-byte character encodings.</p>
+<a id="functions"></a>
+</div>
+<div class="section level2" id="string-functions">
+<h2><a href="#TOC">String Functions</a></h2>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="100%">
+<tr>
+<th class="width20 headerfirst headerrow notebox-title">
+Function
+</th>
+<th class="width15 headerrow notebox-title">
+ 
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.byte()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/byte.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns the internal numerical codes of the characters in a string.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.char()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/char.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a string in which each character has the internal numerical code equal to its corresponding argument.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.find()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/find.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Looks for the first match of a <a href="#patterns">pattern</a> in a string. If found, it returns the indices where the occurrence starts and ends; otherwise, returns <code>nil</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.format()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/format.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a formatted string following the description given in its arguments.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.gmatch()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/gmatch.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a <a href="#patterns">pattern</a>-finding iterator.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.gsub()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/gsub.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Replaces all occurrences of a <a href="#patterns">pattern</a> in a string.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.len()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/len.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns the length of a string (number of characters).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.lower()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/lower.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Changes uppercase characters in a string to lowercase.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.match()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/match.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Extracts substrings by matching <a href="#patterns">patterns</a> in a string.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.rep()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/rep.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Replicates a string by returning a string that is the concatenation of <code>n</code> copies of a specified string.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.reverse()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/reverse.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Reverses a string.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.sub()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/sub.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a substring (a specified portion of an existing string).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>string.upper()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/string/upper.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Changes lowercase characters in a string to uppercase.
+</th>
+</tr>
+</table>
+
+
+
+
+<a id="patterns"></a>
+</div>
+<div class="section level2" id="string-patterns">
+<h2><a href="#TOC">String Patterns</a></h2>
+<p>String functions such as <code>string.find()</code>, <code>string.match()</code>, <code>string.gmatch()</code> and <code>string.gsub()</code> require a <strong>string pattern</strong> to search and replace on. A pattern must be constructed very carefully, otherwise the function will return <code>nil</code> or the string will be improperly altered.</p>
+<div class="section level3" id="character-classes">
+<h3><a href="#TOC">Character Classes</a></h3>
+<p>A <strong>character class</strong> is used to represent a set of characters. The following combinations are allowed in describing a character class, where the class is <strong>not</strong> one of the magic characters <code>^</code>, <code>$</code>, <code>(</code>, <code>)</code>, <code>%</code>, <code>.</code>, <code>[</code>, <code>]</code>, <code>*</code>, <code>+</code>, <code>-</code>, or <code>?</code>.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="95%">
+<tr>
+<th class="width15 itemrow baseline" style="padding-top:8px;">
+<code>.</code>
+</th>
+<th class="itemrow baseline" style="padding-top:8px;">
+Represents all characters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%a</code>
+</th>
+<th class="itemrow baseline">
+Represents all letters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%c</code>
+</th>
+<th class="itemrow baseline">
+Represents all control characters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%d</code>
+</th>
+<th class="itemrow baseline">
+Represents all digits.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%l</code>
+</th>
+<th class="itemrow baseline">
+Represents all lowercase letters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%p</code>
+</th>
+<th class="itemrow baseline">
+Represents all punctuation characters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%s</code>
+</th>
+<th class="itemrow baseline">
+Represents all space characters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%u</code>
+</th>
+<th class="itemrow baseline">
+Represents all uppercase letters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%w</code>
+</th>
+<th class="itemrow baseline">
+Represents all alphanumeric characters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%x</code>
+</th>
+<th class="itemrow baseline">
+Represents all hexadecimal digits.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%z</code>
+</th>
+<th class="itemrow baseline">
+Represents the character with representation 0.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>%x</code>
+</th>
+<th class="itemrow baseline">
+When <code>x</code> is any non-alphanumeric character, this is the standard way to escape the magic characters. Any punctuation character — even non-magic — can be preceded by a <code>%</code> when used to represent itself in a pattern.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>[set]</code>
+</th>
+<th class="itemrow baseline">
+Represents the union of all characters in <code>set</code>. A range of characters can be specified by separating the end characters of the range with a <code>-</code> (hyphen). All classes described above can also be used as components in the set. All other characters in <code>set</code> represent themselves. For example, <code>[%w_]</code> or <code>[_%w]</code> represents all alphanumeric characters plus the underscore. <nobr><code>[0-7]</code></nobr> represents the octal digits. <nobr><code>[0-7%l%-]</code></nobr> represents the octal digits plus lowercase letters plus the <code>-</code> character. The interaction between ranges and classes is not defined, so patterns like <nobr><code>[%a-z]</code></nobr> or <nobr><code>[a-%%]</code></nobr> have no meaning.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>[^set]</code>
+</th>
+<th class="itemrow baseline">
+Represents the complement of <code>set</code> as interpreted above.
+</th>
+</tr>
+</table>
+
+<div class="guide-notebox">
+<div class="notebox-title">
+Notes
+</div>
+
+<ul>
+<li><p>For all classes represented by single letters — <code>%a</code>, <code>%c</code>, etc. — the corresponding uppercase letter represents the complement of the class. For instance, <code>%S</code> represents all non-space characters.</p></li>
+<li><p>The definition of letter, space, and other character groups depend on the current locale. In particular, the class <nobr><code>[a-z]</code></nobr> may not be equivalent to <code>%l</code>.</p></li>
+</ul>
+</div>
+
+</div>
+<div class="section level3" id="patterns-and-pattern-items">
+<h3><a href="#TOC">Patterns and Pattern Items</a></h3>
+<p>A <strong>pattern</strong> is a sequence of <strong>pattern items</strong> (see below). A <code>^</code> at the beginning of a pattern anchors the match at the beginning of the subject string. A <code>$</code> at the end of a pattern anchors the match at the end of the subject string. At other positions, <code>^</code> and <code>$</code> have no special meaning and simply represent themselves. A pattern cannot contain embedded zeros; use <code>%z</code> instead.</p>
+<p>A <strong>pattern item</strong> is defined by any of the following:</p>
+<ul>
+<li><p>A single character class, which matches any single character within the class.</p></li>
+<li><p>A single character class followed by <code>*</code>, which matches 0 or more repetitions of characters in the class. These repetition items will always match the longest possible sequence.</p></li>
+<li><p>A single character class followed by <code>+</code>, which matches 1 or more repetitions of characters in the class. These repetition items will always match the longest possible sequence.</p></li>
+<li><p>A single character class followed by <code>-</code>, which also matches 0 or more repetitions of characters in the class. Unlike <code>*</code>, these repetition items will always match the shortest possible sequence.</p></li>
+<li><p>A single character class followed by <code>?</code>, which matches 0 or 1 occurrences of a character in the class.</p></li>
+<li><p><code>%n</code>, for <code>n</code> between 1 and 9; this pattern matches a substring equal to the <code>n</code>-th captured string (see next).</p></li>
+<li><p><code>%bxy</code>, where <code>x</code> and <code>y</code> are two distinct characters; this pattern item matches strings that start with <code>x</code>, end with <code>y</code>, and where the <code>x</code> and <code>y</code> are balanced. To clarify, if you read the string from left to right, counting +1 for an <code>x</code> and -1 for a <code>y</code>, the ending <code>y</code> is the first <code>y</code> where the count reaches 0. For example, the item <code>%b()</code> matches expressions with balanced parentheses.</p></li>
+</ul>
+</div>
+<div class="section level3" id="captures">
+<h3><a href="#TOC">Captures</a></h3>
+<p>A pattern can contain sub-patterns enclosed in parentheses. These describe <strong>captures</strong>. When a match succeeds, the substrings of the main string that match captures are stored (captured) for future use. Captures are numbered according to their left parentheses. For instance, in the pattern <code>(a*(.)%w(%s*))</code>, the part of the string matching <code>a*(.)%w(%s*)</code> is stored as the first capture and therefore has number 1. The character matching <code>.</code> is captured with number 2, and the part matching <code>%s*</code> has number 3.</p>
+<p>As a special case, the empty capture <code>()</code> captures the current string position (number). For instance, if we apply the pattern <code>()aa()</code> on the string <code>flaaap</code>, there will be two captures: 3 and 5.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 17-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.data.luaString.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.data.luaString.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.data.luaString.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

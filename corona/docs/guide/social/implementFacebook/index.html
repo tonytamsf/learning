@@ -1,0 +1,1818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > social > implementFacebook </title>
+  <meta name="revised" content="04-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > social > implementFacebook " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#implementing-facebook">Implementing Facebook</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#social-plugin">Social Plugin</a><ul>
+<li><a href="#including-the-plugin">Including the Plugin</a></li>
+<li><a href="#showing-the-popup">Showing the Popup</a></li>
+</ul></li>
+<li><a href="#facebook-library">Facebook Library</a><ul>
+<li><a href="#requiring-the-library">Requiring the Library</a></li>
+<li><a href="#login-considerations">Login Considerations</a></li>
+<li><a href="#ios-requirements">iOS Requirements</a></li>
+<li><a href="#android-requirements">Android Requirements</a></li>
+<li><a href="#logging-inout">Logging In/Out</a></li>
+<li><a href="#facebook-listener">Facebook Listener</a></li>
+<li><a href="#making-requests">Making Requests</a></li>
+<li><a href="#using-dialogs">Using Dialogs</a></li>
+<li><a href="#published-installs">Published Installs</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [social][guide.social]  ▸  <a href="index.html">implementFacebook</a>
+</div>
+<div class="section level1" id="implementing-facebook">
+<h1><a href="#TOC">Implementing Facebook</a></h1>
+<p>This guide discusses how to implement common Facebook tasks and processes in your Corona app.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#socialplugin">Social Plugin</a></li>
+<li><a href="#facebook">Facebook Library</a></li>
+</ul>
+</div>
+
+
+<a id="overview"></a>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Corona SDK offers two different ways to work with Facebook:</p>
+<ol style="list-style-type: decimal">
+<li>The <a href="http://docs.coronalabs.com/plugin/CoronaProvider_native_popup_social/index.html">Social Plugin</a></li>
+<li>The <a href="../../../api/library/facebook/index.html">facebook</a> library APIs</li>
+</ol>
+<p>If you need to perform simple tasks like posting a status update to a Facebook user's timeline, the <a href="http://docs.coronalabs.com/plugin/CoronaProvider_native_popup_social/index.html">Social Plugin</a> is the easiest way to accomplish this. If you want to perform more advanced tasks, you'll need to use the <a href="../../../api/library/facebook/index.html">facebook</a> library, discussed in detail starting with the <a href="#fblogin">Facebook Library</a> section below.</p>
+<a id="socialplugin"></a>
+</div>
+<div class="section level2" id="social-plugin">
+<h2><a href="#TOC">Social Plugin</a></h2>
+<p>The <a href="http://docs.coronalabs.com/plugin/CoronaProvider_native_popup_social/index.html">Social Plugin</a> is used to implement features similar to the typical iOS sharing menu, where you can email, send an SMS/text message, print, or share to Twitter or Facebook. Corona supports facilities to handle email, SMS/text, and native support for Twitter and Facebook.</p>
+<p>To use the Social Plugin, be aware of the following important points:</p>
+<ol style="list-style-type: decimal">
+<li>You are not required to set up anything with Facebook.</li>
+<li>The end user must be using an iOS device with iOS 6.0 or later.</li>
+<li>The end user must have core Facebook support enabled on the device.</li>
+<li>You must include the Plugin in your <a href="../../distribution/buildSettings/index.html">build.settings</a> file (see below).</li>
+</ol>
+<div class="section level3" id="including-the-plugin">
+<h3><a href="#TOC">Including the Plugin</a></h3>
+<p>The Social Plugin uses Corona's standard Plugin framework. Thus, you must include the following block of code in <code>build.settings</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">--key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.native.popup.social&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">--required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.coronalabs&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="showing-the-popup">
+<h3><a href="#TOC">Showing the Popup</a></h3>
+<p>To show the native popup in your app, use <a href="../../../api/library/native/showPopup.html">native.showPopup()</a> with <code>&quot;social&quot;</code> as the first parameter:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">native</span><span class="ot">.</span>showPopup<span class="ot">(</span> <span class="st">&quot;social&quot;</span>, <span class="kw">options</span> <span class="ot">)</span></code></pre>
+<p>For the second parameter, <code>options</code> must be a Lua table containing information to pre-populate the form, for example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">service</span> <span class="ot">=</span> <span class="st">&quot;facebook&quot;</span>,
+    <span class="kw">message</span> <span class="ot">=</span> <span class="st">&quot;Check out this photo!&quot;</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">eventListener</span>,
+    <span class="kw">image</span> <span class="ot">=</span> <span class="ot">{</span>
+        <span class="ot">{</span> <span class="kw">filename</span> <span class="ot">=</span> <span class="st">&quot;pic.jpg&quot;</span>, <span class="kw">baseDir</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">ResourceDirectory</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">filename</span> <span class="ot">=</span> <span class="st">&quot;pic2.jpg&quot;</span>, <span class="kw">baseDir</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span><span class="kw">ResourceDirectory</span> <span class="ot">}</span>
+    <span class="ot">}</span>,
+    <span class="kw">url</span> <span class="ot">=</span> <span class="st">&quot;http://coronalabs.com&quot;</span>
+<span class="ot">}</span></code></pre>
+<ul>
+<li><code>service</code> — this is the service you want to use. Valid string values include <code>&quot;facebook&quot;</code>, <code>&quot;twitter&quot;</code>, or <code>&quot;sinaWeibo&quot;</code>.</li>
+<li><code>message</code> — an optional string that specifies the text of your status post.</li>
+<li><code>listener</code> — an optional function to process the return value of the call.</li>
+<li><code>image</code> — an optional table of images to upload with the post. Each entry is a table with key members: <code>filename</code> and <code>baseDir</code> which specifies the <a href="../../../api/library/system/index.html">directory</a> constant where the image is located.</li>
+<li><code>url</code> — either a single URL to include in the post, or an array of strings if you have multiple URLs.</li>
+</ul>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>To ensure that the end user can access the native feature on their device, you can check by calling <a href="../../../api/library/native/canShowPopup.html">native.canShowPopup()</a>. In this instance, use <code>&quot;social&quot;</code> as the first parameter and the desired <strong>service</strong> name (string) as the second parameter:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">isFacebookAvailable</span> <span class="ot">=</span> <span class="kw">native</span><span class="ot">.</span>canShowPopup<span class="ot">(</span> <span class="st">&quot;social&quot;</span>, <span class="st">&quot;facebook&quot;</span> <span class="ot">)</span></code></pre>
+<p>If this returns <code>true</code>, the user is on an operating system that supports the feature and he/she has set up their login credentials. If this call returns <code>false</code>, you may opt to void or deny access to that feature.</p>
+</div>
+
+
+
+
+<a id="facebook"></a>
+</div>
+</div>
+<div class="section level2" id="facebook-library">
+<h2><a href="#TOC">Facebook Library</a></h2>
+<p>For more advanced tasks related to Facebook, you should use the <a href="http://developers.facebook.com/docs/reference/api/">Facebook Graph API</a>. To begin using it, you must first create a developer account at <a href="https://developers.facebook.com/">developers.facebook.com</a>. Please see the <a href="../setupFacebook/index.html">Facebook Portal Setup</a> guide for assistance with this process — it requires some <strong>very</strong> precise information and it's imporant to follow every step carefully.</p>
+<p>This section and all following sections assume that you have created your <strong>Facebook Native App</strong> using the aforementioned <a href="../setupFacebook/index.html">guide</a>.</p>
+<!---
+
+Facebook supports many features that require HTML and JavaScript from a web page. Some of these — "Like&nbsp;this&nbsp;page," for example — do not translate well to mobile apps because apps aren't web pages that can be "liked." Fortunately, Corona handles these type of actions using Facebook's <nobr>REST-based Graph API.</nobr>
+
+-->
+
+<div class="section level3" id="requiring-the-library">
+<h3><a href="#TOC">Requiring the Library</a></h3>
+<p>As with many Corona libraries, you must <code>require</code> the <a href="../../../api/library/facebook/index.html">facebook</a> library to use the related functions. This call should be made in any scene where you'll be calling Facebook functions, and also near the top of <code>main.lua</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">facebook</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;facebook&quot;</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level3" id="login-considerations">
+<h3><a href="#TOC">Login Considerations</a></h3>
+<p>Before the Facebook Graph API can be used, the app must successfully log in to Facebook. Then, it must gather the required authentication information (&quot;authToken&quot;) and the specific permissions required by the app. This process varies depending on the presence of the native Facebook app.</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+<tr>
+<th class="width25 headerrow notebox-title"><center>
+  Facebook App Installed  
+</center></th>
+
+<th class="headerrow notebox-title">
+Behavior
+</th>
+<th class="width5 headerrow notebox-title">
+ 
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl" style="vertical-align:middle;"><center>
+✓
+</center></th>
+<th class="itemrow baseline rowhl">
+If the mobile device has the native Facebook app installed, your app will launch it and ask for the necessary permissions. When this happens, your app is temporarily suspended and placed into the background while the native Facebook app runs. When complete (the user has either granted permission or has cancelled), the Facebook app will try to restore your app and put it in the foreground, bringing with it the information about your permission request.
+</th>
+<th class="itemrow baseline rowhl">
+ 
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl2" style="vertical-align:middle;"><center>
+×
+</center></th>
+<th class="itemrow baseline rowhl2">
+If the mobile device does <strong>not</strong> have the native Facebook app installed, it will use Facebook's website to log in through. This happens through a web view, so your app is never actually suspended to the background. In general, the <nobr>web-based</nobr> login method is very reliable, but you (the developer) cannot control if your app's user does or doesn't have the native Facebook app installed. Therefore, you must support both methods.
+</th>
+<th class="itemrow baseline rowhl2">
+ 
+</th>
+</tr>
+</table>
+
+</div>
+<div class="section level3" id="ios-requirements">
+<h3><a href="#TOC">iOS Requirements</a></h3>
+<p>If your app is for iOS, you must include the following code in <code>build.settings</code> to ensure that the native Facebook app functions properly:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">iphone</span> <span class="ot">=</span> <span class="ot">{</span>
+        <span class="kw">plist</span> <span class="ot">=</span> <span class="ot">{</span>
+
+            <span class="kw">UIApplicationExitsOnSuspend</span> <span class="ot">=</span> <span class="kw">false</span>,
+
+            <span class="kw">FacebookAppID</span> <span class="ot">=</span> <span class="st">&quot;XXXXXXXXXX&quot;</span>,  <span class="co">--replace XXXXXXXXXX with your Facebook App ID</span>
+
+            <span class="kw">CFBundleURLTypes</span> <span class="ot">=</span> <span class="ot">{</span>
+                <span class="ot">{</span>
+                <span class="kw">CFBundleURLSchemes</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;fbXXXXXXXXXX&quot;</span>, <span class="ot">}</span>  <span class="co">--replace XXXXXXXXXX with your Facebook App ID</span>
+                <span class="ot">}</span>
+            <span class="ot">}</span>
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<p>There are three critical parts which must be specified and correct:</p>
+<ul>
+<li><p><code>UIApplicationExitsOnSuspend</code> — to ensure that Facebook can resume your app properly, you must include <code>UIApplicationExitsOnSuspend = false</code>. If you've set this parameter to <code>true</code> for some other reason, you must revert it to <code>false</code> (default).</p></li>
+<li><p><code>FacebookAppID</code> — set this key to <code>FacebookAppID = &quot;XXXXXXXXXX&quot;</code> and replace <strong>XXXXXXXXXX</strong> with your unique Facebook App ID.</p></li>
+<li><p><code>CFBundleURLTypes</code> — the <code>CFBundleURLTypes</code> table must be declared exactly as shown and it must include a table named <code>CFBundleURLSchemes</code>. Inside this, include your Facebook App ID and prefix it with <strong>fb</strong>. Thus, if your App ID is <strong>1234567890</strong>, you should specify: <code>&quot;fb1234567890&quot;</code>.</p></li>
+</ul>
+</div>
+<div class="section level3" id="android-requirements">
+<h3><a href="#TOC">Android Requirements</a></h3>
+<p>On Android, Facebook uses your app <strong>Package Name</strong>, for example <code>com.yoursite.yourapp</code>. To ensure that the native Facebook app functions properly, you must provide Facebook's portal with two important pieces of information — these include the <strong>Class Name</strong> of <code>com.ansca.corona.CoronaActivity</code> and the <strong>Key Hash</strong> gathered from the keystore you built your app with. These are discussed in the <a href="../setupFacebook/index.html">Facebook Portal Setup</a> guide.</p>
+<p>Android also <strong>requires</strong> Internet permission for the app, so include it in <code>build.settings</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">usesPermissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;android.permission.INTERNET&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="logging-inout">
+<h3><a href="#TOC">Logging In/Out</a></h3>
+<p>To log the user into Facebook, use the <a href="../../../api/library/facebook/login.html">facebook.login()</a> call. First, create a local variable equal to the same Facebook App ID that you specified in <code>build.settings</code>. Pass this variable as the first parameter to <code>facebook.login()</code>. Next, specify an event listener function to respond to Facebook requests, including the login request — this function will be the only place where Facebook results are sent. Finally pass a table of <a href="http://developers.facebook.com/docs/authentication/permissions">permissions</a> as a <nobr>comma-delimited</nobr> list inside a string.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">fbAppID</span> <span class="ot">=</span> <span class="st">&quot;XXXXXXXXXX&quot;</span>  <span class="co">--replace with your Facebook App ID</span>
+<span class="kw">facebook</span><span class="ot">.</span>login<span class="ot">(</span> <span class="kw">fbAppID</span>, <span class="kw">facebookListener</span>, <span class="ot">{</span> <span class="st">&quot;publish_actions, email&quot;</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>To log out and disconnect the app from Facebook's services, simply call:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">facebook</span><span class="ot">.</span>logout<span class="ot">()</span></code></pre>
+<p>This function will end the app's session with Facebook, forcing another call to <code>facebook.login()</code> to log the user in again. This does not log the device's user out of Facebook entirely. It also does not log them out of the native Facebook app.</p>
+<!--- 
+
+Facebook recently changed their login process to a two step login process.  Corona SDK handles this for you with a single call.  However Android did not support this until Corona Build #1179.  Please make sure to use this build or later for Android.
+
+-->
+
+</div>
+<div class="section level3" id="facebook-listener">
+<h3><a href="#TOC">Facebook Listener</a></h3>
+<p>All Facebook requests will call the listener function you passed on <code>facebook.login()</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">json</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;json&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">function</span> listener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;event.name&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">name</span> <span class="ot">)</span>  <span class="co">--&quot;fbconnect&quot;</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;event.type:&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">)</span> <span class="co">--type is either &quot;session&quot;, &quot;request&quot;, or &quot;dialog&quot;</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;isError: &quot;</span> <span class="ot">..</span> <span class="fu">tostring</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">isError</span> <span class="ot">)</span> <span class="ot">)</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;didComplete: &quot;</span> <span class="ot">..</span> <span class="fu">tostring</span><span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">didComplete</span> <span class="ot">)</span> <span class="ot">)</span>
+
+    <span class="co">--&quot;session&quot; events cover various login/logout events</span>
+    <span class="co">--&quot;request&quot; events handle calls to various Graph API calls</span>
+    <span class="co">--&quot;dialog&quot; events are standard popup boxes that can be displayed</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;session&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="co">--options are: &quot;login&quot;, &quot;loginFailed&quot;, &quot;loginCancelled&quot;, or &quot;logout&quot;</span>
+        <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;login&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+            <span class="kw">local</span> <span class="kw">access_token</span> <span class="ot">=</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">token</span>
+            <span class="co">--code for tasks following a successful login</span>
+        <span class="kw">end</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="st">&quot;request&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;facebook request&quot;</span><span class="ot">)</span>
+        <span class="kw">if</span> <span class="ot">(</span> <span class="kw">not</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">isError</span> <span class="ot">)</span> <span class="kw">then</span>
+            <span class="kw">local</span> <span class="kw">response</span> <span class="ot">=</span> <span class="kw">json</span><span class="ot">.</span>decode<span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">response</span> <span class="ot">)</span>
+            <span class="co">--process response data here</span>
+        <span class="kw">end</span>
+
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="st">&quot;dialog&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;dialog&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">response</span> <span class="ot">)</span>
+        <span class="co">--handle dialog results here</span>
+    <span class="kw">end</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level3" id="making-requests">
+<h3><a href="#TOC">Making Requests</a></h3>
+<p>To make different Graph API requests, use the <a href="../../../api/library/facebook/request.html">facebook.request()</a> call.</p>
+<pre><code>facebook.request( path [, httpMethod, params ] )</code></pre>
+<p>There only required parameter is <code>path</code> which is based on the <a href="http://developers.facebook.com/docs/api/">Facebook Graph API</a> path. This will typically be the REST object that you want to access, for example:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">facebook</span><span class="ot">.</span>request<span class="ot">(</span> <span class="st">&quot;me/feed&quot;</span> <span class="ot">)</span></code></pre>
+<p>This command will retrieve the latest posts from the user's account feed. By default, this call makes <code>HTTP GET</code> requests to Facebook. If you wish to <strong>send</strong> things to Facebook, you must use a <code>HTTP POST</code> request.</p>
+<p>Some Graph API calls require parameters to be passed to <code>facebook.request()</code>. This is done via the optional <code>params</code> table, for instance:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">facebook</span><span class="ot">.</span>request<span class="ot">(</span> <span class="st">&quot;me/feed&quot;</span>, <span class="st">&quot;POST&quot;</span>, <span class="ot">{</span> <span class="kw">message</span><span class="ot">=</span><span class="st">&quot;Hello Facebook&quot;</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>To upload a photo to Facebook, the <code>params</code> table requires the image details — base directory, file name, and type:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">attachment</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">message</span> <span class="ot">=</span> <span class="st">&quot;Corona Icon file&quot;</span>,
+    <span class="kw">source</span> <span class="ot">=</span> <span class="ot">{</span>
+        <span class="kw">baseDir</span><span class="ot">=</span><span class="kw">system</span><span class="ot">.</span><span class="kw">DocumentsDirectory</span>, 
+        <span class="kw">filename</span><span class="ot">=</span><span class="st">&quot;coronaIcon.png&quot;</span>,
+        <span class="fu">type</span><span class="ot">=</span><span class="st">&quot;image&quot;</span>
+    <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="kw">facebook</span><span class="ot">.</span>request<span class="ot">(</span> <span class="st">&quot;me/photos&quot;</span>, <span class="st">&quot;POST&quot;</span>, <span class="kw">attachment</span> <span class="ot">)</span></code></pre>
+<p>When these requests complete, your Facebook listener function will be called with an <code>event.type</code> of <code>&quot;request&quot;</code>. Facebook generally returns your data as a <nobr>JSON-encoded</nobr> table of data. To convert this JSON table into a Lua table that you can use, call <code>json.decode()</code> and remember to include the <code>json</code> library as indicated:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">json</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;json&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">data</span> <span class="ot">=</span> <span class="kw">json</span><span class="ot">.</span>decode<span class="ot">(</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">response</span> <span class="ot">)</span></code></pre>
+<p>To learn more about which requests, parameters, and data the Facebook Graph API provides, please see the <a href="https://developers.facebook.com/docs/reference/api/">Facebook Graph API</a> documentation.</p>
+</div>
+<div class="section level3" id="using-dialogs">
+<h3><a href="#TOC">Using Dialogs</a></h3>
+<p>Facebook requires that some tasks be done through dialogs they control. To use a dialog, call the <a href="../../../api/library/facebook/showDialog.html">facebook.showDialog()</a> function:</p>
+<pre><code>facebook.showDialog( action [, params, onComplete] )</code></pre>
+<p>Two common <code>action</code> settings include <code>&quot;feed&quot;</code> and <code>&quot;apprequests&quot;</code>. For example, if you want to challenge somebody to a match in a multiplayer game, use the <code>&quot;apprequests&quot;</code> dialog:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">facebook</span><span class="ot">.</span>showDialog<span class="ot">(</span> <span class="st">&quot;apprequests&quot;</span>, <span class="ot">{</span> <span class="kw">message</span><span class="ot">=</span><span class="st">&quot;Download this game and challenge me!&quot;</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>The optional <code>params</code> is a table of key/value pairs that gets passed to the Facebook API call. The keys that you pass correspond to specific options which are available for the dialog. See the <a href="https://developers.facebook.com/docs/dialogs/">Facebook Dialog API</a> documentation for details.</p>
+<p>Finally, if the Facebook app dialog supports a callback function to return data, you can specify an optional event listener as the <code>onComplete</code> parameter. Two <code>action</code> settings which support this are <code>&quot;places&quot;</code> and <code>&quot;friends&quot;</code>.</p>
+</div>
+<div class="section level3" id="published-installs">
+<h3><a href="#TOC">Published Installs</a></h3>
+<p>While not part of the Graph API, <strong>Published Installs</strong> is a way for apps to participate in Facebook's mobile ad campaign which can report (to Facebook) that the app has been installed. This process is simple and there is no callback information and no need to call <a href="../../../api/library/facebook/login.html">facebook.login()</a></p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">facebook</span><span class="ot">.</span>publishInstall<span class="ot">(</span> <span class="st">&quot;XXXXXXXXXX&quot;</span> <span class="ot">)</span>  <span class="co">--replace XXXXXXXXXX with your Facebook App ID</span></code></pre>
+<p>For iOS, this process does require a few additions to <code>build.settings</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">iphone</span> <span class="ot">=</span> <span class="ot">{</span>
+        <span class="kw">plist</span> <span class="ot">=</span> <span class="ot">{</span>
+
+            <span class="kw">UIApplicationExitsOnSuspend</span> <span class="ot">=</span> <span class="kw">false</span>,
+            <span class="kw">FacebookAppID</span> <span class="ot">=</span> <span class="st">&quot;XXXXXXXXXX&quot;</span>,  <span class="co">--replace XXXXXXXXXX with your Facebook App ID</span>
+            <span class="kw">CFBundleURLTypes</span> <span class="ot">=</span> <span class="ot">{</span>
+                <span class="ot">{</span>
+                <span class="kw">CFBundleURLSchemes</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;fbXXXXXXXXXX&quot;</span>, <span class="ot">}</span>  <span class="co">--replace XXXXXXXXXX with your Facebook App ID</span>
+                <span class="ot">}</span>
+            <span class="ot">}</span>,
+
+            <span class="ot">[</span><span class="st">&quot;URL types&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{</span>
+                <span class="kw">item</span> <span class="ot">=</span> <span class="ot">{</span>
+                    <span class="ot">[</span><span class="st">&quot;URL Schemes&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+                        <span class="ot">{</span> <span class="ot">[</span><span class="st">&quot;Item 0&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="st">&quot;fbXXXXXXXXXX&quot;</span> <span class="ot">}</span>,  <span class="co">--replace XXXXXXXXXX with your Facebook App ID</span>
+                <span class="ot">}</span>,
+            <span class="ot">}</span>,
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 04-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.social.implementFacebook.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.social.implementFacebook.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.social.implementFacebook.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

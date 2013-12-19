@@ -1,0 +1,1962 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > gameNetwork > request</title>
+  <meta name="revised" content="04-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > gameNetwork > request" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#gamenetwork.request">gameNetwork.request()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#command-required">command <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#params-optional">params <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#game-center">Game Center:</a></li>
+</ul></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">gameNetwork</a>  ▸  <a href="request.html">request</a>
+</div>
+<div class="section level1" id="gamenetwork.request">
+<h1><a href="#TOC">gameNetwork.request()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">gameNetwork.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left">none</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">gameNetwork, request, gamecenter</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><em>/CoronaSDK/SampleCode/GameNetwork/GameCenter</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="init.html">gameNetwork.init()</a><br/><a href="show.html">gameNetwork.show()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Send or request information to/from the game network provider.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>gameNetwork.request( command [, params ...] )</code></pre>
+<div class="section level5" id="command-required">
+<h5><a href="#TOC">command <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The following commands are supported for the corresponding game networks:</p>
+<p><strong>Game Center:</strong></p>
+<ul>
+<li>setHighScore</li>
+<li>loadScores</li>
+<li>loadLocalPlayer</li>
+<li>loadPlayers</li>
+<li>loadFriends</li>
+<li>loadAchievements</li>
+<li>unlockAchievement</li>
+<li>resetAchievements</li>
+<li>loadAchievementDescriptions</li>
+<li>loadFriendRequestMaxNumberOfRecipients</li>
+<li>loadLeaderboardCategories</li>
+<li>loadPlayerPhoto</li>
+<li>loadAchievementImage</li>
+<li>loadPlaceholderCompletedAchievementImage</li>
+<li>loadIncompleteAchievementImage</li>
+<li>loadCurrentPlayer</li>
+<li>createMatch</li>
+<li>quitMatch</li>
+<li>endMatch</li>
+<li>removeMatch</li>
+<li>setEventListener</li>
+<li>loadMatchData</li>
+<li>endTurn</li>
+<li>loadMatches</li>
+<li>maxPlayersTurnBased</li>
+</ul>
+</div>
+<div class="section level5" id="params-optional">
+<h5><a href="#TOC">params <sub><sup>(optional)</sup></sub></a></h5>
+<p>The following parameters are supported for the corresponding game networks:</p>
+</div>
+<div class="section level4" id="game-center">
+<h4><a href="#TOC">Game Center:</a></h4>
+<p><strong>setHighScore:</strong> Sets a high score for the currently logged in user for the specified leaderboard (category). If the high score is not higher than the one currently on the server, the server will keep the highest value.</p>
+<p>This function corresponds to Apple's reportScoreWithCompletionHandler. The nomenclature deviates in this case to provide consistency with our existing gameNetwork APIs.</p>
+<p>Example &quot;setHighScore&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;setHighScore&quot;,
+{
+    localPlayerScore = { category=&quot;com.appledts.EasyTapList&quot;, value=25 },
+    listener=requestCallback
+})</code></pre>
+<p>'localPlayerScore' is a required table that corresponds to Apple's GKScore class.</p>
+<p>In the localPlayerScore table:</p>
+<p>'category' must be a string that matches the ID of the leaderboard you want to register the score with as entered on iTunes Connect. (The ID you pick need not follow the fully qualified reverse domain style shown here.) '</p>
+<p>'value' must be a number representing your score. Note that Apple allows for 64-bit integers, but all numbers in Lua are of type double. This means your max and min values are restricted to the range of double which is about 2^51 instead of 2^64.</p>
+<p><strong>loadScores:</strong> event.data in callback listener is an array of items (tables) that have the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>category (string)</li>
+<li>value (number)</li>
+<li>context (number, iOS 5+ only)</li>
+<li>date (string)</li>
+<li>formattedValue (string)</li>
+<li>rank (integer)</li>
+<li>shouldSetDefaultLeaderboard (boolean, iOS 5+ only)</li>
+<li>unixTime (integer)</li>
+<li>Each item (table) in the array corresponds to Apple's GKScore class.</li>
+</ul>
+<p>example: event.data[5].formattedValue -- #event.data == 2nd value specified in range table</p>
+<p>event.localPlayerScore also has all of the above properties (not in an array). This table also corresponds to Apple's GKScore class.</p>
+<p>example: event.localPlayerScore.rank</p>
+<p>Warning: iOS 4 has a bug where event.localPlayerScore.category returns nil. This is fixed in iOS 5.</p>
+<p>Example &quot;loadScores&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadScores&quot;,
+{
+    leaderboard =
+    {
+        category=&quot;com.appledts.EasyTapList&quot;,
+        playerScope=&quot;Global&quot;,   -- Global, FriendsOnly
+        timeScope=&quot;AllTime&quot;,    -- AllTime, Week, Today
+        range={1,5}
+    },
+    listener=requestCallback
+})</code></pre>
+<p>'leaderboard' is a required table that corresponds to Apple's GKLeaderboard class.</p>
+<p>In the leaderboard table:</p>
+<p>'category' (required) must be a string that matches the name of the board you want to fetch the scores with as entered on iTunes Connect. (The name you pick need not follow the fully qualified reverse domain style shown here.) '</p>
+<p>'playerScope' (optional) is a string of either &quot;Global&quot; or &quot;FriendsOnly&quot;. The latter setting will restrict the fetched scores to only friends.</p>
+<p>'timeScope' (optional) is a string of either &quot;AllTime&quot;, &quot;Week&quot;, &quot;Today&quot; which limits the fetched scores to the specified time range.</p>
+<p>'range' (optional) is an array of two values. The first value is that start index. The second value is the number of players to retrieve. Apple says this number must be less than 100. Apple's default range is {1,25}.</p>
+<p><strong>loadLocalPlayer:</strong> Requests the GKPlayer object for the currently logged-in user.</p>
+<p>event.data in callback listener includes the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>alias (string)</li>
+<li>isFriend (boolean)</li>
+<li>isAuthenticated (boolean)</li>
+<li>isUnderage (boolean)</li>
+<li>friends (array)</li>
+</ul>
+<p>This table corresponds to Apple's GKLocalPlayer class. Each element in the friends array is a string representing a playerID.</p>
+<p>example: event.data.playerID</p>
+<p>Example &quot;loadLocalPlayer&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadLocalPlayer&quot;, { listener=requestCallback } )</code></pre>
+<p>To guarantee the friends array is populated, Apple says you must call loadFriends before this. We have found that this necessary on iOS 4, but on iOS 5, we get the friends array regardless.</p>
+<p><strong>loadPlayers:</strong> Requests a list of players with the specified player IDs, and returns an array of items (tables) for each requested player in the callback listener.</p>
+<p>event.data in callback listener is an array of items that have the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>alias (string)</li>
+<li>isFriend (boolean)</li>
+</ul>
+<p>Each item (table) in the array corresponds to Apple's GKPlayer class</p>
+<p>example: event.data[3].isFriend</p>
+<p>Example &quot;loadPlayers&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadPlayers&quot;,
+{
+    playerIDs =
+    {
+        &quot;G:123456789&quot;,
+        &quot;G:1234567890&quot;,
+        &quot;G:0123456789&quot;
+    },
+    listener=requestCallback
+})</code></pre>
+<p><strong>loadFriends:</strong> Requests the friends of the currently logged in user, and returns and array of tables for all friends in the callback listener.</p>
+<p>event.data in callback listener is an array of strings representing playerIDs.</p>
+<p>example: event.data[2].playerID</p>
+<p>Example &quot;loadFriends&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadFriends&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>loadAchievements:</strong> Loads a list of the user's completed achievements for the app and returns an array of items (tables) representing each achievement in the callback listener.</p>
+<p>event.data in callback listener is an array of items that have the following properties (each representing an achievement):</p>
+<ul>
+<li>identifier (string)</li>
+<li>percentComplete (number)</li>
+<li>isCompleted (boolean)</li>
+<li>isHidden (boolean)</li>
+<li>lastReportedDate (string)</li>
+<li>showsCompletionBanner (boolean, iOS 5+ only, will be nil otherwise)</li>
+</ul>
+<p>Each item (table) in the array corresponds to Apple's GKAchievement class.</p>
+<p>example: event.data[4].identifier</p>
+<p>Example &quot;loadAchievements&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadAchievements&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>unlockAchievement:</strong> Unlocks the specified achievement (identifier) at the specified percentage. The showsCompletionBanner only takes affect if the achievement is 100% complete, and if the device is running iOS5 or higher.</p>
+<p>This function corresponds to Apple's reportAchievementWithCompletionHandler. The nomenclature deviates in this case to provide consistency with our existing gameNetwork APIs.</p>
+<p>Example &quot;unlockAchievement&quot; request.</p>
+<pre><code>gameNetwork.request( &quot;unlockAchievement&quot;,
+{
+    achievement =
+    {
+        identifier=&quot;com.appletest.one_tap&quot;,
+        percentComplete=100,
+        showsCompletionBanner=true,
+    },
+    listener=requestCallback
+})</code></pre>
+<p>'achievement' is a required table that corresponds to Apple's GKAchievement class.</p>
+<p>In the &quot;achievement&quot; table:</p>
+<p>'identifier' (required) must be a string that matches the name of the achievement you want to unlock/report as entered on iTunes Connect. (The name you pick need not follow the fully qualified reverse domain style shown here.) '</p>
+<p>'percentComplete' (optional) must be a number representing the completion percentage of the achievement. 100 will fully unlock the achievement. If this field is omitted, it is assumed this value is 100.</p>
+<p>'showsCompletionBanner' (optional, iOS 5+ only) is a boolean which if set to true, will cause Apple to automatically show a completion banner for you in your app when the percentComplete reaches 100. This field is ignored on pre-iOS 5 OS's.</p>
+<p>The listener callback will fill event.data with a table that corresponds to the Apple GKAchievement class that you just unlocked. You may use this information to help identify which/any achievements that were successfully reported to the Game Center servers and which ones might have failed due to network timeouts.</p>
+<p><strong>resetAchievements:</strong> Resets all achievements for the currently logged-in user. Be careful, as there is no undoing this request. Once called, the user will have all achievements for this app reset to 0%.</p>
+<p>Example &quot;resetAchievements&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;resetAchievements&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>loadAchievementDescriptions:</strong> Requests a list of all descriptions associated with the achievements for the app and returns an array of items (tables) representing each achievement description object in the callback listener.</p>
+<p>Each item (table) in the array corresponds to Apple's GKAchievementDescription class.</p>
+<p>event.data in callback listener is an array of items which are the descriptions of your achievements.</p>
+<ul>
+<li>identifier (string)</li>
+<li>title (string)</li>
+<li>achievedDescription (string)</li>
+<li>unachievedDescription (string)</li>
+<li>maximumPoints (integer)</li>
+<li>isHidden (boolean)</li>
+</ul>
+<p>Example &quot;loadAchievementDescriptions&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadAchievementDescriptions&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>loadFriendRequestMaxNumberOfRecipients:</strong> Apple imposes a maximum number of people you may invite in a single friendRequest. This function will allow you to retrieve that number so you may dynamically adapt your code to accommodate this value if it changes. As of this writing, this number is 3. The value will be returned through the callback listener (via event.data).</p>
+<p>Example &quot;loadFriendRequestMaxNumberOfRecipients&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadFriendRequestMaxNumberOfRecipients&quot;, { listener=requestCallback } )</code></pre>
+<p><strong>loadLeaderboardCategories:</strong> Requests a list of leaderboard categories for the app and returns an array of tables with each table containing description information of a leaderboard in the callback listener.</p>
+<p>event.data in callback listener is an array of items (tables) where each table contains the keys 'category' and 'title', both of which are strings.</p>
+<p>Example &quot;loadLeaderboardCategories&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadLeaderboardCategories&quot;, { listener=requestCallback } )
+
+-- example of what an event.data table returned via callback listener looks like
+event.data =
+{
+    [1] = {
+        category = &quot;com.appledts.EasyTapList&quot;,
+        title = &quot;Easy&quot;
+    },
+    [2] = {
+        category = &quot;com.appledts.HardTapList&quot;,
+        title = &quot;Hard&quot;
+    },
+    [3] = {
+        category = &quot;com.appledts.AwesomeTapList&quot;,
+        title = &quot;Awesome&quot;
+    },
+}</code></pre>
+<p><strong>loadPlayerPhoto:</strong> Retrieves the image of the requested player and creates a display object for it.</p>
+<p>Example &quot;loadPlayerPhoto&quot; request.</p>
+<pre><code>gameNetwork.request( &quot;loadPlayerPhoto&quot;,
+{
+    playerID = &quot;G:0123456789&quot;,
+    size=&quot;Small&quot;, -- &quot;Small&quot; or &quot;Normal&quot;
+    listener=requestCallback
+})</code></pre>
+<p>'playerID' (required) is the Game Center player ID (string) of the player you want to fetch the image for.</p>
+<p>'size' (optional) represents the size of the image you want to get back. Supported values are &quot;Small&quot; and &quot;Normal&quot;. &quot;Small&quot; is the default.</p>
+<p>The listener callback will fill event.data with a table that corresponds to the Apple GKPlayer class as you've seen with other APIs documented above. But unlike the other APIs one additional property is added, 'photo', which is the display object of the retrieved image.</p>
+<p>event.data in callback listener includes the following properties:</p>
+<ul>
+<li>playerID (string)</li>
+<li>alias (string)</li>
+<li>isFriend (boolean)</li>
+<li>isAuthenticated (boolean)</li>
+<li>isUnderage (boolean)</li>
+<li>friends (array)</li>
+<li>photo (display object)</li>
+</ul>
+<p>If called on pre-iOS5, the callback will be invoked and return errorCode=1 and errorMessage=&quot;This API is not available on this version of iOS.&quot;</p>
+<p><strong>loadAchievementImage:</strong> Retrieves the image of the requested achievement and creates a display object for it.</p>
+<p>Example &quot;loadAchievementImage&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadAchievementImage&quot;,
+{
+    achievementDescription=
+    {
+        identifier=&quot;com.appledts.twenty_taps&quot;
+    },
+    listener=requestCallback
+})</code></pre>
+<p>'achievementDescription' is a required table that corresponds to Apple's GKAchievementDescription class.</p>
+<p>In the &quot;achievementDescription&quot; table:</p>
+<p>'identifier' (required) must be a string that matches the name of the achievement you want to retrieve the image for. (The name you pick need not follow the fully qualified reverse domain style shown here.) '</p>
+<p>The listener callback will fill event.data with a table that corresponds to the Apple GKAchievementDescription class as you've seen with other APIs documented above. But unlike the other APIs one additional property is added, 'image', which is the display object of the retrieved image.</p>
+<p>event.data in callback listener includes the following properties:</p>
+<ul>
+<li>identifier (string)</li>
+<li>title (string)</li>
+<li>achievedDescription (string)</li>
+<li>unachievedDescription (string)</li>
+<li>maximumPoints (integer)</li>
+<li>isHidden (boolean)</li>
+<li>image (display object)</li>
+</ul>
+<p>Remember to upload images to iTunes Connect that are compatible with Corona (e.g. don't used indexed color pngs, etc.)</p>
+<p><strong>loadPlaceholderCompletedAchievementImage:</strong> Retrieves the Apple placeholder image of a completed achievement and creates a display object for it.</p>
+<p>Example &quot;loadPlaceholderCompletedAchievementImage&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadPlaceholderCompletedAchievementImage&quot;,
+{
+    listener=requestCallback
+})</code></pre>
+<p>The listener callback will fill event.data with the display object of the image.</p>
+<p><strong>loadIncompleteAchievementImage:</strong> Retrieves the Apple placeholder image of an incomplete achievement and creates a display object for it.</p>
+<p>Example &quot;loadIncompleteAchievementImage&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadIncompleteAchievementImage&quot;,
+{
+    listener=requestCallback
+})</code></pre>
+<p>The listener callback will fill event.data with the display object of the image.</p>
+<p>For further property reference for the different objects (GKLeaderboard, GKAchievement, GKAchievementDescription, GKScore, GKPlayer, and GKLocalPlayer), please see the <a href="http://developer.apple.com/library/ios/#documentation/GameKit/Reference/GameKit_Collection/_index.html#//apple_ref/doc/uid/TP40008303">Official Game Kit Framework Reference</a>.</p>
+<p><strong>loadCurrentPlayer:</strong> Retrieves the current whos turn it is in a match.</p>
+<p>Example &quot;loadCurrentPlayer&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadCurrentPlayer&quot;,
+{
+    matchID = &quot;w4o98y3498hg349h&quot;,
+    listener=requestCallback
+})</code></pre>
+<p>'matchID' (required) is the Game Center match ID (string) of the match you want to fetch the current participant for.</p>
+<p>event.data in callback listener includes the following object: <a href="../../type/GameNetwork/participant.html">participant</a></p>
+<p><strong>createMatch:</strong> Creates a turnbased match with the specified players. On iOS 5.x the playerIDs field is ignored so you can not invite players like this. It will result in a game with only automatch players.</p>
+<p>Example &quot;createMatch&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;createMatch&quot;,
+{
+    playerIDs = {&quot;w4o98y3498hg349h&quot;, &quot;wrighfq547hg543&quot;},
+    minPlayers = 2,
+    maxPlayers = 3,
+    playerGroup = 1, -- The game type will be created, for example it can be quick game or long game.  Only players whose requests share the same playerGroup value are automatched by Game Center.
+    playerAttributes = {1,4,6}, -- The bits to set for the player
+    inviteMessage = &quot;Hi join me&quot;,
+    listener=requestCallback
+})</code></pre>
+<p>'playerIDs' (required) is an array of strings with the ids of the people you want to invite to a match</p>
+<p>'minPlayers' (optional) is the minimum number of players that can be in a match</p>
+<p>'maxPlayers' (optional) is the maximum number of players that can be in a match</p>
+<p>'playerGroup' (optional)(number) is the type of game that the player will join for an automatch game</p>
+<p>'playerAttributes' (optional)(table) is a table with the bits(1-32) for which to set for the player. Automatching with player attributes matches new players into the game so that the bitwise OR of the masks of all the players in the resulting match equals 0xFFFFFFFF.</p>
+<p>event.data in callback listener includes is the following object:</p>
+<p><a href="../../type/GameNetwork/match.html">match</a></p>
+<p><strong>quitMatch:</strong> The player leaves the specified match. The outcome of the player leaving the match is set.</p>
+<p>Example &quot;quitMatch&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;createMatch&quot;,
+{
+    matchID = &quot;adsfawerg4&quot;,
+    outcome = &quot;lost&quot;,
+    data = &quot;dsfa4wt4t&quot;,
+    nextParticipant = {&quot;34tgergae5rtg5&quot;},
+    listener=requestCallback
+})</code></pre>
+<p>'matchID' (required) is a string identifying the match the player will quit.</p>
+<p>'outcome' (required) is the result of the match for the player that quit.</p>
+<p>'data' (required) is the data of the match for the next player. This is only necessary if its the local player's turn.</p>
+<p>'nextParticipant' (required) is the next player thats supposed to take a turn if it is the logged in player's turn wrapped in an array. It can be the playerID if it exists or it can be the index value of the participant. This is only necessary if its the local player's turn.</p>
+<p>event.data in callback listener includes is the following object:</p>
+<p><a href="../../type/GameNetwork/match.html">match</a> <strong>endMatch:</strong> The match is ended for all players. The outcome of the match is set for all the players.</p>
+<p>Example &quot;endMatch&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;endMatch&quot;,
+{
+    matchID = &quot;adsfawerg4&quot;,
+    outcome = {
+            [participant1ID] = &quot;first&quot;,
+            [participant2ID] = &quot;second&quot;,
+            [participant3ID] = &quot;third&quot;,
+        },
+    data = &quot;dsfa4wt4t&quot;,
+    listener=requestCallback
+})</code></pre>
+<p>'matchID' (required) is a string identifying the match the player will end</p>
+<p>'outcome' (required) is an array containing the player ids and the outcome for the player</p>
+<p>'data' (required) is the final data of the match</p>
+<p><strong>removeMatch:</strong> Removes the match of the list of matches in Game Center. This should only be called after endMatch has been called</p>
+<p>Example &quot;removeMatch&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;removeMatch&quot;,
+{
+    matchID = &quot;adsfawerg4&quot;,
+    listener=requestCallback
+})</code></pre>
+<p>'matchID' (required) is a string identifying the match the player will end</p>
+<p><strong>setEventListener:</strong> Sets the event listener for all matches.</p>
+<p>Example &quot;setEventListener&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;setEventListener&quot;,
+{
+    listener=requestCallback
+})</code></pre>
+<p>event.type can be of the following:</p>
+<ul>
+<li><p>invitationReceived - This is the event when the player has received an invitation to join a match</p></li>
+<li><p>matchEnded - This is the event when another player has called gameNetwork.request(&quot;endMatch&quot;), subsequently ending the match for all the players.</p></li>
+<li><p>playerTurn - This is the event when it is the current players turn in a match.</p></li>
+</ul>
+<p>event.data in callback listener includes the following properties when event.type is invitationReceived:</p>
+<ul>
+<li>(array of strings) An array containing the ids of all the players invited to a match</li>
+</ul>
+<p>event.data in callback listener includes the following properties when event.type is matchEnded: <a href="../../type/GameNetwork/match.html">match</a></p>
+<p>event.data in callback listener includes the following properties when event.type is playerTurn: <a href="../../type/GameNetwork/match.html">match</a></p>
+<p><strong>loadMatchData:</strong> Retrieves the data of a match.</p>
+<p>Example &quot;loadMatchData&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadMatchData&quot;,
+{
+    matchID = &quot;adsfawerg4&quot;,
+    listener=requestCallback
+})</code></pre>
+<p>'matchID' (required) is a string identifying the match for which the match data will be retrieved.</p>
+<p>event.data in callback listener includes is the following object:</p>
+<p><a href="../../type/GameNetwork/match.html">match</a></p>
+<p><strong>endTurn:</strong> Ends the current player's turn and lets the next player start their turn.</p>
+<p>Example &quot;endTurn&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;endTurn&quot;,
+{
+    matchID = &quot;adsfawerg4&quot;,
+    data = &quot;dsfa4wt4t&quot;,
+    nextParticipant = {&quot;34tgergae5rtg5&quot;},
+    listener=requestCallback
+})</code></pre>
+<p>'matchID' (required) is a string identifying the match the player will end their turn for.</p>
+<p>'data' (required) is the data of the match for the next player.</p>
+<p>'nextParticipant' (required) is the next player thats supposed to take a turn thats wrapped in an array. It can be the playerID if it exists or it can be the index value of the participant.</p>
+<p>event.data in callback listener includes is the following object:</p>
+<p><a href="../../type/GameNetwork/match.html">match</a></p>
+<p><strong>loadMatches:</strong> Loads the turn-based matches involving the local player and creates a match object for each match.</p>
+<p>Example &quot;loadMatches&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadMatches&quot;,
+{
+    listener=requestCallback
+})</code></pre>
+<p>event.data in callback listener includes the following:</p>
+<ul>
+<li>array with a <a href="../../type/GameNetwork/match.html">match</a> in each index</li>
+</ul>
+<p><strong>loadTurnBasedMatchMaxNumberOfParticipants:</strong> Apple imposes a maximum number of people you may invite to a turn based match. This function will allow you to retrieve that number so you may dynamically adapt your code to accommodate this value if it changes. The value will be returned through the callback listener (via event.data). This request is only valid for iOS6+. It will not call the callback for iOS5</p>
+<p>Example &quot;loadMatches&quot; request:</p>
+<pre><code>gameNetwork.request( &quot;loadMatches&quot;,
+{
+    listener=requestCallback
+})</code></pre>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<p><strong>Game Center:</strong></p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Called after a request has been sent.</span>
+<span class="kw">local</span> <span class="kw">function</span> onGameNetworkRequestResult<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+    <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;setHighScore&quot;</span> <span class="kw">then</span>
+        <span class="co">-- High score has been set.</span>
+    <span class="kw">else</span> <span class="kw">if</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">type</span> <span class="ot">==</span> <span class="st">&quot;resetAchievements&quot;</span> <span class="kw">then</span>
+        <span class="co">-- Achievements have been reset.</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">-- Update the player&#39;s high score.</span>
+<span class="kw">gameNetwork</span><span class="ot">.</span>request<span class="ot">(</span> <span class="st">&quot;setHighScore&quot;</span>,
+<span class="ot">{</span>
+    <span class="kw">localPlayerScore</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">category</span> <span class="ot">=</span> <span class="st">&quot;com.appledts.EasyTapList&quot;</span>, <span class="kw">value</span> <span class="ot">=</span> <span class="dv">25</span> <span class="ot">}</span>,
+    <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">onGameNetworkRequestResult</span>,
+<span class="ot">})</span>
+
+<span class="co">-- Reset the player&#39;s achievement list.</span>
+<span class="kw">gameNetwork</span><span class="ot">.</span>request<span class="ot">(</span> <span class="st">&quot;resetAchievements&quot;</span>, <span class="ot">{</span> <span class="kw">listener</span> <span class="ot">=</span> <span class="kw">onGameNetworkRequestResult</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 04-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.gameNetwork.request&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.gameNetwork.request&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.gameNetwork.request&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

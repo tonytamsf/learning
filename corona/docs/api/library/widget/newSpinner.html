@@ -1,0 +1,1697 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newSpinner</title>
+  <meta name="revised" content="16-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newSpinner" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newspinner">widget.newSpinner()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left / top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-height-optional">width / height <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#objectstart"><a href="../../type/SpinnerWidget/start.html">object:start()</a></a></li>
+<li><a href="#objectstop"><a href="../../type/SpinnerWidget/stop.html">object:stop()</a></a></li>
+</ul></li>
+<li><a href="#single-frame-construction">Single Frame Construction</a><ul>
+<li><a href="#sheet-required">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#startframe-required">startFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#deltaangle-optional">deltaAngle <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#incrementevery-optional">incrementEvery <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#multi-frame-construction">Multi-Frame Construction</a><ul>
+<li><a href="#sheet-required-1">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#startframe-required-1">startFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#count-required">count <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#time-optional">time <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#single-frame-construction-1">Single Frame Construction</a></li>
+<li><a href="#multi-frame-construction-1">Multi-Frame Construction</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newSpinner.html">newSpinner</a>
+</div>
+<div class="section level1" id="widget.newspinner">
+<h1><a href="#TOC">widget.newSpinner()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/SpinnerWidget/index.html">SpinnerWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, spinner, activity, indicator</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/SpinnerWidget/index.html">SpinnerWidget</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a <a href="../../type/SpinnerWidget/index.html">Spinner</a> object.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>To conserve texture memory, a <a href="../../type/SpinnerWidget/index.html">Spinner</a> can only be created from an <a href="../graphics/newImageSheet.html">image sheet</a>.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newSpinner( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> An optional identification to assign to the spinner. Default is <code>widget_spinner</code>.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left / top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The left and top position where the spinner will be created. Default values are <code>0,0</code>.</p>
+</div>
+<div class="section level5" id="width-height-optional">
+<h5><a href="#TOC">width / height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The width and height of each frame from the <a href="../graphics/newImageSheet.html">image sheet</a>. If you are using the default theme, these values are set automatically.</p>
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level4" id="objectstart">
+<h4><a href="#TOC"><a href="../../type/SpinnerWidget/start.html">object:start()</a></a></h4>
+</div>
+<div class="section level4" id="objectstop">
+<h4><a href="#TOC"><a href="../../type/SpinnerWidget/stop.html">object:stop()</a></a></h4>
+<a id="single"></a>
+</div>
+</div>
+<div class="section level2" id="single-frame-construction">
+<h2><a href="#TOC">Single Frame Construction</a></h2>
+<p>A basic spinner can be built using one frame from an <a href="../graphics/newImageSheet.html">image sheet</a>. The image will rotate by a specified delta angle on each increment of the specified time.</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-spinner-single.png" /><p class="caption"></p>
+</div>
+<div class="section level5" id="sheet-required">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> The <a href="../graphics/newImageSheet.html">image sheet</a> object for the spinner.</p>
+</div>
+<div class="section level5" id="startframe-required">
+<h5><a href="#TOC">startFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The starting frame index of the spinner animation sequence (the index of the sole frame from the sheet).</p>
+</div>
+<div class="section level5" id="deltaangle-optional">
+<h5><a href="#TOC">deltaAngle <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The delta angle by which the spinner rotates per time increment (see <code>incrementEvery</code> below). For example, if you specify <code>30</code>, the spinner will rotate 30 degrees per increment.</p>
+</div>
+<div class="section level5" id="incrementevery-optional">
+<h5><a href="#TOC">incrementEvery <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The delay for each rotation iteration of the spinner, in milliseconds.</p>
+<a id="multi"></a>
+</div>
+</div>
+<div class="section level2" id="multi-frame-construction">
+<h2><a href="#TOC">Multi-Frame Construction</a></h2>
+<p>An animated spinner can be built using multiple frames from an <a href="../graphics/newImageSheet.html">image sheet</a>. This spinner type will loop through the frame sequence over a specified time.</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-spinner-multi.png" /><p class="caption"></p>
+</div>
+<div class="section level5" id="sheet-required-1">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> The <a href="../graphics/newImageSheet.html">image sheet</a> object for the spinner.</p>
+</div>
+<div class="section level5" id="startframe-required-1">
+<h5><a href="#TOC">startFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The starting frame index of the spinner animation sequence (the first frame in its animation sequence).</p>
+</div>
+<div class="section level5" id="count-required">
+<h5><a href="#TOC">count <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The total frame count of the spinner animation sequence.</p>
+</div>
+<div class="section level5" id="time-optional">
+<h5><a href="#TOC">time <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The time for one complete loop of the spinner animation, in milliseconds. Default is <code>1000</code>.</p>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level5" id="single-frame-construction-1">
+<h5><a href="#TOC">Single Frame Construction</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">1</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">128</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">spinnerSingleSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;spinner-single.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">spinner</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newSpinner</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">spinnerSingleSheet</span>,
+    <span class="kw">startFrame</span> <span class="ot">=</span> <span class="dv">1</span>,
+    <span class="kw">deltaAngle</span> <span class="ot">=</span> <span class="dv">10</span>,
+    <span class="kw">incrementEvery</span> <span class="ot">=</span> <span class="dv">20</span>
+<span class="ot">}</span>
+
+<span class="kw">spinner</span>:start<span class="ot">()</span></code></pre>
+</div>
+<div class="section level5" id="multi-frame-construction-1">
+<h5><a href="#TOC">Multi-Frame Construction</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">4</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">512</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">128</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">spinnerMultiSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;spinner-multi.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">spinner</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newSpinner</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">128</span>,
+    <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">spinnerMultiSheet</span>,
+    <span class="kw">startFrame</span> <span class="ot">=</span> <span class="dv">1</span>,
+    <span class="kw">count</span> <span class="ot">=</span> <span class="dv">4</span>,
+    <span class="kw">time</span> <span class="ot">=</span> <span class="dv">800</span>
+<span class="ot">}</span>
+
+<span class="kw">spinner</span>:start<span class="ot">()</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newSpinner&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newSpinner&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newSpinner&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1835 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > system > systemOS </title>
+  <meta name="revised" content="19-Jun-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > system > systemOS " />
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#system-and-os-functions">System and OS Functions</a><ul>
+<li><a href="#system-library">System Library</a></li>
+<li><a href="#os-library">OS Library</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [system][guide.system]  ▸  <a href="index.html">systemOS</a>
+</div>
+<div class="section level1" id="system-and-os-functions">
+<h1><a href="#TOC">System and OS Functions</a></h1>
+<p>This guide discusses the Corona <code>system</code> and <code>os</code> functions. Collectively, these are used to return system information and control system functions — get device information, enable multitouch, control the idle time, accelerometer, GPS, etc. — and deal with system time, date, and other OS-related information.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#systemlib">System Library</a></li>
+<li><a href="#oslib">OS Library</a></li>
+</ul>
+</div>
+
+
+<a id="systemlib"></a>
+<div class="section level2" id="system-library">
+<h2><a href="#TOC">System Library</a></h2>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="100%">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Function
+</th>
+<th class="width15 headerrow notebox-title">
+ 
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.getInfo()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/getInfo.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns information about the system on which the application is running.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.openURL()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/openURL.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Opens a web page in the device browser, creates an email, or calls a phone number.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.pathForFile()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/pathForFile.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Generates an absolute path using system-defined directories as the base. See <a href="../../data/readWriteFiles/index.html">Reading and Writing Files</a> for more information.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.getPreference()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/getPreference.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a system preference value (<code>ui</code> or <code>locale</code>) as a string.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.getTimer()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/getTimer.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns the time in milliseconds since application launch.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.orientation</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/orientation.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a string identifying the orientation of the device.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.setTapDelay()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/setTapDelay.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets the delay time between when a tap is detected and when the tap event is delivered.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.activate()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/activate.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Activates a system-level feature such as multitouch.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.deactivate()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/deactivate.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Deactivates a system-level feature activated by <code>system.activate()</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.scheduleNotification()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/scheduleNotification.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Schedules a local notification event to be delivered at a future time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.cancelNotification()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/cancelNotification.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Removes the specified notification from the scheduler, status bar, or notification center.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.setIdleTimer()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/setIdleTimer.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Controls whether the system idle timer is enabled (automatic screen dim and sleep).
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.getIdleTimer()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/getIdleTimer.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Determines whether the system idle timer is enabled.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.setLocationAccuracy()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/setLocationAccuracy.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets the desired accuracy of <a href="../../../api/event/location/index.html">location (GPS)</a> events to distance in meters.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.setLocationThreshold()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/setLocationThreshold.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets the distance in meters between each <a href="../../../api/event/location/index.html">location (GPS)</a> event.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.setAccelerometerInterval()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/setAccelerometerInterval.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets the frequency of <a href="../../../api/event/accelerometer/index.html">accelerometer</a> events.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.setGyroscopeInterval()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/setGyroscopeInterval.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Sets the frequency of <a href="../../../api/event/gyroscope/index.html">gyroscope</a> events in Hertz.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.hasEventSource()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/hasEventSource.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns whether the system delivers events corresponding to <code>eventName</code>.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>system.vibrate()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/system/vibrate.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Vibrates the phone. On the Corona Simulator, this triggers a system beep.
+</th>
+</tr>
+</table>
+
+
+
+
+<a id="oslib"></a>
+</div>
+<div class="section level2" id="os-library">
+<h2><a href="#TOC">OS Library</a></h2>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;" width="100%">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Function
+</th>
+<th class="width15 headerrow notebox-title">
+ 
+</th>
+<th class="headerrow notebox-title">
+Description
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.clock()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/clock.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns an approximation of the amount in seconds of CPU time used by the program.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.date()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/date.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns a formatted string or a table containing date and time.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.time()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/time.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns the current time in seconds from 1970, or the date and time specified by a table.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.difftime()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/difftime.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Returns the number of seconds from time &quot;t1&quot; to time &quot;t2&quot;.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.execute()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/execute.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Passes a string to the OS for execution and returns a system-dependent status code.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.exit()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/exit.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Calls the C function <code>exit()</code> to terminate the host program.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.remove()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/remove.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Deletes a file or directory in the documents or temporary directory.
+</th>
+</tr>
+<tr>
+<th class="itemrow baseline">
+<code>os.rename()</code>
+</th>
+<th class="itemrow baseline">
+<a href="../../../api/library/os/rename.html">reference</a>
+</th>
+<th class="itemrow baseline">
+Renames a file or directory in the documents or temporary directory.
+</th>
+</tr>
+</table>
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 19-Jun-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.system.systemOS.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.system.systemOS.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.system.systemOS.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

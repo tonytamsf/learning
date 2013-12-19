@@ -1,0 +1,1800 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > basics > configSettings </title>
+  <meta name="revised" content="21-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > basics > configSettings " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#project-configuration">Project Configuration</a><ul>
+<li><a href="#basic-structure">Basic Structure</a></li>
+<li><a href="#dynamic-scaling">Dynamic Scaling</a><ul>
+<li><a href="#width-height">width | height</a></li>
+<li><a href="#scale">scale</a></li>
+<li><a href="#xalign-yalign">xAlign | yAlign</a></li>
+</ul></li>
+<li><a href="#dynamic-image-selection">Dynamic Image Selection</a><ul>
+<li><a href="#example">Example</a></li>
+</ul></li>
+<li><a href="#content-properties">Content Properties</a></li>
+<li><a href="#runtime-errors">Runtime Errors</a></li>
+<li><a href="#frame-rate-fps">Frame Rate (fps)</a></li>
+<li><a href="#app-licensing">App Licensing</a></li>
+<li><a href="#analytics-launchpad">Analytics (LaunchPad)</a></li>
+<li><a href="#anti-aliasing">Anti-Aliasing</a></li>
+<li><a href="#google-licensing">Google Licensing</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [basics][guide.basics]  ▸  <a href="index.html">configSettings</a>
+</div>
+<div class="section level1" id="project-configuration">
+<h1><a href="#TOC">Project Configuration</a></h1>
+<p>Configuration settings for an app are defined using a <code>config.lua</code> file written in Lua syntax. It should be placed in the project's base directory.</p>
+<ul>
+<li><a href="#basicstruct">Basic Structure</a></li>
+<li><a href="#dynamicscaling">Dynamic Scaling</a></li>
+<li><a href="#dynamicimages">Dynamic Image Selection</a></li>
+<li><a href="#contentproperties">Content Properties</a></li>
+<li><a href="#debug">Runtime Errors</a></li>
+<li><a href="#fps">Frame Rate (fps)</a></li>
+<li><a href="#licensing">App Licensing</a></li>
+<li><a href="#analytics">Analytics (LaunchPad)</a></li>
+<li><a href="#antialias">Anti-Aliasing</a></li>
+</ul>
+<a id="basicstruct"></a>
+<div class="section level2" id="basic-structure">
+<h2><a href="#TOC">Basic Structure</a></h2>
+<p>The <code>config.lua</code> file is set up using a <code>content</code> table nested within a <code>application</code> table as follows:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">--parameters here</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<a id="dynamicscaling"></a>
+</div>
+<div class="section level2" id="dynamic-scaling">
+<h2><a href="#TOC">Dynamic Scaling</a></h2>
+<p>Since most apps are developed for multiple devices and screen resolutions, Corona features <strong>dynamic scaling</strong>. This allows you to use a <strong>common set of screen coordinates</strong> while Corona automatically scales text, vector objects, and images to different resolutions depending on the device.</p>
+<p>Corona can scale both upward or downward depending on your &quot;starting resolution&quot;. It can also substitute higher-resolution image files when needed, ensuring that your app appears clear and sharp on all devices (see <a href="#dynamicimages">Dynamic Image Selection</a> below).</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+Content Area
+</div>
+
+<p>A fundamental concept behind dynamic scaling is <strong>content area</strong>. In Corona, your base content area can be whatever you wish, but often it's defined as a common screen resolution, for example 640 × 960 (iPhone4) or 800 × 1280 (Kindle Fire HD).</p>
+<p>The content area represents the overall &quot;stage&quot; on which text, vector objects, and image assets are displayed. Everything will be positioned in relation to this content area, which may or may not match the screen's actual pixel resolution. The content area will be <strong>scaled</strong> to fit the screen, with subtle differences dictated by the <code>scale</code> definition (see <strong>scale</strong> below).</p>
+<p>The internal <strong>coordinate system</strong> is also dependent on the content area, with coordinates <code>(0,0)</code> residing in the top-left corner of the content area, <strong>not</strong> necessarily the top-left corner of the screen. For more information on the Corona coordinate system, see <a href="../../start/displayGroups/index.html">Display Groups and Coordinates</a>.</p>
+</div>
+
+
+<div class="section level3" id="width-height">
+<h3><a href="#TOC">width | height</a></h3>
+<p>The content area is defined by the <code>width</code> and <code>height</code> values in <code>config.lua</code>. If you omit or set either of these values to <code>0</code>, dynamic scaling will <strong>not</strong> be used.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">640</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">960</span>,
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p><strong>The content area should always be defined in respect to portrait orientation</strong>. If your app is designed for <strong>landscape</strong> orientation, you should still set the <code>width</code> and <code>height</code> according to <strong>portrait</strong> orientation. In the example above, a landscape-oriented app for iPhone4 should still use <code>width</code> and <code>height</code> parameters of 640 and 960 respectively, <strong>not</strong> 960 and 640.</p>
+<p>To control an app's orientation on actual devices, you must define specific parameters in the <code>build.settings</code> file. See <a href="../../distribution/buildSettings/index.html">Project Build Settings</a> for more information.</p>
+</div>
+
+
+</div>
+<div class="section level3" id="scale">
+<h3><a href="#TOC">scale</a></h3>
+<p>The <strong>scaling method</strong> of the content area is determined by the <code>scale</code> value.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">640</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">960</span>,
+        <span class="kw">scale</span> <span class="ot">=</span> <span class="st">&quot;letterbox&quot;</span>,
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<p>The possible values include the following (case-insensitive):</p>
+<ul>
+<li><p><code>letterbox</code> — scales the content area to fill the screen while preserving the same aspect ratio. The entire content area will reside on the screen, but this might result in &quot;black bars&quot; on devices with aspect ratios that differ from your content aspect ratio. Note that you can still utilize this &quot;blank&quot; area and fill it with visual elements by positioning them outside the content area.</p></li>
+<li><p><code>zoomEven</code> — scales the content area to fill the screen while preserving the same aspect ratio. Some content may &quot;bleed&quot; off the screen edges on devices with aspect ratios that differ from your content aspect ratio.</p></li>
+<li><p><code>zoomStretch</code> — scales the content area to fill the entire screen. This is the default method if you don't specify one of the above options, or if you omit the <code>scale</code> parameter entirely. All content will remain on the screen, but it may be stretched horizontally or vertically. This mode is not recommended, as it will often distort the content area.</p></li>
+</ul>
+</div>
+<div class="section level3" id="xalign-yalign">
+<h3><a href="#TOC">xAlign | yAlign</a></h3>
+<p>By default, dynamically-scaled content is <strong>centered</strong> on the screen. In <code>letterbox</code> scale mode, empty screen area will be evenly divided between both sides. In <code>zoomEven</code> mode, the bleed area will be cropped equally on both sides.</p>
+<p>If you need to align the content area to a particular edge of the screen, you can use the <code>xAlign</code> and <code>yAlign</code> values.</p>
+<ul>
+<li><p><code>xAlign</code> — string value which sets the alignment in the <strong>x</strong> direction. Possible values are <code>left</code>, <code>center</code>, or <code>right</code>.</p></li>
+<li><p><code>yAlign</code> — string value which sets the alignment in the <strong>y</strong> direction. Possible values are <code>top</code>, <code>center</code>, or <code>bottom</code>.</p></li>
+</ul>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">640</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">960</span>,
+        <span class="kw">scale</span> <span class="ot">=</span> <span class="st">&quot;letterbox&quot;</span>,
+        <span class="kw">xAlign</span> <span class="ot">=</span> <span class="st">&quot;left&quot;</span>,
+        <span class="kw">yAlign</span> <span class="ot">=</span> <span class="st">&quot;top&quot;</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<a id="dynamicimages"></a>
+</div>
+</div>
+<div class="section level2" id="dynamic-image-selection">
+<h2><a href="#TOC">Dynamic Image Selection</a></h2>
+<p>In addition to dynamic scaling, Corona supports <strong>dynamic image selection</strong>. If you are developing an app for both normal and &quot;Retina/HD&quot; devices, you should not rely on Corona to simply scale one set of images across a wide array of screen resolutions. There are several issues related to this:</p>
+<ol style="list-style-type: decimal">
+<li><p>If you design all of your images in low resolution and allow Corona to scale them up for Retina/HD devices, the images will appear blurry or pixelated. Not only will this result in poor visual appearance, but it may cause the app to be rejected before it reaches the marketplace.</p></li>
+<li><p>In contrast, if you design all of your images for Retina/HD and allow Corona to scale them down for lower resolution devices, the larger images will require the same amount of texture memory on those devices. This may adversely affect the performance of your app — or worse, those images will not appear if they exceed the maximum texture size on a device.</p></li>
+</ol>
+<p>The solution is to create <strong>multiple versions</strong> of every image, tailored for two or three different resolutions, and name them according to the &quot;image set&quot; they belong to. On each device, Corona will automatically select images from the set that most closely matches the content area and scale.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>This feature is only supported by images displayed using <a href="../../../api/library/display/newImageRect.html">display.newImageRect()</a> or by sprites and images taken from <a href="../../media/imageSheets/index.html">image sheets</a> that contain the overall sheet size parameters.</p>
+</div>
+
+<p>To set up dynamic image selection, you must include an <code>imageSuffix</code> table within the <code>content</code> table. Inside this table, declare at least one key-value pair consisting of an <strong>image suffix</strong> and a <strong>scale factor</strong>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">imageSuffix</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="ot">[</span><span class="st">&quot;-small&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">0.375</span>,
+    <span class="ot">[</span><span class="st">&quot;@2x&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">1.5</span>
+<span class="ot">}</span></code></pre>
+<p>As indicated, each <strong>image suffix</strong> must be specified within brackets and quotes as in <code>[&quot;@2x&quot;]</code>. The suffix can be named whatever you want, but it should be short and logical since you must append the same suffix to <strong>all</strong> image files designed for that image set. When adding a suffix to each image file, do not include the bracket or quotes — just append the suffix itself, for example <code>myImage-small.png</code> or <code>myImage@2x.png</code>.</p>
+<p>The second part of each declaration is the <strong>scale factor</strong>. This value specifies the scale threshold above which Corona will use images in that suffix set. The following code can help you determine the proper values:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="fu">print</span><span class="ot">(</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">pixelWidth</span> <span class="ot">/</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">actualContentWidth</span> <span class="ot">)</span></code></pre>
+<p>Add this code to your project, access the Corona Simulator, and use <strong>Window → View As</strong> to simulate different devices. Note the output in the Terminal/console — this is the scale factor for the device. If the value on a particular device is <strong>greater than</strong> or <strong>equal to</strong> the number you specify for the scale factor, Corona will use images from that suffix set.</p>
+<div class="section level3" id="example">
+<h3><a href="#TOC">Example</a></h3>
+<p>In the following example, just one suffix is defined (<code>&quot;@2x&quot;</code>), but it accommodates several <nobr>high-resolution</nobr> devices. Resolutions below this scale factor will simply use the <nobr>non-suffixed</nobr> image set. A non-suffixed image set should be included in every project as a basic precaution — this ensures that if a particular device falls outside of the scale factor range(s) you've defined, Corona can use these images instead.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span> 
+    <span class="ot">{</span> 
+        <span class="kw">width</span> <span class="ot">=</span> <span class="dv">800</span>,
+        <span class="kw">height</span> <span class="ot">=</span> <span class="dv">1200</span>,
+        <span class="kw">scale</span> <span class="ot">=</span> <span class="st">&quot;letterbox&quot;</span>,
+        <span class="kw">xAlign</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>,
+        <span class="kw">yAlign</span> <span class="ot">=</span> <span class="st">&quot;center&quot;</span>,
+
+        <span class="kw">imageSuffix</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="ot">[</span><span class="st">&quot;@2x&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">1.5</span>
+            <span class="co">--high-resolution devices (Retina iPad, Kindle Fire HD 9&quot;, Nexus 10, etc.) will use @2x-suffixed images</span>
+            <span class="co">--devices less than 1200 pixels in width (iPhone4, iPad2, Kindle Fire 7&quot;, etc.) will use non-suffixed images</span>
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Note
+</div>
+
+<p>Although you can define as many image sets as you wish, there are simply too many screen sizes and aspect ratios to achieve a perfect 1:1 ratio on all of them. Thus, you must accept some degree of scaling, even when using dynamic image selection. In most cases, you should set up image suffixes that target devices of similar resolution, then allow Corona to scale the images up or down slightly depending on the device. This minor degree of scaling will generally not be perceived by the end user, since most modern devices have a very high pixel density. As noted at the top of this section, it's better to scale images down versus up and you should attempt to construct a scaling setup that achieves this on the most popular devices.</p>
+</div>
+
+
+
+
+<a id="contentproperties"></a>
+</div>
+</div>
+<div class="section level2" id="content-properties">
+<h2><a href="#TOC">Content Properties</a></h2>
+<p>Several <strong>display properties</strong> are exposed within Corona to help you work with scaled content. Please refer to the <a href="../../../api/library/display/index.html">API Reference</a> for a complete list of properties.</p>
+<ul>
+<li><p><code>display.contentWidth</code> and <code>display.contentHeight</code> — read-only properties representing the original width and height of the content, in pixels.</p></li>
+<li><p><code>display.pixelWidth</code> and <code>display.pixelHeight</code> — entire screen width and height, in pixels.</p></li>
+<li><p><code>display.viewableContentWidth</code> and <code>display.viewableContentHeight</code> — read-only properties representing the <strong>viewable</strong> width and height. This is useful if you're using <code>zoomEven</code> scaling, as it will reveal the viewable (uncropped) measurements, in pixels.</p></li>
+<li><p><code>display.contentCenterX</code> and <code>display.contentCenterY</code> — read-only properties representing the center of the content area, useful for positioning objects along either central axis.</p></li>
+</ul>
+<a id="debug"></a>
+</div>
+<div class="section level2" id="runtime-errors">
+<h2><a href="#TOC">Runtime Errors</a></h2>
+<p>In the Corona Simulator, there is a setting under <strong>Preferences</strong> called <strong>Show Runtime Errors</strong> which defaults to <strong>on</strong>. This global setting triggers pop-up error messages while running an app in the Simulator. If you don't like this feature or if it doesn't fit your workflow, you can turn it off.</p>
+<p>You can also set this on a per-app basis from <code>config.lua</code> to control error messages while running the app on a device. <code>showRuntimeErrors</code> accepts a boolean value (true or false). The default is false.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">showRuntimeErrors</span> <span class="ot">=</span> <span class="kw">true</span>,
+<span class="ot">}</span></code></pre>
+<!--If you explicitly set `showRuntimeErrors` to `false`, it will __override__ the preference in the Simulator for that particular app.-->
+
+<p>Remember that disabling error messages doesn't mean that errors aren't occurring. The pop-up alerts help you detect these errors.</p>
+<p>Another option is to use the <code>unhandledError</code> Runtime listener to trap errors which would otherwise trigger an error pop-up. This allows you to implement custom error reporting. Note that even if you disable error messages, the listener is still called, but the <code>return</code> value doesn't matter since the pop-up is never displayed.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">function</span> myUnhandledErrorListener<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">local</span> <span class="kw">iHandledTheError</span> <span class="ot">=</span> <span class="kw">true</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="kw">iHandledTheError</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Handling the unhandled error&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">errorMessage</span> <span class="ot">)</span>
+    <span class="kw">else</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Not handling the unhandled error&quot;</span>, <span class="kw">event</span><span class="ot">.</span><span class="kw">errorMessage</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> <span class="kw">iHandledTheError</span>
+<span class="kw">end</span>
+
+<span class="kw">Runtime</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;unhandledError&quot;</span>, <span class="kw">myUnhandledErrorListener</span> <span class="ot">)</span></code></pre>
+<a id="fps"></a>
+</div>
+<div class="section level2" id="frame-rate-fps">
+<h2><a href="#TOC">Frame Rate (fps)</a></h2>
+<p>The default frame rate is <strong>30</strong> frames per second, but you can set it to <strong>60</strong> frames per second by adding the <code>fps</code> key. Values other than <strong>30</strong> or <strong>60</strong> will be ignored.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">fps</span> <span class="ot">=</span> <span class="dv">60</span>,
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<a id="licensing"></a>
+</div>
+<div class="section level2" id="app-licensing">
+<h2><a href="#TOC">App Licensing</a></h2>
+<p>The Corona <a href="../../../api/library/licensing/index.html">licensing</a> library lets you confirm that the app was bought from a store. To implement licensing, the <code>license</code> parameters must be added to the <code>application</code> table.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">license</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">google</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">key</span> <span class="ot">=</span> <span class="st">&quot;Your key here&quot;</span>,
+            <span class="kw">policy</span> <span class="ot">=</span> <span class="st">&quot;this is optional&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span>    </code></pre>
+<p>In addition, you must <code>require</code> the licensing library in your core project file. Please refer to the <a href="../../../api/library/licensing/index.html">licensing</a> documentation for details.</p>
+<a id="analytics"></a>
+</div>
+<div class="section level2" id="analytics-launchpad">
+<h2><a href="#TOC">Analytics (LaunchPad)</a></h2>
+<p><strong>Corona SDK Analytics</strong> is a free service given to all Corona SDK developers. You can view data about your published apps, including the number of sessions, the number of unique users, and session lengths. Session data is displayed in graphs broken up by device type (iPhone, iPad, iPod touch, and Android) and for device types combined. You can access Corona SDK Analytics through your account dashboard. For more information, see <a href="http://www.coronalabs.com/resources/frequently-asked-questions/">Frequently Asked Questions</a>.</p>
+<p>Analytics are <strong>enabled</strong> by default. To disable them, add a <code>launchPad</code> key set to <code>false</code> within <code>config.lua</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">launchPad</span> <span class="ot">=</span> <span class="kw">false</span>,
+<span class="ot">}</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>If you're using Analytics on <strong>Android</strong>, you must grant Internet permission to the application. If you don't, the app will <strong>not</strong> send out analytics data, nor will a warning or error be reported. See the <a href="../../distribution/buildSettings/index.html">Project Build Settings</a> guide for details on enabling Android permissions.</p>
+</div>
+
+
+
+<a id="antialias"></a>
+</div>
+<div class="section level2" id="anti-aliasing">
+<h2><a href="#TOC">Anti-Aliasing</a></h2>
+<p>If the target device/hardware supports anti-aliasing of vector objects, you can enable this feature by setting the <code>antialias</code> key within the <code>content</code> table.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">content</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">antialias</span> <span class="ot">=</span> <span class="kw">true</span>,
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<a id="licensing"></a>
+</div>
+<div class="section level2" id="google-licensing">
+<h2><a href="#TOC">Google Licensing</a></h2>
+<p>You can check for license verification in your application by providing your Google provided key in config.lua. You can also set the policy. Read more about it on Google's <a href="http://developer.android.com/google/play/licensing/licensing-reference.html">reference page</a>. This is needed if your application wants to use expansion files.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">application</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">license</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">google</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">key</span> <span class="ot">=</span> <span class="st">&quot;your key here&quot;</span>,
+            <span class="kw">policy</span> <span class="ot">=</span> <span class="st">&quot;this is optional&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 21-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.basics.configSettings.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.basics.configSettings.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.basics.configSettings.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,5657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API </title>
+  <meta name="revised" content="26-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API " />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="index.html">SDK APIs</a></li>
+<li><a href="../native/index.html">Enterprise APIs</a></li>
+<li><a href="../plugin/index.html">Plugins</a></li>
+<li><a href="../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#sdk-api-reference">SDK API Reference</a><ul>
+<li><a href="#libraries"><a href="library/index.html">Libraries</a></a><ul>
+<li><a href="#ads."><a href="library/ads/index.html">ads.*</a></a></li>
+<li><a href="#analytics."><a href="library/analytics/index.html">analytics.*</a></a></li>
+<li><a href="#audio."><a href="library/audio/index.html">audio.*</a></a></li>
+<li><a href="#credits."><a href="library/credits/index.html">credits.*</a></a></li>
+<li><a href="#crypto."><a href="library/crypto/index.html">crypto.*</a></a></li>
+<li><a href="#display."><a href="library/display/index.html">display.*</a></a></li>
+<li><a href="#easing."><a href="library/easing/index.html">easing.*</a></a></li>
+<li><a href="#facebook."><a href="library/facebook/index.html">facebook.*</a></a></li>
+<li><a href="#gamenetwork."><a href="library/gameNetwork/index.html">gameNetwork.*</a></a></li>
+<li><a href="#globals"><a href="library/global/index.html">(globals)</a></a></li>
+<li><a href="#graphics."><a href="library/graphics/index.html">graphics.*</a></a></li>
+<li><a href="#io."><a href="library/io/index.html">io.*</a></a></li>
+<li><a href="#json."><a href="library/json/index.html">json.*</a></a></li>
+<li><a href="#lfs.-file-system"><a href="library/lfs/index.html">lfs.* (file system)</a></a></li>
+<li><a href="#licensing."><a href="library/licensing/index.html">licensing.*</a></a></li>
+<li><a href="#math."><a href="library/math/index.html">math.*</a></a></li>
+<li><a href="#media."><a href="library/media/index.html">media.*</a></a></li>
+<li><a href="#native."><a href="library/native/index.html">native.*</a></a></li>
+<li><a href="#network."><a href="library/network/index.html">network.*</a></a></li>
+<li><a href="#os."><a href="library/os/index.html">os.*</a></a></li>
+<li><a href="#package."><a href="library/package/index.html">package.*</a></a></li>
+<li><a href="#physics."><a href="library/physics/index.html">physics.*</a></a></li>
+<li><a href="#socket.-networking"><a href="library/socket/index.html">socket.* (networking)</a></a></li>
+<li><a href="#sprite.-removed"><a href="library/sprite/index.html">sprite.* (removed)</a></a></li>
+<li><a href="#sqlite3.-database"><a href="library/sqlite3/index.html">sqlite3.* (database)</a></a></li>
+<li><a href="#store."><a href="library/store/index.html">store.*</a></a></li>
+<li><a href="#storyboard."><a href="library/storyboard/index.html">storyboard.*</a></a></li>
+<li><a href="#string."><a href="library/string/index.html">string.*</a></a></li>
+<li><a href="#system."><a href="library/system/index.html">system.*</a></a></li>
+<li><a href="#table.-array"><a href="library/table/index.html">table.* (array)</a></a></li>
+<li><a href="#timer."><a href="library/timer/index.html">timer.*</a></a></li>
+<li><a href="#transition."><a href="library/transition/index.html">transition.*</a></a></li>
+<li><a href="#widget."><a href="library/widget/index.html">widget.*</a></a></li>
+</ul></li>
+<li><a href="#events"><a href="event/index.html">Events</a></a><ul>
+<li><a href="#accelerometer"><a href="event/accelerometer/index.html">accelerometer</a></a></li>
+<li><a href="#audio"><a href="event/audio/index.html">audio</a></a></li>
+<li><a href="#axis"><a href="event/axis/index.html">axis</a></a></li>
+<li><a href="#collision"><a href="event/collision/index.html">collision</a></a></li>
+<li><a href="#completion"><a href="event/completion/index.html">completion</a></a></li>
+<li><a href="#creditsrequest"><a href="event/creditsRequest/index.html">creditsRequest</a></a></li>
+<li><a href="#enterframe"><a href="event/enterFrame/index.html">enterFrame</a></a></li>
+<li><a href="#fbconnect"><a href="event/fbconnect/index.html">fbconnect</a></a></li>
+<li><a href="#finalize"><a href="event/finalize/index.html">finalize</a></a></li>
+<li><a href="#gamenetwork"><a href="event/gameNetwork/index.html">gameNetwork</a></a></li>
+<li><a href="#gyroscope"><a href="event/gyroscope/index.html">gyroscope</a></a></li>
+<li><a href="#heading-compass"><a href="event/heading/index.html">heading (compass)</a></a></li>
+<li><a href="#inputdevicestatus"><a href="event/inputDeviceStatus/index.html">inputDeviceStatus</a></a></li>
+<li><a href="#key"><a href="event/key/index.html">key</a></a></li>
+<li><a href="#licensing"><a href="event/licensing/index.html">licensing</a></a></li>
+<li><a href="#location-gps"><a href="event/location/index.html">location (GPS)</a></a></li>
+<li><a href="#mapaddress"><a href="event/mapAddress/index.html">mapAddress</a></a></li>
+<li><a href="#maplocation"><a href="event/mapLocation/index.html">mapLocation</a></a></li>
+<li><a href="#maplocation-1"><a href="event/mapMarker/index.html">mapLocation</a></a></li>
+<li><a href="#mapaddress-1"><a href="event/mapTap/index.html">mapAddress</a></a></li>
+<li><a href="#memorywarning"><a href="event/memoryWarning/index.html">memoryWarning</a></a></li>
+<li><a href="#mouse"><a href="event/mouse/index.html">mouse</a></a></li>
+<li><a href="#networkrequest"><a href="event/networkRequest/index.html">networkRequest</a></a></li>
+<li><a href="#networkstatus"><a href="event/networkStatus/index.html">networkStatus</a></a></li>
+<li><a href="#notification"><a href="event/notification/index.html">notification</a></a></li>
+<li><a href="#orientation"><a href="event/orientation/index.html">orientation</a></a></li>
+<li><a href="#popup"><a href="event/popup/index.html">popup</a></a></li>
+<li><a href="#postcollision"><a href="event/postCollision/index.html">postCollision</a></a></li>
+<li><a href="#precollision"><a href="event/preCollision/index.html">preCollision</a></a></li>
+<li><a href="#productlist-iap"><a href="event/productList/index.html">productList (IAP)</a></a></li>
+<li><a href="#resize"><a href="event/resize/index.html">resize</a></a></li>
+<li><a href="#scene"><a href="event/scene/index.html">scene</a></a></li>
+<li><a href="#sprite"><a href="event/sprite/index.html">sprite</a></a></li>
+<li><a href="#storetransaction-in-app-purchase"><a href="event/storeTransaction/index.html">storeTransaction (In-app purchase)</a></a></li>
+<li><a href="#system"><a href="event/system/index.html">system</a></a></li>
+<li><a href="#tap"><a href="event/tap/index.html">tap</a></a></li>
+<li><a href="#timer"><a href="event/timer/index.html">timer</a></a></li>
+<li><a href="#touch"><a href="event/touch/index.html">touch</a></a></li>
+<li><a href="#unhandlederror"><a href="event/unhandledError/index.html">unhandledError</a></a></li>
+<li><a href="#urlrequest"><a href="event/urlRequest/index.html">urlRequest</a></a></li>
+<li><a href="#userinput"><a href="event/userInput/index.html">userInput</a></a></li>
+</ul></li>
+<li><a href="#types"><a href="type/index.html">Types</a></a><ul>
+<li><a href="#array"><a href="type/Array.html">Array</a></a></li>
+<li><a href="#bitmappaint"><a href="type/BitmapPaint/index.html">BitmapPaint</a></a></li>
+<li><a href="#body"><a href="type/Body/index.html">Body</a></a></li>
+<li><a href="#boolean"><a href="type/Boolean.html">Boolean</a></a></li>
+<li><a href="#buttonwidget"><a href="type/ButtonWidget/index.html">ButtonWidget</a></a></li>
+<li><a href="#circlepath"><a href="type/CirclePath/index.html">CirclePath</a></a></li>
+<li><a href="#compositepaint"><a href="type/CompositePaint/index.html">CompositePaint</a></a></li>
+<li><a href="#constant"><a href="type/Constant.html">Constant</a></a></li>
+<li><a href="#coronaclass"><a href="type/CoronaClass.html">CoronaClass</a></a></li>
+<li><a href="#coronalibrary"><a href="type/CoronaLibrary/index.html">CoronaLibrary</a></a></li>
+<li><a href="#coronaprototype"><a href="type/CoronaPrototype/index.html">CoronaPrototype</a></a></li>
+<li><a href="#coronaprovider"><a href="type/CoronaProvider/index.html">CoronaProvider</a></a></li>
+<li><a href="#displayobject"><a href="type/DisplayObject/index.html">DisplayObject</a></a></li>
+<li><a href="#event"><a href="type/Event.html">Event</a></a></li>
+<li><a href="#eventlistener"><a href="type/EventListener/index.html">EventListener</a></a></li>
+<li><a href="#object"><a href="type/File/index.html">object</a></a></li>
+<li><a href="#function"><a href="type/Function.html">Function</a></a></li>
+<li><a href="#gamenetwork-1"><a href="type/GameNetwork/index.html">gameNetwork</a></a></li>
+<li><a href="#gradientpaint"><a href="type/GradientPaint/index.html">GradientPaint</a></a></li>
+<li><a href="#groupobject"><a href="type/GroupObject/index.html">GroupObject</a></a></li>
+<li><a href="#imagegroup"><a href="type/ImageGroup.html">ImageGroup</a></a></li>
+<li><a href="#imagesheet"><a href="type/ImageSheet/index.html">ImageSheet</a></a></li>
+<li><a href="#imagesheetpaint"><a href="type/ImageSheetPaint/index.html">ImageSheetPaint</a></a></li>
+<li><a href="#inputaxis"><a href="type/InputAxis/index.html">InputAxis</a></a></li>
+<li><a href="#inputdevice"><a href="type/InputDevice/index.html">InputDevice</a></a></li>
+<li><a href="#joint"><a href="type/Joint/index.html">Joint</a></a></li>
+<li><a href="#library"><a href="type/Library.html">Library</a></a></li>
+<li><a href="#lineobject"><a href="type/LineObject/index.html">LineObject</a></a></li>
+<li><a href="#listener"><a href="type/Listener.html">Listener</a></a></li>
+<li><a href="#map"><a href="type/Map/index.html">Map</a></a></li>
+<li><a href="#mask"><a href="type/Mask/index.html">Mask</a></a></li>
+<li><a href="#nativedisplayobject"><a href="type/NativeDisplayObject/index.html">NativeDisplayObject</a></a></li>
+<li><a href="#number"><a href="type/Number.html">Number</a></a></li>
+<li><a href="#object-1"><a href="type/Object.html">Object</a></a></li>
+<li><a href="#paint"><a href="type/Paint/index.html">Paint</a></a></li>
+<li><a href="#path"><a href="type/Path/index.html">Path</a></a></li>
+<li><a href="#physicscontact"><a href="type/PhysicsContact/index.html">PhysicsContact</a></a></li>
+<li><a href="#pickerwidget"><a href="type/PickerWidget/index.html">PickerWidget</a></a></li>
+<li><a href="#progressviewwidget"><a href="type/ProgressViewWidget/index.html">ProgressViewWidget</a></a></li>
+<li><a href="#recording"><a href="type/Recording/index.html">Recording</a></a></li>
+<li><a href="#rectpath"><a href="type/RectPath/index.html">RectPath</a></a></li>
+<li><a href="#roundedrectpath"><a href="type/RoundedRectPath/index.html">RoundedRectPath</a></a></li>
+<li><a href="#runtime"><a href="type/Runtime/index.html">Runtime</a></a></li>
+<li><a href="#scene-1"><a href="type/Scene/index.html">Scene</a></a></li>
+<li><a href="#scrollviewwidget"><a href="type/ScrollViewWidget/index.html">ScrollViewWidget</a></a></li>
+<li><a href="#segmentedcontrolwidget"><a href="type/SegmentedControlWidget/index.html">SegmentedControlWidget</a></a></li>
+<li><a href="#shapeobject"><a href="type/ShapeObject/index.html">ShapeObject</a></a></li>
+<li><a href="#sliderwidget"><a href="type/SliderWidget/index.html">SliderWidget</a></a></li>
+<li><a href="#snapshotobject"><a href="type/SnapshotObject/index.html">SnapshotObject</a></a></li>
+<li><a href="#spinnerwidget"><a href="type/SpinnerWidget/index.html">SpinnerWidget</a></a></li>
+<li><a href="#spriteobject"><a href="type/SpriteObject/index.html">SpriteObject</a></a></li>
+<li><a href="#stageobject"><a href="type/StageObject/index.html">StageObject</a></a></li>
+<li><a href="#stepperwidget"><a href="type/StepperWidget/index.html">StepperWidget</a></a></li>
+<li><a href="#string"><a href="type/String.html">String</a></a></li>
+<li><a href="#switchwidget"><a href="type/SwitchWidget/index.html">SwitchWidget</a></a></li>
+<li><a href="#tabbarwidget"><a href="type/TabBarWidget/index.html">TabBarWidget</a></a></li>
+<li><a href="#table"><a href="type/Table.html">Table</a></a></li>
+<li><a href="#tableviewwidget"><a href="type/TableViewWidget/index.html">TableViewWidget</a></a></li>
+<li><a href="#textbox"><a href="type/TextBox/index.html">TextBox</a></a></li>
+<li><a href="#textfield"><a href="type/TextField/index.html">TextField</a></a></li>
+<li><a href="#textobject"><a href="type/TextObject/index.html">TextObject</a></a></li>
+<li><a href="#userdata"><a href="type/Userdata.html">Userdata</a></a></li>
+<li><a href="#video"><a href="type/Video/index.html">Video</a></a></li>
+<li><a href="#webview"><a href="type/WebView/index.html">WebView</a></a></li>
+</ul></li>
+<li><a href="#section"></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="index.html">API</a>
+</div>
+<div class="section level1" id="sdk-api-reference">
+<h1><a href="#TOC">SDK API Reference</a></h1>
+<h2 style="border-bottom:none; margin-top:-0.75em;">
+<a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a>
+</h2>
+
+<p>This is the complete list of <a href="../guide/start/introLua/index.html">Lua</a> APIs for <a href="http://coronalabs.com/products/corona-sdk/">Corona SDK</a>. If you're looking for native APIs in Objective-C and Java, go to the <a href="../native/index.html">Enterprise API reference</a>.</p>
+<table>
+<col width="3%" />
+<col width="35%" />
+<col width="35%" />
+<col width="27%" />
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><big>Get Started</big><br/> New to Corona? You're in luck! Corona let's you get started for free. <a href="https://developer.coronalabs.com/downloads/corona-sdk">Download today</a>!</td>
+<td align="left"><big>Daily Builds</big><br/> Check out the latest <a href="http://developer.coronalabs.com/downloads/daily-builds">here</a> and corresponding <a href="http://docs.coronalabs.com/daily">API docs</a>. Or <a href="http://http://www.coronalabs.com/store/">upgrade</a> to get access.</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><big>Explore</big><br/> There are also <a href="../guide/index.html">guides</a> and <a href="../tutorial/index.html">tutorials</a> available, as well as information on <a href="../native/index.html">native coding</a> options.</td>
+<td align="left"><big>Off the Grid</big><br/> If you would like to download this documentation for offline viewing, please <a href="http://docs.coronalabs.com/CoronaApiDocs.zip">click here</a>.</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<div class="section level2" id="libraries">
+<h2><a href="#TOC"><a href="library/index.html">Libraries</a></a></h2>
+<div class="section level4" id="ads.">
+<h4><a href="#TOC"><a href="library/ads/index.html">ads.*</a></a></h4>
+<p class="index">
+<a href="library/ads/hide.html">ads.hide()</a>
+</p>
+
+<p class="index">
+<a href="library/ads/init.html">ads.init()</a>
+</p>
+
+<p class="index">
+<a href="library/ads/show.html">ads.show()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="analytics.">
+<h4><a href="#TOC"><a href="library/analytics/index.html">analytics.*</a></a></h4>
+<p class="index">
+<a href="library/analytics/init.html">analytics.init()</a>
+</p>
+
+<p class="index">
+<a href="library/analytics/logEvent.html">analytics.logEvent()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="audio.">
+<h4><a href="#TOC"><a href="library/audio/index.html">audio.*</a></a></h4>
+<p class="index">
+<a href="library/audio/dispose.html">audio.dispose()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/fade.html">audio.fade()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/fadeOut.html">audio.fadeOut()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/findFreeChannel.html">audio.findFreeChannel()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/freeChannels.html">audio.freeChannels</a>
+</p>
+
+<p class="index">
+<a href="library/audio/getDuration.html">audio.getDuration()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/getMaxVolume.html">audio.getMaxVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/getMinVolume.html">audio.getMinVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/getVolume.html">audio.getVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/isChannelActive.html">audio.isChannelActive()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/isChannelPaused.html">audio.isChannelPaused()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/isChannelPlaying.html">audio.isChannelPlaying()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/loadSound.html">audio.loadSound()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/loadStream.html">audio.loadStream()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/pause.html">audio.pause()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/play.html">audio.play()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/reserveChannels.html">audio.reserveChannels()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/reservedChannels.html">audio.reservedChannels</a>
+</p>
+
+<p class="index">
+<a href="library/audio/resume.html">audio.resume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/rewind.html">audio.rewind()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/seek.html">audio.seek()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/setMaxVolume.html">audio.setMaxVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/setMinVolume.html">audio.setMinVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/setVolume.html">audio.setVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/stop.html">audio.stop()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/stopWithDelay.html">audio.stopWithDelay()</a>
+</p>
+
+<p class="index">
+<a href="library/audio/totalChannels.html">audio.totalChannels</a>
+</p>
+
+<p class="index">
+<a href="library/audio/unreservedFreeChannels.html">audio.unreservedFreeChannels</a>
+</p>
+
+<p class="index">
+<a href="library/audio/unreservedUsedChannels.html">audio.unreservedUsedChannels</a>
+</p>
+
+<p class="index">
+<a href="library/audio/usedChannels.html">audio.usedChannels</a>
+</p>
+
+
+</div>
+<div class="section level4" id="credits.">
+<h4><a href="#TOC"><a href="library/credits/index.html">credits.*</a></a></h4>
+<p class="index">
+<a href="library/credits/init.html">credits.init()</a>
+</p>
+
+<p class="index">
+<a href="library/credits/requestUpdate.html">credits.requestUpdate()</a>
+</p>
+
+<p class="index">
+<a href="library/credits/showOffers.html">credits.showOffers()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="crypto.">
+<h4><a href="#TOC"><a href="library/crypto/index.html">crypto.*</a></a></h4>
+<p class="index">
+<a href="library/crypto/digest.html">crypto.digest()</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/hmac.html">crypto.hmac()</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/md4.html">crypto.md4</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/md5.html">crypto.md5</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/sha1.html">crypto.sha1</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/sha224.html">crypto.sha224</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/sha256.html">crypto.sha256</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/sha384.html">crypto.sha384</a>
+</p>
+
+<p class="index">
+<a href="library/crypto/sha512.html">crypto.sha512</a>
+</p>
+
+
+</div>
+<div class="section level4" id="display.">
+<h4><a href="#TOC"><a href="library/display/index.html">display.*</a></a></h4>
+<p class="index">
+<a href="library/display/actualContentHeight.html">display.actualContentHeight</a>
+</p>
+
+<p class="index">
+<a href="library/display/actualContentWidth.html">display.actualContentWidth</a>
+</p>
+
+<p class="index">
+<a href="library/display/capture.html">display.capture()</a>
+</p>
+
+<p class="index">
+<a href="library/display/captureBounds.html">display.captureBounds()</a>
+</p>
+
+<p class="index">
+<a href="library/display/captureScreen.html">display.captureScreen()</a>
+</p>
+
+<p class="index">
+<a href="library/display/contentCenterX.html">display.contentCenterX</a>
+</p>
+
+<p class="index">
+<a href="library/display/contentCenterY.html">display.contentCenterY</a>
+</p>
+
+<p class="index">
+<a href="library/display/contentHeight.html">display.contentHeight</a>
+</p>
+
+<p class="index">
+<a href="library/display/contentScaleX.html">display.contentScaleX</a>
+</p>
+
+<p class="index">
+<a href="library/display/contentScaleY.html">display.contentScaleY</a>
+</p>
+
+<p class="index">
+<a href="library/display/contentWidth.html">display.contentWidth</a>
+</p>
+
+<p class="index">
+<a href="library/display/currentStage.html">display.currentStage</a>
+</p>
+
+<p class="index">
+<a href="library/display/fps.html">display.fps</a>
+</p>
+
+<p class="index">
+<a href="library/display/getCurrentStage.html">display.getCurrentStage()</a>
+</p>
+
+<p class="index">
+<a href="library/display/imageSuffix.html">display.imageSuffix</a>
+</p>
+
+<p class="index">
+<a href="library/display/loadRemoteImage.html">display.loadRemoteImage()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newCircle.html">display.newCircle()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newContainer.html">display.newContainer()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newEmbossedText.html">display.newEmbossedText()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newGroup.html">display.newGroup()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newImage.html">display.newImage()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newImageGroup.html">display.newImageGroup()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newImageRect.html">display.newImageRect()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newLine.html">display.newLine()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newPolygon.html">display.newPolygon()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newRect.html">display.newRect()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newRoundedRect.html">display.newRoundedRect()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newSnapshot.html">display.newSnapshot()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newSprite.html">display.newSprite()</a>
+</p>
+
+<p class="index">
+<a href="library/display/newText.html">display.newText()</a>
+</p>
+
+<p class="index">
+<a href="library/display/pixelHeight.html">display.pixelHeight</a>
+</p>
+
+<p class="index">
+<a href="library/display/pixelWidth.html">display.pixelWidth</a>
+</p>
+
+<p class="index">
+<a href="library/display/remove.html">display.remove()</a>
+</p>
+
+<p class="index">
+<a href="library/display/save.html">display.save()</a>
+</p>
+
+<p class="index">
+<a href="library/display/screenOriginX.html">display.screenOriginX</a>
+</p>
+
+<p class="index">
+<a href="library/display/screenOriginY.html">display.screenOriginY</a>
+</p>
+
+<p class="index">
+<a href="library/display/setDefault.html">display.setDefault()</a>
+</p>
+
+<p class="index">
+<a href="library/display/setDrawMode.html">display.setDrawMode()</a>
+</p>
+
+<p class="index">
+<a href="library/display/setStatusBar.html">display.setStatusBar()</a>
+</p>
+
+<p class="index">
+<a href="library/display/statusBarHeight.html">display.statusBarHeight</a>
+</p>
+
+<p class="index">
+<a href="library/display/topStatusBarContentHeight.html">display.topStatusBarContentHeight</a>
+</p>
+
+<p class="index">
+<a href="library/display/viewableContentHeight.html">display.viewableContentHeight</a>
+</p>
+
+<p class="index">
+<a href="library/display/viewableContentWidth.html">display.viewableContentWidth</a>
+</p>
+
+
+</div>
+<div class="section level4" id="easing.">
+<h4><a href="#TOC"><a href="library/easing/index.html">easing.*</a></a></h4>
+<p class="index">
+<a href="library/easing/inExpo.html">easing.inExpo()</a>
+</p>
+
+<p class="index">
+<a href="library/easing/inOutExpo.html">easing.inOutExpo()</a>
+</p>
+
+<p class="index">
+<a href="library/easing/inOutQuad.html">easing.inOutQuad()</a>
+</p>
+
+<p class="index">
+<a href="library/easing/inQuad.html">easing.inQuad()</a>
+</p>
+
+<p class="index">
+<a href="library/easing/linear.html">easing.linear()</a>
+</p>
+
+<p class="index">
+<a href="library/easing/outExpo.html">easing.outExpo()</a>
+</p>
+
+<p class="index">
+<a href="library/easing/outQuad.html">easing.outQuad()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="facebook.">
+<h4><a href="#TOC"><a href="library/facebook/index.html">facebook.*</a></a></h4>
+<p class="index">
+<a href="library/facebook/login.html">facebook.login()</a>
+</p>
+
+<p class="index">
+<a href="library/facebook/logout.html">facebook.logout()</a>
+</p>
+
+<p class="index">
+<a href="library/facebook/publishInstall.html">facebook.publishInstall()</a>
+</p>
+
+<p class="index">
+<a href="library/facebook/request.html">facebook.request()</a>
+</p>
+
+<p class="index">
+<a href="library/facebook/showDialog.html">facebook.showDialog()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="gamenetwork.">
+<h4><a href="#TOC"><a href="library/gameNetwork/index.html">gameNetwork.*</a></a></h4>
+<p class="index">
+<a href="library/gameNetwork/init.html">gameNetwork.init()</a>
+</p>
+
+<p class="index">
+<a href="library/gameNetwork/request.html">gameNetwork.request()</a>
+</p>
+
+<p class="index">
+<a href="library/gameNetwork/show.html">gameNetwork.show()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="globals">
+<h4><a href="#TOC"><a href="library/global/index.html">(globals)</a></a></h4>
+<p class="index">
+<a href="library/global/assert.html">assert()</a>
+</p>
+
+<p class="index">
+<a href="library/global/collectgarbage.html">collectgarbage()</a>
+</p>
+
+<p class="index">
+<a href="library/global/error.html">error()</a>
+</p>
+
+<p class="index">
+<a href="library/global/getfenv.html">getfenv()</a>
+</p>
+
+<p class="index">
+<a href="library/global/getmetatable.html">getmetatable()</a>
+</p>
+
+<p class="index">
+<a href="library/global/ipairs.html">ipairs()</a>
+</p>
+
+<p class="index">
+<a href="library/global/next.html">next()</a>
+</p>
+
+<p class="index">
+<a href="library/global/pairs.html">pairs()</a>
+</p>
+
+<p class="index">
+<a href="library/global/pcall.html">pcall()</a>
+</p>
+
+<p class="index">
+<a href="library/global/print.html">print()</a>
+</p>
+
+<p class="index">
+<a href="library/global/rawequal.html">rawequal()</a>
+</p>
+
+<p class="index">
+<a href="library/global/rawget.html">rawget()</a>
+</p>
+
+<p class="index">
+<a href="library/global/rawset.html">rawset()</a>
+</p>
+
+<p class="index">
+<a href="library/global/select.html">select()</a>
+</p>
+
+<p class="index">
+<a href="library/global/setfenv.html">setfenv()</a>
+</p>
+
+<p class="index">
+<a href="library/global/setmetatable.html">setmetatable()</a>
+</p>
+
+<p class="index">
+<a href="library/global/tonumber.html">tonumber()</a>
+</p>
+
+<p class="index">
+<a href="library/global/tostring.html">tostring()</a>
+</p>
+
+<p class="index">
+<a href="library/global/type.html">type()</a>
+</p>
+
+<p class="index">
+<a href="library/global/unpack.html">unpack()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="graphics.">
+<h4><a href="#TOC"><a href="library/graphics/index.html">graphics.*</a></a></h4>
+<p class="index">
+<a href="library/graphics/newGradient.html">graphics.newGradient()</a>
+</p>
+
+<p class="index">
+<a href="library/graphics/newImageSheet.html">graphics.newImageSheet()</a>
+</p>
+
+<p class="index">
+<a href="library/graphics/newMask.html">graphics.newMask()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="io.">
+<h4><a href="#TOC"><a href="library/io/index.html">io.*</a></a></h4>
+<p class="index">
+<a href="library/io/close.html">io.close()</a>
+</p>
+
+<p class="index">
+<a href="library/io/flush.html">io.flush()</a>
+</p>
+
+<p class="index">
+<a href="library/io/input.html">io.input()</a>
+</p>
+
+<p class="index">
+<a href="library/io/lines.html">io.lines()</a>
+</p>
+
+<p class="index">
+<a href="library/io/open.html">io.open()</a>
+</p>
+
+<p class="index">
+<a href="library/io/output.html">io.output()</a>
+</p>
+
+<p class="index">
+<a href="library/io/read.html">io.read()</a>
+</p>
+
+<p class="index">
+<a href="library/io/tmpfile.html">io.tmpfile()</a>
+</p>
+
+<p class="index">
+<a href="library/io/type.html">io.type()</a>
+</p>
+
+<p class="index">
+<a href="library/io/write.html">io.write()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="json.">
+<h4><a href="#TOC"><a href="library/json/index.html">json.*</a></a></h4>
+<p class="index">
+<a href="library/json/decode.html">json.decode()</a>
+</p>
+
+<p class="index">
+<a href="library/json/encode.html">json.encode()</a>
+</p>
+
+<p class="index">
+<a href="library/json/null.html">json.null</a>
+</p>
+
+
+</div>
+<div class="section level4" id="lfs.-file-system">
+<h4><a href="#TOC"><a href="library/lfs/index.html">lfs.* (file system)</a></a></h4>
+</div>
+<div class="section level4" id="licensing.">
+<h4><a href="#TOC"><a href="library/licensing/index.html">licensing.*</a></a></h4>
+<p class="index">
+<a href="library/licensing/init.html">licensing.init()</a>
+</p>
+
+<p class="index">
+<a href="library/licensing/verify.html">licensing.verify()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="math.">
+<h4><a href="#TOC"><a href="library/math/index.html">math.*</a></a></h4>
+<p class="index">
+<a href="library/math/abs.html">math.abs()</a>
+</p>
+
+<p class="index">
+<a href="library/math/acos.html">math.acos()</a>
+</p>
+
+<p class="index">
+<a href="library/math/asin.html">math.asin()</a>
+</p>
+
+<p class="index">
+<a href="library/math/atan.html">math.atan()</a>
+</p>
+
+<p class="index">
+<a href="library/math/atan2.html">math.atan2()</a>
+</p>
+
+<p class="index">
+<a href="library/math/ceil.html">math.ceil()</a>
+</p>
+
+<p class="index">
+<a href="library/math/cos.html">math.cos()</a>
+</p>
+
+<p class="index">
+<a href="library/math/cosh.html">math.cosh()</a>
+</p>
+
+<p class="index">
+<a href="library/math/deg.html">math.deg()</a>
+</p>
+
+<p class="index">
+<a href="library/math/exp.html">math.exp()</a>
+</p>
+
+<p class="index">
+<a href="library/math/floor.html">math.floor()</a>
+</p>
+
+<p class="index">
+<a href="library/math/fmod.html">math.fmod()</a>
+</p>
+
+<p class="index">
+<a href="library/math/frexp.html">math.frexp()</a>
+</p>
+
+<p class="index">
+<a href="library/math/huge.html">math.huge</a>
+</p>
+
+<p class="index">
+<a href="library/math/inf.html">math.inf</a>
+</p>
+
+<p class="index">
+<a href="library/math/ldexp.html">math.ldexp()</a>
+</p>
+
+<p class="index">
+<a href="library/math/log.html">math.log()</a>
+</p>
+
+<p class="index">
+<a href="library/math/log10.html">math.log10()</a>
+</p>
+
+<p class="index">
+<a href="library/math/max.html">math.max()</a>
+</p>
+
+<p class="index">
+<a href="library/math/min.html">math.min()</a>
+</p>
+
+<p class="index">
+<a href="library/math/modf.html">math.modf()</a>
+</p>
+
+<p class="index">
+<a href="library/math/pi.html">math.pi</a>
+</p>
+
+<p class="index">
+<a href="library/math/pow.html">math.pow()</a>
+</p>
+
+<p class="index">
+<a href="library/math/rad.html">math.rad()</a>
+</p>
+
+<p class="index">
+<a href="library/math/random.html">math.random()</a>
+</p>
+
+<p class="index">
+<a href="library/math/randomseed.html">math.randomseed()</a>
+</p>
+
+<p class="index">
+<a href="library/math/round.html">math.round()</a>
+</p>
+
+<p class="index">
+<a href="library/math/sin.html">math.sin()</a>
+</p>
+
+<p class="index">
+<a href="library/math/sinh.html">math.sinh()</a>
+</p>
+
+<p class="index">
+<a href="library/math/sqrt.html">math.sqrt()</a>
+</p>
+
+<p class="index">
+<a href="library/math/tan.html">math.tan()</a>
+</p>
+
+<p class="index">
+<a href="library/math/tanh.html">math.tanh()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="media.">
+<h4><a href="#TOC"><a href="library/media/index.html">media.*</a></a></h4>
+<p class="index">
+<a href="library/media/RemoteSource.html">media.RemoteSource</a>
+</p>
+
+<p class="index">
+<a href="library/media/capturePhoto.html">media.capturePhoto()</a>
+</p>
+
+<p class="index">
+<a href="library/media/captureVideo.html">media.captureVideo()</a>
+</p>
+
+<p class="index">
+<a href="library/media/getSoundVolume.html">media.getSoundVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/media/hasSource.html">media.hasSource()</a>
+</p>
+
+<p class="index">
+<a href="library/media/newEventSound.html">media.newEventSound()</a>
+</p>
+
+<p class="index">
+<a href="library/media/newRecording.html">media.newRecording()</a>
+</p>
+
+<p class="index">
+<a href="library/media/pauseSound.html">media.pauseSound()</a>
+</p>
+
+<p class="index">
+<a href="library/media/playEventSound.html">media.playEventSound()</a>
+</p>
+
+<p class="index">
+<a href="library/media/playSound.html">media.playSound()</a>
+</p>
+
+<p class="index">
+<a href="library/media/playVideo.html">media.playVideo()</a>
+</p>
+
+<p class="index">
+<a href="library/media/save.html">media.save()</a>
+</p>
+
+<p class="index">
+<a href="library/media/selectPhoto.html">media.selectPhoto()</a>
+</p>
+
+<p class="index">
+<a href="library/media/selectVideo.html">media.selectVideo()</a>
+</p>
+
+<p class="index">
+<a href="library/media/setSoundVolume.html">media.setSoundVolume()</a>
+</p>
+
+<p class="index">
+<a href="library/media/show.html">media.show()</a>
+</p>
+
+<p class="index">
+<a href="library/media/stopSound.html">media.stopSound()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="native.">
+<h4><a href="#TOC"><a href="library/native/index.html">native.*</a></a></h4>
+<p class="index">
+<a href="library/native/canShowPopup.html">native.canShowPopup()</a>
+</p>
+
+<p class="index">
+<a href="library/native/cancelAlert.html">native.cancelAlert()</a>
+</p>
+
+<p class="index">
+<a href="library/native/cancelWebPopup.html">native.cancelWebPopup()</a>
+</p>
+
+<p class="index">
+<a href="library/native/getFontNames.html">native.getFontNames()</a>
+</p>
+
+<p class="index">
+<a href="library/native/getProperty.html">native.getProperty()</a>
+</p>
+
+<p class="index">
+<a href="library/native/getSync.html">native.getSync()</a>
+</p>
+
+<p class="index">
+<a href="library/native/newFont.html">native.newFont()</a>
+</p>
+
+<p class="index">
+<a href="library/native/newMapView.html">native.newMapView()</a>
+</p>
+
+<p class="index">
+<a href="library/native/newTextBox.html">native.newTextBox()</a>
+</p>
+
+<p class="index">
+<a href="library/native/newTextField.html">native.newTextField()</a>
+</p>
+
+<p class="index">
+<a href="library/native/newVideo.html">native.newVideo()</a>
+</p>
+
+<p class="index">
+<a href="library/native/newWebView.html">native.newWebView()</a>
+</p>
+
+<p class="index">
+<a href="library/native/requestExit.html">native.requestExit()</a>
+</p>
+
+<p class="index">
+<a href="library/native/setActivityIndicator.html">native.setActivityIndicator()</a>
+</p>
+
+<p class="index">
+<a href="library/native/setKeyboardFocus.html">native.setKeyboardFocus()</a>
+</p>
+
+<p class="index">
+<a href="library/native/setProperty.html">native.setProperty()</a>
+</p>
+
+<p class="index">
+<a href="library/native/setSync.html">native.setSync()</a>
+</p>
+
+<p class="index">
+<a href="library/native/showAlert.html">native.showAlert()</a>
+</p>
+
+<p class="index">
+<a href="library/native/showPopup.html">native.showPopup()</a>
+</p>
+
+<p class="index">
+<a href="library/native/showWebPopup.html">native.showWebPopup()</a>
+</p>
+
+<p class="index">
+<a href="library/native/systemFont.html">native.systemFont</a>
+</p>
+
+<p class="index">
+<a href="library/native/systemFontBold.html">native.systemFontBold</a>
+</p>
+
+
+</div>
+<div class="section level4" id="network.">
+<h4><a href="#TOC"><a href="library/network/index.html">network.*</a></a></h4>
+<p class="index">
+<a href="library/network/canDetectNetworkStatusChanges.html">network.canDetectNetworkStatusChanges</a>
+</p>
+
+<p class="index">
+<a href="library/network/cancel.html">network.cancel()</a>
+</p>
+
+<p class="index">
+<a href="library/network/download.html">network.download()</a>
+</p>
+
+<p class="index">
+<a href="library/network/request.html">network.request()</a>
+</p>
+
+<p class="index">
+<a href="library/network/setStatusListener.html">network.setStatusListener()</a>
+</p>
+
+<p class="index">
+<a href="library/network/upload.html">network.upload()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="os.">
+<h4><a href="#TOC"><a href="library/os/index.html">os.*</a></a></h4>
+<p class="index">
+<a href="library/os/clock.html">os.clock()</a>
+</p>
+
+<p class="index">
+<a href="library/os/date.html">os.date()</a>
+</p>
+
+<p class="index">
+<a href="library/os/difftime.html">os.difftime()</a>
+</p>
+
+<p class="index">
+<a href="library/os/execute.html">os.execute()</a>
+</p>
+
+<p class="index">
+<a href="library/os/exit.html">os.exit()</a>
+</p>
+
+<p class="index">
+<a href="library/os/remove.html">os.remove()</a>
+</p>
+
+<p class="index">
+<a href="library/os/rename.html">os.rename()</a>
+</p>
+
+<p class="index">
+<a href="library/os/time.html">os.time()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="package.">
+<h4><a href="#TOC"><a href="library/package/index.html">package.*</a></a></h4>
+<p class="index">
+<a href="library/package/loaded.html">package.loaded</a>
+</p>
+
+<p class="index">
+<a href="library/package/loaders.html">package.loaders</a>
+</p>
+
+<p class="index">
+<a href="library/package/module.html">module()</a>
+</p>
+
+<p class="index">
+<a href="library/package/require.html">require()</a>
+</p>
+
+<p class="index">
+<a href="library/package/seeall.html">package.seeall</a>
+</p>
+
+
+</div>
+<div class="section level4" id="physics.">
+<h4><a href="#TOC"><a href="library/physics/index.html">physics.*</a></a></h4>
+<p class="index">
+<a href="library/physics/addBody.html">physics.addBody()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/fromMKS.html">physics.fromMKS()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/getAverageCollisionPositions.html">physics.getAverageCollisionPositions()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/getDebugErrorsEnabled.html">physics.getDebugErrorsEnabled()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/getGravity.html">physics.getGravity()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/getMKS.html">physics.getMKS()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/getReportCollisionsInContentCoordinates.html">physics.getReportCollisionsInContentCoordinates()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/newJoint.html">physics.newJoint()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/pause.html">physics.pause()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/queryRegion.html">physics.queryRegion()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/rayCast.html">physics.rayCast()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/reflectRay.html">physics.reflectRay()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/removeBody.html">physics.removeBody()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setAverageCollisionPositions.html">physics.setAverageCollisionPositions()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setContinuous.html">physics.setContinuous()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setDebugErrorsEnabled.html">physics.setDebugErrorsEnabled()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setDrawMode.html">physics.setDrawMode()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setGravity.html">physics.setGravity()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setMKS.html">physics.setMKS()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setPositionIterations.html">physics.setPositionIterations()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setReportCollisionsInContentCoordinates.html">physics.setReportCollisionsInContentCoordinates()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setScale.html">physics.setScale()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setTimeStep.html">physics.setTimeStep()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/setVelocityIterations.html">physics.setVelocityIterations()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/start.html">physics.start()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/stop.html">physics.stop()</a>
+</p>
+
+<p class="index">
+<a href="library/physics/toMKS.html">physics.toMKS()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="socket.-networking">
+<h4><a href="#TOC"><a href="library/socket/index.html">socket.* (networking)</a></a></h4>
+</div>
+<div class="section level4" id="sprite.-removed">
+<h4><a href="#TOC"><a href="library/sprite/index.html">sprite.* (removed)</a></a></h4>
+</div>
+<div class="section level4" id="sqlite3.-database">
+<h4><a href="#TOC"><a href="library/sqlite3/index.html">sqlite3.* (database)</a></a></h4>
+</div>
+<div class="section level4" id="store.">
+<h4><a href="#TOC"><a href="library/store/index.html">store.*</a></a></h4>
+<p class="index">
+<a href="library/store/availableStores.html">store.availableStores</a>
+</p>
+
+<p class="index">
+<a href="library/store/canLoadProducts.html">store.canLoadProducts</a>
+</p>
+
+<p class="index">
+<a href="library/store/canMakePurchases.html">store.canMakePurchases</a>
+</p>
+
+<p class="index">
+<a href="library/store/finishTransaction.html">store.finishTransaction()</a>
+</p>
+
+<p class="index">
+<a href="library/store/init.html">store.init()</a>
+</p>
+
+<p class="index">
+<a href="library/store/isActive.html">store.isActive</a>
+</p>
+
+<p class="index">
+<a href="library/store/loadProducts.html">store.loadProducts()</a>
+</p>
+
+<p class="index">
+<a href="library/store/purchase.html">store.purchase()</a>
+</p>
+
+<p class="index">
+<a href="library/store/restore.html">store.restore()</a>
+</p>
+
+<p class="index">
+<a href="library/store/target.html">store.target</a>
+</p>
+
+
+</div>
+<div class="section level4" id="storyboard.">
+<h4><a href="#TOC"><a href="library/storyboard/index.html">storyboard.*</a></a></h4>
+<p class="index">
+<a href="library/storyboard/disableAutoPurge.html">storyboard.disableAutoPurge</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/getCurrentSceneName.html">storyboard.getCurrentSceneName()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/getPrevious.html">storyboard.getPrevious()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/getScene.html">storyboard.getScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/gotoScene.html">storyboard.gotoScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/hideOverlay.html">storyboard.hideOverlay()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/isDebug.html">storyboard.isDebug</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/loadScene.html">storyboard.loadScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/newScene.html">storyboard.newScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/printMemUsage.html">storyboard.printMemUsage()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/purgeAll.html">storyboard.purgeAll()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/purgeOnSceneChange.html">storyboard.purgeOnSceneChange</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/purgeScene.html">storyboard.purgeScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/reloadScene.html">storyboard.reloadScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/removeAll.html">storyboard.removeAll()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/removeScene.html">storyboard.removeScene()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/showOverlay.html">storyboard.showOverlay()</a>
+</p>
+
+<p class="index">
+<a href="library/storyboard/stage.html">storyboard.stage</a>
+</p>
+
+
+</div>
+<div class="section level4" id="string.">
+<h4><a href="#TOC"><a href="library/string/index.html">string.*</a></a></h4>
+<p class="index">
+<a href="library/string/byte.html">string.byte()</a>
+</p>
+
+<p class="index">
+<a href="library/string/char.html">string.char()</a>
+</p>
+
+<p class="index">
+<a href="library/string/find.html">string.find()</a>
+</p>
+
+<p class="index">
+<a href="library/string/format.html">string.format()</a>
+</p>
+
+<p class="index">
+<a href="library/string/gmatch.html">string.gmatch()</a>
+</p>
+
+<p class="index">
+<a href="library/string/gsub.html">string.gsub()</a>
+</p>
+
+<p class="index">
+<a href="library/string/len.html">string.len()</a>
+</p>
+
+<p class="index">
+<a href="library/string/lower.html">string.lower()</a>
+</p>
+
+<p class="index">
+<a href="library/string/match.html">string.match()</a>
+</p>
+
+<p class="index">
+<a href="library/string/rep.html">string.rep()</a>
+</p>
+
+<p class="index">
+<a href="library/string/reverse.html">string.reverse()</a>
+</p>
+
+<p class="index">
+<a href="library/string/sub.html">string.sub()</a>
+</p>
+
+<p class="index">
+<a href="library/string/upper.html">string.upper()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="system.">
+<h4><a href="#TOC"><a href="library/system/index.html">system.*</a></a></h4>
+<p class="index">
+<a href="library/system/CachesDirectory.html">system.CachesDirectory</a>
+</p>
+
+<p class="index">
+<a href="library/system/DocumentsDirectory.html">system.DocumentsDirectory</a>
+</p>
+
+<p class="index">
+<a href="library/system/ResourceDirectory.html">system.ResourceDirectory</a>
+</p>
+
+<p class="index">
+<a href="library/system/TemporaryDirectory.html">system.TemporaryDirectory</a>
+</p>
+
+<p class="index">
+<a href="library/system/activate.html">system.activate()</a>
+</p>
+
+<p class="index">
+<a href="library/system/cancelNotification.html">system.cancelNotification()</a>
+</p>
+
+<p class="index">
+<a href="library/system/deactivate.html">system.deactivate()</a>
+</p>
+
+<p class="index">
+<a href="library/system/getIdleTimer.html">system.getIdleTimer()</a>
+</p>
+
+<p class="index">
+<a href="library/system/getInfo.html">system.getInfo()</a>
+</p>
+
+<p class="index">
+<a href="library/system/getInputDevices.html">system.getInputDevices()</a>
+</p>
+
+<p class="index">
+<a href="library/system/getPreference.html">system.getPreference()</a>
+</p>
+
+<p class="index">
+<a href="library/system/getTimer.html">system.getTimer()</a>
+</p>
+
+<p class="index">
+<a href="library/system/hasEventSource.html">system.hasEventSource()</a>
+</p>
+
+<p class="index">
+<a href="library/system/openURL.html">system.openURL()</a>
+</p>
+
+<p class="index">
+<a href="library/system/orientation.html">system.orientation</a>
+</p>
+
+<p class="index">
+<a href="library/system/pathForFile.html">system.pathForFile()</a>
+</p>
+
+<p class="index">
+<a href="library/system/scheduleNotification.html">system.scheduleNotification()</a>
+</p>
+
+<p class="index">
+<a href="library/system/setAccelerometerInterval.html">system.setAccelerometerInterval()</a>
+</p>
+
+<p class="index">
+<a href="library/system/setGyroscopeInterval.html">system.setGyroscopeInterval()</a>
+</p>
+
+<p class="index">
+<a href="library/system/setIdleTimer.html">system.setIdleTimer()</a>
+</p>
+
+<p class="index">
+<a href="library/system/setLocationAccuracy.html">system.setLocationAccuracy()</a>
+</p>
+
+<p class="index">
+<a href="library/system/setLocationThreshold.html">system.setLocationThreshold()</a>
+</p>
+
+<p class="index">
+<a href="library/system/setTapDelay.html">system.setTapDelay()</a>
+</p>
+
+<p class="index">
+<a href="library/system/vibrate.html">system.vibrate()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="table.-array">
+<h4><a href="#TOC"><a href="library/table/index.html">table.* (array)</a></a></h4>
+<p class="index">
+<a href="library/table/concat.html">table.concat()</a>
+</p>
+
+<p class="index">
+<a href="library/table/copy.html">table.copy()</a>
+</p>
+
+<p class="index">
+<a href="library/table/indexOf.html">table.indexOf()</a>
+</p>
+
+<p class="index">
+<a href="library/table/insert.html">table.insert()</a>
+</p>
+
+<p class="index">
+<a href="library/table/maxn.html">table.maxn()</a>
+</p>
+
+<p class="index">
+<a href="library/table/remove.html">table.remove()</a>
+</p>
+
+<p class="index">
+<a href="library/table/sort.html">table.sort()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="timer.">
+<h4><a href="#TOC"><a href="library/timer/index.html">timer.*</a></a></h4>
+<p class="index">
+<a href="library/timer/cancel.html">timer.cancel()</a>
+</p>
+
+<p class="index">
+<a href="library/timer/pause.html">timer.pause()</a>
+</p>
+
+<p class="index">
+<a href="library/timer/performWithDelay.html">timer.performWithDelay()</a>
+</p>
+
+<p class="index">
+<a href="library/timer/resume.html">timer.resume()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="transition.">
+<h4><a href="#TOC"><a href="library/transition/index.html">transition.*</a></a></h4>
+<p class="index">
+<a href="library/transition/blink.html">transition.blink</a>
+</p>
+
+<p class="index">
+<a href="library/transition/cancel.html">transition.cancel()</a>
+</p>
+
+<p class="index">
+<a href="library/transition/fadeIn.html">transition.fadeIn</a>
+</p>
+
+<p class="index">
+<a href="library/transition/fadeOut.html">transition.fadeOut</a>
+</p>
+
+<p class="index">
+<a href="library/transition/from.html">transition.from()</a>
+</p>
+
+<p class="index">
+<a href="library/transition/moveBy.html">transition.moveBy</a>
+</p>
+
+<p class="index">
+<a href="library/transition/moveTo.html">transition.moveTo</a>
+</p>
+
+<p class="index">
+<a href="library/transition/pause.html">transition.pause()</a>
+</p>
+
+<p class="index">
+<a href="library/transition/resume.html">transition.resume()</a>
+</p>
+
+<p class="index">
+<a href="library/transition/scaleBy.html">transition.scaleBy</a>
+</p>
+
+<p class="index">
+<a href="library/transition/scaleTo.html">transition.scaleTo</a>
+</p>
+
+<p class="index">
+<a href="library/transition/to.html">transition.to</a>
+</p>
+
+
+</div>
+<div class="section level4" id="widget.">
+<h4><a href="#TOC"><a href="library/widget/index.html">widget.*</a></a></h4>
+<p class="index">
+<a href="library/widget/migration.html">V2.0 Migration guide</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newButton.html">widget.newButton()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newPickerWheel.html">widget.newPickerWheel()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newProgressView.html">widget.newProgressView()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newScrollView.html">widget.newScrollView()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newSegmentedControl.html">widget.newSegmentedControl()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newSlider.html">widget.newSlider()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newSpinner.html">widget.newSpinner()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newStepper.html">widget.newStepper()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newSwitch.html">widget.newSwitch()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newTabBar.html">widget.newTabBar()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/newTableView.html">widget.newTableView()</a>
+</p>
+
+<p class="index">
+<a href="library/widget/setTheme.html">widget.setTheme()</a>
+</p>
+
+
+</div>
+</div>
+<div class="section level2" id="events">
+<h2><a href="#TOC"><a href="event/index.html">Events</a></a></h2>
+<div class="section level4" id="accelerometer">
+<h4><a href="#TOC"><a href="event/accelerometer/index.html">accelerometer</a></a></h4>
+<p class="index">
+<a href="event/accelerometer/deltaTime.html">event.deltaTime</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/isShake.html">event.isShake</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/xGravity.html">event.xGravity</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/xInstant.html">event.xInstant</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/xRaw.html">event.xRaw</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/yGravity.html">event.yGravity</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/yInstant.html">event.yInstant</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/yRaw.html">event.yRaw</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/zGravity.html">event.zGravity</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/zInstant.html">event.zInstant</a>
+</p>
+
+<p class="index">
+<a href="event/accelerometer/zRaw.html">event.zRaw</a>
+</p>
+
+
+</div>
+<div class="section level4" id="audio">
+<h4><a href="#TOC"><a href="event/audio/index.html">audio</a></a></h4>
+<p class="index">
+<a href="event/audio/channel.html">event.channel</a>
+</p>
+
+<p class="index">
+<a href="event/audio/completed.html">event.completed</a>
+</p>
+
+<p class="index">
+<a href="event/audio/handle.html">event.handle</a>
+</p>
+
+<p class="index">
+<a href="event/audio/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/audio/phase.html">event.phase</a>
+</p>
+
+
+</div>
+<div class="section level4" id="axis">
+<h4><a href="#TOC"><a href="event/axis/index.html">axis</a></a></h4>
+<p class="index">
+<a href="event/axis/axis.html">event.axis</a>
+</p>
+
+<p class="index">
+<a href="event/axis/device.html">event.device</a>
+</p>
+
+<p class="index">
+<a href="event/axis/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/axis/normalizedValue.html">event.normalizedValue</a>
+</p>
+
+<p class="index">
+<a href="event/axis/rawValue.html">event.rawValue</a>
+</p>
+
+
+</div>
+<div class="section level4" id="collision">
+<h4><a href="#TOC"><a href="event/collision/index.html">collision</a></a></h4>
+<p class="index">
+<a href="event/collision/contact.html">event.contact</a>
+</p>
+
+<p class="index">
+<a href="event/collision/element1.html">event.element1</a>
+</p>
+
+<p class="index">
+<a href="event/collision/element2.html">event.element2</a>
+</p>
+
+<p class="index">
+<a href="event/collision/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/collision/object1.html">event.object1</a>
+</p>
+
+<p class="index">
+<a href="event/collision/object2.html">event.object2</a>
+</p>
+
+<p class="index">
+<a href="event/collision/phase.html">event.phase</a>
+</p>
+
+<p class="index">
+<a href="event/collision/x.html">event.x</a>
+</p>
+
+<p class="index">
+<a href="event/collision/y.html">event.y</a>
+</p>
+
+
+</div>
+<div class="section level4" id="completion">
+<h4><a href="#TOC"><a href="event/completion/index.html">completion</a></a></h4>
+<p class="index">
+<a href="event/completion/action.html">event.action</a>
+</p>
+
+<p class="index">
+<a href="event/completion/duration.html">event.duration</a>
+</p>
+
+<p class="index">
+<a href="event/completion/fileSize.html">event.fileSize</a>
+</p>
+
+<p class="index">
+<a href="event/completion/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/completion/target.html">event.target</a>
+</p>
+
+<p class="index">
+<a href="event/completion/url.html">event.url</a>
+</p>
+
+
+</div>
+<div class="section level4" id="creditsrequest">
+<h4><a href="#TOC"><a href="event/creditsRequest/index.html">creditsRequest</a></a></h4>
+<p class="index">
+<a href="event/creditsRequest/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/creditsRequest/newCredits.html">event.newCredits</a>
+</p>
+
+<p class="index">
+<a href="event/creditsRequest/totalCredits.html">event.totalCredits</a>
+</p>
+
+
+</div>
+<div class="section level4" id="enterframe">
+<h4><a href="#TOC"><a href="event/enterFrame/index.html">enterFrame</a></a></h4>
+<p class="index">
+<a href="event/enterFrame/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/enterFrame/time.html">event.time</a>
+</p>
+
+
+</div>
+<div class="section level4" id="fbconnect">
+<h4><a href="#TOC"><a href="event/fbconnect/index.html">fbconnect</a></a></h4>
+<p class="index">
+<a href="event/fbconnect/didComplete.html">event.didComplete</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/expiration.html">event.expiration</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/isError.html">event.isError</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/phase.html">event.phase</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/response.html">event.response</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/token.html">event.token</a>
+</p>
+
+<p class="index">
+<a href="event/fbconnect/type.html">event.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="finalize">
+<h4><a href="#TOC"><a href="event/finalize/index.html">finalize</a></a></h4>
+<p class="index">
+<a href="event/finalize/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/finalize/target.html">event.target</a>
+</p>
+
+
+</div>
+<div class="section level4" id="gamenetwork">
+<h4><a href="#TOC"><a href="event/gameNetwork/index.html">gameNetwork</a></a></h4>
+<p class="index">
+<a href="event/gameNetwork/data.html">event.data</a>
+</p>
+
+<p class="index">
+<a href="event/gameNetwork/errorCode.html">event.errorCode</a>
+</p>
+
+<p class="index">
+<a href="event/gameNetwork/errorMessage.html">event.errorMessage</a>
+</p>
+
+<p class="index">
+<a href="event/gameNetwork/localPlayerScore.html">event.localPlayerScore</a>
+</p>
+
+<p class="index">
+<a href="event/gameNetwork/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/gameNetwork/provider.html">event.provider</a>
+</p>
+
+<p class="index">
+<a href="event/gameNetwork/type.html">event.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="gyroscope">
+<h4><a href="#TOC"><a href="event/gyroscope/index.html">gyroscope</a></a></h4>
+<p class="index">
+<a href="event/gyroscope/deltaTime.html">event.deltaTime</a>
+</p>
+
+<p class="index">
+<a href="event/gyroscope/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/gyroscope/xRotation.html">event.xRotation</a>
+</p>
+
+<p class="index">
+<a href="event/gyroscope/yRotation.html">event.yRotation</a>
+</p>
+
+<p class="index">
+<a href="event/gyroscope/zRotation.html">event.zRotation</a>
+</p>
+
+
+</div>
+<div class="section level4" id="heading-compass">
+<h4><a href="#TOC"><a href="event/heading/index.html">heading (compass)</a></a></h4>
+<p class="index">
+<a href="event/heading/geographic.html">event.geographic</a>
+</p>
+
+<p class="index">
+<a href="event/heading/magnetic.html">event.magnetic</a>
+</p>
+
+<p class="index">
+<a href="event/heading/name.html">event.name</a>
+</p>
+
+
+</div>
+<div class="section level4" id="inputdevicestatus">
+<h4><a href="#TOC"><a href="event/inputDeviceStatus/index.html">inputDeviceStatus</a></a></h4>
+<p class="index">
+<a href="event/inputDeviceStatus/connectionStateChanged.html">event.connectionStateChanged</a>
+</p>
+
+<p class="index">
+<a href="event/inputDeviceStatus/device.html">event.device</a>
+</p>
+
+<p class="index">
+<a href="event/inputDeviceStatus/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/inputDeviceStatus/reconfigured.html">event.reconfigured</a>
+</p>
+
+
+</div>
+<div class="section level4" id="key">
+<h4><a href="#TOC"><a href="event/key/index.html">key</a></a></h4>
+<p class="index">
+<a href="event/key/descriptor.html">event.descriptor</a>
+</p>
+
+<p class="index">
+<a href="event/key/device.html">event.device</a>
+</p>
+
+<p class="index">
+<a href="event/key/isAltDown.html">event.isAltDown</a>
+</p>
+
+<p class="index">
+<a href="event/key/isCtrlDown.html">event.isCtrlDown</a>
+</p>
+
+<p class="index">
+<a href="event/key/isShiftDown.html">event.isShiftDown</a>
+</p>
+
+<p class="index">
+<a href="event/key/keyName.html">event.keyName</a>
+</p>
+
+<p class="index">
+<a href="event/key/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/key/nativeKeyCode.html">event.nativeKeyCode</a>
+</p>
+
+<p class="index">
+<a href="event/key/phase.html">event.phase</a>
+</p>
+
+
+</div>
+<div class="section level4" id="licensing">
+<h4><a href="#TOC"><a href="event/licensing/index.html">licensing</a></a></h4>
+<p class="index">
+<a href="event/licensing/errorType.html">event.errorType</a>
+</p>
+
+<p class="index">
+<a href="event/licensing/expiration.html">event.expiration</a>
+</p>
+
+<p class="index">
+<a href="event/licensing/isError.html">event.isError</a>
+</p>
+
+<p class="index">
+<a href="event/licensing/isVerified.html">event.isVerified</a>
+</p>
+
+<p class="index">
+<a href="event/licensing/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/licensing/provider.html">event.provider</a>
+</p>
+
+<p class="index">
+<a href="event/licensing/response.html">event.response</a>
+</p>
+
+
+</div>
+<div class="section level4" id="location-gps">
+<h4><a href="#TOC"><a href="event/location/index.html">location (GPS)</a></a></h4>
+<p class="index">
+<a href="event/location/accuracy.html">event.accuracy</a>
+</p>
+
+<p class="index">
+<a href="event/location/altitude.html">event.altitude</a>
+</p>
+
+<p class="index">
+<a href="event/location/direction.html">event.direction</a>
+</p>
+
+<p class="index">
+<a href="event/location/errorCode.html">event.errorCode</a>
+</p>
+
+<p class="index">
+<a href="event/location/errorMessage.html">event.errorMessage</a>
+</p>
+
+<p class="index">
+<a href="event/location/latitude.html">event.latitude</a>
+</p>
+
+<p class="index">
+<a href="event/location/longitude.html">event.longitude</a>
+</p>
+
+<p class="index">
+<a href="event/location/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/location/speed.html">event.speed</a>
+</p>
+
+<p class="index">
+<a href="event/location/time.html">event.time</a>
+</p>
+
+
+</div>
+<div class="section level4" id="mapaddress">
+<h4><a href="#TOC"><a href="event/mapAddress/index.html">mapAddress</a></a></h4>
+<p class="index">
+<a href="event/mapAddress/city.html">event.city</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/cityDetail.html">event.cityDetail</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/country.html">event.country</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/countryCode.html">event.countryCode</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/errorMessage.html">event.errorMessage</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/isError.html">event.isError</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/postalCode.html">event.postalCode</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/region.html">event.region</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/regionDetail.html">event.regionDetail</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/street.html">event.street</a>
+</p>
+
+<p class="index">
+<a href="event/mapAddress/streetDetail.html">event.streetDetail</a>
+</p>
+
+
+</div>
+<div class="section level4" id="maplocation">
+<h4><a href="#TOC"><a href="event/mapLocation/index.html">mapLocation</a></a></h4>
+<p class="index">
+<a href="event/mapLocation/errorMessage.html">event.errorMessage</a>
+</p>
+
+<p class="index">
+<a href="event/mapLocation/isError.html">event.isError</a>
+</p>
+
+<p class="index">
+<a href="event/mapLocation/latitude.html">event.latitude</a>
+</p>
+
+<p class="index">
+<a href="event/mapLocation/longitude.html">event.longitude</a>
+</p>
+
+<p class="index">
+<a href="event/mapLocation/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/mapLocation/request.html">event.request</a>
+</p>
+
+<p class="index">
+<a href="event/mapLocation/type.html">event.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="maplocation-1">
+<h4><a href="#TOC"><a href="event/mapMarker/index.html">mapLocation</a></a></h4>
+<p class="index">
+<a href="event/mapMarker/latitude.html">event.latitude</a>
+</p>
+
+<p class="index">
+<a href="event/mapMarker/longitude.html">event.longitude</a>
+</p>
+
+<p class="index">
+<a href="event/mapMarker/markerId.html">event.markerId</a>
+</p>
+
+
+</div>
+<div class="section level4" id="mapaddress-1">
+<h4><a href="#TOC"><a href="event/mapTap/index.html">mapAddress</a></a></h4>
+<p class="index">
+<a href="event/mapTap/latitude.html">event.latitude</a>
+</p>
+
+<p class="index">
+<a href="event/mapTap/longitude.html">event.longitude</a>
+</p>
+
+
+</div>
+<div class="section level4" id="memorywarning">
+<h4><a href="#TOC"><a href="event/memoryWarning/index.html">memoryWarning</a></a></h4>
+<p class="index">
+<a href="event/memoryWarning/name.html">event.name</a>
+</p>
+
+
+</div>
+<div class="section level4" id="mouse">
+<h4><a href="#TOC"><a href="event/mouse/index.html">mouse</a></a></h4>
+<p class="index">
+<a href="event/mouse/isMiddleButtonDown.html">event.isMiddleButtonDown</a>
+</p>
+
+<p class="index">
+<a href="event/mouse/isPrimaryButtonDown.html">event.isPrimaryButtonDown</a>
+</p>
+
+<p class="index">
+<a href="event/mouse/isSecondaryButtonDown.html">event.isSecondaryButtonDown</a>
+</p>
+
+<p class="index">
+<a href="event/mouse/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/mouse/time.html">event.time</a>
+</p>
+
+<p class="index">
+<a href="event/mouse/x.html">event.x</a>
+</p>
+
+<p class="index">
+<a href="event/mouse/y.html">event.y</a>
+</p>
+
+
+</div>
+<div class="section level4" id="networkrequest">
+<h4><a href="#TOC"><a href="event/networkRequest/index.html">networkRequest</a></a></h4>
+<p class="index">
+<a href="event/networkRequest/bytesEstimated.html">event.bytesEstimated</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/bytesTransferred.html">event.bytesTransferred</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/header.html">event.header</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/isError.html">event.isError</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/phase.html">event.phase</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/requestId.html">event.requestId</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/response.html">event.response</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/responseHeaders.html">event.responseHeaders</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/responseType.html">event.responseType</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/status.html">event.status</a>
+</p>
+
+<p class="index">
+<a href="event/networkRequest/url.html">event.url</a>
+</p>
+
+
+</div>
+<div class="section level4" id="networkstatus">
+<h4><a href="#TOC"><a href="event/networkStatus/index.html">networkStatus</a></a></h4>
+<p class="index">
+<a href="event/networkStatus/address.html">event.address</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/isConnectionOnDemand.html">event.isConnectionOnDemand</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/isConnectionRequired.html">event.isConnectionRequired</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/isInteractionRequired.html">event.isInteractionRequired</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/isReachable.html">event.isReachable</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/isReachableViaCellular.html">event.isReachableViaCellular</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/isReachableViaWiFi.html">event.isReachableViaWiFi</a>
+</p>
+
+<p class="index">
+<a href="event/networkStatus/name.html">event.name</a>
+</p>
+
+
+</div>
+<div class="section level4" id="notification">
+<h4><a href="#TOC"><a href="event/notification/index.html">notification</a></a></h4>
+<p class="index">
+<a href="event/notification/applicationState.html">event.applicationState</a>
+</p>
+
+<p class="index">
+<a href="event/notification/custom.html">event.custom</a>
+</p>
+
+<p class="index">
+<a href="event/notification/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/notification/type.html">event.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="orientation">
+<h4><a href="#TOC"><a href="event/orientation/index.html">orientation</a></a></h4>
+<p class="index">
+<a href="event/orientation/delta.html">event.delta</a>
+</p>
+
+<p class="index">
+<a href="event/orientation/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/orientation/type.html">event.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="popup">
+<h4><a href="#TOC"><a href="event/popup/index.html">popup</a></a></h4>
+<p class="index">
+<a href="event/popup/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/popup/type.html">event.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="postcollision">
+<h4><a href="#TOC"><a href="event/postCollision/index.html">postCollision</a></a></h4>
+<p class="index">
+<a href="event/postCollision/contact.html">event.contact</a>
+</p>
+
+<p class="index">
+<a href="event/postCollision/force.html">event.force</a>
+</p>
+
+<p class="index">
+<a href="event/postCollision/friction.html">event.friction</a>
+</p>
+
+<p class="index">
+<a href="event/postCollision/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/postCollision/object1.html">event.object1</a>
+</p>
+
+<p class="index">
+<a href="event/postCollision/object2.html">event.object2</a>
+</p>
+
+<p class="index">
+<a href="event/postCollision/other.html">event.other</a>
+</p>
+
+
+</div>
+<div class="section level4" id="precollision">
+<h4><a href="#TOC"><a href="event/preCollision/index.html">preCollision</a></a></h4>
+<p class="index">
+<a href="event/preCollision/contact.html">event.contact</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/element1.html">event.element1</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/element2.html">event.element2</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/object1.html">event.object1</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/object2.html">event.object2</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/other.html">event.other</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/x.html">event.x</a>
+</p>
+
+<p class="index">
+<a href="event/preCollision/y.html">event.y</a>
+</p>
+
+
+</div>
+<div class="section level4" id="productlist-iap">
+<h4><a href="#TOC"><a href="event/productList/index.html">productList (IAP)</a></a></h4>
+<p class="index">
+<a href="event/productList/invalidProducts.html">event.invalidProducts</a>
+</p>
+
+<p class="index">
+<a href="event/productList/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/productList/products.html">event.products</a>
+</p>
+
+
+</div>
+<div class="section level4" id="resize">
+<h4><a href="#TOC"><a href="event/resize/index.html">resize</a></a></h4>
+<p class="index">
+<a href="event/resize/name.html">event.name</a>
+</p>
+
+
+</div>
+<div class="section level4" id="scene">
+<h4><a href="#TOC"><a href="event/scene/index.html">scene</a></a></h4>
+<p class="index">
+<a href="event/scene/createScene/index.html">createScene</a>
+</p>
+
+<p class="index">
+<a href="event/scene/createScene/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/createScene/params.html">event.params</a>
+</p>
+
+<p class="index">
+<a href="event/scene/destroyScene/index.html">destroyScene</a>
+</p>
+
+<p class="index">
+<a href="event/scene/destroyScene/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/didExitScene/index.html">didExitScene</a>
+</p>
+
+<p class="index">
+<a href="event/scene/didExitScene/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/enterScene/index.html">enterScene</a>
+</p>
+
+<p class="index">
+<a href="event/scene/enterScene/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/enterScene/params.html">event.params</a>
+</p>
+
+<p class="index">
+<a href="event/scene/exitScene/index.html">exitScene</a>
+</p>
+
+<p class="index">
+<a href="event/scene/exitScene/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/overlayBegan/index.html">overlayBegan</a>
+</p>
+
+<p class="index">
+<a href="event/scene/overlayBegan/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/overlayBegan/sceneName.html">event.sceneName</a>
+</p>
+
+<p class="index">
+<a href="event/scene/overlayEnded/index.html">overlayEnded</a>
+</p>
+
+<p class="index">
+<a href="event/scene/overlayEnded/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/overlayEnded/sceneName.html">event.sceneName</a>
+</p>
+
+<p class="index">
+<a href="event/scene/willEnterScene/index.html">willEnterScene</a>
+</p>
+
+<p class="index">
+<a href="event/scene/willEnterScene/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/scene/willEnterScene/params.html">event.params</a>
+</p>
+
+
+</div>
+<div class="section level4" id="sprite">
+<h4><a href="#TOC"><a href="event/sprite/index.html">sprite</a></a></h4>
+<p class="index">
+<a href="event/sprite/name.html">event.sprite</a>
+</p>
+
+<p class="index">
+<a href="event/sprite/phase.html">event.phase</a>
+</p>
+
+<p class="index">
+<a href="event/sprite/sprite.html">event.sprite</a>
+</p>
+
+<p class="index">
+<a href="event/sprite/target.html">event.target</a>
+</p>
+
+
+</div>
+<div class="section level4" id="storetransaction-in-app-purchase">
+<h4><a href="#TOC"><a href="event/storeTransaction/index.html">storeTransaction (In-app purchase)</a></a></h4>
+<p class="index">
+<a href="event/storeTransaction/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/storeTransaction/transaction.html">event.transaction</a>
+</p>
+
+
+</div>
+<div class="section level4" id="system">
+<h4><a href="#TOC"><a href="event/system/index.html">system</a></a></h4>
+<p class="index">
+<a href="event/system/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/system/type.html">event.type</a>
+</p>
+
+<p class="index">
+<a href="event/system/url.html">event.url</a>
+</p>
+
+
+</div>
+<div class="section level4" id="tap">
+<h4><a href="#TOC"><a href="event/tap/index.html">tap</a></a></h4>
+<p class="index">
+<a href="event/tap/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/tap/numTaps.html">event.numTaps</a>
+</p>
+
+<p class="index">
+<a href="event/tap/x.html">event.x</a>
+</p>
+
+<p class="index">
+<a href="event/tap/y.html">event.y</a>
+</p>
+
+
+</div>
+<div class="section level4" id="timer">
+<h4><a href="#TOC"><a href="event/timer/index.html">timer</a></a></h4>
+<p class="index">
+<a href="event/timer/count.html">event.count</a>
+</p>
+
+<p class="index">
+<a href="event/timer/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/timer/source.html">event.source</a>
+</p>
+
+<p class="index">
+<a href="event/timer/time.html">event.time</a>
+</p>
+
+
+</div>
+<div class="section level4" id="touch">
+<h4><a href="#TOC"><a href="event/touch/index.html">touch</a></a></h4>
+<p class="index">
+<a href="event/touch/id.html">event.id</a>
+</p>
+
+<p class="index">
+<a href="event/touch/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/touch/phase.html">event.phase</a>
+</p>
+
+<p class="index">
+<a href="event/touch/target.html">event.target</a>
+</p>
+
+<p class="index">
+<a href="event/touch/time.html">event.time</a>
+</p>
+
+<p class="index">
+<a href="event/touch/x.html">event.x</a>
+</p>
+
+<p class="index">
+<a href="event/touch/xStart.html">event.xStart</a>
+</p>
+
+<p class="index">
+<a href="event/touch/y.html">event.y</a>
+</p>
+
+<p class="index">
+<a href="event/touch/yStart.html">event.yStart</a>
+</p>
+
+
+</div>
+<div class="section level4" id="unhandlederror">
+<h4><a href="#TOC"><a href="event/unhandledError/index.html">unhandledError</a></a></h4>
+<p class="index">
+<a href="event/unhandledError/errorMessage.html">event.errorMessage</a>
+</p>
+
+<p class="index">
+<a href="event/unhandledError/stackTrace.html">event.stackTrace</a>
+</p>
+
+
+</div>
+<div class="section level4" id="urlrequest">
+<h4><a href="#TOC"><a href="event/urlRequest/index.html">urlRequest</a></a></h4>
+<p class="index">
+<a href="event/urlRequest/errorCode.html">event.errorCode</a>
+</p>
+
+<p class="index">
+<a href="event/urlRequest/errorMessage.html">event.errorMessage</a>
+</p>
+
+<p class="index">
+<a href="event/urlRequest/name.html">event.name</a>
+</p>
+
+<p class="index">
+<a href="event/urlRequest/type.html">event.type</a>
+</p>
+
+<p class="index">
+<a href="event/urlRequest/url.html">event.url</a>
+</p>
+
+
+</div>
+<div class="section level4" id="userinput">
+<h4><a href="#TOC"><a href="event/userInput/index.html">userInput</a></a></h4>
+<p class="index">
+<a href="event/userInput/newCharacters.html">event.newCharacters</a>
+</p>
+
+<p class="index">
+<a href="event/userInput/oldText.html">event.oldText</a>
+</p>
+
+<p class="index">
+<a href="event/userInput/phase.html">event.phase</a>
+</p>
+
+<p class="index">
+<a href="event/userInput/startPosition.html">event.startPosition</a>
+</p>
+
+<p class="index">
+<a href="event/userInput/target.html">event.target</a>
+</p>
+
+<p class="index">
+<a href="event/userInput/text.html">event.text</a>
+</p>
+
+
+</div>
+</div>
+<div class="section level2" id="types">
+<h2><a href="#TOC"><a href="type/index.html">Types</a></a></h2>
+<div class="section level4" id="array">
+<h4><a href="#TOC"><a href="type/Array.html">Array</a></a></h4>
+</div>
+<div class="section level4" id="bitmappaint">
+<h4><a href="#TOC"><a href="type/BitmapPaint/index.html">BitmapPaint</a></a></h4>
+<p class="index">
+<a href="type/BitmapPaint/rotation.html">paint.rotation</a>
+</p>
+
+<p class="index">
+<a href="type/BitmapPaint/scaleX.html">paint.scaleX</a>
+</p>
+
+<p class="index">
+<a href="type/BitmapPaint/scaleY.html">paint.scaleY</a>
+</p>
+
+<p class="index">
+<a href="type/BitmapPaint/x.html">paint.x</a>
+</p>
+
+<p class="index">
+<a href="type/BitmapPaint/y.html">paint.y</a>
+</p>
+
+
+</div>
+<div class="section level4" id="body">
+<h4><a href="#TOC"><a href="type/Body/index.html">Body</a></a></h4>
+<p class="index">
+<a href="type/Body/angularDamping.html">object.angularDamping</a>
+</p>
+
+<p class="index">
+<a href="type/Body/angularVelocity.html">object.angularVelocity</a>
+</p>
+
+<p class="index">
+<a href="type/Body/applyAngularImpulse.html">object:applyAngularImpulse()</a>
+</p>
+
+<p class="index">
+<a href="type/Body/applyForce.html">object:applyForce()</a>
+</p>
+
+<p class="index">
+<a href="type/Body/applyLinearImpulse.html">object:applyLinearImpulse()</a>
+</p>
+
+<p class="index">
+<a href="type/Body/applyTorque.html">object:applyTorque()</a>
+</p>
+
+<p class="index">
+<a href="type/Body/bodyType.html">object.bodyType</a>
+</p>
+
+<p class="index">
+<a href="type/Body/getLinearVelocity.html">object:getLinearVelocity()</a>
+</p>
+
+<p class="index">
+<a href="type/Body/gravityScale.html">object.gravityScale</a>
+</p>
+
+<p class="index">
+<a href="type/Body/isAwake.html">object.isAwake</a>
+</p>
+
+<p class="index">
+<a href="type/Body/isBodyActive.html">object.isBodyActive</a>
+</p>
+
+<p class="index">
+<a href="type/Body/isBullet.html">object.isBullet</a>
+</p>
+
+<p class="index">
+<a href="type/Body/isFixedRotation.html">object.isFixedRotation</a>
+</p>
+
+<p class="index">
+<a href="type/Body/isSensor.html">object.isSensor</a>
+</p>
+
+<p class="index">
+<a href="type/Body/isSleepingAllowed.html">object.isSleepingAllowed</a>
+</p>
+
+<p class="index">
+<a href="type/Body/linearDamping.html">object.linearDamping</a>
+</p>
+
+<p class="index">
+<a href="type/Body/resetMassData.html">object:resetMassData()</a>
+</p>
+
+<p class="index">
+<a href="type/Body/setLinearVelocity.html">object:setLinearVelocity()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="boolean">
+<h4><a href="#TOC"><a href="type/Boolean.html">Boolean</a></a></h4>
+</div>
+<div class="section level4" id="buttonwidget">
+<h4><a href="#TOC"><a href="type/ButtonWidget/index.html">ButtonWidget</a></a></h4>
+<p class="index">
+<a href="type/ButtonWidget/getLabel.html">object:getLabel()</a>
+</p>
+
+<p class="index">
+<a href="type/ButtonWidget/setEnabled.html">object:setEnabled()</a>
+</p>
+
+<p class="index">
+<a href="type/ButtonWidget/setLabel.html">object:setLabel()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="circlepath">
+<h4><a href="#TOC"><a href="type/CirclePath/index.html">CirclePath</a></a></h4>
+</div>
+<div class="section level4" id="compositepaint">
+<h4><a href="#TOC"><a href="type/CompositePaint/index.html">CompositePaint</a></a></h4>
+</div>
+<div class="section level4" id="constant">
+<h4><a href="#TOC"><a href="type/Constant.html">Constant</a></a></h4>
+</div>
+<div class="section level4" id="coronaclass">
+<h4><a href="#TOC"><a href="type/CoronaClass.html">CoronaClass</a></a></h4>
+</div>
+<div class="section level4" id="coronalibrary">
+<h4><a href="#TOC"><a href="type/CoronaLibrary/index.html">CoronaLibrary</a></a></h4>
+<p class="index">
+<a href="type/CoronaLibrary/getCurrentProvider.html">object:getCurrentProvider()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaLibrary/name.html">object.name</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaLibrary/publisherId.html">object.publisherId</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaLibrary/revision.html">object.revision</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaLibrary/setCurrentProvider.html">object:setCurrentProvider()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaLibrary/version.html">object.version</a>
+</p>
+
+
+</div>
+<div class="section level4" id="coronaprototype">
+<h4><a href="#TOC"><a href="type/CoronaPrototype/index.html">CoronaPrototype</a></a></h4>
+<p class="index">
+<a href="type/CoronaPrototype/initialize.html">object:initialize()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaPrototype/instanceOf.html">object:instanceOf()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaPrototype/isClass.html">object:isClass()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaPrototype/isRoot.html">object:isRoot()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaPrototype/new.html">object:new()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaPrototype/newClass.html">object:newClass()</a>
+</p>
+
+<p class="index">
+<a href="type/CoronaPrototype/setExtension.html">object:setExtension()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="coronaprovider">
+<h4><a href="#TOC"><a href="type/CoronaProvider/index.html">CoronaProvider</a></a></h4>
+</div>
+<div class="section level4" id="displayobject">
+<h4><a href="#TOC"><a href="type/DisplayObject/index.html">DisplayObject</a></a></h4>
+<p class="index">
+<a href="type/DisplayObject/alpha.html">object.alpha</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/anchorX.html">object.anchorX</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/anchorY.html">object.anchorY</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/contentBounds.html">object.contentBounds</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/contentHeight.html">object.contentHeight</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/contentToLocal.html">object:contentToLocal()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/contentWidth.html">object.contentWidth</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/height.html">object.height</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/isHitTestMasked.html">object.isHitTestMasked</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/isHitTestable.html">object.isHitTestable</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/isVisible.html">object.isVisible</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/localToContent.html">object:localToContent()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/maskRotation.html">object.maskRotation</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/maskScaleX.html">object.maskScaleX</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/maskScaleY.html">object.maskScaleY</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/maskX.html">object.maskX</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/maskY.html">object.maskY</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/parent.html">object.parent</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/removeSelf.html">object:removeSelf()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/rotate.html">object:rotate()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/rotation.html">object.rotation</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/scale.html">object:scale()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/setMask.html">object:setMask()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/setReferencePoint.html">object:setReferencePoint()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/toBack.html">object:toBack()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/toFront.html">object:toFront()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/translate.html">object:translate()</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/width.html">object.width</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/x.html">object.x</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/xScale.html">object.xScale</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/y.html">object.y</a>
+</p>
+
+<p class="index">
+<a href="type/DisplayObject/yScale.html">object.yScale</a>
+</p>
+
+
+</div>
+<div class="section level4" id="event">
+<h4><a href="#TOC"><a href="type/Event.html">Event</a></a></h4>
+</div>
+<div class="section level4" id="eventlistener">
+<h4><a href="#TOC"><a href="type/EventListener/index.html">EventListener</a></a></h4>
+<p class="index">
+<a href="type/EventListener/addEventListener.html">object:addEventListener()</a>
+</p>
+
+<p class="index">
+<a href="type/EventListener/dispatchEvent.html">object:dispatchEvent()</a>
+</p>
+
+<p class="index">
+<a href="type/EventListener/removeEventListener.html">object:removeEventListener()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="object">
+<h4><a href="#TOC"><a href="type/File/index.html">object</a></a></h4>
+<p class="index">
+<a href="type/File/close.html">object:close()</a>
+</p>
+
+<p class="index">
+<a href="type/File/flush.html">object:flush()</a>
+</p>
+
+<p class="index">
+<a href="type/File/lines.html">object:lines()</a>
+</p>
+
+<p class="index">
+<a href="type/File/read.html">object:read()</a>
+</p>
+
+<p class="index">
+<a href="type/File/seek.html">object:seek()</a>
+</p>
+
+<p class="index">
+<a href="type/File/setvbuf.html">object:setvbuf()</a>
+</p>
+
+<p class="index">
+<a href="type/File/write.html">object:write()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="function">
+<h4><a href="#TOC"><a href="type/Function.html">Function</a></a></h4>
+</div>
+<div class="section level4" id="gamenetwork-1">
+<h4><a href="#TOC"><a href="type/GameNetwork/index.html">gameNetwork</a></a></h4>
+<p class="index">
+<a href="type/GameNetwork/match.html">gameNetwork.match</a>
+</p>
+
+<p class="index">
+<a href="type/GameNetwork/outcome.html">gameNetwork.outcome</a>
+</p>
+
+<p class="index">
+<a href="type/GameNetwork/participant.html">gameNetwork.participant</a>
+</p>
+
+<p class="index">
+<a href="type/GameNetwork/status.html">gameNetwork.status</a>
+</p>
+
+
+</div>
+<div class="section level4" id="gradientpaint">
+<h4><a href="#TOC"><a href="type/GradientPaint/index.html">GradientPaint</a></a></h4>
+</div>
+<div class="section level4" id="groupobject">
+<h4><a href="#TOC"><a href="type/GroupObject/index.html">GroupObject</a></a></h4>
+<p class="index">
+<a href="type/GroupObject/insert.html">object:insert()</a>
+</p>
+
+<p class="index">
+<a href="type/GroupObject/numChildren.html">object.numChildren</a>
+</p>
+
+<p class="index">
+<a href="type/GroupObject/remove.html">object:remove()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="imagegroup">
+<h4><a href="#TOC"><a href="type/ImageGroup.html">ImageGroup</a></a></h4>
+</div>
+<div class="section level4" id="imagesheet">
+<h4><a href="#TOC"><a href="type/ImageSheet/index.html">ImageSheet</a></a></h4>
+</div>
+<div class="section level4" id="imagesheetpaint">
+<h4><a href="#TOC"><a href="type/ImageSheetPaint/index.html">ImageSheetPaint</a></a></h4>
+</div>
+<div class="section level4" id="inputaxis">
+<h4><a href="#TOC"><a href="type/InputAxis/index.html">InputAxis</a></a></h4>
+<p class="index">
+<a href="type/InputAxis/accuracy.html">object.accuracy</a>
+</p>
+
+<p class="index">
+<a href="type/InputAxis/descriptor.html">object.descriptor</a>
+</p>
+
+<p class="index">
+<a href="type/InputAxis/maxValue.html">object.maxValue</a>
+</p>
+
+<p class="index">
+<a href="type/InputAxis/minValue.html">object.minValue</a>
+</p>
+
+<p class="index">
+<a href="type/InputAxis/number.html">object.number</a>
+</p>
+
+<p class="index">
+<a href="type/InputAxis/type.html">object.type</a>
+</p>
+
+
+</div>
+<div class="section level4" id="inputdevice">
+<h4><a href="#TOC"><a href="type/InputDevice/index.html">InputDevice</a></a></h4>
+<p class="index">
+<a href="type/InputDevice/androidDeviceId.html">object.androidDeviceId</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/canVibrate.html">object.canVibrate</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/connectionState.html">object.connectionState</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/descriptor.html">object.descriptor</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/displayName.html">object.displayName</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/getAxes.html">object:getAxes()</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/isConnected.html">object.isConnected</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/permanentId.html">object.permanentId</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/type.html">object.type</a>
+</p>
+
+<p class="index">
+<a href="type/InputDevice/vibrate.html">object:vibrate()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="joint">
+<h4><a href="#TOC"><a href="type/Joint/index.html">Joint</a></a></h4>
+<p class="index">
+<a href="type/Joint/dampingRatio.html">object.dampingRatio</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/frequency.html">object.frequency</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getAnchorA.html">object:getAnchorA()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getAnchorB.html">object:getAnchorB()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getGroundAnchorA.html">object:getGroundAnchorA()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getGroundAnchorB.html">object:getGroundAnchorB()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getLimits.html">object:getLimits()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getLocalAnchorA.html">object:getAnchorA()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getLocalAnchorB.html">object:getAnchorA()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getLocalAxisA.html">object:getAnchorA()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getReactionForce.html">object:getReactionForce()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getRotationLimits.html">object:getRotationLimits()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/getTarget.html">object:getTarget()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/isActive.html">object.isLimitEnabled</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/isCollideConnected.html">object.isCollideConnected</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/isLimitEnabled.html">object.isLimitEnabled</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/isMotorEnabled.html">object.isMotorEnabled</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/joint1.html">object.joint1</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/joint2.html">object.joint2</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/jointAngle.html">object.jointAngle</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/jointSpeed.html">object.jointSpeed</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/jointTranslation.html">object.jointTranslation</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/length.html">object.length</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/length1.html">object.length1</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/length2.html">object.length2</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/limitState.html">object.limitState</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/maxForce.html">object.maxForce</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/maxLength.html">object.maxLength</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/maxMotorForce.html">object.maxMotorForce</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/maxMotorTorque.html">object.maxMotorTorque</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/maxTorque.html">object.maxTorque</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/motorForce.html">object.motorForce</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/motorSpeed.html">object.motorSpeed</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/motorTorque.html">object.motorTorque</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/ratio.html">object.ratio</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/reactionTorque.html">object.reactionTorque</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/referenceAngle.html">object.jointAngle</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/removeSelf.html">object:removeSelf()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/setLimits.html">object:setLimits()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/setRotationLimits.html">object:setRotationLimits()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/setTarget.html">object:setTarget()</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/springDampingRatio.html">object.springDampingRatio</a>
+</p>
+
+<p class="index">
+<a href="type/Joint/springFrequency.html">object.springFrequency</a>
+</p>
+
+
+</div>
+<div class="section level4" id="library">
+<h4><a href="#TOC"><a href="type/Library.html">Library</a></a></h4>
+</div>
+<div class="section level4" id="lineobject">
+<h4><a href="#TOC"><a href="type/LineObject/index.html">LineObject</a></a></h4>
+<p class="index">
+<a href="type/LineObject/append.html">object:append()</a>
+</p>
+
+<p class="index">
+<a href="type/LineObject/setColor.html">object:setColor()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="listener">
+<h4><a href="#TOC"><a href="type/Listener.html">Listener</a></a></h4>
+</div>
+<div class="section level4" id="map">
+<h4><a href="#TOC"><a href="type/Map/index.html">Map</a></a></h4>
+<p class="index">
+<a href="type/Map/addMarker.html">object:addMarker()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/getAddressLocation.html">object:getAddressLocation()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/getUserLocation.html">object:getUserLocation()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/isLocationVisible.html">object.isLocationVisible</a>
+</p>
+
+<p class="index">
+<a href="type/Map/isScrollEnabled.html">object.isScrollEnabled</a>
+</p>
+
+<p class="index">
+<a href="type/Map/isZoomEnabled.html">object.isZoomEnabled</a>
+</p>
+
+<p class="index">
+<a href="type/Map/mapType.html">object.mapType</a>
+</p>
+
+<p class="index">
+<a href="type/Map/nearestAddress.html">object:nearestAddress()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/removeAllMarkers.html">object:removeAllMarkers()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/removeMarker.html">object:removeMarker()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/requestLocation.html">object:requestLocation()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/setCenter.html">object:setCenter()</a>
+</p>
+
+<p class="index">
+<a href="type/Map/setRegion.html">object:setRegion()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="mask">
+<h4><a href="#TOC"><a href="type/Mask/index.html">Mask</a></a></h4>
+</div>
+<div class="section level4" id="nativedisplayobject">
+<h4><a href="#TOC"><a href="type/NativeDisplayObject/index.html">NativeDisplayObject</a></a></h4>
+</div>
+<div class="section level4" id="number">
+<h4><a href="#TOC"><a href="type/Number.html">Number</a></a></h4>
+</div>
+<div class="section level4" id="object-1">
+<h4><a href="#TOC"><a href="type/Object.html">Object</a></a></h4>
+</div>
+<div class="section level4" id="paint">
+<h4><a href="#TOC"><a href="type/Paint/index.html">Paint</a></a></h4>
+</div>
+<div class="section level4" id="path">
+<h4><a href="#TOC"><a href="type/Path/index.html">Path</a></a></h4>
+</div>
+<div class="section level4" id="physicscontact">
+<h4><a href="#TOC"><a href="type/PhysicsContact/index.html">PhysicsContact</a></a></h4>
+<p class="index">
+<a href="type/PhysicsContact/bounce.html">object.bounce</a>
+</p>
+
+<p class="index">
+<a href="type/PhysicsContact/friction.html">object.friction</a>
+</p>
+
+<p class="index">
+<a href="type/PhysicsContact/isEnabled.html">object.isEnabled</a>
+</p>
+
+<p class="index">
+<a href="type/PhysicsContact/isTouching.html">object.isTouching</a>
+</p>
+
+
+</div>
+<div class="section level4" id="pickerwidget">
+<h4><a href="#TOC"><a href="type/PickerWidget/index.html">PickerWidget</a></a></h4>
+<p class="index">
+<a href="type/PickerWidget/getValues.html">object:getValues()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="progressviewwidget">
+<h4><a href="#TOC"><a href="type/ProgressViewWidget/index.html">ProgressViewWidget</a></a></h4>
+<p class="index">
+<a href="type/ProgressViewWidget/getProgress.html">object:getProgress()</a>
+</p>
+
+<p class="index">
+<a href="type/ProgressViewWidget/resizeView.html">object:resizeView( newWidth )</a>
+</p>
+
+<p class="index">
+<a href="type/ProgressViewWidget/setProgress.html">object:setProgress()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="recording">
+<h4><a href="#TOC"><a href="type/Recording/index.html">Recording</a></a></h4>
+<p class="index">
+<a href="type/Recording/getSampleRate.html">object:getSampleRate()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/getTunerFrequency.html">object:getTunerFrequency()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/getTunerVolume.html">object:getTunerVolume()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/isRecording.html">object:isRecording()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/setSampleRate.html">object:setSampleRate()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/startRecording.html">object:startRecording()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/startTuner.html">object:startTuner()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/stopRecording.html">object:stopRecording()</a>
+</p>
+
+<p class="index">
+<a href="type/Recording/stopTuner.html">object:stopTuner()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="rectpath">
+<h4><a href="#TOC"><a href="type/RectPath/index.html">RectPath</a></a></h4>
+</div>
+<div class="section level4" id="roundedrectpath">
+<h4><a href="#TOC"><a href="type/RoundedRectPath/index.html">RoundedRectPath</a></a></h4>
+</div>
+<div class="section level4" id="runtime">
+<h4><a href="#TOC"><a href="type/Runtime/index.html">Runtime</a></a></h4>
+<p class="index">
+<a href="type/Runtime/hasEventSource.html">Runtime:hasEventSource()</a>
+</p>
+
+<p class="index">
+<a href="type/Runtime/hideErrorAlerts.html">Runtime:hideErrorAlerts()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="scene-1">
+<h4><a href="#TOC"><a href="type/Scene/index.html">Scene</a></a></h4>
+</div>
+<div class="section level4" id="scrollviewwidget">
+<h4><a href="#TOC"><a href="type/ScrollViewWidget/index.html">ScrollViewWidget</a></a></h4>
+<p class="index">
+<a href="type/ScrollViewWidget/getContentPosition.html">object:getContentPosition()</a>
+</p>
+
+<p class="index">
+<a href="type/ScrollViewWidget/scrollTo.html">object:scrollTo()</a>
+</p>
+
+<p class="index">
+<a href="type/ScrollViewWidget/scrollToPosition.html">object:scrollToPosition()</a>
+</p>
+
+<p class="index">
+<a href="type/ScrollViewWidget/setScrollHeight.html">object:setScrollHeight()</a>
+</p>
+
+<p class="index">
+<a href="type/ScrollViewWidget/setScrollWidth.html">object:setScrollWidth()</a>
+</p>
+
+<p class="index">
+<a href="type/ScrollViewWidget/takeFocus.html">object:takeFocus()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="segmentedcontrolwidget">
+<h4><a href="#TOC"><a href="type/SegmentedControlWidget/index.html">SegmentedControlWidget</a></a></h4>
+<p class="index">
+<a href="type/SegmentedControlWidget/segmentLabel.html">object.segmentLabel</a>
+</p>
+
+<p class="index">
+<a href="type/SegmentedControlWidget/segmentNumber.html">object.segmentNumber</a>
+</p>
+
+
+</div>
+<div class="section level4" id="shapeobject">
+<h4><a href="#TOC"><a href="type/ShapeObject/index.html">ShapeObject</a></a></h4>
+<p class="index">
+<a href="type/ShapeObject/blendMode.html">object.blendMode</a>
+</p>
+
+<p class="index">
+<a href="type/ShapeObject/fill.html">object.fill</a>
+</p>
+
+<p class="index">
+<a href="type/ShapeObject/path.html">object.path</a>
+</p>
+
+<p class="index">
+<a href="type/ShapeObject/setFillColor.html">object:setFillColor()</a>
+</p>
+
+<p class="index">
+<a href="type/ShapeObject/setStrokeColor.html">object:setStrokeColor()</a>
+</p>
+
+<p class="index">
+<a href="type/ShapeObject/stroke.html">object.stroke</a>
+</p>
+
+<p class="index">
+<a href="type/ShapeObject/strokeWidth.html">object.strokeWidth</a>
+</p>
+
+
+</div>
+<div class="section level4" id="sliderwidget">
+<h4><a href="#TOC"><a href="type/SliderWidget/index.html">SliderWidget</a></a></h4>
+<p class="index">
+<a href="type/SliderWidget/setValue.html">object:setValue()</a>
+</p>
+
+<p class="index">
+<a href="type/SliderWidget/value.html">object.value</a>
+</p>
+
+
+</div>
+<div class="section level4" id="snapshotobject">
+<h4><a href="#TOC"><a href="type/SnapshotObject/index.html">SnapshotObject</a></a></h4>
+<p class="index">
+<a href="type/SnapshotObject/canvas.html">object.canvas</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/canvasMode.html">object.canvasMode</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/clearColor.html">object.clearColor</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/group.html">object.group</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/invalidate.html">object:invalidate()</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/textureFilter.html">object.textureFilter</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/textureWrapX.html">object.textureWrapX</a>
+</p>
+
+<p class="index">
+<a href="type/SnapshotObject/textureWrapY.html">object.textureWrapY</a>
+</p>
+
+
+</div>
+<div class="section level4" id="spinnerwidget">
+<h4><a href="#TOC"><a href="type/SpinnerWidget/index.html">SpinnerWidget</a></a></h4>
+<p class="index">
+<a href="type/SpinnerWidget/start.html">object:start()</a>
+</p>
+
+<p class="index">
+<a href="type/SpinnerWidget/stop.html">object:stop()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="spriteobject">
+<h4><a href="#TOC"><a href="type/SpriteObject/index.html">SpriteObject</a></a></h4>
+<p class="index">
+<a href="type/SpriteObject/frame.html">object.frame</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/isPlaying.html">object.isPlaying</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/numFrames.html">object.numFrames</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/pause.html">object:pause()</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/play.html">object:play()</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/sequence.html">object.sequence</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/setFrame.html">object:setFrame()</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/setSequence.html">object:setSequence()</a>
+</p>
+
+<p class="index">
+<a href="type/SpriteObject/timeScale.html">object.timeScale</a>
+</p>
+
+
+</div>
+<div class="section level4" id="stageobject">
+<h4><a href="#TOC"><a href="type/StageObject/index.html">StageObject</a></a></h4>
+<p class="index">
+<a href="type/StageObject/setFocus.html">object:setFocus()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="stepperwidget">
+<h4><a href="#TOC"><a href="type/StepperWidget/index.html">StepperWidget</a></a></h4>
+<p class="index">
+<a href="type/StepperWidget/maximumValue.html">object.maximumValue</a>
+</p>
+
+<p class="index">
+<a href="type/StepperWidget/minimumValue.html">object.minimumValue</a>
+</p>
+
+<p class="index">
+<a href="type/StepperWidget/value.html">object.value</a>
+</p>
+
+
+</div>
+<div class="section level4" id="string">
+<h4><a href="#TOC"><a href="type/String.html">String</a></a></h4>
+</div>
+<div class="section level4" id="switchwidget">
+<h4><a href="#TOC"><a href="type/SwitchWidget/index.html">SwitchWidget</a></a></h4>
+<p class="index">
+<a href="type/SwitchWidget/isOn.html">object.isOn</a>
+</p>
+
+<p class="index">
+<a href="type/SwitchWidget/setState.html">object:setState()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="tabbarwidget">
+<h4><a href="#TOC"><a href="type/TabBarWidget/index.html">TabBarWidget</a></a></h4>
+<p class="index">
+<a href="type/TabBarWidget/setSelected.html">object:setSelected()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="table">
+<h4><a href="#TOC"><a href="type/Table.html">Table</a></a></h4>
+</div>
+<div class="section level4" id="tableviewwidget">
+<h4><a href="#TOC"><a href="type/TableViewWidget/index.html">TableViewWidget</a></a></h4>
+<p class="index">
+<a href="type/TableViewWidget/deleteAllRows.html">object:deleteAllRows()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/deleteRow.html">object:deleteRow()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/getContentPosition.html">object:getContentPosition()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/getNumRows.html">object:getNumRows()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/getRowAtIndex.html">object:getRowAtIndex()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/insertRow.html">object:insertRow()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/reloadData.html">object:reloadData()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/scrollToIndex.html">object:scrollToIndex()</a>
+</p>
+
+<p class="index">
+<a href="type/TableViewWidget/scrollToY.html">object:scrollToY()</a>
+</p>
+
+
+</div>
+<div class="section level4" id="textbox">
+<h4><a href="#TOC"><a href="type/TextBox/index.html">TextBox</a></a></h4>
+<p class="index">
+<a href="type/TextBox/align.html">object.align</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/font.html">object.font</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/hasBackground.html">object.hasBackground</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/isEditable.html">object.isEditable</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/setReturnKey.html">object:setReturnKey()</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/setTextColor.html">object:setTextColor()</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/size.html">object.size</a>
+</p>
+
+<p class="index">
+<a href="type/TextBox/text.html">object.text</a>
+</p>
+
+
+</div>
+<div class="section level4" id="textfield">
+<h4><a href="#TOC"><a href="type/TextField/index.html">TextField</a></a></h4>
+<p class="index">
+<a href="type/TextField/align.html">object.align</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/font.html">object.font</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/hasBackground.html">object.hasBackground</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/inputType.html">object.inputType</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/isSecure.html">object.isSecure</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/setReturnKey.html">object:setReturnKey()</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/setTextColor.html">object:setTextColor()</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/size.html">object.size</a>
+</p>
+
+<p class="index">
+<a href="type/TextField/text.html">object.text</a>
+</p>
+
+
+</div>
+<div class="section level4" id="textobject">
+<h4><a href="#TOC"><a href="type/TextObject/index.html">TextObject</a></a></h4>
+<p class="index">
+<a href="type/TextObject/setTextColor.html">object:setTextColor()</a>
+</p>
+
+<p class="index">
+<a href="type/TextObject/size.html">object.size</a>
+</p>
+
+<p class="index">
+<a href="type/TextObject/text.html">object.text</a>
+</p>
+
+
+</div>
+<div class="section level4" id="userdata">
+<h4><a href="#TOC"><a href="type/Userdata.html">Userdata</a></a></h4>
+</div>
+<div class="section level4" id="video">
+<h4><a href="#TOC"><a href="type/Video/index.html">Video</a></a></h4>
+<p class="index">
+<a href="type/Video/currentTime.html">object.currentTime</a>
+</p>
+
+<p class="index">
+<a href="type/Video/isMuted.html">object.isMuted</a>
+</p>
+
+<p class="index">
+<a href="type/Video/load.html">object:load()</a>
+</p>
+
+<p class="index">
+<a href="type/Video/pause.html">object:pause()</a>
+</p>
+
+<p class="index">
+<a href="type/Video/play.html">object:play()</a>
+</p>
+
+<p class="index">
+<a href="type/Video/seek.html">object:seek()</a>
+</p>
+
+<p class="index">
+<a href="type/Video/totalTime.html">object.totalTime</a>
+</p>
+
+
+</div>
+<div class="section level4" id="webview">
+<h4><a href="#TOC"><a href="type/WebView/index.html">WebView</a></a></h4>
+<p class="index">
+<a href="type/WebView/back.html">object:back()</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/canGoBack.html">object.canGoBack</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/canGoForward.html">object.canGoForward</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/forward.html">object:forward()</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/hasBackground.html">object.hasBackground</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/reload.html">object:reload()</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/request.html">object:request()</a>
+</p>
+
+<p class="index">
+<a href="type/WebView/stop.html">object:stop()</a>
+</p>
+
+
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

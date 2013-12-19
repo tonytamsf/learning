@@ -1,0 +1,1873 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > chatroommanager</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > chatroommanager" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.chatroommanager">together.ChatRoomManager</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#table-chatrooms"><a href="../../api/type/Table.html">table</a> ChatRooms</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#add"><a href="#more_add">Add()</a></a></li>
+<li><a href="#findbychatroomid"><a href="#more_findbychatroomid">FindByChatRoomID()</a></a></li>
+<li><a href="#getcount"><a href="#more_getcount">GetCount()</a></a></li>
+<li><a href="#get"><a href="#more_get">Get()</a></a></li>
+<li><a href="#indexof"><a href="#more_indexof">IndexOf()</a></a></li>
+<li><a href="#indexofbychatroomid"><a href="#more_indexofbychatroomid">IndexOfByChatRoomID()</a></a></li>
+<li><a href="#remove"><a href="#more_remove">Remove()</a></a></li>
+<li><a href="#create"><a href="#more_create">Create()</a></a></li>
+<li><a href="#delete"><a href="#more_delete">Delete()</a></a></li>
+<li><a href="#getall"><a href="#more_getall">GetAll()</a></a></li>
+<li><a href="#add-1">Add()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#findbychatroomid-1">FindByChatRoomID()</a><ul>
+<li><a href="#returns-togetherchatroom">Returns <a href="togetherchatroom.html">TogetherChatRoom</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#getcount-1">GetCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+</ul></li>
+<li><a href="#get-1">Get()</a><ul>
+<li><a href="#returns-togetherchatroom-1">Returns <a href="togetherchatroom.html">TogetherChatRoom</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#indexof-1">IndexOf()</a><ul>
+<li><a href="#returns-number-1">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#indexofbychatroomid-1">IndexOfByChatRoomID()</a><ul>
+<li><a href="#returns-number-2">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#remove-1">Remove()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#create-1">Create()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#delete-1">Delete()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a><ul>
+<li><a href="#getall-1">GetAll()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-9">Syntax</a></li>
+<li><a href="#parameters-8">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-8"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="chatroommanager.html">chatroommanager</a>
+</div>
+<div class="section level1" id="together.chatroommanager">
+<h1><a href="#TOC">together.ChatRoomManager</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">ChatRoomManager</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The ChatRoomManager is used for fetching and finding chatrooms that exist for the current game.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="table-chatrooms">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> ChatRooms</a></h4>
+<p>Stores all the ChatRooms contained in the Manager.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="add">
+<h5><a href="#TOC"><a href="#more_add">Add()</a></a></h5>
+</div>
+<div class="section level5" id="findbychatroomid">
+<h5><a href="#TOC"><a href="#more_findbychatroomid">FindByChatRoomID()</a></a></h5>
+</div>
+<div class="section level5" id="getcount">
+<h5><a href="#TOC"><a href="#more_getcount">GetCount()</a></a></h5>
+</div>
+<div class="section level5" id="get">
+<h5><a href="#TOC"><a href="#more_get">Get()</a></a></h5>
+</div>
+<div class="section level5" id="indexof">
+<h5><a href="#TOC"><a href="#more_indexof">IndexOf()</a></a></h5>
+</div>
+<div class="section level5" id="indexofbychatroomid">
+<h5><a href="#TOC"><a href="#more_indexofbychatroomid">IndexOfByChatRoomID()</a></a></h5>
+</div>
+<div class="section level5" id="remove">
+<h5><a href="#TOC"><a href="#more_remove">Remove()</a></a></h5>
+</div>
+<div class="section level5" id="create">
+<h5><a href="#TOC"><a href="#more_create">Create()</a></a></h5>
+</div>
+<div class="section level5" id="delete">
+<h5><a href="#TOC"><a href="#more_delete">Delete()</a></a></h5>
+</div>
+<div class="section level5" id="getall">
+<h5><a href="#TOC"><a href="#more_getall">GetAll()</a></a></h5>
+<hr />
+<div id="more_add">
+</div>
+
+</div>
+<div class="section level3" id="add-1">
+<h3><a href="#TOC">Add()</a></h3>
+<p>Adds a ChatRoom to the manager internally without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:Add( chatRoom )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherchatroom.html">TogetherChatRoom</a> chatRoom</b></p>
+<p><i>Instance of a ChatRoom to add internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findbychatroomid">
+</div>
+
+<div class="section level3" id="findbychatroomid-1">
+<h3><a href="#TOC">FindByChatRoomID()</a></h3>
+<p>Finds the ChatRoom with the specified ChatRoomID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatroom">
+<h4><a href="#TOC">Returns <a href="togetherchatroom.html">TogetherChatRoom</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:FindByChatRoomID( chatRoomID )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatRoomID</b></p>
+<p><i>The ID of the ChatRoom to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getcount">
+</div>
+
+<div class="section level3" id="getcount-1">
+<h3><a href="#TOC">GetCount()</a></h3>
+<p>Gets the number of ChatRooms currently managed by the internal list</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:GetCount(  )</code></pre>
+<hr />
+<div id="more_get">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="get-1">
+<h3><a href="#TOC">Get()</a></h3>
+<p>Gets the ChatRoom at the specified index if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togetherchatroom-1">
+<h4><a href="#TOC">Returns <a href="togetherchatroom.html">TogetherChatRoom</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:Get( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the ChatRoom to retrieve</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexof">
+</div>
+
+<div class="section level3" id="indexof-1">
+<h3><a href="#TOC">IndexOf()</a></h3>
+<p>Returns the index of the specified ChatRoom if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-number-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:IndexOf( chatRoom )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togetherchatroom.html">TogetherChatRoom</a> chatRoom</b></p>
+<p><i>Instance of the ChatRoom to retrieve the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofbychatroomid">
+</div>
+
+<div class="section level3" id="indexofbychatroomid-1">
+<h3><a href="#TOC">IndexOfByChatRoomID()</a></h3>
+<p>Returns the index of the ChatRoom with the specified ChatRoomID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-2">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:IndexOfByChatRoomID( chatRoomID )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatRoomID</b></p>
+<p><i>The ID of the ChatRoom to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_remove">
+</div>
+
+<div class="section level3" id="remove-1">
+<h3><a href="#TOC">Remove()</a></h3>
+<p>Removes a ChatRoom from the managed list without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:Remove( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the ChatRoom to be removed if it exists</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_create">
+</div>
+
+<div class="section level3" id="create-1">
+<h3><a href="#TOC">Create()</a></h3>
+<p>Creates a ChatRoom that can be associated to a Game Instance and optionally joined immediately.</p>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:Create( name, description, roomID, gameInstanceID, chatRoomProperties, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> name</b></p>
+<p><i>The name of the new ChatRoom.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> description</b></p>
+<p><i>The description for the new ChatRoom.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> roomID</b></p>
+<p><i>The ID of the room the ChatRoom is in. Pass in 0 for no room.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> gameInstanceID</b></p>
+<p><i>The ID of the GameInstance the ChatRoom is associated with. GameInstances associated with ChatRooms will retrieved when GameInstanceManager:GetAll() is called.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> chatRoomProperties</b></p>
+<p><i>The properties to associate with the ChatRoom. Pass in null if no properties should be associated.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_delete">
+</div>
+
+<div class="section level3" id="delete-1">
+<h3><a href="#TOC">Delete()</a></h3>
+<p>Deletes a ChatRoom with the specified ID.</p>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:Delete( chatRoomID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> chatRoomID</b></p>
+<p><i>The ID of the ChatRoom to delete</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getall">
+</div>
+
+<div class="section level3" id="getall-1">
+<h3><a href="#TOC">GetAll()</a></h3>
+<p>Gets all ChatRooms or optionally all a specific user is a member of.</p>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-9">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>ChatRoomManager:GetAll( getForUserID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-8">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> getForUserID</b></p>
+<p><i>The ID of the User to get ChatRooms for. When specified, only the ChatRooms the User is a member of will be retrieved. Pass in 0 to retrieve all ChatRooms.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-8">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.chatroommanager&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.chatroommanager&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.chatroommanager&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

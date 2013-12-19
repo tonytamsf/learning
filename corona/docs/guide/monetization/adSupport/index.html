@@ -1,0 +1,1675 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > monetization > adSupport </title>
+  <meta name="revised" content="12-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > monetization > adSupport " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#implementing-ads">Implementing Ads</a><ul>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#inneractive">inneractive</a></li>
+<li><a href="#vungle">Vungle</a></li>
+<li><a href="#inmobi">InMobi</a></li>
+<li><a href="#admob">AdMob</a></li>
+<li><a href="#iads">iAds</a></li>
+</ul></li>
+<li><a href="#service-setup">Service Setup</a><ul>
+<li><a href="#inmobi-1">InMobi</a></li>
+<li><a href="#inneractive-1">inneractive</a></li>
+<li><a href="#iads-1">iAds</a></li>
+<li><a href="#admob-1">AdMob</a></li>
+</ul></li>
+<li><a href="#ad-functions">Ad Functions</a><ul>
+<li><a href="#ads.init"><a href="../../../api/library/ads/init.html">ads.init()</a></a></li>
+<li><a href="#ads.show"><a href="../../../api/library/ads/show.html">ads.show()</a></a></li>
+<li><a href="#ads.hide"><a href="../../../api/library/ads/hide.html">ads.hide()</a></a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [monetization][guide.monetization]  ▸  <a href="index.html">adSupport</a>
+</div>
+<div class="section level1" id="implementing-ads">
+<h1><a href="#TOC">Implementing Ads</a></h1>
+<p>This guide demonstrates how to make use of Corona SDK ad support. Ads are used to display advertisements within your app and provide an additional income stream.</p>
+<ul>
+<li><a href="#plugins">Project Settings</a></li>
+<li><a href="#servicesetup">Service Setup</a></li>
+<li><a href="#functions">Ad Functions</a></li>
+</ul>
+<a id="plugins"></a>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<p>To use ad services, you must specify which ad plugin(s) should be included in the compiled build. When you build the app from the Corona Simulator, the server automatically integrates the plugin(s) into your project, but you must first add an entry for each desired ad provider into the <code>plugins</code> table of <code>build.settings</code>.</p>
+<div class="section level3" id="inneractive">
+<h3><a href="#TOC">inneractive</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.ads.inneractive&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.inner-active&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,      
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="vungle">
+<h3><a href="#TOC">Vungle</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.ads.vungle&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.vungle&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,      
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="inmobi">
+<h3><a href="#TOC">InMobi</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.ads.inmobi&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.coronalabs&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,      
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="admob">
+<h3><a href="#TOC">AdMob</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.ads.admob&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.coronalabs&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,      
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="iads">
+<h3><a href="#TOC">iAds</a></h3>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">plugins</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">-- key is the name passed to Lua&#39;s &#39;require()&#39;</span>
+        <span class="ot">[</span><span class="st">&quot;CoronaProvider.ads.iads&quot;</span><span class="ot">]</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="co">-- required</span>
+            <span class="kw">publisherId</span> <span class="ot">=</span> <span class="st">&quot;com.coronalabs&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,      
+<span class="ot">}</span></code></pre>
+<a id="servicesetup"></a>
+</div>
+</div>
+<div class="section level2" id="service-setup">
+<h2><a href="#TOC">Service Setup</a></h2>
+<div class="section level3" id="inmobi-1">
+<h3><a href="#TOC">InMobi</a></h3>
+<p>Setting up a new account with InMobi is your responsibility as a developer. If you need guidance, please visit <a href="http://www.inmobi.com/helpcenter/general-help/getting-started/">this page</a>. Once you're set up, please review the InMobi example in the <a href="../../../api/library/ads/show.html">ads.show()</a> documentation.</p>
+</div>
+<div class="section level3" id="inneractive-1">
+<h3><a href="#TOC">inneractive</a></h3>
+<ol style="list-style-type: decimal">
+<li><p>If you haven't already done so, visit the <a href="http://developer.coronalabs.com/dashboard/inneractive">inneractive registration page</a> to create a new account. Click <strong>Join Us, It's FREE!</strong> in the upper-right corner.</p></li>
+<li><p>Fill in your full name, company name, email, and review the terms of use. When finished, click <strong>Get Started Now</strong>.</p></li>
+<li><p>You should be presented with a confirmation screen. Check your email and click the confirmation link in the email from &quot;inneractive&quot;. You'll then receive another email that contains your auto-generated password.</p></li>
+<li><p>You should be redirected to the <strong>Add App</strong> section where you can create an <strong>AppID</strong>. If not, log in to the <a href="http://developer.coronalabs.com/dashboard/inneractive">dashboard</a> and click the <strong>Add App</strong> tab. Fill out the form with your app details and click <strong>Create</strong>.</p></li>
+</ol>
+<div style="margin-left:40px;">
+<img src="/images/inneractive-add-app.jpg" alt="Add App (inneractive)" />
+</div>
+
+<ol start="5" style="list-style-type: decimal">
+<li>In a few seconds, your <strong>AppID</strong> will be shown. You should pass this as the second argument to <code>ads.init()</code>. Please refer to the example in the <a href="../../../api/library/ads/show.html">ads.show()</a> documentation for details.</li>
+</ol>
+</div>
+<div class="section level3" id="iads-1">
+<h3><a href="#TOC">iAds</a></h3>
+<p>iAds have certain behavioral specifications that may differ from the other providers. Please review the details in the <a href="../../../api/library/ads/show.html">ads.show()</a> documentation carefully to set up iAds as a provider.</p>
+</div>
+<div class="section level3" id="admob-1">
+<h3><a href="#TOC">AdMob</a></h3>
+<p>Registering with AdMob is your responsibility as a developer. If you need guidance, please visit <a href="http://www.admob.com/register/">this page</a>.</p>
+<a id="functions"></a>
+</div>
+</div>
+<div class="section level2" id="ad-functions">
+<h2><a href="#TOC">Ad Functions</a></h2>
+<p>With the previous steps completed, you must <code>require</code> the Corona <a href="../../../api/library/ads/index.html">ads</a> library in your project. Due to partnership requirements, Corona Analytics will remain active if you require ads in your code, overriding any corresponding setting in <code>config.lua</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">ads</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;ads&quot;</span> <span class="ot">)</span></code></pre>
+<div class="section level4" id="ads.init">
+<h4><a href="#TOC"><a href="../../../api/library/ads/init.html">ads.init()</a></a></h4>
+<p>This function initializes the Corona <code>ads</code> library by specifying the name of the ad network service provider and the application identifier.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">ads</span><span class="ot">.</span>init<span class="ot">(</span> <span class="kw">providerName</span>, <span class="kw">appID</span> <span class="ot">[</span>, <span class="kw">adListener</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<ul>
+<li><strong>providerName</strong> — a string representing the ad network you wish to use.</li>
+<li><strong>appID</strong> — the unique app ID from the provider's network to use in your app.</li>
+<li><strong>adListener</strong> — optional function that will receive an event indicating if showing an ad has succeeded or failed. This will be called for every new ad that is requested, according to the interval given to the <a href="../../../api/library/ads/show.html">ads.show()</a> function. Provides a property <code>event.isError</code> which will be <code>true</code> if the system failed to retrieve an ad. This can occur if the ad network is unreachable or is out of inventory/ads, in which case nothing is shown on screen. <code>event.isError</code> will be <code>false</code> if an ad was successfully retrieved and displayed on screen. For iAds, the property <code>event.response</code> is also provided, which will contain the status message or error message returned by the ads provider.</li>
+</ul>
+</div>
+<div class="section level4" id="ads.show">
+<h4><a href="#TOC"><a href="../../../api/library/ads/show.html">ads.show()</a></a></h4>
+<p>This function begins showing ads at the given screen location on the provided refresh period.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">ads</span><span class="ot">.</span>show<span class="ot">(</span> <span class="kw">adUnitType</span> <span class="ot">[</span>, <span class="kw">params</span><span class="ot">]</span> <span class="ot">)</span></code></pre>
+<ul>
+<li><p><strong>adUnitType</strong> (required) — this option varies by provider. Please refer to <strong>Ad Unit Values</strong> in the <a href="../../../api/library/ads/show.html">ads.show()</a> documentation.</p></li>
+<li><p><strong>params</strong> (optional) — used for initial settings of the ad unit.</p>
+<p><code>x</code> (number) — the upper-left banner position. Defaults to 0. For iAds, this applies only to the <code>banner</code> ad type.</p>
+<p><code>y</code> (number) — The top banner position. Defaults to 0. For iAds, this applies only to the <code>banner</code> ad type.</p>
+<p><code>interval</code> (number) — the ad refresh time (in seconds). Defaults to 10 for InMobi; 60 for inneractive. Not applicable for iAds.</p>
+<p><code>testMode</code> (boolean) — set to <code>true</code> for development/testing. Defaults to <code>false</code>. Not applicable for iAds.</p></li>
+</ul>
+</div>
+<div class="section level4" id="ads.hide">
+<h4><a href="#TOC"><a href="../../../api/library/ads/hide.html">ads.hide()</a></a></h4>
+<p>This function removes the currently shown ad from the screen and prevents new ads from being retrieved until <a href="../../../api/library/ads/show.html">ads.show()</a> has been called again. If you wish to use different ad providers in different scenes of your app, you should hide the current ads before calling <code>ads.init()</code> with the new provider.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">ads</span><span class="ot">.</span>hide<span class="ot">()</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 12-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.monetization.adSupport.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.monetization.adSupport.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.monetization.adSupport.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

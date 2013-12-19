@@ -1,0 +1,1742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Types > InputAxis > type</title>
+  <meta name="revised" content="04-Sep-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Types > InputAxis > type" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#object.type">object.type</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#type-names">Type Names</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Types</a>  ▸  <a href="index.html">InputAxis</a>  ▸  <a href="type.html">Types</a>
+</div>
+<div class="section level1" id="object.type">
+<h1><a href="#TOC">object.type</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../String.html">String</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Object</strong></td>
+<td align="left"><a href="index.html">InputAxis</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">device, input, axis, type</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>A string describing the type of axis input the device has, such as &quot;x&quot; or &quot;y&quot; for a joystick's x-axis or y-axis input. This is informational only and should not be used to identify the type of data provided by the axis input. See the &quot;Gotchas&quot; section below for the reason why.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p><strong>You should not rely on this property to identify the axis.</strong></p>
+<p>Identifying the axis types of an input device is highly unreliable. It is common for an axis to misidentify itself, such as an axis identified as &quot;rotationZ&quot; for the x-axis of a right thumbstick. This is because there isn't a common standard for input device manufacturers to follow between platforms other than the de facto standard where the first 2 axis inputs are the x and y of a joystick. Because of this, you should not rely on this <code>type</code> property. It is better to provide a key and axis binding screen to the end-user for mapping input controls, much like how it is done for desktop games.</p>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- Fetch all input devices currently connected to the system.</span>
+<span class="kw">local</span> <span class="kw">inputDevices</span> <span class="ot">=</span> <span class="kw">system</span><span class="ot">.</span>getInputDevices<span class="ot">()</span>
+
+<span class="co">-- Traverse all input devices.</span>
+<span class="kw">for</span> <span class="kw">deviceIndex</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="ot">#</span><span class="kw">inputDevices</span> <span class="kw">do</span>
+    <span class="co">-- Fetch the input device&#39;s axes.</span>
+    <span class="kw">local</span> <span class="kw">inputAxes</span> <span class="ot">=</span> <span class="kw">inputDevices</span><span class="ot">[</span><span class="kw">deviceIndex</span><span class="ot">]</span>:getAxes<span class="ot">()</span>
+
+    <span class="co">-- Print all available axis type information to the log.</span>
+    <span class="kw">for</span> <span class="kw">axisIndex</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="ot">#</span><span class="kw">inputAxes</span> <span class="kw">do</span>
+        <span class="kw">local</span> <span class="kw">inputAxis</span> <span class="ot">=</span> <span class="kw">inputAxes</span><span class="ot">[</span><span class="kw">axisIndex</span><span class="ot">]</span>
+        <span class="fu">print</span><span class="ot">(</span><span class="kw">inputAxis</span><span class="ot">.</span><span class="kw">descriptor</span> <span class="ot">..</span> <span class="st">&quot;: &quot;</span> <span class="ot">..</span> <span class="kw">inputAxis</span><span class="ot">.</span><span class="kw">type</span><span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span></code></pre>
+</div>
+<div class="section level2" id="type-names">
+<h2><a href="#TOC">Type Names</a></h2>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Name</strong></td>
+<td align="left"><strong>Description</strong></td>
+</tr>
+<tr class="even">
+<td align="left">&quot;unknown&quot;</td>
+<td align="left">The type of axis input is unknown.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;x&quot;</td>
+<td align="left">- For a joystick or gamepad, this is the absolute x-axis position of the stick.<br><br>- For a touchscreen or mouse, this is the cursor's x-axis position on screen in pixels.<br><br>- For a touchpad, this is the absolute x-axis position on the pad.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;y&quot;</td>
+<td align="left">- For a joystick or gamepad, this is the absolute y-axis position of the stick.<br><br>- For a touchscreen or mouse, this is the cursor's y-axis position on screen in pixels.<br><br>- For a touchpad, this is the absolute y-axis position on the pad.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;z&quot;</td>
+<td align="left">Represents th z-axis for a 3D input device.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;rotationX&quot;</td>
+<td align="left">Indicates that the device provides rotation input around the x-axis.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;rotationY&quot;</td>
+<td align="left">Indicates that the device provides rotation input around the y-axis.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;rotationZ&quot;</td>
+<td align="left">Indicates that the device provides rotation input around the z-axis.<br>This is commonly used by a flightstick, where the joystick can be rotated to conrol the rudder.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;hatX&quot;</td>
+<td align="left">The absolute x-axis position of a hat switch, which is typically found at the top of a flightstick.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;hatY&quot;</td>
+<td align="left">The absolute y-axis position of a hat switch, which is typically found at the top of a flightstick.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;leftTrigger&quot;</td>
+<td align="left">The left analog trigger on a gamepad.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;rightTrigger&quot;</td>
+<td align="left">The right analog trigger on a gamepad.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;gas&quot;</td>
+<td align="left">Indicates that the device provides gas pedal input. On Android, this will sometimes represent the right analog trigger on a gamepad.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;brake&quot;</td>
+<td align="left">Indicates that the device provides brake pedal input. On Android, this will sometimes represent the left analog trigger on a gamepad.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;wheel&quot;</td>
+<td align="left">Provides the absolute position of a steering wheel.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;rudder&quot;</td>
+<td align="left">Absolute position of the rudder from a flightstick or pedals.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;throttle&quot;</td>
+<td align="left">Absolute position of a throttle or slider device.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;verticalScroll&quot;</td>
+<td align="left">Provides relative vertical movements from a scroll wheel or scroll ball.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;horizontalScroll&quot;</td>
+<td align="left">Provides relative horizontal movements from a scroll wheel or scroll ball.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;orientation&quot;</td>
+<td align="left">Indicates the direction that a stylus or finger is relative to a surface.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;hoverDistance&quot;</td>
+<td align="left">Provides the distance that a finger or stylus is being held away from the touchscreen or touchpad.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;hoverMajor&quot;</td>
+<td align="left">Provides the length of the major axis of the stylus or finger that is about the touchscreen or touchpad.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;hoverMinor&quot;</td>
+<td align="left">Provides the length of the minor axis of the stylus or finger that is about the touchscreen or touchpad.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;touchSize&quot;</td>
+<td align="left">Provides the surface area that is in contact with the touchscreen or touchpad.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;touchMajor&quot;</td>
+<td align="left">Provides the length of the major axis of the stylus or finger that is in contact with the touchscreen or touchpad.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;touchMinor&quot;</td>
+<td align="left">Provides the length of the minor axis of the stylus or finger that is in contact with the touchscreen or touchpad.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;pressure&quot;</td>
+<td align="left">Provides the amount of pressure applied to the touchscreen or touchpad. Can be used by a mouse or trackball to indicate that a button was pressed.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;tilt&quot;</td>
+<td align="left">Provides the angle that a stylus is being held, relative to the surface.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic1&quot;</td>
+<td align="left">Generic axis input 1. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic2&quot;</td>
+<td align="left">Generic axis input 2. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic3&quot;</td>
+<td align="left">Generic axis input 3. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic4&quot;</td>
+<td align="left">Generic axis input 4. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic5&quot;</td>
+<td align="left">Generic axis input 5. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic6&quot;</td>
+<td align="left">Generic axis input 6. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic7&quot;</td>
+<td align="left">Generic axis input 7. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic8&quot;</td>
+<td align="left">Generic axis input 8. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic9&quot;</td>
+<td align="left">Generic axis input 9. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic10&quot;</td>
+<td align="left">Generic axis input 10. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic11&quot;</td>
+<td align="left">Generic axis input 11. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic12&quot;</td>
+<td align="left">Generic axis input 12. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic13&quot;</td>
+<td align="left">Generic axis input 13. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic14&quot;</td>
+<td align="left">Generic axis input 14. The data it provides is device specific.</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;generic15&quot;</td>
+<td align="left">Generic axis input 15. The data it provides is device specific.</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;generic16&quot;</td>
+<td align="left">Generic axis input 16. The data it provides is device specific.</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 04-Sep-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.type.InputAxis.type&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.type.InputAxis.type&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.type.InputAxis.type&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

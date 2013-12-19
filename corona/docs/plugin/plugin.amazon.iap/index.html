@@ -1,0 +1,1710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > plugin.amazon.iap </title>
+  <meta name="revised" content="22-Aug-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > plugin.amazon.iap " />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#plugin.amazon.iap.">plugin.amazon.iap.*</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#sign-up">Sign Up</a></li>
+<li><a href="#platforms">Platforms</a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#project-settings">Project Settings</a><ul>
+<li><a href="#sdk">SDK</a></li>
+<li><a href="#enterprise">Enterprise</a></li>
+</ul></li>
+<li><a href="#sample-code">Sample Code</a></li>
+<li><a href="#support">Support</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">plugin.amazon.iap</a>
+</div>
+<div class="section level1" id="plugin.amazon.iap.">
+<h1><a href="#TOC">plugin.amazon.iap.*</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../api/type/Library.html">library</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">plugin.amazon.iap</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>See also</strong></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Availability</strong></td>
+<td align="left">Pro, Enterprise</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The Amazon In-App Purchasing plugin lets you sell digital content and subscriptions--such as in-game currency, expansion packs, upgrades, magazine issues and more--from within your apps.</p>
+</div>
+<div class="section level2" id="sign-up">
+<h2><a href="#TOC">Sign Up</a></h2>
+<p>To use the Amazon In-App Purchasing API, you must distribute your app with the Amazon Appstore. please <a href="http://developer.amazon.com">sign up</a> for an account.</p>
+</div>
+<div class="section level2" id="platforms">
+<h2><a href="#TOC">Platforms</a></h2>
+<p>The following platforms are supported:</p>
+<ul>
+<li>Amazon Appstore for Android</li>
+</ul>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>local amazonIAP = require &quot;plugin.amazon.iap&quot;</code></pre>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<p>Before using the Amazon IAP plugin, please familiarize yourself with the Amazon In-App Purchasing workflows <a href="https://developer.amazon.com/sdk/in-app-purchasing.html">here</a>. Please note, you must install the <a href="https://developer.amazon.com/sdk/in-app-purchasing/documentation/testing-iap.html">Amazon SDK Tester</a> or publish your app through the Amazon Appstore to use the Amazon IAP plugin.</p>
+<p>The Amazon IAP plugin provides most functions and fields provided by the core store library with some minor differences as detailed below</p>
+<ul>
+<li>target
+<ul>
+<li>Always equals 'amazon'. Your app should not require the plugin until it has been determined to be appropriate, but this target can be used for conditional logic elsewhere in your app.</li>
+</ul></li>
+<li>init
+<ul>
+<li>This function does not take an optional store name as the first parameter. The only parameter must be the purchase callback function.</li>
+</ul></li>
+<li>canLoadProducts
+<ul>
+<li>Always equals true</li>
+</ul></li>
+<li>loadProducts
+<ul>
+<li>The products in the loadProducts callback also includes &quot;itemType&quot; which can be one of &quot;CONSUMABLE&quot;, &quot;ENTITLEMENT&quot;, or &quot;SUBSCRIPTION&quot;</li>
+</ul></li>
+<li>canMakePurchases
+<ul>
+<li>Always equals true. The Amazon Appstore allows a customer to disable In-App Purchasing, the IAP workflow will reflect this when the user is prompted to buy an item. There is no way for your app to know if a user has disabled Amazon In-App Purchasing.</li>
+</ul></li>
+<li>purchase
+<ul>
+<li>purchase() takes a string(a single SKU) instead of an array of items to purchase. The Amazon IAP plugin does not support purchasing multiple items in one transaction.</li>
+<li>transaction objects in the purchase callback additionally contain 'userId' identifying the user that made the purchase</li>
+<li>transaction objects in the purchase callback may additionally contain 'subscriptionStartDate' and 'subscriptionEndDate' if the purchased item was a subscription. These are represented as epoch-milliseconds.</li>
+<li>transaction objects in the purchase callback will never contain &quot;date&quot;</li>
+<li>transaction objects in the purchase callback will never contain &quot;signature&quot;.</li>
+<li>transaction objects in the purchase callback will never be in the state &quot;canceled&quot;. The state will be &quot;FAILED&quot; if the user canceled the transaction.</li>
+<li>If you call purchase() on an entitlement or subscription that the user already owns, the callback will be called but none of the fields will be filled out except 'state' which will be 'restored'. This is a limitation of the Amazon IAP SDK. You should not call purchase on entitlements that the user already owns.</li>
+</ul></li>
+<li>finishTransaction
+<ul>
+<li>This call is a no-op. It is not required while using the Amazon IAP plugin.</li>
+</ul></li>
+<li>restore
+<ul>
+<li>Transaction objects in the purchase callback will never contain &quot;originalReceipt&quot;, &quot;originalIdentifier&quot;, &quot;originalDate&quot; in the event of a restore. Restore events are identical to purchase events, just with a different state(&quot;restored&quot;).</li>
+<li>The Amazon IAP plugin has an additional state that is possible after calling restore, &quot;revoked&quot;. A transaction with state &quot;revoked&quot; will still contain userId, identifier, and productIdentifier.</li>
+</ul></li>
+</ul>
+<p>The following functions and fields in the Corona store API are not supported by the Amazon IAP Plugin</p>
+<ul>
+<li>availableStores</li>
+</ul>
+<p>The following functions and fields are provided by the Amazon IAP Plugin and are additional to the Corona store API.</p>
+<ul>
+<li>getUserId()
+<ul>
+<li>getUserId() can be called anytime after calling init() to determine the ID of the currently logged in user.</li>
+<li>getUserId() will return nil if called before init(). getUserId() will return 'unknown' if the logged in user is unknown.</li>
+</ul></li>
+<li>isSandboxMode()
+<ul>
+<li>isSandboxMode() returns true when your app running in the context of the Amazon SDK Tester and returns false when your app has been installed by the Amazon Appstore</li>
+</ul></li>
+</ul>
+</div>
+<div class="section level2" id="project-settings">
+<h2><a href="#TOC">Project Settings</a></h2>
+<div class="section level3" id="sdk">
+<h3><a href="#TOC">SDK</a></h3>
+<p>When you build using the Corona Simulator, the server automatically takes care of integrating the plugin into your project.</p>
+<p>All you need to do is add an entry into a <code>plugins</code> table of your <code>build.settings</code>. The following is an example of a minimal <code>build.settings</code> file:</p>
+<p>Amazon IAP plugin is not supported on any platform except android. On these platforms the library methods are stubbed</p>
+<pre><code>settings =
+{
+    plugins =
+    {
+        -- key is the name passed to Lua&#39;s &#39;require()&#39;
+        [&quot;plugin.amazon.iap&quot;] =
+        {
+            -- required
+            publisherId = &quot;com.amazon&quot;,
+        },
+    },      
+}</code></pre>
+</div>
+<div class="section level3" id="enterprise">
+<h3><a href="#TOC">Enterprise</a></h3>
+<p>This plugin is prebundled in the Plugins-3rd-Party folder of the CoronaEnterprise download.</p>
+<p>Copy the following JAR files to the libs directory of your Android project:</p>
+<pre><code>in-app-purchasing-1.0.3.jar
+plugin.amazon.iap.jar </code></pre>
+<p>Alternatively, you may wish to use the in-app-purchasing-1.0.3.jar directly. The documentation for the In-App Purchasing API can be found <a href="https://developer.amazon.com/sdk/in-app-purchasing.html">here</a>.</p>
+</div>
+</div>
+<div class="section level2" id="sample-code">
+<h2><a href="#TOC">Sample Code</a></h2>
+<pre><code>local function storeListener( event ) 
+    local transaction = event.transaction 
+    if transaction.state == &quot;purchased&quot; then 
+        print(&quot;productIdentifier&quot;, transaction.productIdentifier) 
+        print(&quot;receipt&quot;, transaction.receipt) 
+        print(&quot;transactionIdentifier&quot;, transaction.identifier) 
+        print (&quot;The user who made the purchase was&quot;, transaction.userId) 
+
+        --Entitle this SKU here: 
+
+    elseif  transaction.state == &quot;restored&quot; then 
+        print(&quot;productIdentifier&quot;, transaction.productIdentifier) 
+        print(&quot;receipt&quot;, transaction.receipt) 
+        print(&quot;transactionIdentifier&quot;, transaction.identifier) 
+        print (&quot;The user who made the purchase was&quot;, transaction.userId) 
+        --Entitle this SKU here: 
+
+    elseif  transaction.state == &quot;revoked&quot; then 
+        print(&quot;productIdentifier&quot;, transaction.productIdentifier) 
+        print(&quot;receipt&quot;, transaction.receipt) 
+        print(&quot;transactionIdentifier&quot;, transaction.identifier) 
+        print (&quot;The user who has a revoked purchase is&quot;, transaction.userId) 
+        --Revoke this SKU here: 
+
+    elseif transaction.state == &quot;failed&quot; then 
+        print(&quot;Transaction failed&quot;, transaction.errorType, transaction.errorString) 
+        --display an error message here 
+    end 
+end 
+
+local function loadProductsListener( event ) 
+    local products = event.products 
+    for i=1, #event.products do 
+        print(event.products[i].title) 
+        print(event.products[i].description) 
+        print(event.products[i].localizedPrice) 
+        print(event.products[i].productIdentifier) 
+    end 
+    for i=1, #event.invalidProducts do 
+        print(event.invalidProducts[i]) 
+    end 
+end 
+
+store = require &quot;store&quot; 
+if system.getInfo(&quot;targetAppStore&quot;) == &quot;amazon&quot;  or system.getInfo(&quot;environment&quot;) == &quot;simulator&quot; then 
+    store = require &quot;plugin.amazon.iap&quot; 
+
+    store.init( storeListener ) 
+    print(&quot;The currently logged in user is: &quot;, store.getUserId())
+    store.restore() 
+
+    if store.canLoadProducts == true then 
+        store.loadProducts({&quot;my_sku&quot;}, loadProductsListener) 
+    end 
+
+    if store.isSandboxMode() == true then 
+        store.purchase(&quot;my_test_sku&quot;) 
+    else 
+        store.purchase(&quot;my_real_sku&quot;) 
+    end 
+end </code></pre>
+</div>
+<div class="section level2" id="support">
+<h2><a href="#TOC">Support</a></h2>
+<p>More support is available:</p>
+<ul>
+<li><a href="https://developer.amazon.com/help/contactus.html">ContactUs</a></li>
+<li><a href="http://forums.coronalabs.com/forum/614-amazon-iap/">Forum</a></li>
+<li><a href="http://developer.amazon.com">Amazon Mobile App Distribution Portal</a></li>
+</ul>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 22-Aug-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.plugin.amazon.iap.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.plugin.amazon.iap.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.plugin.amazon.iap.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

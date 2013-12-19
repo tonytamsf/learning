@@ -1,0 +1,1789 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > togetheruser</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > togetheruser" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.togetheruser">together.TogetherUser</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#number-userid"><a href="../../api/type/Number.html">number</a> UserID</a></li>
+<li><a href="#string-userguid"><a href="../../api/type/String.html">string</a> UserGuid</a></li>
+<li><a href="#number-activeuseraccounttypeid"><a href="../../api/type/Number.html">number</a> ActiveUserAccountTypeID</a></li>
+<li><a href="#string-name"><a href="../../api/type/String.html">string</a> Name</a></li>
+<li><a href="#string-username"><a href="../../api/type/String.html">string</a> Username</a></li>
+<li><a href="#string-email"><a href="../../api/type/String.html">string</a> Email</a></li>
+<li><a href="#boolean-active"><a href="../../api/type/Boolean.html">boolean</a> Active</a></li>
+<li><a href="#boolean-anonymous"><a href="../../api/type/Boolean.html">boolean</a> Anonymous</a></li>
+<li><a href="#propertycollection-properties"><a href="propertycollection.html">PropertyCollection</a> Properties</a></li>
+<li><a href="#togetherfacebookuser-facebookuser"><a href="togetherfacebookuser.html">TogetherFacebookUser</a> FacebookUser</a></li>
+<li><a href="#togethercustomuser-customuser"><a href="togethercustomuser.html">TogetherCustomUser</a> CustomUser</a></li>
+<li><a href="#togetherclientuserprofile-clientuserprofile"><a href="togetherclientuserprofile.html">TogetherClientUserProfile</a> ClientUserProfile</a></li>
+<li><a href="#togethergameuserprofile-gameuserprofile"><a href="togethergameuserprofile.html">TogetherGameUserProfile</a> GameUserProfile</a></li>
+<li><a href="#useritemmanager-useritemmanager"><a href="useritemmanager.html">UserItemManager</a> UserItemManager</a></li>
+<li><a href="#userachievementmanager-userachievementmanager"><a href="userachievementmanager.html">UserAchievementManager</a> UserAchievementManager</a></li>
+<li><a href="#usergamemanager-usergamemanager"><a href="usergamemanager.html">UserGameManager</a> UserGameManager</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#getviewname"><a href="#more_getviewname">GetViewName()</a></a></li>
+<li><a href="#gettogetherfacebookuser"><a href="#more_gettogetherfacebookuser">GetTogetherFacebookUser()</a></a></li>
+<li><a href="#gettogethercustomuser"><a href="#more_gettogethercustomuser">GetTogetherCustomUser()</a></a></li>
+<li><a href="#isfacebookregistered"><a href="#more_isfacebookregistered">IsFacebookRegistered()</a></a></li>
+<li><a href="#iscustomregistered"><a href="#more_iscustomregistered">IsCustomRegistered()</a></a></li>
+<li><a href="#getdetails"><a href="#more_getdetails">GetDetails()</a></a></li>
+<li><a href="#modify"><a href="#more_modify">Modify()</a></a></li>
+<li><a href="#getviewname-1">GetViewName()</a><ul>
+<li><a href="#returns-string">Returns <a href="../../api/type/String.html">string</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+</ul></li>
+<li><a href="#gettogetherfacebookuser-1">GetTogetherFacebookUser()</a><ul>
+<li><a href="#returns-togetherfacebookuser">Returns <a href="togetherfacebookuser.html">TogetherFacebookUser</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+</ul></li>
+<li><a href="#gettogethercustomuser-1">GetTogetherCustomUser()</a><ul>
+<li><a href="#returns-togethercustomuser">Returns <a href="togethercustomuser.html">TogetherCustomUser</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+</ul></li>
+<li><a href="#isfacebookregistered-1">IsFacebookRegistered()</a><ul>
+<li><a href="#returns-boolean">Returns <a href="../../api/type/Boolean.html">boolean</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+</ul></li>
+<li><a href="#iscustomregistered-1">IsCustomRegistered()</a><ul>
+<li><a href="#returns-boolean-1">Returns <a href="../../api/type/Boolean.html">boolean</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+</ul></li>
+<li><a href="#getdetails-1">GetDetails()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#modify-1">Modify()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="togetheruser.html">togetheruser</a>
+</div>
+<div class="section level1" id="together.togetheruser">
+<h1><a href="#TOC">together.TogetherUser</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">TogetherUser</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The TogetherUser class represents a Together User.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="number-userid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> UserID</a></h4>
+<p>The ID of the User.</p>
+</div>
+<div class="section level4" id="string-userguid">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> UserGuid</a></h4>
+<p>The Guid assigned to the user that should be cached on the device. When the UserGuid is passed while sending the 'loginuser' message to the server, the User assigned the UserGuid will be returned.</p>
+</div>
+<div class="section level4" id="number-activeuseraccounttypeid">
+<h4><a href="#TOC"><a href="../../api/type/Number.html">number</a> ActiveUserAccountTypeID</a></h4>
+<p>The type of account the User has. This member represents the last registration performed by the user. 0=Anonymous, 1=Facebook, 2=Twitter, 3=GooglePlus, 4=GameCenter, 5=Custom</p>
+</div>
+<div class="section level4" id="string-name">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> Name</a></h4>
+<p>The name of the User. For anonymous users, it will be in the format 'user_###' where ### equals the UserID of the User. For registered users, this will be equal to the Users name from some external social network. When a User registers via Facebook, Name will be set to their Facebook name.</p>
+</div>
+<div class="section level4" id="string-username">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> Username</a></h4>
+<p>The username for the User. It will be in the format 'user_###' where ### equals the UserID of the User. This value is generated when a new User logs into a together game for the first. This value can not be changed at this time.</p>
+</div>
+<div class="section level4" id="string-email">
+<h4><a href="#TOC"><a href="../../api/type/String.html">string</a> Email</a></h4>
+<p>The email of the User.</p>
+</div>
+<div class="section level4" id="boolean-active">
+<h4><a href="#TOC"><a href="../../api/type/Boolean.html">boolean</a> Active</a></h4>
+<p>A boolean indicating whether the User is active.</p>
+</div>
+<div class="section level4" id="boolean-anonymous">
+<h4><a href="#TOC"><a href="../../api/type/Boolean.html">boolean</a> Anonymous</a></h4>
+<p>A boolean indicating whether the User has registered yet.</p>
+</div>
+<div class="section level4" id="propertycollection-properties">
+<h4><a href="#TOC"><a href="propertycollection.html">PropertyCollection</a> Properties</a></h4>
+<p>A property collection containing all custom properties for the User.</p>
+</div>
+<div class="section level4" id="togetherfacebookuser-facebookuser">
+<h4><a href="#TOC"><a href="togetherfacebookuser.html">TogetherFacebookUser</a> FacebookUser</a></h4>
+<p>An instance of a FacebookUser object containing facebook user information. If FacebookUser is non nil, then the User has performed a Facebook registration at some time.</p>
+</div>
+<div class="section level4" id="togethercustomuser-customuser">
+<h4><a href="#TOC"><a href="togethercustomuser.html">TogetherCustomUser</a> CustomUser</a></h4>
+<p>An instance of a CustomUser object containing custom user information. If CustomUser is non nil, then the User has performed a Custom registration at some time.</p>
+</div>
+<div class="section level4" id="togetherclientuserprofile-clientuserprofile">
+<h4><a href="#TOC"><a href="togetherclientuserprofile.html">TogetherClientUserProfile</a> ClientUserProfile</a></h4>
+<p>An instance of a ClientUserProfile object containing client specific properties for the User.</p>
+</div>
+<div class="section level4" id="togethergameuserprofile-gameuserprofile">
+<h4><a href="#TOC"><a href="togethergameuserprofile.html">TogetherGameUserProfile</a> GameUserProfile</a></h4>
+<p>An instance of a GameUserProfile object containing game specific properties for the User.</p>
+</div>
+<div class="section level4" id="useritemmanager-useritemmanager">
+<h4><a href="#TOC"><a href="useritemmanager.html">UserItemManager</a> UserItemManager</a></h4>
+<p>An instance of a UserItemManager object so developers can have quick access to User's inventory of Items.</p>
+</div>
+<div class="section level4" id="userachievementmanager-userachievementmanager">
+<h4><a href="#TOC"><a href="userachievementmanager.html">UserAchievementManager</a> UserAchievementManager</a></h4>
+<p>An instance of a UserAchievementManager object so developers can have quick access to a User's UserAchievements.</p>
+</div>
+<div class="section level4" id="usergamemanager-usergamemanager">
+<h4><a href="#TOC"><a href="usergamemanager.html">UserGameManager</a> UserGameManager</a></h4>
+<p>An instance of a UserGameManager object so developers can have quick access to the list of games a User has played.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="getviewname">
+<h5><a href="#TOC"><a href="#more_getviewname">GetViewName()</a></a></h5>
+</div>
+<div class="section level5" id="gettogetherfacebookuser">
+<h5><a href="#TOC"><a href="#more_gettogetherfacebookuser">GetTogetherFacebookUser()</a></a></h5>
+</div>
+<div class="section level5" id="gettogethercustomuser">
+<h5><a href="#TOC"><a href="#more_gettogethercustomuser">GetTogetherCustomUser()</a></a></h5>
+</div>
+<div class="section level5" id="isfacebookregistered">
+<h5><a href="#TOC"><a href="#more_isfacebookregistered">IsFacebookRegistered()</a></a></h5>
+</div>
+<div class="section level5" id="iscustomregistered">
+<h5><a href="#TOC"><a href="#more_iscustomregistered">IsCustomRegistered()</a></a></h5>
+</div>
+<div class="section level5" id="getdetails">
+<h5><a href="#TOC"><a href="#more_getdetails">GetDetails()</a></a></h5>
+</div>
+<div class="section level5" id="modify">
+<h5><a href="#TOC"><a href="#more_modify">Modify()</a></a></h5>
+<hr />
+<div id="more_getviewname">
+</div>
+
+</div>
+<div class="section level3" id="getviewname-1">
+<h3><a href="#TOC">GetViewName()</a></h3>
+<p>Returns the visual display name for the User.</p>
+<div class="section level4" id="returns-string">
+<h4><a href="#TOC">Returns <a href="../../api/type/String.html">string</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:GetViewName(  )</code></pre>
+<hr />
+<div id="more_gettogetherfacebookuser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="gettogetherfacebookuser-1">
+<h3><a href="#TOC">GetTogetherFacebookUser()</a></h3>
+<p>Gets the FacebookUser associated to this Together User if it exists, otherwise this will create and assign an empty FacebookUser, then return it</p>
+<div class="section level4" id="returns-togetherfacebookuser">
+<h4><a href="#TOC">Returns <a href="togetherfacebookuser.html">TogetherFacebookUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:GetTogetherFacebookUser(  )</code></pre>
+<hr />
+<div id="more_gettogethercustomuser">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="gettogethercustomuser-1">
+<h3><a href="#TOC">GetTogetherCustomUser()</a></h3>
+<p>Gets the CustomUSer associated to this Together User if it exists, otherwise this will create and assign an empty CustomUser, then return it</p>
+<div class="section level4" id="returns-togethercustomuser">
+<h4><a href="#TOC">Returns <a href="togethercustomuser.html">TogetherCustomUser</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:GetTogetherCustomUser(  )</code></pre>
+<hr />
+<div id="more_isfacebookregistered">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="isfacebookregistered-1">
+<h3><a href="#TOC">IsFacebookRegistered()</a></h3>
+<p>Returns a boolean indicating whether the User has registered via Facebook.</p>
+<div class="section level4" id="returns-boolean">
+<h4><a href="#TOC">Returns <a href="../../api/type/Boolean.html">boolean</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:IsFacebookRegistered(  )</code></pre>
+<hr />
+<div id="more_iscustomregistered">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="iscustomregistered-1">
+<h3><a href="#TOC">IsCustomRegistered()</a></h3>
+<p>Returns a boolean indicating whether the User has registered via Custom registration.</p>
+<div class="section level4" id="returns-boolean-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Boolean.html">boolean</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:IsCustomRegistered(  )</code></pre>
+<hr />
+<div id="more_getdetails">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="getdetails-1">
+<h3><a href="#TOC">GetDetails()</a></h3>
+<p>Gets all the User's details. Upon success, this will automatically update the internal data. The UserID member is passed along to the server when this method is called.</p>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:GetDetails( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_modify">
+</div>
+
+<div class="section level3" id="modify-1">
+<h3><a href="#TOC">Modify()</a></h3>
+<p>Modifies a User. Upon success, this will automatically update the internal data. The Properties, ClientUserProfile properties, and GameUserProfile properties are sent to the server when this method is called.</p>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>TogetherUser:Modify( callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.togetheruser&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.togetheruser&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.togetheruser&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

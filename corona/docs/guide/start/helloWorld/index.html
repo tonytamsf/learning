@@ -1,0 +1,1713 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > start > helloWorld </title>
+  <meta name="revised" content="17-Jul-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > start > helloWorld " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#corona-in-5-minutes">Corona in 5 Minutes</a><ul>
+<li><a href="#printing-hello-world">Printing &quot;Hello World!&quot;</a></li>
+<li><a href="#displaying-hello-world">Displaying &quot;Hello World!&quot;</a></li>
+<li><a href="#setting-text-color">Setting Text Color</a></li>
+<li><a href="#setting-default-text-color">Setting Default Text Color</a></li>
+<li><a href="#basic-interactivity">Basic Interactivity</a><ul>
+<li><a href="#event-listener">Event Listener</a></li>
+</ul></li>
+<li><a href="#rapid-physics">Rapid Physics</a><ul>
+<li><a href="#physics-library">Physics Library</a></li>
+<li><a href="#visual-objects">Visual Objects</a></li>
+<li><a href="#physics-bodies">Physics Bodies</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [start][guide.start]  ▸  <a href="index.html">helloWorld</a>
+</div>
+<div class="section level1" id="corona-in-5-minutes">
+<h1><a href="#TOC">Corona in 5 Minutes</a></h1>
+<p>The best way to learn Corona is by writing sample apps. To do this, you write programs in a language called <strong>Lua</strong>. If you're new to the language, please read the <a href="../introLua/index.html">Introduction to Lua</a>.</p>
+<p>In keeping with tradition, you'll write some Lua code that prints &quot;Hello World!&quot; to the Terminal/Output window. Then you'll display that text to the screen, change its color, and create basic tap interactivity to change its color randomly. After that, you'll learn how to implement physics in Corona with just a few lines of code.</p>
+<div class="guides-toc">
+
+<ul>
+<li><a href="#printhello">Printing &quot;Hello World!&quot;</a></li>
+<li><a href="#displayhello">Displaying &quot;Hello World!&quot;</a></li>
+<li><a href="#settextcolor">Setting Text Color</a></li>
+<li><a href="#defaulttextcolor">Setting Default Text Color</a></li>
+<li><a href="#basicinteractivity">Basic Interactivity</a></li>
+<li><a href="#physics">Rapid Physics</a></li>
+</ul>
+</div>
+
+
+<a id="printhello"></a>
+<div class="section level2" id="printing-hello-world">
+<h2><a href="#TOC">Printing &quot;Hello World!&quot;</a></h2>
+<div class="guide-notebox">
+<div class="notebox-title">
+Linking the Terminal
+</div>
+
+<p>In <strong>Mac OS X</strong>, if you're running the Corona Simulator by itself (without the Terminal open) please close and quit the Simulator for a moment — you need to reload it with the Terminal window &quot;linked&quot; and working in unison. Now, in your Corona SDK folder, instead of opening <code>Corona Simulator</code>, open <code>Corona Terminal</code>. The Terminal will load, then it will automatically open the Corona Simulator Welcome Window where you can choose the <strong>Simulator</strong> option. The Terminal will then display diagnostic output as you run your code.</p>
+</div>
+
+<p>With both the <strong>Corona Simulator</strong> and the <strong>Corona Terminal</strong> (Mac OS X) or <strong>Corona Simulator Output</strong> (Windows) open, load your chosen text editor. Create a blank file and save it as <code>main.lua</code> to a project directory named &quot;HelloWorld&quot;. In general, each project should be contained within its own directory on your system, and each project's core file <strong>must</strong> be named <code>main.lua</code>. You may eventually design complex apps using external modules, but every Lua project must contain a <code>main.lua</code> file at its core.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>Include only the files that your application uses in the project directory. You should not leave old copies of <code>main.lua</code> or old multimedia assets in the folder. Also, you should only include <strong>final production</strong> assets in the folder; do not include original native files produced by tools like Photoshop® (.psd) or Illustrator® (.ai).</p>
+</div>
+
+<p>In the text file, type the following:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Hello World!&quot;</span> <span class="ot">)</span></code></pre>
+<p>Save your file, then open the project in the Simulator:  <strong>File</strong> → <strong>Open...</strong> → <strong>[&quot;HelloWorld&quot; directory]</strong></p>
+<p>Note that you don't need to select <code>&quot;main.lua&quot;</code> to open the project; simply click the <strong>Open</strong> button and Corona will load the project in the Simulator.</p>
+<p>Notice that nothing appears in the Simulator window. Don't panic! Look at the <strong>Terminal/Output</strong> window and you'll see the text <code>Hello World!</code> displayed there.</p>
+<div class="figure">
+<img src="/images/hello-world-1.gif" alt="&quot;Hello World!&quot; in the Terminal/Output" /><p class="caption">&quot;Hello World!&quot; in the Terminal/Output</p>
+</div>
+<p>In Lua, the humble <code>print</code> command is used to output messages <strong>only to the Terminal</strong>, including diagnostic messages about what's happening in your program, warning/error messages, and &quot;debugging&quot; messages. It can be used to quickly test aspects of a program to ensure that it's operating properly.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+About Parameters
+</div>
+
+<p>The <code>print</code> command accepts only one <strong>parameter</strong>. If you are new to programming, a parameter is a numerical value, text string, variable, or similar piece of information that is <strong>passed to</strong> and <strong>used by</strong> the command or function. In the above example, the parameter passed to the <code>print()</code> function is simply <code>&quot;Hello World!&quot;</code>. This parameter is a <strong>text string</strong> and thus it is enclosed in quotes. As you can see in the Terminal view, the quotes are <strong>not</strong> displayed in the printed result; they simply indicate that the parameter is a string value (text), not a variable or numerical value.</p>
+</div>
+
+
+
+
+<a id="displayhello"></a>
+</div>
+<div class="section level2" id="displaying-hello-world">
+<h2><a href="#TOC">Displaying &quot;Hello World!&quot;</a></h2>
+<p>To display <code>Hello World!</code> on the Simulator screen, you need to use a different <strong>API</strong> (Application Programming Interface) included in Corona's <strong>display library</strong>. A <strong>library</strong> in Corona is a collection of functions and commands that provide useful, related functionality.</p>
+<p>To show <code>Hello World!</code> in the Simulator, add the following line to your text file:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myTextObject</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="st">&quot;Hello World!&quot;</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="st">&quot;Arial&quot;</span>, <span class="dv">60</span> <span class="ot">)</span></code></pre>
+<p>If you're new to scripting or programming, this might look complicated, but in fact it's relatively simple. Let's examine each element in order:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myTextObject</span></code></pre>
+<p>This is the basic method to declare a variable in Lua. Unlike most other languages, Lua is a <strong>dynamically typed language</strong>. This means that you don't need to explicitly define the variable as a number, string, etc. Variables can, and sometimes will, change types as you work with them. As you study further, you'll realize that this is a very convenient feature of Lua.</p>
+<p>In this case, <code>local</code> defines the <strong>scope</strong> of the variable in Lua's memory system. Scoping is a very important aspect of Lua which you can read about <a href="http://omnigeek.robmiracle.com/2011/10/14/understanding-scope-for-beginning-programmers/">here</a>.</p>
+<p><code>myTextObject</code> is the <strong>variable name</strong> and can be whatever you wish. However, variable names must be <strong>unique</strong> (not previously declared elsewhere in your code) and <strong>non-reserved</strong> — you cannot name your variables the same as a command/API reserved by Lua or Corona.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="ot">...</span> <span class="ot">)</span></code></pre>
+<p>As mentioned above, Corona includes many <strong>libraries</strong>, including the <strong>display</strong> library which contains APIs related to displaying and managing screen content like text, vector objects, images, and animated sprites.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+About &quot;Dot&quot; Notation
+</div>
+
+<p>To access an item from a library, use this notation consistently:</p>
+<p><code>[library].[API]</code></p>
+<p>This tells Corona that you wish to &quot;access&quot; the chosen library then &quot;use&quot; the chosen API. You must always specify the library first, then a <strong>dot</strong> (period), then the API. This is known as a <strong>property relationship</strong>.</p>
+</div>
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="ot">...</span> <span class="ot">)</span>  <span class="co">--CORRECT!</span>
+newText<span class="ot">(</span> <span class="ot">...</span> <span class="ot">)</span>  <span class="co">--INCORRECT</span></code></pre>
+<p>The <code>newText</code> API is self-explanatory: display a new text object to the screen! It requires five core parameters as explained below. Note that parameters are always separated by commas — do <strong>not</strong> separate them solely with spaces!</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>newText<span class="ot">(</span> <span class="kw">string</span>, <span class="kw">left</span>, <span class="kw">top</span>, <span class="kw">font</span>, <span class="kw">size</span> <span class="ot">)</span></code></pre>
+<ul>
+<li><code>string</code> — the value to display as text</li>
+<li><code>left</code> — the left (horizontal) position of the text on the screen</li>
+<li><code>top</code> — the top (vertical) position of the text on the screen</li>
+<li><code>font</code> — the desired font face</li>
+<li><code>size</code> — the size of the font on the screen</li>
+</ul>
+<p>Now that you understand each parameter, inspect the <code>newText</code> command in your code. You are telling Corona to display the string &quot;Hello World!&quot; to the screen. The text will begin at 50 pixels from the left side of the screen. The text <strong>top</strong> position will be 50 pixels from the top of the screen. The text will be shown in the common &quot;Arial&quot; font face. Finally, the text will be shown at a size of 60.</p>
+<p>Let's check the result of your new code using the Simulator! Simply &quot;relaunch&quot; the Simulator using ⌘-R (Command-R) and you will see your text displayed on the screen in the upper-left corner.</p>
+<div class="figure">
+<img src="/images/hello-world-2.gif" alt="&quot;Hello-World!&quot; in the Simulator" /><p class="caption">&quot;Hello-World!&quot; in the Simulator</p>
+</div>
+<a id="settextcolor"></a>
+</div>
+<div class="section level2" id="setting-text-color">
+<h2><a href="#TOC">Setting Text Color</a></h2>
+<p>Now let's discuss how to modify the color of your text. Notice that the <code>newText</code> API does not include parameters to set the color directly. To accomplish this, you will need to use another command:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="ot">[</span><span class="kw">object</span><span class="ot">]</span>:setTextColor<span class="ot">(</span> <span class="kw">R</span>, <span class="kw">G</span>, <span class="kw">B</span> <span class="ot">).</span></code></pre>
+<p>If you use this command directly after you display the text — on the next line — it effectively occurs at the same time in your app and the new color will be reflected immediately.</p>
+<p>Let's try the command in your app. Add this code to your text document on the line directly following the <code>newText</code> command:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">myTextObject</span>:setTextColor<span class="ot">(</span> <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span></code></pre>
+<p>Notice that you begin with <code>myTextObject</code>, the same variable name that you assigned above. Directly following that, you put a <strong>colon</strong>, and following that you write the command.</p>
+<div class="guide-notebox">
+<div class="notebox-title">
+About &quot;Colon&quot; Notation
+</div>
+
+<p>In addition to the <strong>dot</strong> notation explained above, let's examine the <strong>colon</strong> notation.</p>
+<p><code>[object]:[command]</code></p>
+<p>This notation is called an <strong>object method</strong>. Typically this method modifies the variable/object before the colon. In this tutorial, <code>setTextColor( 255, 0, 0 )</code>, <strong>following</strong> the colon, tells Corona that you want to change the color of <code>myTextObject</code>, specified <strong>before</strong> the colon.</p>
+</div>
+
+<p>As you can see, this API requires 3 core parameters: R (red), G (green), and B (blue). Each parameter is a color &quot;channel&quot; and the value must be a number between 0 and 255. The higher the value, the more of that color will be &quot;mixed&quot; into the final result. If you set all three values to 255, the result will be solid white; if you set all three values to 0, the result will be solid black. In the above line of code, only the <strong>red</strong> value is mixed into the result. Relaunch the Simulator with ⌘-R (Command-R) and notice that the text color has changed to pure, bright red.</p>
+<div class="figure">
+<img src="/images/hello-world-3.gif" alt="&quot;Hello-World!&quot; in the Simulator" /><p class="caption">&quot;Hello-World!&quot; in the Simulator</p>
+</div>
+<p>As you develop your application, you'll find yourself following this procedure often: you'll load your app in the Simulator, make some edits to <code>main.lua</code> file in the text editor, switch back to the Simulator, and &quot;relaunch&quot; your app to see the results. This saves you the time and trouble of quitting and restarting the simulator.</p>
+<p>You can experiment with different colors yourself, or refer to a chart such as the one found on <a href="http://en.wikipedia.org/wiki/Web_colors#X11_color_names">this page</a>. On this chart, you will see the RGB values under the column &quot;Decimal code&quot;. Although this chart contains a wide array of colors, you are not limited to them — you can adjust the three values as necessary to achieve the exact color you desire.</p>
+<a id="defaulttextcolor"></a>
+</div>
+<div class="section level2" id="setting-default-text-color">
+<h2><a href="#TOC">Setting Default Text Color</a></h2>
+<p>It's often useful to set a default text color for <strong>all</strong> of the text in your app. Fortunately, you can achieve this with just one line of code.</p>
+<p>At the very <strong>top</strong> of your text document, insert a new line and add this code:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>setDefault<span class="ot">(</span> “<span class="kw">textColor</span>”, <span class="dv">150</span>, <span class="dv">150</span>, <span class="dv">150</span> <span class="ot">)</span></code></pre>
+<p>Now, all of the text in your app will be displayed in a medium grey, and you won't need to spend time setting the color of every new text object. Of course, you can still override this default text color on a particular text element by using the explicit <code>setTextColor()</code> method described above.</p>
+<a id="basicinteractivity"></a>
+</div>
+<div class="section level2" id="basic-interactivity">
+<h2><a href="#TOC">Basic Interactivity</a></h2>
+<p>Let's add some basic interactivity that will change the color of the text randomly. Add the following lines to the end of your project:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">function</span> screenTap<span class="ot">()</span>
+    <span class="kw">local</span> <span class="kw">r</span> <span class="ot">=</span> <span class="fu">math.random</span><span class="ot">(</span> <span class="dv">0</span>, <span class="dv">255</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">g</span> <span class="ot">=</span> <span class="fu">math.random</span><span class="ot">(</span> <span class="dv">0</span>, <span class="dv">255</span> <span class="ot">)</span>
+    <span class="kw">local</span> <span class="kw">b</span> <span class="ot">=</span> <span class="fu">math.random</span><span class="ot">(</span> <span class="dv">0</span>, <span class="dv">255</span> <span class="ot">)</span>
+    <span class="kw">myTextObject</span>:setTextColor<span class="ot">(</span> <span class="kw">r</span>, <span class="kw">g</span>, <span class="kw">b</span> <span class="ot">)</span>
+<span class="kw">end</span></code></pre>
+<p>This code creates a new <strong>function</strong>, a core element of programming. A function is a block of code — a routine or set of commands — that is &quot;called&quot; (to be executed) by another command or process.</p>
+<p>This specific function is named <strong>screenTap</strong>, the name you'll use to reference it. Since this is a custom function you've written, you can name it whatever seems logical; note that many programmers adhere to a short descriptive &quot;sentence&quot; with the first word lowercase and successive words capitalized for legibility.</p>
+<p>Inside the function, you write four lines. The first three lines create variables for the red, green, and blue values that you'll use to set the text color. These three values are randomly determined by the <code>math.random()</code> command, part of Corona's <a href="../../../api/library/math/index.html">math</a> library. In this example, you tell Corona to choose a random number between <strong>0</strong> and <strong>255</strong>, the allowed range for any of the color channel values.</p>
+<p>The fourth line simply uses those random values to set the text color, using the same method you practiced with already.</p>
+<div class="section level3" id="event-listener">
+<h3><a href="#TOC">Event Listener</a></h3>
+<p>Next, you need to add a Corona <strong>event listener</strong> to create interactivity. Add this line to your project on the line after the function's <code>end</code> line:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span><span class="kw">currentStage</span>:addEventListener<span class="ot">(</span> <span class="st">&quot;tap&quot;</span>, <span class="kw">screenTap</span> <span class="ot">)</span></code></pre>
+<p>Event listeners can take various forms which you'll learn as you progress further. This one adds a &quot;tap&quot; listener to the screen &quot;stage&quot;. For more information on the stage, please read the guide on <a href="../displayGroups/index.html">Display Groups and Coordinates</a>.</p>
+<p>Note that the <strong>object method</strong> is used to create an event listener. The <strong>object</strong> is the Corona stage, accessed by the command <code>display.currentStage</code>. The <strong>method</strong> is the addition of an event listener with two parameters:</p>
+<ul>
+<li><code>&quot;tap&quot;</code> — this tells Corona that you wish to &quot;listen&quot; for a quick screen tap, meaning a quick touch and release on a specific point.</li>
+<li><code>screenTap</code> — this is the reference to the function you just wrote; it will be executed when the tap occurs.</li>
+</ul>
+<p>That's it! Relaunch the Simulator and now &quot;tap&quot; (click) on the screen. The text should change to a random color on each click. This is an extremely basic example of what you can do using a tap listener, but it exhibits how easy it is to add basic interactivity to a Corona object.</p>
+<a id="physics"></a>
+</div>
+</div>
+<div class="section level2" id="rapid-physics">
+<h2><a href="#TOC">Rapid Physics</a></h2>
+<p>In line with Corona's rapid prototyping, you can implement physics with just a few lines of code. Corona includes the widely-used Box2D physics engine which features multiple body types, collision detection, joints, raycasting, and more. If you want to follow along with this project in the Simulator, the source code and assets can be found in your local application directory here:</p>
+<p><strong>CoronaSDK</strong> → <strong>SampleCode</strong> → <strong>Physics</strong> → <strong>HelloPhysics</strong></p>
+<div class="section level3" id="physics-library">
+<h3><a href="#TOC">Physics Library</a></h3>
+<p>When using physics, the first thing you must do is <code>require()</code> the <a href="../../../api/library/physics/index.html">physics</a> library. Don't worry about what this does internally — just realize that it opens up access to the physics APIs and functions. In addition, you must <strong>start</strong> the physics engine; this should be done before calling any other physics functions.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">physics</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;physics&quot;</span> <span class="ot">)</span>
+<span class="kw">physics</span><span class="ot">.</span>start<span class="ot">()</span></code></pre>
+</div>
+<div class="section level3" id="visual-objects">
+<h3><a href="#TOC">Visual Objects</a></h3>
+<p>Next, you should add some visual content to the screen. A good starting point is a sky background and a grassy piece of ground. More details about images are described in the <a href="../../media/displayObjects/index.html">Display Objects</a> guide, but at this time, observe the simple use of <code>display.newImage()</code>:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">sky</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;bkg_clouds.png&quot;</span> <span class="ot">)</span>
+<span class="kw">sky</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">160</span><span class="ot">;</span> <span class="kw">sky</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">195</span>
+
+<span class="kw">local</span> <span class="kw">ground</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;ground.png&quot;</span> <span class="ot">)</span>
+<span class="kw">ground</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">160</span><span class="ot">;</span> <span class="kw">ground</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">445</span></code></pre>
+<p>This basic code displays two images on the screen: <code>&quot;bkg_clouds.png&quot;</code> for the sky background and <code>&quot;ground.png&quot;</code> for the ground image. After the images are placed, the position(s) are adjusted to specific <strong>x/y</strong> coordinates on the screen: <strong>160,195</strong> for the sky and <strong>160,445</strong> for the grass. Reload the project in the Simulator and you'll see the sky and ground displayed on the screen.</p>
+</div>
+<div class="section level3" id="physics-bodies">
+<h3><a href="#TOC">Physics Bodies</a></h3>
+<p>Now the fun part: creating a physics body. When you make a standard display object into a physics body, it immediately becomes a functioning element of the physics engine and it will adhere to basic Box2D physics behavior.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">ground</span>, <span class="st">&quot;static&quot;</span>, <span class="ot">{</span> <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>This line is simple. The first parameter, <code>ground</code>, is the name of the display object you want convert to a physics body. The second parameter, <code>&quot;static&quot;</code>, tells Corona that this object is a solid, non-moving object that will be effectively locked in place and immune to physical forces like gravity. As you might guess, this is a perfect body type for the solid ground. The third parameter is a Lua table/array <code>{}</code> that contains various settings and properties for the physics body. In this case, the <strong>friction</strong> is set to 50% and the <strong>bounce</strong> to 30%.</p>
+<p>If you reload this in the Simulator, it won't look any different because, by default, objects that are physical bodies do not &quot;appear&quot; any different than normal objects. Don't concern yourself with this now — just be aware that the ground is now a physical body that will interact with other physical bodies in the scene.</p>
+<p>To see this in action, add an additional object now:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">crate</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newImage<span class="ot">(</span> <span class="st">&quot;crate.png&quot;</span> <span class="ot">)</span>
+<span class="kw">crate</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">180</span><span class="ot">;</span> <span class="kw">crate</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="ot">-</span><span class="dv">50</span><span class="ot">;</span> <span class="kw">crate</span><span class="ot">.</span><span class="kw">rotation</span> <span class="ot">=</span> <span class="dv">5</span></code></pre>
+<p>This adds a wooden crate to the scene, far above the ground and off the screen. At this point, it will just float in space because it's not yet a physical body. To change this, convert it to a physical body in the same fashion as the ground:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">physics</span><span class="ot">.</span>addBody<span class="ot">(</span> <span class="kw">crate</span>, <span class="ot">{</span> <span class="kw">density</span><span class="ot">=</span><span class="dv">3.0</span>, <span class="kw">friction</span><span class="ot">=</span><span class="dv">0.5</span>, <span class="kw">bounce</span><span class="ot">=</span><span class="dv">0.3</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>Notice that in this case, the second parameter which defines the body type — <code>&quot;static&quot;</code> in the case of the ground object — has been omitted. This makes the crate into a <strong>dynamic</strong> physics object, the default body type in Corona. Dynamic objects will be affected by all forces such as gravity, impulses, and collisions with other physical objects.</p>
+<p>Now reload the project in the Simulator and watch how the crate falls from the sky, collides with the ground, bounces, and comes to a rest. Implementing basic physics in Corona is that easy!</p>
+<!--- To continue your exploration of the physics engine, please refer to the [Physics&nbsp;Setup][] guide. -->
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 17-Jul-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.start.helloWorld.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.start.helloWorld.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.start.helloWorld.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

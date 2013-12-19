@@ -1,0 +1,1669 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > display > newEmbossedText</title>
+  <meta name="revised" content="19-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > display > newEmbossedText" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#display.newembossedtext">display.newEmbossedText()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#parent-optional">parent <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#text-required">text <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#x-y-optional">x / y <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-height-optional">width / height <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#font-required">font <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#fontsize-required">fontSize <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#align-optional">align <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#syntax-legacy">Syntax (Legacy)</a><ul>
+<li><a href="#parentgroup-optional">parentGroup <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#string-required">string <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#x-y-required">x / y <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#width-height-optional-1">width, height <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#font-required-1">font <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#size-required">size <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">display</a>  ▸  <a href="newEmbossedText.html">newEmbossedText</a>
+</div>
+
+<div class="section level1" id="display.newembossedtext">
+<h1><a href="#TOC">display.newEmbossedText()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">display.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/DisplayObject/index.html">DisplayObject</a> (group)</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">embossed text, text</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="newText.html">display.newText()</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates an embossed text object. The local origin is at the center of the text. Supports multi-line text by specifying a <code>width</code> and <code>height</code> when the object is created (optional).</p>
+<p>By default, the text color is white <code>( 1, 1, 1 )</code>. See <a href="../../type/ShapeObject/setFillColor.html">object:setFillColor()</a> for more information.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>display.newEmbossedText( { options } )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="parent-optional">
+<h5><a href="#TOC">parent <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/GroupObject/index.html">GroupObject</a>.</em> Display group in which to insert the text object.</p>
+</div>
+<div class="section level5" id="text-required">
+<h5><a href="#TOC">text <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The text to display.</p>
+</div>
+<div class="section level5" id="x-y-optional">
+<h5><a href="#TOC">x / y <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Coordinates for the object's <strong>x</strong> and <strong>y</strong> center point.</p>
+</div>
+<div class="section level5" id="width-height-optional">
+<h5><a href="#TOC">width / height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Optional parameters to enable multi-line text. Text will be wrapped at <code>width</code> and be cropped at <code>height</code>. Set <code>height</code> to <code>0</code> and the text box height will adjust to the amount of text, but never exceed the maximum texture height for the device. Both <code>width</code> and <code>height</code> are required if you use the <code>align</code> property (see below).</p>
+</div>
+<div class="section level5" id="font-required">
+<h5><a href="#TOC">font <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Names the font. Obtain an array of available fonts via native.getFontNames(). Alternatively, you can pass the following constants instead of a string:</p>
+<ul>
+<li><code>native.systemFont</code></li>
+<li><code>native.systemFontBold</code></li>
+</ul>
+</div>
+<div class="section level5" id="fontsize-required">
+<h5><a href="#TOC">fontSize <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The size of the text in content-pixels.</p>
+</div>
+<div class="section level5" id="align-optional">
+<h5><a href="#TOC">align <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> This specifies the alignment of the text when a <code>width</code> parameter is supplied. Default value is <code>&quot;left&quot;</code>. Valid values are <code>&quot;left&quot;</code>, <code>&quot;center&quot;</code>, or <code>&quot;right&quot;</code>.</p>
+</div>
+</div>
+<div class="section level2" id="syntax-legacy">
+<h2><a href="#TOC">Syntax (Legacy)</a></h2>
+<p>Either of the following are valid:</p>
+<pre><code>display.newEmbossedText( [parentGroup,] text, x, y, font, fontSize )
+display.newEmbossedText( [parentGroup,] text, x, y, [width, height,] font, fontSize )</code></pre>
+<div class="section level5" id="parentgroup-optional">
+<h5><a href="#TOC">parentGroup <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/DisplayObject/index.html">DisplayObject</a> (group).</em> The display group to insert the embossed text object into.</p>
+</div>
+<div class="section level5" id="string-required">
+<h5><a href="#TOC">string <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The text to display.</p>
+</div>
+<div class="section level5" id="x-y-required">
+<h5><a href="#TOC">x / y <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Coordinates for the object's <strong>x</strong> and <strong>y</strong> center point.</p>
+</div>
+<div class="section level5" id="width-height-optional-1">
+<h5><a href="#TOC">width, height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Optional arguments to enable multi-line text. Text will be wrapped at <code>width</code> and be cropped at <code>height</code>. Set <code>height</code> to 0 and the height will change according to amount of text—but will <em>not</em> exceed the maximum texture height for the device.</p>
+</div>
+<div class="section level5" id="font-required-1">
+<h5><a href="#TOC">font <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Names the font. Obtain an array of available fonts via <a href="../native/getFontNames.html">native.getFontNames()</a>. Alternatively, you can also pass the following constants instead of a string:</p>
+<ul>
+<li><code>native.systemFont</code></li>
+<li><code>native.systemFontBold</code></li>
+</ul>
+</div>
+<div class="section level5" id="size-required">
+<h5><a href="#TOC">size <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The size of the text in content-pixels.</p>
+</div>
+</div>
+<div class="section level2" id="limitations">
+<h2><a href="#TOC">Limitations</a></h2>
+<ul>
+<li>The <code>newEmbossedText</code> object uses a mask when the object is created. Since there is a masking nesting limit of three on all platforms, care must be taken when inserting text into <code>newContainer</code>, <code>ScrollView</code> or <code>TableView</code> objects (which also consume a mask). If you exceed the mask nesting limit, the text may appear as a solid (white) block.</li>
+<li><code>newEmbossedText</code> support both <code>text.text = string</code> as well as <code>text:setText( string )</code> methods to change the text of embossed text. The latter function returns a Display Group (rather than a vector text object) with additional methods for setting text (<code>text:setText()</code>) and changing the text color (<code>text:setTextColor()</code>). Use <code>text.text</code> to retrieve the text string.</li>
+<li><code>newEmbossedText</code> support both <code>text.size = number</code> as well as <code>text:setSize( number )</code> methods to change the size of embossed text. Use <code>text.size</code> to retrieve the text size.</li>
+<li>Use <code>text:setEmbossColor( colorTable )</code> method to change the emboss color of the text.</li>
+<li>In V1 Compatability mode, x,y becomes Left/Top.</li>
+</ul>
+</div>
+<div class="section level2" id="example">
+<h2><a href="#TOC">Example</a></h2>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newEmbossedText<span class="ot">(</span><span class="st">&quot;Hello World!&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFont</span>, <span class="dv">16</span>, <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">}</span> <span class="ot">)</span></code></pre>
+<p>Update the text string and change the color:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">myText</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newEmbossedText<span class="ot">(</span><span class="st">&quot;hello&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="kw">native</span><span class="ot">.</span><span class="kw">systemFont</span>, <span class="dv">12</span>, <span class="ot">{</span> <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> <span class="ot">})</span>
+<span class="kw">myText</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">=</span> <span class="dv">50</span>
+<span class="kw">myText</span><span class="ot">.</span><span class="kw">y</span> <span class="ot">=</span> <span class="dv">50</span>
+<span class="kw">myText</span>:setTextColor<span class="ot">(</span> <span class="dv">0</span> <span class="ot">)</span>
+<span class="kw">myText</span>:setSize<span class="ot">(</span> <span class="dv">24</span> <span class="ot">)</span> <span class="co">-- change text size</span>
+<span class="kw">myText</span>:setText<span class="ot">(</span> <span class="st">&quot;Hello World!&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">color</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="kw">highlight</span> <span class="ot">=</span> 
+    <span class="ot">{</span>
+        <span class="kw">r</span> <span class="ot">=</span><span class="dv">255</span>, <span class="kw">g</span> <span class="ot">=</span> <span class="dv">255</span>, <span class="kw">b</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="kw">a</span> <span class="ot">=</span> <span class="dv">200</span>
+    <span class="ot">}</span>,
+    <span class="kw">shadow</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">r</span> <span class="ot">=</span> <span class="dv">255</span>, <span class="kw">g</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="kw">b</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="kw">a</span> <span class="ot">=</span> <span class="dv">128</span>
+    <span class="ot">}</span>
+<span class="ot">}</span>
+<span class="kw">myText</span>:setEmbossColor<span class="ot">(</span> <span class="kw">color</span> <span class="ot">)</span>
+
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">myText</span><span class="ot">.</span><span class="kw">text</span> <span class="ot">)</span> <span class="co">-- terminal output: Hello World!</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Text size: &quot;</span> <span class="ot">..</span> <span class="kw">myText</span><span class="ot">.</span><span class="kw">size</span> <span class="ot">)</span> <span class="co">-- prints 24</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 19-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.display.newEmbossedText&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.display.newEmbossedText&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.display.newEmbossedText&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

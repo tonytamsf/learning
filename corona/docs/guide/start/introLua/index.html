@@ -1,0 +1,1849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > start > introLua </title>
+  <meta name="revised" content="16-May-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > start > introLua " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction-to-lua">Introduction to Lua</a><ul>
+<li><a href="#conventions">Conventions</a></li>
+<li><a href="#types-and-values">Types and Values</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#variables">Variables</a><ul>
+<li><a href="#global">Global</a></li>
+<li><a href="#local">Local</a></li>
+<li><a href="#table-fields">Table Fields</a></li>
+</ul></li>
+<li><a href="#expressions">Expressions</a><ul>
+<li><a href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li><a href="#relational-operators">Relational Operators</a></li>
+<li><a href="#logical-operators">Logical Operators</a></li>
+<li><a href="#concatenation">Concatenation</a></li>
+<li><a href="#length-operator">Length Operator</a></li>
+<li><a href="#precedence">Precedence</a></li>
+</ul></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#object-method">Object Method</a></li>
+</ul></li>
+<li><a href="#scope-rules">Scope Rules</a></li>
+<li><a href="#memory-allocation">Memory Allocation</a></li>
+<li><a href="#syntax-comparison">Syntax Comparison</a></li>
+<li><a href="#lua-functions">Lua Functions</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [start][guide.start]  ▸  <a href="index.html">introLua</a>
+</div>
+<div class="section level1" id="introduction-to-lua">
+<h1><a href="#TOC">Introduction to Lua</a></h1>
+<p>Lua is an extension programming language designed to support general procedural programming with data description facilities. Lua is intended to be used as a powerful, lightweight scripting language for any program that needs one.</p>
+<ul>
+<li><a href="#conventions">Conventions</a></li>
+<li><a href="#typesvalues">Types and Values</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#expressions">Expressions</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#scope">Scope Rules</a></li>
+<li><a href="#memory">Memory Allocation</a></li>
+<li><a href="#syntax">Syntax Comparison</a></li>
+<li><a href="#luafunctions">Lua Functions</a></li>
+</ul>
+<a id="conventions"></a>
+<div class="section level2" id="conventions">
+<h2><a href="#TOC">Conventions</a></h2>
+<p><strong>Names</strong> (also called <strong>identifiers</strong>) in Lua can be any string of letters, digits, and underscores, not beginning with a digit. This coincides with the definition of names in most languages. The definition of &quot;letter&quot; depends on the current locale: any character considered alphabetic by the current locale can be used in an identifier. Identifiers are used to name variables and table fields.</p>
+<p>The following keywords are <strong>reserved</strong> and cannot be used as names:</p>
+<pre><code> and     break        do         else     elseif     end       false
+ for     function     if         in       local      nil       not
+ or      repeat       return     then     true       until     while</code></pre>
+<p>The following strings denote other tokens:</p>
+<pre><code> +      -      *      /      %      ^      #
+ ==     ~=     &lt;=     &gt;=     &lt;      &gt;      =
+ (      )      {      }      [      ]
+ ;      :      ,      .      ..     ...</code></pre>
+<p>Lua is a <strong>case-sensitive</strong> language: <code>and</code> is a reserved word, but <code>And</code> and <code>AND</code> are two different, valid names. As a convention, names starting with an underscore followed by uppercase letters (such as <code>_VERSION</code>) are reserved for internal global variables used by Lua.</p>
+<p>A <strong>comment</strong> starts with a double hyphen (<code>--</code>) anywhere outside a string. They run until the end of the line. You can comment out a full block of code by surrounding it with <code>--[[</code> and <code>]]</code>. To uncomment the same block, simply add another hyphen to the first enclosure, as in <code>---[[</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">--single line commented out</span>
+
+<span class="co">--[[ entire block commented out</span>
+<span class="co">print( 10 )</span>
+<span class="co">print( 15 )</span>
+<span class="co">]]</span></code></pre>
+<p>A <strong>numerical constant</strong> can be written with an optional decimal part and an optional decimal exponent. Lua also accepts integer hexadecimal constants, by prefixing them with <code>0x</code>. Examples of valid numerical constants are:</p>
+<pre><code> 3    3.0    3.1416    314.16e-2    0.31416E1    0xff    0x56</code></pre>
+<a id="typesvalues"></a>
+</div>
+<div class="section level2" id="types-and-values">
+<h2><a href="#TOC">Types and Values</a></h2>
+<p>Lua is a <strong>dynamically typed language</strong>. This means that variables do not have types; only values do. There are no type definitions in the language. All values carry their own type.</p>
+<p>All values in Lua are <strong>first-class values</strong>. This means that all values can be stored in variables, passed as arguments to other functions, and returned as results.</p>
+<p>The basic types you should be concerned with are:</p>
+<ul>
+<li><p><strong>nil</strong> — the type of the value <code>nil</code>, whose main property is to be different from any other value; it usually represents the absence of a useful value.</p></li>
+<li><p><strong>boolean</strong> — the type of the values <code>false</code> and <code>true</code>. Both <code>nil</code> and <code>false</code> make a condition false; any other value makes it true.</p></li>
+<li><p><strong>number</strong> — represents real (double-precision floating-point) numbers.</p></li>
+<li><p><strong>string</strong> — represents arrays of characters. Lua is 8-bit clean: strings can contain any 8-bit character, including embedded zeros.</p></li>
+<li><p><strong>function</strong> — see <a href="#functions">Functions</a> for more information.</p></li>
+<li><p><strong>table</strong> — the sole data structuring mechanism in Lua. See <a href="#tables">Tables</a> for more information.</p></li>
+</ul>
+<p>Lua provides automatic conversion between <strong>string</strong> and <strong>number</strong> values at run time. Any arithmetic operation applied to a string tries to convert this string to a number, following the usual conversion rules. Conversely, whenever a number is used where a string is expected, the number is converted to a string, in a reasonable format. For complete control over how numbers are converted to strings, use the <a href="../../../api/library/string/format.html">string.format</a> function from the string library.</p>
+<a id="tables"></a>
+</div>
+<div class="section level2" id="tables">
+<h2><a href="#TOC">Tables</a></h2>
+<p>Tables are the sole data structuring mechanism in Lua. They implement <strong>associative arrays</strong>, that is, arrays that can be indexed not only with numbers, but with any value except <code>nil</code>. Tables can be heterogeneous; that is, they can contain values of all types except <code>nil</code>.</p>
+<p>To represent records (properties), Lua uses the field name as an <strong>index</strong>. The language supports this representation by providing <code>a.name</code> as syntactic sugar for <code>a[&quot;name&quot;]</code>.</p>
+<p>Like indices, the value of a table field can be of any type except <code>nil</code>. In particular, because functions are first-class values, table fields can contain functions. Thus tables can also carry <strong>methods</strong>.</p>
+<p>Tables are <strong>objects</strong>: variables do not actually contain these values, only <strong>references</strong> to them. Assignment, parameter passing, and function returns always manipulate references to such values; these operations do <strong>not</strong> imply any kind of copy.</p>
+<p>The table constructor is written using <strong>braces</strong> (curly brackets) as in <code>{}</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">t</span> <span class="ot">=</span> <span class="ot">{}</span>           <span class="co">--create a table</span>
+
+<span class="kw">k</span> <span class="ot">=</span> <span class="st">&quot;x&quot;</span>
+<span class="kw">t</span><span class="ot">[</span><span class="kw">k</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">3.14</span>      <span class="co">--new table entry, with key=&quot;x&quot; and value=3.14</span>
+
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">[</span><span class="kw">k</span><span class="ot">]</span> <span class="ot">)</span>    <span class="co">--&gt; 3.14</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">[</span><span class="st">&quot;x&quot;</span><span class="ot">]</span> <span class="ot">)</span>  <span class="co">--&gt; 3.14</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">.</span><span class="kw">x</span> <span class="ot">)</span>     <span class="co">--&gt; 3.14</span>
+
+<span class="kw">t</span><span class="ot">[</span><span class="dv">2</span><span class="ot">]</span> <span class="ot">=</span> <span class="st">&quot;foo&quot;</span>     <span class="co">--new table entry, with key=2 and value=&quot;foo&quot;</span>
+
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">[</span><span class="dv">2</span><span class="ot">]</span> <span class="ot">)</span>    <span class="co">--&gt; &quot;foo&quot;</span></code></pre>
+<div class="guide-notebox">
+<div class="notebox-title">
+Accessing Entries
+</div>
+
+<p>In the above example, the entry with field name <code>&quot;x&quot;</code> was accessed in two ways: as a <strong>property</strong> using the dot operator <code>t.x</code> and as an <strong>array index</strong> using <code>t[&quot;x&quot;]</code>.</p>
+<p>A common mistake is to confuse <code>t.x</code> with <code>t[x]</code>. The first is equivalent to <code>t[&quot;x&quot;]</code>: a table indexed by the string <code>&quot;x&quot;</code>. The second is a table indexed by the value of variable <code>x</code>.</p>
+</div>
+
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>Many Corona APIs return objects. You can manipulate the documented properties of these objects just like you would for table properties. You can even add your own properties provided you do <strong>not</strong> prefix any of your custom properties with an underscore, as in <code>t._custom = 10</code>. Corona reserves the right to use any property name that begins with an underscore.</p>
+</div>
+
+
+
+
+<a id="variables"></a>
+</div>
+<div class="section level2" id="variables">
+<h2><a href="#TOC">Variables</a></h2>
+<p>Variables are places that store values. There are three kinds of variables in Lua: <strong>global</strong>, <strong>local</strong>, and <strong>table fields</strong> (properties). Any non-initialized variable is <code>nil</code> by default.</p>
+<div class="section level3" id="global">
+<h3><a href="#TOC">Global</a></h3>
+<p>Global variables do not need declarations. You simply assign a value to one to create it:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="fu">print</span><span class="ot">(</span> <span class="kw">s</span> <span class="ot">)</span>  <span class="co">--&gt; nil</span>
+
+<span class="kw">s</span> <span class="ot">=</span> <span class="st">&quot;One million dollars&quot;</span>
+
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">s</span> <span class="ot">)</span>  <span class="co">--&gt; One million dollars</span></code></pre>
+<p>Global variables live as long as your application is running. You can delete a global variable by assigning <code>nil</code> to it. At this point, the global variable behaves as if it were never initialized.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">s</span> <span class="ot">=</span> <span class="kw">nil</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">s</span> <span class="ot">)</span>  <span class="co">--&gt; nil</span></code></pre>
+</div>
+<div class="section level3" id="local">
+<h3><a href="#TOC">Local</a></h3>
+<p>Local variables are declared using the local statement:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">x</span> <span class="ot">=</span> <span class="dv">1</span>         <span class="co">--global variable</span>
+<span class="kw">local</span> <span class="kw">y</span> <span class="ot">=</span> <span class="dv">10</span>  <span class="co">--local variable</span></code></pre>
+<p>Unlike global variables, local variables are visible only in the block where they are declared. The <strong>scope</strong> of the local variable begins after the declaration and ends at the end of the block.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">a</span> <span class="ot">=</span> <span class="dv">10</span>
+<span class="kw">local</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>
+
+<span class="kw">while</span> <span class="ot">(</span> <span class="kw">i</span> <span class="ot">&lt;=</span> <span class="dv">10</span> <span class="ot">)</span> <span class="kw">do</span>
+    <span class="kw">local</span> <span class="kw">a</span> <span class="ot">=</span> <span class="kw">i</span><span class="ot">*</span><span class="kw">i</span>  <span class="co">--different variable &#39;a&#39;, local to this &#39;while&#39; block</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">a</span> <span class="ot">)</span>     <span class="co">--&gt; 1, 4, 9, 16, 25, ...</span>
+    <span class="kw">i</span> <span class="ot">=</span> <span class="kw">i</span> <span class="ot">+</span> <span class="dv">1</span>
+<span class="kw">end</span>
+
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">a</span> <span class="ot">)</span>         <span class="co">--&gt; 10 (the global &#39;a&#39;)</span></code></pre>
+</div>
+<div class="section level3" id="table-fields">
+<h3><a href="#TOC">Table Fields</a></h3>
+<p>Table fields are just the elements of the table themselves. You index into the array to assign the values to a field.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">t</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">foo</span><span class="ot">=</span><span class="st">&quot;hello&quot;</span> <span class="ot">}</span>  <span class="co">--create table with a single property &quot;foo&quot;</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">.</span><span class="kw">foo</span> <span class="ot">)</span>       <span class="co">--&gt; &quot;hello&quot;</span>
+
+<span class="kw">t</span><span class="ot">.</span><span class="kw">foo</span> <span class="ot">=</span> <span class="st">&quot;bye&quot;</span>        <span class="co">--assign a new value to property &quot;foo&quot;</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">.</span><span class="kw">foo</span> <span class="ot">)</span>       <span class="co">--&gt; &quot;bye&quot;</span>
+
+<span class="kw">t</span><span class="ot">.</span><span class="kw">bar</span> <span class="ot">=</span> <span class="dv">10</span>           <span class="co">--create a new property named &quot;bar&quot;</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">.</span><span class="kw">bar</span> <span class="ot">)</span>       <span class="co">--&gt; 10</span>
+<span class="fu">print</span><span class="ot">(</span> <span class="kw">t</span><span class="ot">[</span><span class="st">&quot;bar&quot;</span><span class="ot">]</span> <span class="ot">)</span>    <span class="co">--&gt; 10</span></code></pre>
+<a id="expressions"></a>
+</div>
+</div>
+<div class="section level2" id="expressions">
+<h2><a href="#TOC">Expressions</a></h2>
+<div class="section level3" id="arithmetic-operators">
+<h3><a href="#TOC">Arithmetic Operators</a></h3>
+<p>Lua supports the usual binary arithmetic operators:</p>
+<pre><code> +  (addition)          -  (subtraction)
+ *  (multiplication)    /  (division)
+ %  (modulo)            ^  (exponentiation)</code></pre>
+<p>It also supports the unary <code>-</code> (negation).</p>
+<p>If the operands are numbers or strings that can be converted to numbers, all operations have the usual meaning. Exponentiation works for any exponent. For instance, <code>x^(-0.5)</code> computes the inverse of the square root of <code>x</code>.</p>
+<p>Modulo is defined as: <code>a % b == a - math.floor(a/b)*b</code>, as in the remainder of a division that rounds the quotient towards minus infinity.</p>
+</div>
+<div class="section level3" id="relational-operators">
+<h3><a href="#TOC">Relational Operators</a></h3>
+<p>The relational operators in Lua are</p>
+<pre><code> ==  (equal to)
+ ~=  (not equal to)
+ &lt;   (less than)
+ &gt;   (greater than)
+ &lt;=  (less than or equal to)
+ &gt;=  (greater than or equal to)</code></pre>
+<p>These operators always result in <code>true</code> or <code>false</code>.</p>
+<p>Equality (<code>==</code>) first compares the <a href="../../../api/library/global/type.html">type</a> of its operands. If the types are different, then the result is <code>false</code>. Otherwise, the values of the operands are compared.</p>
+<p>Numbers and strings are compared in the usual way. Objects are compared by reference: two objects are considered equal only if they are the same object. Every time you create a new object, this object is different from any previously existing object.</p>
+<p>The automatic conversion rules do <strong>not</strong> apply to equality comparisons. Thus, <code>&quot;0&quot; == 0</code> evaluates to <code>false</code>.</p>
+</div>
+<div class="section level3" id="logical-operators">
+<h3><a href="#TOC">Logical Operators</a></h3>
+<p>The logical operators in Lua are <code>and</code>, <code>or</code>, and <code>not</code>. All logical operators consider both <code>false</code> and <code>nil</code> as false and anything else as true.</p>
+<ul>
+<li><p><strong>and</strong> — the conjunction operator <code>and</code> returns its first argument if this value is <code>false</code> or <code>nil</code>; otherwise, <code>and</code> returns its second argument.</p></li>
+<li><p><strong>or</strong> — the disjunction operator <code>or</code> returns its first argument if this value is different from <code>nil</code> and <code>false</code>; otherwise, <code>or</code> returns its second argument.</p></li>
+<li><p><strong>not</strong> — the negation operator <code>not</code> always returns <code>false</code> or <code>true</code>.</p></li>
+</ul>
+<p>Both <code>and</code> and <code>or</code> use shortcut evaluation; that is, the second operand is evaluated only if necessary.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="dv">10</span> <span class="kw">or</span> <span class="dv">20</span>           <span class="co">--&gt; 10</span>
+<span class="dv">10</span> <span class="kw">or</span> <span class="fu">error</span><span class="ot">()</span>      <span class="co">--&gt; 10</span>
+<span class="kw">nil</span> <span class="kw">or</span> <span class="st">&quot;a&quot;</span>         <span class="co">--&gt; &quot;a&quot;</span>
+<span class="kw">nil</span> <span class="kw">and</span> <span class="dv">10</span>         <span class="co">--&gt; nil</span>
+<span class="kw">false</span> <span class="kw">and</span> <span class="fu">error</span><span class="ot">()</span>  <span class="co">--&gt; false</span>
+<span class="kw">false</span> <span class="kw">and</span> <span class="kw">nil</span>      <span class="co">--&gt; false</span>
+<span class="kw">false</span> <span class="kw">or</span> <span class="kw">nil</span>       <span class="co">--&gt; nil</span>
+<span class="dv">10</span> <span class="kw">and</span> <span class="dv">20</span>          <span class="co">--&gt; 20</span></code></pre>
+</div>
+<div class="section level3" id="concatenation">
+<h3><a href="#TOC">Concatenation</a></h3>
+<p>The string concatenation operator in Lua is denoted by two dots (<code>..</code>). If both operands are strings or numbers, then they are converted to strings according to the conversion rules mentioned above.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">s</span> <span class="ot">=</span> <span class="st">&quot;foo&quot;</span><span class="ot">..</span><span class="st">&quot;10&quot;</span></code></pre>
+</div>
+<div class="section level3" id="length-operator">
+<h3><a href="#TOC">Length Operator</a></h3>
+<p>The length operator is denoted by the unary operator <code>#</code>. The length of a <strong>string</strong> is its number of bytes — that is, the usual meaning of string length when each character is one byte.</p>
+<p>The length of a <strong>table</strong> <code>t</code> is defined to be any integer index <code>n</code> such that <code>t[n]</code> is not <code>nil</code> and <code>t[n+1]</code> is <code>nil</code>; moreover, if <code>t[1]</code> is <code>nil</code>, <code>n</code> can be zero. For a regular array, with non-<code>nil</code> values from 1 to a given <code>n</code>, its length is exactly that <code>n</code>, the index of its last value. If the array has &quot;holes&quot; (that is, <code>nil</code> values between other non-<code>nil</code> values), then <code>#t</code> can be any of the indices that directly precedes a <code>nil</code> value — that is, it may consider any such <code>nil</code> value as the end of the array.</p>
+</div>
+<div class="section level3" id="precedence">
+<h3><a href="#TOC">Precedence</a></h3>
+<p>Operator precedence in Lua follows the table below, from lower to higher priority:</p>
+<pre><code> or
+ and
+ &lt;     &gt;     &lt;=    &gt;=    ~=    ==
+ ..
+ +     -
+ *     /     %
+ not   #     - (unary)
+ ^</code></pre>
+<p>As usual, you can use parentheses to change the precedences of an expression. The concatenation (<code>..</code>) and exponentiation (<code>^</code>) operators are right associative. All other binary operators are left associative.</p>
+<a id="functions"></a>
+</div>
+</div>
+<div class="section level2" id="functions">
+<h2><a href="#TOC">Functions</a></h2>
+<p>Plain functions are just as expected: you provide arguments as input (within the parentheses), the function performs some tasks, and the results can be returned.</p>
+<p>The following are common methods to declare a function:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">function</span> f <span class="ot">()</span>
+<span class="co">--body</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">f</span> <span class="ot">=</span> <span class="kw">function</span><span class="ot">()</span>
+<span class="co">--body</span>
+<span class="kw">end</span>
+
+<span class="kw">function</span> f <span class="ot">()</span>
+<span class="co">--body</span>
+<span class="kw">end</span>
+
+<span class="kw">f</span> <span class="ot">=</span> <span class="kw">function</span> <span class="ot">()</span>
+<span class="co">--body</span>
+<span class="kw">end</span></code></pre>
+<p>Functions can be variables, so a table can store them as properties. This allows for very flexible uses of a table. It can be used to logically group a family of functions into a table, for example the <code>math</code> library. In this case, to calculate the sine of 100, you would write <code>math.sin(100)</code>. Here, <code>math</code> is merely a table, and the property <code>sin</code> is the actual function.</p>
+<div class="section level3" id="object-method">
+<h3><a href="#TOC">Object Method</a></h3>
+<p>Objects in Lua are represented by tables. Display objects (rectangles, images, etc.) and the global Runtime object are all <strong>objects</strong>. Like the <code>math</code> library, these objects similarly store object methods (instance methods) as properties. One key difference, however, is syntax. You need to tell Lua that you intend this function to be called as an <strong>object method</strong>, not just a plain function. To do so, you need to use the colon (<code>:</code>) operator instead of the dot operator. This may be different from other languages. Compare the syntax of Javascript and Lua:</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width30 headerfirst headerrow notebox-title">
+Javascript
+</th>
+<th class="width30 headerrow notebox-title">
+Lua
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>object.translate( 10, 10 );</code> 
+</th>
+<th class="itemrow">
+<code>object:translate( 10, 10 )</code> 
+</th>
+</tr>
+</table><div style="clear:both;"></div>
+
+
+
+
+<a id="scope"></a>
+</div>
+</div>
+<div class="section level2" id="scope-rules">
+<h2><a href="#TOC">Scope Rules</a></h2>
+<p>Lua is a lexically scoped language. The scope of variables begins at the first statement after their declaration and lasts until the end of the innermost block that includes the declaration.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">x</span> <span class="ot">=</span> <span class="dv">10</span>                  <span class="co">--global variable</span>
+<span class="kw">do</span>                      <span class="co">--new block</span>
+    <span class="kw">local</span> <span class="kw">x</span> <span class="ot">=</span> <span class="kw">x</span>         <span class="co">--new &#39;x&#39; with value 10</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="kw">x</span><span class="ot">)</span>            <span class="co">--&gt; 10</span>
+    <span class="kw">x</span> <span class="ot">=</span> <span class="kw">x</span><span class="ot">+</span><span class="dv">1</span>
+    <span class="kw">do</span>                  <span class="co">--another block</span>
+        <span class="kw">local</span> <span class="kw">x</span> <span class="ot">=</span> <span class="kw">x</span><span class="ot">+</span><span class="dv">1</span>   <span class="co">--another &#39;x&#39;</span>
+        <span class="fu">print</span><span class="ot">(</span><span class="kw">x</span><span class="ot">)</span>        <span class="co">--&gt; 12</span>
+    <span class="kw">end</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="kw">x</span><span class="ot">)</span>            <span class="co">--&gt; 11</span>
+<span class="kw">end</span>
+<span class="fu">print</span><span class="ot">(</span><span class="kw">x</span><span class="ot">)</span>                <span class="co">--&gt; 10  (the global one)</span></code></pre>
+<p>Notice that, in a declaration like <code>local x = x</code>, the new <code>x</code> being declared is not in scope yet, and so the second <code>x</code> refers to the outside variable.</p>
+<p>Because of the lexical scoping rules, local variables can be freely accessed by functions defined inside their scope. A local variable used by an inner function is called an <strong>upvalue</strong>, or external local variable, inside the inner function.</p>
+<p>Notice that each execution of a <code>local</code> statement defines new local variables:</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">a</span> <span class="ot">=</span> <span class="ot">{}</span>
+<span class="kw">local</span> <span class="kw">x</span> <span class="ot">=</span> <span class="dv">20</span>
+<span class="kw">for</span> <span class="kw">i</span> <span class="ot">=</span> <span class="dv">1</span>,<span class="dv">10</span> <span class="kw">do</span>
+    <span class="kw">local</span> <span class="kw">y</span> <span class="ot">=</span> <span class="dv">0</span>
+    <span class="kw">a</span><span class="ot">[</span><span class="kw">i</span><span class="ot">]</span> <span class="ot">=</span> <span class="kw">function</span> <span class="ot">()</span> <span class="kw">y</span> <span class="ot">=</span> <span class="kw">y</span><span class="ot">+</span><span class="dv">1</span><span class="ot">;</span> <span class="kw">return</span> <span class="kw">x</span><span class="ot">+</span><span class="kw">y</span> <span class="kw">end</span>
+<span class="kw">end</span></code></pre>
+<p>The loop creates ten closures — that is, ten instances of the anonymous function. Each of these closures uses a different <code>y</code> variable, while all of them share the same <code>x</code>.</p>
+<a id="memory"></a>
+</div>
+<div class="section level2" id="memory-allocation">
+<h2><a href="#TOC">Memory Allocation</a></h2>
+<p>Mobile devices have limited memory available for use, so care must be taken to ensure that the total memory footprint of your application is kept to a minimum.</p>
+<p>Lua performs automatic memory management. This means that you don't have to worry about allocating memory for new objects. Nor do you need to explicitly free memory when the objects are no longer needed. Lua manages memory automatically by running a <strong>garbage collector</strong> from time to time to collect all &quot;dead&quot; objects — that is, objects that are no longer accessible from Lua. All memory used by Lua is subject to automatic management. However, it is up to you to tell Lua what to consider garbage. For example, anything stored in a global variable is <strong>not</strong> considered garbage, even if your application never uses it again. Similarly, anything stored in a table or array will not be considered garbage — even a variable or object that was initially declared in the local scope. In both cases, it is up to you to assign <code>nil</code> to these positions. This ensures that their corresponding memory will not be locked and can be freed by the garbage collector.</p>
+<p>Display object require an additional step. You must first remove the object from the display hierarchy using <code>object:removeSelf()</code> or <code>display.remove( object )</code>, then you must set its reference to <code>nil</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">myObject</span>:removeSelf<span class="ot">()</span>
+<span class="co">--[[ or ]]</span>
+<span class="kw">display</span><span class="ot">.</span>remove <span class="ot">(</span> <span class="kw">myObject</span> <span class="ot">)</span>
+
+<span class="kw">myObject</span> <span class="ot">=</span> <span class="kw">nil</span></code></pre>
+<a id="syntax"></a>
+</div>
+<div class="section level2" id="syntax-comparison">
+<h2><a href="#TOC">Syntax Comparison</a></h2>
+<p>Some differences in syntax between Lua and other languages are worth noting because they can help prevent compiler errors:</p>
+<ul>
+<li><p><strong>semicolons</strong> — trailing semicolon at the end of each statement (effectively a line of code) are <strong>optional</strong> in Lua.</p></li>
+<li><p><strong>braces</strong> — You may be accustomed to using <code>{ }</code> to define variable scope. In Lua, you do this by bracketing the code with <code>do</code> and <code>end</code>. Braces in Lua are interpreted as <strong>table constructors</strong>.</p></li>
+<li><p><strong>if - then - else</strong> — if you come from C, Java, Javascript, etc., a common mistake you'll make in writing <code>if</code> and <code>elseif</code> statements is forgetting to append <code>then</code> to the end of the <code>if/elseif</code> test conditions. Another common mistake is inadvertently using <code>else if</code> (with a space) when Lua expects <code>elseif</code>.</p></li>
+<li><p><strong>arrays</strong> — in Lua, arrays are <strong>1-based</strong>. Technically, you can index into an array starting with 0. However, Lua and Corona APIs assume that the first element of a table <code>t</code> is <code>t[1]</code>, not <code>t[0]</code>.</p></li>
+<li><p><strong>multiple return values</strong> — an unconventional but useful feature in Lua is the ability of a function to return <strong>more than one result</strong>.</p></li>
+<li><p><strong>multiple assignment</strong> — multiple assignments offer a convenient way to swap values. The statement <code>x,y = y,x</code> will swap <code>x</code> for <code>y</code> and vice versa.</p></li>
+<li><p><strong>ternary operator</strong> (<code>? :</code>) — Lua does not offer the equivalent to the C ternary operator <code>a?b:c</code>. The Lua idiom <code>(a and b) or c</code> offers a close approximation provided <code>b</code> is not false. For example, the Lua equivalent to <code>max = (x&gt;y?x:y)</code> would be <code>max = ( x&gt;y and x or y)</code>.</p></li>
+</ul>
+<a id="luafunctions"></a>
+</div>
+<div class="section level2" id="lua-functions">
+<h2><a href="#TOC">Lua Functions</a></h2>
+<p>The basic Lua library provides several core functions. For security reasons, the <code>dofile()</code>, <code>load()</code>, <code>loadfile()</code>, and <code>loadstring()</code> functions are not available in Corona.</p>
+<p>See the <a href="../../../api/library/global/index.html">(globals)</a> API reference for the complete list available to you.</p>
+<br />
+<div class="newline" style="margin-top:10px; margin-bottom:18px;"></div>
+
+<p>Content in this guide is cited from the <a href="http://www.lua.org/manual/5.1/">Lua 5.1 Reference Manual</a>, freely available under the terms of the <a href="http://www.lua.org/license.html">Lua license</a>.</p>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 16-May-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.start.introLua.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.start.introLua.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.start.introLua.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

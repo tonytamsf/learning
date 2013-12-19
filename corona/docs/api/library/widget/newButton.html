@@ -1,0 +1,1931 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newButton</title>
+  <meta name="revised" content="26-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newButton" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newbutton">widget.newButton()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left / top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#isenabled-optional">isEnabled <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onpress-optional">onPress <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onrelease-optional">onRelease <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onevent-optional">onEvent <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#objectsetlabel"><a href="../../type/ButtonWidget/setLabel.html">object:setLabel()</a></a></li>
+<li><a href="#objectgetlabel"><a href="../../type/ButtonWidget/getLabel.html">object:getLabel()</a></a></li>
+<li><a href="#objectsetenabled"><a href="../../type/ButtonWidget/setEnabled.html">object:setEnabled()</a></a></li>
+</ul></li>
+<li><a href="#basic-visual-options">Basic Visual Options</a><ul>
+<li><a href="#label-optional">label <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#labelalign-optional">labelAlign <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#labelcolor-optional">labelColor <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#labelxoffset-labelyoffset-optional">labelXOffset / labelYOffset <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#font-optional">font <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#fontsize-optional">fontSize <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#emboss-optional">emboss <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#textonly-optional">textOnly <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#image-construction">2-Image Construction</a><ul>
+<li><a href="#width-height-required">width / height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#basedir-optional">baseDir <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#defaultfile-required">defaultFile <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#overfile-optional">overFile <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#frame-construction">2-Frame Construction</a><ul>
+<li><a href="#sheet-required">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#defaultframe-required">defaultFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#overframe-required">overFrame <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#slice-construction">9-Slice Construction</a><ul>
+<li><a href="#width-height-required-1">width / height <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#sheet-required-1">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#middleframe-middleframeover-required">middleFrame / middleFrameOver <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#topleftframe-topleftoverframe-required">topLeftFrame / topLeftOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#topmiddleframe-topmiddleoverframe-required">topMiddleFrame / topMiddleOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#toprightframe-toprightoverframe-required">topRightFrame / topRightOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#middlerightframe-middlerightoverframe-required">middleRightFrame / middleRightOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#bottomrightframe-bottomrightoverframe-required">bottomRightFrame / bottomRightOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#bottommiddleframe-bottommiddleoverframe-required">bottomMiddleFrame / bottomMiddleOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#bottomleftframe-bottomleftoverframe-required">bottomLeftFrame / bottomLeftOverFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#middleleftframe-middleleftoverframe-required">middleLeftFrame / middleLeftOverFrame <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#default">Default</a></li>
+<li><a href="#image-construction-1">2-Image Construction</a></li>
+<li><a href="#frame-construction-1">2-Frame Construction</a></li>
+<li><a href="#slice-construction-1">9-Slice Construction</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newButton.html">newButton</a>
+</div>
+<div class="section level1" id="widget.newbutton">
+<h1><a href="#TOC">widget.newButton()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/ButtonWidget/index.html">ButtonWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, button</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/ButtonWidget/index.html">ButtonWidget</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a <a href="../../type/ButtonWidget/index.html">Button</a> object.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newButton( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following basic parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> An optional identification string to assign for the button. Default is <code>widget_button</code>.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left / top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The left and top position where the button will be created. Default values are <code>0,0</code>.</p>
+</div>
+<div class="section level5" id="isenabled-optional">
+<h5><a href="#TOC">isEnabled <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If <code>false</code>, the button will not respond to touch events. Use <a href="../../type/ButtonWidget/setEnabled.html">button:setEnabled()</a> to enable or disable touch events on a button after creation. Default is <code>true</code> (button is enabled).</p>
+</div>
+<div class="section level5" id="onpress-optional">
+<h5><a href="#TOC">onPress <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> An optional function to be called when the button is pressed. The callback function does not require testing for <code>event.phase</code> since it only honors <code>&quot;began&quot;</code>.</p>
+</div>
+<div class="section level5" id="onrelease-optional">
+<h5><a href="#TOC">onRelease <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> An optional function to be called when the user releases the button (assuming the touch is still over the button). The callback function does not require testing for <code>event.phase</code> since it only honors <code>&quot;ended&quot;</code>.</p>
+</div>
+<div class="section level5" id="onevent-optional">
+<h5><a href="#TOC">onEvent <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> An optional function that should only be specified if <code>onPress</code> and <code>onRelease</code> are not set. This callback function allows you to test for the <code>event.phase</code> of <code>&quot;began&quot;</code>, <code>&quot;moved&quot;</code>, or <code>&quot;ended&quot;</code>.</p>
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level4" id="objectsetlabel">
+<h4><a href="#TOC"><a href="../../type/ButtonWidget/setLabel.html">object:setLabel()</a></a></h4>
+</div>
+<div class="section level4" id="objectgetlabel">
+<h4><a href="#TOC"><a href="../../type/ButtonWidget/getLabel.html">object:getLabel()</a></a></h4>
+</div>
+<div class="section level4" id="objectsetenabled">
+<h4><a href="#TOC"><a href="../../type/ButtonWidget/setEnabled.html">object:setEnabled()</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="basic-visual-options">
+<h2><a href="#TOC">Basic Visual Options</a></h2>
+<p>All buttons accept the following visual parameters in the <code>options</code> table, plus specific parameters for <a href="#2image">2-Image</a>, <a href="#2frame">2-Frame</a>, or <a href="#9slice">9-Slice</a> button type construction.</p>
+<!---
+
+##### width / height
+_[Numbers][api.type.Number]._ These values vary depending on the construction type &mdash; see the appropriate construction section below.
+
+-->
+
+<div class="section level5" id="label-optional">
+<h5><a href="#TOC">label <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Text label that will appear on top of the button.</p>
+</div>
+<div class="section level5" id="labelalign-optional">
+<h5><a href="#TOC">labelAlign <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Alignment of the button label. Valid values are <code>left</code>, <code>right</code>, or <code>center</code>. Default is <code>center</code>.</p>
+</div>
+<div class="section level5" id="labelcolor-optional">
+<h5><a href="#TOC">labelColor <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Table.html">Table</a>.</em> Table of two RGB+A color settings, one each for the default and over states.</p>
+<div class="code-indent" style="width:500px;">
+
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">labelColor</span> <span class="ot">=</span> <span class="ot">{</span> <span class="kw">default</span><span class="ot">={</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span> <span class="ot">}</span>, <span class="kw">over</span><span class="ot">={</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0.5</span> <span class="ot">}</span> <span class="ot">}</span></code></pre>
+</div>
+
+</div>
+<div class="section level5" id="labelxoffset-labelyoffset-optional">
+<h5><a href="#TOC">labelXOffset / labelYOffset <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Optional <strong>x</strong> and <strong>y</strong> offsets for the button label. For example, <code>labelYOffset = -8</code> will shift the label 8 pixels up from default.</p>
+</div>
+<div class="section level5" id="font-optional">
+<h5><a href="#TOC">font <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Font used for the button label. Default is <code>native.systemFont</code>.</p>
+</div>
+<div class="section level5" id="fontsize-optional">
+<h5><a href="#TOC">fontSize <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> Font size (in pixels) for the button label. Default is <code>14</code>.</p>
+</div>
+<div class="section level5" id="emboss-optional">
+<h5><a href="#TOC">emboss <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the button label will appear embossed (inset effect).</p>
+</div>
+<div class="section level5" id="textonly-optional">
+<h5><a href="#TOC">textOnly <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Boolean.html">Boolean</a>.</em> If set to <code>true</code>, the button will be constructed via a text object only (no background element). Default is <code>false</code>.</p>
+<a id="2image"></a>
+</div>
+</div>
+<div class="section level2" id="image-construction">
+<h2><a href="#TOC">2-Image Construction</a></h2>
+<p>This is the easiest button to construct — just create two image files, one for the <strong>default</strong> state and another for the <strong>over</strong> state.</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-button-file.png" /><p class="caption"></p>
+</div>
+<div class="section level5" id="width-height-required">
+<h5><a href="#TOC">width / height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The width and height of the image files.</p>
+</div>
+<div class="section level5" id="basedir-optional">
+<h5><a href="#TOC">baseDir <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Constant.html">Constant</a>.</em> The base directory where your custom images are located. Default is your project folder (<code>system.ResourceDirectory</code>).</p>
+</div>
+<div class="section level5" id="defaultfile-required">
+<h5><a href="#TOC">defaultFile <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The file name of the button default image (the &quot;un-pressed&quot; state).</p>
+</div>
+<div class="section level5" id="overfile-optional">
+<h5><a href="#TOC">overFile <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> The file name of the button over image (the &quot;pressed&quot; state).</p>
+<a id="2frame"></a>
+</div>
+</div>
+<div class="section level2" id="frame-construction">
+<h2><a href="#TOC">2-Frame Construction</a></h2>
+<p>This method uses two frames from an <a href="../graphics/newImageSheet.html">image sheet</a> — one frame each for the <strong>default</strong> and <strong>over</strong> states. For this method, include a reference to the image sheet as the <code>sheet</code> parameter. Then specify the frame numbers from the image sheet as <code>defaultFrame</code> and <code>overFrame</code> respectively.</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-button-file.png" /><p class="caption"></p>
+</div>
+<div class="section level5" id="sheet-required">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> The <a href="../graphics/newImageSheet.html">image sheet</a> object for the button.</p>
+</div>
+<div class="section level5" id="defaultframe-required">
+<h5><a href="#TOC">defaultFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The index number for the default frame of the button (the &quot;un-pressed&quot; state).</p>
+</div>
+<div class="section level5" id="overframe-required">
+<h5><a href="#TOC">overFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The index number for the over frame of the button (the &quot;pressed&quot; state).</p>
+<a id="9slice"></a>
+</div>
+</div>
+<div class="section level2" id="slice-construction">
+<h2><a href="#TOC">9-Slice Construction</a></h2>
+<p>This method uses 9 slices from an <a href="../graphics/newImageSheet.html">image sheet</a> which are assembled internally to create <nobr>flexible-sized</nobr> buttons. As indicated in the following image, the 9 slices consist of the 4 corners (red), the 2 horizontal sides (green), the 2 vertical sides (yellow), and the middle fill. Depending on the size of the button, the corners will remain at the size stated in the image sheet, but the sides and middle will stretch to fill the entire width and height. Remember that 18 slices are necessary to construct the entire button: 9 slices each for the <strong>default</strong> and <strong>over</strong> states.</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-button-9slice.png" /><p class="caption"></p>
+</div>
+<div class="section level5" id="width-height-required-1">
+<h5><a href="#TOC">width / height <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The flexible width and height of the 9-slice button.</p>
+</div>
+<div class="section level5" id="sheet-required-1">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> The <a href="../graphics/newImageSheet.html">image sheet</a> object for the button.</p>
+</div>
+<div class="section level5" id="middleframe-middleframeover-required">
+<h5><a href="#TOC">middleFrame / middleFrameOver <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the middle fill region.</p>
+</div>
+<div class="section level5" id="topleftframe-topleftoverframe-required">
+<h5><a href="#TOC">topLeftFrame / topLeftOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the top-left corner.</p>
+</div>
+<div class="section level5" id="topmiddleframe-topmiddleoverframe-required">
+<h5><a href="#TOC">topMiddleFrame / topMiddleOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the top-middle side.</p>
+</div>
+<div class="section level5" id="toprightframe-toprightoverframe-required">
+<h5><a href="#TOC">topRightFrame / topRightOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the top-right corner.</p>
+</div>
+<div class="section level5" id="middlerightframe-middlerightoverframe-required">
+<h5><a href="#TOC">middleRightFrame / middleRightOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the middle-right side.</p>
+</div>
+<div class="section level5" id="bottomrightframe-bottomrightoverframe-required">
+<h5><a href="#TOC">bottomRightFrame / bottomRightOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the bottom-right corner.</p>
+</div>
+<div class="section level5" id="bottommiddleframe-bottommiddleoverframe-required">
+<h5><a href="#TOC">bottomMiddleFrame / bottomMiddleOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the bottom-middle side.</p>
+</div>
+<div class="section level5" id="bottomleftframe-bottomleftoverframe-required">
+<h5><a href="#TOC">bottomLeftFrame / bottomLeftOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the bottom-left corner.</p>
+</div>
+<div class="section level5" id="middleleftframe-middleleftoverframe-required">
+<h5><a href="#TOC">middleLeftFrame / middleLeftOverFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The default (&quot;un-pressed&quot;) and over (&quot;pressed&quot;) frames of the middle-left side.</p>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level5" id="default">
+<h5><a href="#TOC">Default</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Function to handle button events</span>
+<span class="kw">local</span> <span class="kw">function</span> handleButtonEvent<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;ended&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Button was pressed and released&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">-- Create the button</span>
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newButton</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">id</span> <span class="ot">=</span> <span class="st">&quot;button1&quot;</span>,
+    <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;Default&quot;</span>,
+    <span class="kw">onEvent</span> <span class="ot">=</span> <span class="kw">handleButtonEvent</span>
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level5" id="image-construction-1">
+<h5><a href="#TOC">2-Image Construction</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Function to handle button events</span>
+<span class="kw">local</span> <span class="kw">function</span> handleButtonEvent<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;ended&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Button was pressed and released&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newButton</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">240</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">120</span>,
+    <span class="kw">defaultFile</span> <span class="ot">=</span> <span class="st">&quot;buttonDefault.png&quot;</span>,
+    <span class="kw">overFile</span> <span class="ot">=</span> <span class="st">&quot;buttonOver.png&quot;</span>,
+    <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;button&quot;</span>,
+    <span class="kw">onEvent</span> <span class="ot">=</span> <span class="kw">handleButtonEvent</span>
+<span class="ot">}</span>
+
+<span class="co">-- Change the button&#39;s label text</span>
+<span class="kw">myButton</span>:setLabel<span class="ot">(</span> <span class="st">&quot;2-Image&quot;</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level5" id="frame-construction-1">
+<h5><a href="#TOC">2-Frame Construction</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Function to handle button events</span>
+<span class="kw">local</span> <span class="kw">function</span> handleButtonEvent<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;ended&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Button was pressed and released&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">-- Image sheet options and declaration</span>
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">240</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">120</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">2</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">480</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">120</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">buttonSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;buttonSheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newButton</span>
+<span class="ot">{</span>
+    <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">buttonSheet</span>,
+    <span class="kw">defaultFrame</span> <span class="ot">=</span> <span class="dv">1</span>,
+    <span class="kw">overFrame</span> <span class="ot">=</span> <span class="dv">2</span>,
+    <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;button&quot;</span>,
+    <span class="kw">onEvent</span> <span class="ot">=</span> <span class="kw">handleButtonEvent</span>
+<span class="ot">}</span>
+
+<span class="co">-- Change the button&#39;s label text</span>
+<span class="kw">myButton</span>:setLabel<span class="ot">(</span> <span class="st">&quot;2-Frame&quot;</span> <span class="ot">)</span></code></pre>
+</div>
+<div class="section level5" id="slice-construction-1">
+<h5><a href="#TOC">9-Slice Construction</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="co">-- Function to handle button events</span>
+<span class="kw">local</span> <span class="kw">function</span> handleButtonEvent<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;ended&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="fu">print</span><span class="ot">(</span> <span class="st">&quot;Button was pressed and released&quot;</span> <span class="ot">)</span>
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+<span class="co">-- Image sheet options and declaration</span>
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">frames</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">198</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">219</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">78</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">198</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">78</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">219</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">78</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">99</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">99</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">198</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">219</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">99</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">240</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">261</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">198</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">459</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">0</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">240</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">78</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">261</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">198</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">78</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">459</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">78</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">240</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">99</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">261</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">99</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">198</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>,
+        <span class="ot">{</span> <span class="kw">x</span><span class="ot">=</span><span class="dv">459</span>, <span class="kw">y</span><span class="ot">=</span><span class="dv">99</span>, <span class="kw">width</span><span class="ot">=</span><span class="dv">21</span>, <span class="kw">height</span><span class="ot">=</span><span class="dv">21</span> <span class="ot">}</span>
+    <span class="ot">}</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">480</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">120</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">buttonSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;buttonSheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">myButton</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newButton</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">340</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">buttonSheet</span>,
+    <span class="kw">topLeftFrame</span> <span class="ot">=</span> <span class="dv">1</span>,
+    <span class="kw">topMiddleFrame</span> <span class="ot">=</span> <span class="dv">2</span>,
+    <span class="kw">topRightFrame</span> <span class="ot">=</span> <span class="dv">3</span>,
+    <span class="kw">middleLeftFrame</span> <span class="ot">=</span> <span class="dv">4</span>,
+    <span class="kw">middleFrame</span> <span class="ot">=</span> <span class="dv">5</span>,
+    <span class="kw">middleRightFrame</span> <span class="ot">=</span> <span class="dv">6</span>,
+    <span class="kw">bottomLeftFrame</span> <span class="ot">=</span> <span class="dv">7</span>,
+    <span class="kw">bottomMiddleFrame</span> <span class="ot">=</span> <span class="dv">8</span>,
+    <span class="kw">bottomRightFrame</span> <span class="ot">=</span> <span class="dv">9</span>,
+    <span class="kw">topLeftOverFrame</span> <span class="ot">=</span> <span class="dv">10</span>,
+    <span class="kw">topMiddleOverFrame</span> <span class="ot">=</span> <span class="dv">11</span>,
+    <span class="kw">topRightOverFrame</span> <span class="ot">=</span> <span class="dv">12</span>,
+    <span class="kw">middleLeftOverFrame</span> <span class="ot">=</span> <span class="dv">13</span>,
+    <span class="kw">middleOverFrame</span> <span class="ot">=</span> <span class="dv">14</span>,
+    <span class="kw">middleRightOverFrame</span> <span class="ot">=</span> <span class="dv">15</span>,
+    <span class="kw">bottomLeftOverFrame</span> <span class="ot">=</span> <span class="dv">16</span>,
+    <span class="kw">bottomMiddleOverFrame</span> <span class="ot">=</span> <span class="dv">17</span>,
+    <span class="kw">bottomRightOverFrame</span> <span class="ot">=</span> <span class="dv">18</span>,
+    <span class="kw">label</span> <span class="ot">=</span> <span class="st">&quot;button&quot;</span>
+<span class="ot">}</span>
+
+<span class="co">-- Change the button&#39;s label text</span>
+<span class="kw">myButton</span>:setLabel<span class="ot">(</span> <span class="st">&quot;9-Slice&quot;</span> <span class="ot">)</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newButton&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newButton&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newButton&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

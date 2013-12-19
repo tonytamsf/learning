@@ -1,0 +1,1663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > display > setDefault</title>
+  <meta name="revised" content="18-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > display > setDefault" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#display.setdefault">display.setDefault()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#key-required">key <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#gray-r-g-b-alpha-optional">gray, r, g, b, alpha <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#display-object-keys">Display Object Keys</a><ul>
+<li><a href="#anchorx">&quot;anchorX&quot;</a></li>
+<li><a href="#anchory">&quot;anchorY&quot;</a></li>
+</ul></li>
+<li><a href="#color-keys">Color Keys</a><ul>
+<li><a href="#background">&quot;background&quot;</a></li>
+<li><a href="#fillcolor">&quot;fillColor&quot;</a></li>
+<li><a href="#strokecolor">&quot;strokeColor&quot;</a></li>
+<li><a href="#linecolor">&quot;lineColor&quot;</a></li>
+<li><a href="#textcolor">&quot;textColor&quot;</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+<li><a href="#texture-keys">Texture Keys</a><ul>
+<li><a href="#magtexturefilter">&quot;magTextureFilter&quot;</a></li>
+<li><a href="#mintexturefilter">&quot;minTextureFilter&quot;</a></li>
+<li><a href="#texturewrapx">&quot;textureWrapX&quot;</a></li>
+<li><a href="#texturewrapy">&quot;textureWrapY&quot;</a></li>
+<li><a href="#important-note-on-texture-wrap">Important note on texture wrap</a></li>
+<li><a href="#examples-1">Examples</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">display</a>  ▸  <a href="setDefault.html">setDefault</a>
+</div>
+
+<div class="section level1" id="display.setdefault">
+<h1><a href="#TOC">display.setDefault()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">display.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left">none</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">defaults, set default, color, graphics, vector objects</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="newCircle.html">display.newCircle()</a><br/><a href="newRect.html">display.newRect()</a><br/><a href="newLine.html">display.newLine()</a><br/><a href="newText.html">display.newText()</a><br/><a href="../../type/DisplayObject/anchorX.html">object.anchorX</a><br/>[object.anchorY][pi.type.DisplayObject.anchorY]</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Set defaults for display objects, such as default colors for display objects. Colors default to white if not set.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<p>Any one of the following are valid:</p>
+<pre><code>display.setDefault( key, r, g, b, alpha )
+display.setDefault( key, r, g, b )
+display.setDefault( key, gray )
+display.setDefault( key, gray, alpha )
+display.setDefault( key, value )</code></pre>
+<div class="section level5" id="key-required">
+<h5><a href="#TOC">key <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> Specifies the</p>
+</div>
+<div class="section level5" id="gray-r-g-b-alpha-optional">
+<h5><a href="#TOC">gray, r, g, b, alpha <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> Color values between 0 and 1</p>
+</div>
+<div class="section level3" id="display-object-keys">
+<h3><a href="#TOC">Display Object Keys</a></h3>
+<p>These keys specify default values common to all display objects.</p>
+<div class="section level4" id="anchorx">
+<h4><a href="#TOC">&quot;anchorX&quot;</a></h4>
+<p>The anchor alignment along the x-direction. This value is what is used for the value of the <a href="../../type/DisplayObject/anchorX.html">anchorX</a> property in new objects. The default is 0.5 which centers along the x-direction.</p>
+</div>
+<div class="section level4" id="anchory">
+<h4><a href="#TOC">&quot;anchorY&quot;</a></h4>
+<p>The anchor alignment along the y-direction. This value is what is used for the value of the <a href="../../type/DisplayObject/anchorY.html">anchorY</a> property in new objects. The default is 0.5 which centers along the y-direction.</p>
+</div>
+</div>
+<div class="section level3" id="color-keys">
+<h3><a href="#TOC">Color Keys</a></h3>
+<p>A color key specifies which default color value to set:</p>
+<div class="section level4" id="background">
+<h4><a href="#TOC">&quot;background&quot;</a></h4>
+<p>Corresponds to the default color for that the screen is cleared with. The default is initially black. (Available to subscribers starting in daily build 2011.505)</p>
+</div>
+<div class="section level4" id="fillcolor">
+<h4><a href="#TOC">&quot;fillColor&quot;</a></h4>
+<p>Corresponds to the default color for vector objects (e.g. <a href="newRect.html">display.newRect()</a>). The default is initially white.</p>
+</div>
+<div class="section level4" id="strokecolor">
+<h4><a href="#TOC">&quot;strokeColor&quot;</a></h4>
+<p>Corresponds to the default color for vector objects (e.g. <a href="newRect.html">display.newRect()</a>). The default is initially white.</p>
+</div>
+<div class="section level4" id="linecolor">
+<h4><a href="#TOC">&quot;lineColor&quot;</a></h4>
+<p>Corresponds to the default color for line objects (e.g. <a href="newLine.html">display.newLine()</a>). The default is initially white.</p>
+</div>
+<div class="section level4" id="textcolor">
+<h4><a href="#TOC">&quot;textColor&quot;</a></h4>
+<p>Corresponds to the default color for text objects (e.g. <a href="newText.html">display.newText()</a>). The default is initially white.</p>
+</div>
+<div class="section level4" id="examples">
+<h4><a href="#TOC">Examples</a></h4>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- set default fill color for vector objects to red</span>
+<span class="kw">display</span><span class="ot">.</span>setDefault<span class="ot">(</span> <span class="st">&quot;fillColor&quot;</span>, <span class="dv">255</span>, <span class="dv">0</span>, <span class="dv">0</span> <span class="ot">)</span>
+
+<span class="co">-- set default screen background color to blue</span>
+<span class="kw">display</span><span class="ot">.</span>setDefault<span class="ot">(</span> <span class="st">&quot;background&quot;</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span> <span class="ot">)</span></code></pre>
+</div>
+</div>
+<div class="section level3" id="texture-keys">
+<h3><a href="#TOC">Texture Keys</a></h3>
+<div class="section level4" id="magtexturefilter">
+<h4><a href="#TOC">&quot;magTextureFilter&quot;</a></h4>
+<p>The default magnification sampling filter applied whenever an image is loaded by Corona. Once an image is loaded the first time, the same sampling filter will be applied for any subsequent loads of the same file. This is because textures are loaded once per file. Default value is <code>&quot;linear&quot;</code>. Other values are: <code>&quot;nearest&quot;</code>.</p>
+</div>
+<div class="section level4" id="mintexturefilter">
+<h4><a href="#TOC">&quot;minTextureFilter&quot;</a></h4>
+<p>The default minification sampling filter applied whenever an image is loaded by Corona. Once an image is loaded the first time, the same sampling filter will be applied for any subsequent loads of the same file. This is because textures are loaded once per file. Default value is <code>&quot;linear&quot;</code>. Other values are: <code>&quot;nearest&quot;</code>.</p>
+</div>
+<div class="section level4" id="texturewrapx">
+<h4><a href="#TOC">&quot;textureWrapX&quot;</a></h4>
+<p>The wrap mode along the x-direction. Once an image is loaded the first time, the same wrap mode will be applied for any subsequent loads of the same file. This is because textures are loaded once per file. Default value is <code>&quot;clampToEdge&quot;</code>. Other values are useful for patterns: <code>&quot;repeat&quot;</code>, <code>&quot;mirroredRepeat&quot;</code>.</p>
+<p>See the important note below.</p>
+</div>
+<div class="section level4" id="texturewrapy">
+<h4><a href="#TOC">&quot;textureWrapY&quot;</a></h4>
+<p>The wrap mode along the y-direction. Once an image is loaded the first time, the same wrap mode will be applied for any subsequent loads of the same file. This is because textures are loaded once per file. Default value is <code>&quot;clampToEdge&quot;</code>. Other values are useful for patterns: <code>&quot;repeat&quot;</code>, <code>&quot;mirroredRepeat&quot;</code>.</p>
+<p>See the important note below.</p>
+</div>
+<div class="section level4" id="important-note-on-texture-wrap">
+<h4><a href="#TOC">Important note on texture wrap</a></h4>
+<p>&quot;clampToEdge&quot; is the only valid texture wrap for <a href="http://www.opengl.org/wiki/NPOT_Texture">non-power-of-two textures</a>.</p>
+<p>To use &quot;repeat&quot;, make sure the dimentions of your texture are a power of two. For example 16, 32, 64, 128, 256, etc.</p>
+</div>
+<div class="section level4" id="examples-1">
+<h4><a href="#TOC">Examples</a></h4>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">display</span><span class="ot">.</span>setDefault<span class="ot">(</span> <span class="st">&quot;textureWrapX&quot;</span>, <span class="st">&quot;repeat&quot;</span> <span class="ot">)</span>
+<span class="kw">display</span><span class="ot">.</span>setDefault<span class="ot">(</span> <span class="st">&quot;textureWrapY&quot;</span>, <span class="st">&quot;repeat&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">x</span>,<span class="kw">y</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span><span class="kw">contentCenterX</span>, <span class="kw">display</span><span class="ot">.</span><span class="kw">contentCenterY</span>
+<span class="kw">local</span> <span class="kw">o</span> <span class="ot">=</span> <span class="kw">display</span><span class="ot">.</span>newRect<span class="ot">(</span> <span class="kw">x</span>, <span class="kw">y</span>, <span class="kw">display</span><span class="ot">.</span><span class="kw">contentWidth</span>, <span class="kw">display</span><span class="ot">.</span><span class="kw">contentHeight</span> <span class="ot">)</span>
+<span class="kw">o</span><span class="ot">.</span><span class="kw">fill</span> <span class="ot">=</span> <span class="ot">{</span> <span class="fu">type</span><span class="ot">=</span><span class="st">&quot;image&quot;</span>, <span class="kw">filename</span><span class="ot">=</span><span class="st">&quot;fish.small.red.png&quot;</span> <span class="ot">}</span>
+<span class="kw">o</span><span class="ot">.</span><span class="kw">fill</span><span class="ot">.</span><span class="kw">scaleX</span> <span class="ot">=</span> <span class="dv">0.1</span>
+<span class="kw">o</span><span class="ot">.</span><span class="kw">fill</span><span class="ot">.</span><span class="kw">scaleY</span> <span class="ot">=</span> <span class="dv">0.1</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 18-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.display.setDefault&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.display.setDefault&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.display.setDefault&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

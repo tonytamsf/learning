@@ -1,0 +1,2289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: guide > distribution > buildSettings </title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  guide > distribution > buildSettings " />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../../api/index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#project-build-settings">Project Build Settings</a><ul>
+<li><a href="#basic-structure">Basic Structure</a></li>
+<li><a href="#device-orientation">Device Orientation</a><ul>
+<li><a href="#auto-orientation">Auto-Orientation</a></li>
+</ul></li>
+<li><a href="#ios-build-settings">iOS Build Settings</a></li>
+<li><a href="#android-build-settings">Android Build Settings</a><ul>
+<li><a href="#version-code">Version Code</a></li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#expansion-files">Expansion Files</a></li>
+<li><a href="#large-heap">Large Heap</a></li>
+</ul></li>
+<li><a href="#custom-app-icons">Custom App Icons</a><ul>
+<li><a href="#ios">iOS</a></li>
+<li><a href="#android">Android</a></li>
+<li><a href="#ouya">Ouya</a></li>
+</ul></li>
+<li><a href="#launch-images">Launch Images</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">guide</a>  ▸  [distribution][guide.distribution]  ▸  <a href="index.html">buildSettings</a>
+</div>
+<div class="section level1" id="project-build-settings">
+<h1><a href="#TOC">Project Build Settings</a></h1>
+<p>Build-time properties for an app are defined using a optional <code>build.settings</code> file written in Lua syntax. It should be placed in the project's base directory.</p>
+<ul>
+<li><a href="#basicstruct">Basic Structure</a></li>
+<li><a href="#orientation">Device Orientation</a></li>
+<li><a href="#iOSsettings">iOS Build Settings</a></li>
+<li><a href="#androidsettings">Android Build Settings</a></li>
+<li><a href="#appicons">Custom App Icons</a></li>
+<li><a href="#launchimage">Launch Images</a></li>
+</ul>
+<a id="basicstruct"></a>
+<div class="section level2" id="basic-structure">
+<h2><a href="#TOC">Basic Structure</a></h2>
+<p>At the minimum, the <code>build.settings</code> file should contain a <code>settings</code> table which will contain various child tables to dictate build-time options.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="co">--child tables here</span>
+<span class="ot">}</span></code></pre>
+<a id="orientation"></a>
+</div>
+<div class="section level2" id="device-orientation">
+<h2><a href="#TOC">Device Orientation</a></h2>
+<p>The <code>build.settings</code> file can be used to set app orientation in relation to the device's physical orientation in space — this includes auto-orientation triggered by the accelerometer if the device is rotated or flipped during runtime.</p>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>Please note that there are three different things which are subject to orientation:</p>
+<ol style="list-style-type: decimal">
+<li>The launch screen image (see <a href="#launchimage">Launch Images</a> below).</li>
+<li>Native UI elements such as alerts and the visual keyboard.</li>
+<li>The Corona display stage itself.</li>
+</ol>
+</div>
+
+<p>All orientation settings must be contained in the <code>orientation</code> table within <code>settings</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">orientation</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">--parameters</span>
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<p>Within the <code>orientation</code> table, there are three optional key values: <code>default</code>, <code>content</code>, <code>supported</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">orientation</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">default</span> <span class="ot">=</span> <span class="st">&quot;&quot;</span>,  <span class="co">--initial launch orientation</span>
+        <span class="kw">content</span> <span class="ot">=</span> <span class="st">&quot;&quot;</span>,  <span class="co">--locked orientation of the Corona stage, independent of Native UI elements (iOS only)</span>
+        <span class="kw">supported</span> <span class="ot">=</span> <span class="ot">{</span> <span class="ot">}</span>,  <span class="co">--table of allowed options for auto-orientation</span>
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<p>Each of these must be set to one the following <strong>name conventions</strong> (or a list of these for the <code>supported</code> table).</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width20 headerfirst headerrow notebox-title">
+Name
+</th>
+<th class="width50 headerrow notebox-title">
+Orientation
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>portrait</code>
+</th>
+<th class="itemrow">
+Device in the vertical position with the home button at the bottom
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>portraitUpsideDown</code>
+</th>
+<th class="itemrow">
+Device in the vertical position with the home button at the top
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>landscapeRight</code>
+</th>
+<th class="itemrow">
+Device in the horizontal position with the home button at the right
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>landscapeLeft</code>
+</th>
+<th class="itemrow">
+Device in the horizontal position with the home button at the left
+</th>
+</tr>
+</table><div style="clear:both;"></div>
+
+<div class="section level3" id="auto-orientation">
+<h3><a href="#TOC">Auto-Orientation</a></h3>
+<p>On most devices, <strong>auto-orientation</strong> is triggered by the accelerometer if the device is rotated or flipped during runtime. If you want to limit an app to landscape orientation, specify both landscape conventions in the <code>supported</code> table as shown below. To limit an app to portrait orientation, specify both <code>&quot;portrait&quot;</code> and <code>&quot;portraitUpsideDown&quot;</code>.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">orientation</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">default</span> <span class="ot">=</span> <span class="st">&quot;landscapeRight&quot;</span>,
+        <span class="kw">supported</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;landscapeLeft&quot;</span>, <span class="st">&quot;landscapeRight&quot;</span> <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp title-nomargin">
+Important
+</div>
+
+<ol style="list-style-type: decimal">
+<li><p>When the device orientation changes, the <strong>coordinate position</strong> <code>(0,0)</code> on the Corona display stage will correspond to the top-left corner of the current orientation.</p></li>
+<li><p>The <strong>iPad</strong> ignores the <code>default</code> setting and attempts to launch in the current physical orientation of the device, assuming that orientation is specified in the supported list.</p></li>
+<li><p>On <strong>Android</strong>, if your <code>supported</code> list contains both a portrait <em>and</em> a landscape orientation, then your app will support all orientations on the device, except on some Android devices that don't support <code>portraitUpsideDown</code> at all.</p></li>
+<li><p>In <strong>Android 2.2</strong>, if you build a landscape-only app by supporting <code>landscapeRight</code> and <code>landscapeLeft</code>, it will never display in the <code>landscapeLeft</code> mode. Likewise, if you build a portrait-only app by supporting <code>portrait</code> and <code>portraitUpsideDown</code>, it will never appear as <code>portraitUpsideDown</code>. This is an Android 2.2 limitation.</p></li>
+<li><p>In <strong>iOS</strong>, you can optionally use the <code>content</code> key value to lock the Corona stage to a particular orientation. Native UI elements such as alerts or the visual keyboard will auto-orient, but the Corona display stage will remain locked. This is useful if you want to maintain a fixed coordinate system in an iOS app.</p></li>
+<li><p>If you ever need to detect the current device orientation, it can be read from the <code>system.orientation</code> property. This will return one of six values from a set of the four standard conventions plus <code>faceUp</code> and <code>faceDown</code>.</p></li>
+</ol>
+</div>
+
+
+
+
+<a id="iOSsettings"></a>
+</div>
+</div>
+<div class="section level2" id="ios-build-settings">
+<h2><a href="#TOC">iOS Build Settings</a></h2>
+<p>Within the <code>settings</code> table, you can include a <code>plist</code> table nested within the <code>iphone</code> table, which encompasses <strong>all</strong> iOS devices, not just iPhone. This <code>plist</code> table is used to set values for the compiled app's <code>Info.plist</code> file.</p>
+<p>For boolean values in <code>plist</code> keys, use Lua-style booleans (<code>true</code> and <code>false</code> ) rather than Objective-C booleans (<code>YES</code> and <code>NO</code>).</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">iphone</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">plist</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">UIApplicationExitsOnSuspend</span> <span class="ot">=</span> <span class="kw">false</span>,
+            <span class="kw">UIPrerenderedIcon</span> <span class="ot">=</span> <span class="kw">true</span>,
+            <span class="kw">UIStatusBarHidden</span> <span class="ot">=</span> <span class="kw">true</span>,
+            <span class="kw">UIAppFonts</span> <span class="ot">=</span> <span class="ot">{</span> <span class="st">&quot;AvenirLTStd-Black.otf&quot;</span>,<span class="st">&quot;SourceCodePro-Black.ttf&quot;</span> <span class="ot">}</span>,
+            <span class="kw">CFBundleIconFiles</span> <span class="ot">=</span> <span class="ot">{</span> <span class="ot">}</span>,
+            <span class="kw">MinimumOSVersion</span> <span class="ot">=</span> <span class="st">&quot;5.1.0&quot;</span>,
+        <span class="ot">}</span>
+
+        <span class="kw">skipPNGCrush</span> <span class="ot">=</span> <span class="kw">false</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<p>In the example above, a few useful <code>plist</code> keys are shown:</p>
+<ul>
+<li><p><code>UIApplicationExitsOnSuspend</code> — if <code>true</code>, the app will quit when the user exits it. Default is <code>false</code>.</p></li>
+<li><p><code>UIPrerenderedIcon</code> — if <code>true</code>, iOS will <strong>not</strong> apply a shine effect to the app icon.</p></li>
+<li><p><code>UIStatusBarHidden</code> — specifies if the status bar should initially be hidden when the app launches.</p></li>
+<li><p><code>UIAppFonts</code> — a table of font files to bundle with the app. For more information, please see this <a href="http://www.coronalabs.com/blog/2013/01/16/faq-wednesday-custom-fonts/">FAQ</a>.</p></li>
+<li><p><code>CFBundleIconFiles</code> — a table of app icon files to associate with the app. See <a href="#appicons">Custom App Icons</a> below.</p></li>
+<li><p><code>MinimumOSVersion</code> — specify this <strong>only</strong> if you need to restrict the app to a minimum OS version.</p></li>
+</ul>
+<p>See Apple's <a href="https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009248-SW1">documentation</a> for more information on supported values and what you can do with them. Note that keys containing special characters like the tilde (~) must be declared using the Lua <strong>dot notation</strong> as follows:</p>
+<p>Also, there is a build time setting to control PNG file processing:</p>
+<ul>
+<li><code>skipPNGCrush</code> — set this to <code>true</code> <strong>only</strong> if you need to avoid having PNG files processed with <code>pngcrush</code> (this is not recommended and may result in issues submitting apps to Apple).</li>
+</ul>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">iphone</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">plist</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">UIInterfaceOrientation</span> <span class="ot">=</span> <span class="st">&quot;UIInterfaceOrientationLandscapeRight&quot;</span>,
+            <span class="kw">UISupportedInterfaceOrientations</span> <span class="ot">=</span>
+            <span class="ot">{</span> <span class="st">&quot;UIInterfaceOrientationLandscapeLeft&quot;</span>,<span class="st">&quot;UIInterfaceOrientationLandscapeRight&quot;</span> <span class="ot">}</span>,
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span>
+
+<span class="kw">settings</span><span class="ot">.</span><span class="kw">iphone</span><span class="ot">.</span><span class="kw">plist</span><span class="ot">[</span><span class="st">&quot;UIInterfaceOrientation~ipad&quot;</span><span class="ot">]</span> <span class="ot">=</span> <span class="st">&quot;UIInterfaceOrientationPortrait&quot;</span>
+<span class="kw">settings</span><span class="ot">.</span><span class="kw">iphone</span><span class="ot">.</span><span class="kw">plist</span><span class="ot">[</span><span class="st">&quot;UISupportedInterfaceOrientations~ipad&quot;</span><span class="ot">]</span> <span class="ot">=</span> 
+<span class="ot">{</span> <span class="st">&quot;UIInterfaceOrientationPortrait&quot;</span>,<span class="st">&quot;UIInterfaceOrientationPortraitUpsideDown&quot;</span> <span class="ot">}</span></code></pre>
+<a id="androidsettings"></a>
+</div>
+<div class="section level2" id="android-build-settings">
+<h2><a href="#TOC">Android Build Settings</a></h2>
+<p>Within the <code>settings</code> table, you can include a <code>android</code> table to control build setting for Android devices.</p>
+<div class="section level3" id="version-code">
+<h3><a href="#TOC">Version Code</a></h3>
+<p>An Android app should always have a <strong>version code</strong> declared with the <code>versionCode</code> key value. This is an <em>internal</em> number used to distinguish application releases for the Android Marketplace. It corresponds to the <code>versionCode</code> item detailed <a href="http://developer.android.com/guide/topics/manifest/manifest-element.html">here</a>. It is not visible to users.</p>
+<ul>
+<li><p>The version code must be an <strong>integer</strong> — it cannot contain any decimal points.</p></li>
+<li><p>The version code defaults to <code>&quot;1&quot;</code> if it's not set. However, this field should be specified and it <strong>must</strong> be set to a higher value when submitting an updated app to market. One possible scheme is to set <code>versionCode</code> to <code>&quot;10&quot;</code> for version <strong>1.0</strong>. The next update would be <code>&quot;11&quot;</code> for version <strong>1.1</strong>, and so forth. If you already submitted an app to the Android Marketplace but you didn't specify the version code, just add the <code>versionCode</code> key value and set it to <code>&quot;2&quot;</code> or higher.</p></li>
+</ul>
+</div>
+<div class="section level3" id="permissions">
+<h3><a href="#TOC">Permissions</a></h3>
+<p>The <code>usesPermissions</code> table creates <code>&lt;uses-permission&gt;</code> tags in the <code>AndroidManifest.xml</code> file. It replaces the deprecated <code>androidPermissions</code> table, although that method is still supported for backwards compatibility.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">versionCode</span> <span class="ot">=</span> <span class="st">&quot;11&quot;</span>,
+        <span class="kw">usesPermissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;android.permission.INTERNET&quot;</span>,
+            <span class="st">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span>,
+            <span class="st">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span>,
+            <span class="st">&quot;android.permission.ACCESS_COURSE_LOCATION&quot;</span>,
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+<p>In the example above, a few useful <code>android.permission</code> keys are exhibited.</p>
+<ul>
+<li><p><code>&quot;android.permission.INTERNET&quot;</code> — permits a Corona app to access the Internet.</p></li>
+<li><p><code>&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</code> — allows <code>media.save()</code> and camera support.</p></li>
+<li><p><code>&quot;android.permission.ACCESS_FINE_LOCATION&quot;</code> — allows access to GPS.</p></li>
+<li><p><code>&quot;android.permission.ACCESS_COURSE_LOCATION&quot;</code> — allows getting the location from WiFi/CellularService.</p></li>
+</ul>
+<p>See the Android <a href="http://developer.android.com/reference/android/Manifest.permission.html">documentation</a> for more information on supported values and what you can do with them.</p>
+</div>
+<div class="section level3" id="features">
+<h3><a href="#TOC">Features</a></h3>
+<p>The <code>usesFeatures</code> table creates <code>&lt;uses-feature&gt;</code> tags in the <code>AndroidManifest.xml</code> file. These parameters tell the Android Marketplace which hardware capabilities the app does or doesn't require. See the Android <a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#features-reference">features reference</a> for a list of supported values.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">usesFeatures</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="ot">{</span> <span class="kw">name</span> <span class="ot">=</span> <span class="st">&quot;android.hardware.camera&quot;</span>, <span class="kw">required</span> <span class="ot">=</span> <span class="kw">true</span> <span class="ot">}</span>,
+            <span class="ot">{</span> <span class="kw">name</span> <span class="ot">=</span> <span class="st">&quot;android.hardware.location&quot;</span>, <span class="kw">required</span> <span class="ot">=</span> <span class="kw">false</span> <span class="ot">}</span>,
+            <span class="ot">{</span> <span class="kw">name</span> <span class="ot">=</span> <span class="st">&quot;android.hardware.location.gps&quot;</span>, <span class="kw">required</span> <span class="ot">=</span> <span class="kw">false</span> <span class="ot">}</span>,
+        <span class="ot">}</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp">
+Important
+</div>
+
+<p>If you grant <strong>permission</strong> to a feature using the <code>usesPermissions</code> table above, Android assumes that this feature is also <strong>required</strong>. For example, if you grant permission to the <code>CAMERA</code>, the Android Marketplace will assume that a camera is required for the app to function. Thus, devices lacking a camera will not be able to download or purchase the app. As a precaution, if your app uses the camera for some features but does not require it for basic functionality, you should include this feature and set its <code>required</code> tag to <strong>false</strong> in the <code>usesFeatures</code> table.</p>
+<p><code>{ name = &quot;android.hardware.camera&quot;, required = false },</code></p>
+</div>
+
+</div>
+<div class="section level3" id="expansion-files">
+<h3><a href="#TOC">Expansion Files</a></h3>
+<p>The <code>usesExpansionFile</code> boolean indicates if the app should be built with expansion files. If it is set to <code>true</code> and the build target is Google Play, then everything in the project directory except the Lua scripts are put into the expansion file. Make sure you have Google licensing set up or the expansion files might not be downloaded. See the Android <a href="http://developer.android.com/google/play/expansion-files.html">documentation</a> for more information.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span> 
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="co">--this tells the Corona Simulator to create an expansion file.</span>
+        <span class="kw">usesExpansionFile</span> <span class="ot">=</span> <span class="kw">true</span>,
+
+        <span class="co">--the following permissions are required to download expansion files.</span>
+        <span class="kw">usesPermissions</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="st">&quot;android.permission.INTERNET&quot;</span>,
+            <span class="st">&quot;com.android.vending.CHECK_LICENSE&quot;</span>,
+            <span class="st">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span>
+        <span class="ot">}</span>,
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="large-heap">
+<h3><a href="#TOC">Large Heap</a></h3>
+<p>You can set your app to use a <strong>large heap</strong> by adding the <code>largeHeap = true</code> parameter. For example, you might need to raise the max heap size on a particular device from 32 MB to 256 MB, allowing a Corona app to load 2048×2048 images.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">android</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">largeHeap</span> <span class="ot">=</span> <span class="kw">true</span>
+    <span class="ot">}</span>
+<span class="ot">}</span></code></pre>
+<p>Please note that this setting is for Android <strong>3.0</strong> and higher. Android 2.x devices will still run the app but they'll ignore this setting.</p>
+<a id="appicons"></a>
+</div>
+</div>
+<div class="section level2" id="custom-app-icons">
+<h2><a href="#TOC">Custom App Icons</a></h2>
+<div class="section level3" id="ios">
+<h3><a href="#TOC">iOS</a></h3>
+<p>For iOS, you must create a series of app icons for the iOS devices you plan to support. Apple recommends that you also create a set of small icons for <strong>spotlight search results</strong> and <strong>settings</strong>. All icons should adhere to the standard iOS names and sizes listed below. Note that each icon has a definition for &quot;normal&quot; plus a Retina version appended with <code>@2x</code>. For detailed information on creating icons, please refer to the <a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">iOS Human Interface Guidelines</a>.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width20 headerfirst headerrow notebox-title">
+File
+</th>
+<th class="width15 headerrow notebox-title">
+iOS Version
+</th>
+<th class="width15 headerrow notebox-title">
+Size (w×h)
+</th>
+<th class="width45 headerrow notebox-title">
+Usage
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-60.png</code>
+</th>
+<th class="itemrow">
+&gt;= 7.0
+</th>
+<th class="itemrow">
+60 × 60
+</th>
+<th class="itemrow">
+App Icon — iPhone
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-60@2x.png</code>
+</th>
+<th class="itemrow">
+&gt;= 7.0
+</th>
+<th class="itemrow">
+120 × 120
+</th>
+<th class="itemrow">
+App Icon — Retina iPhone
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-76.png</code>
+</th>
+<th class="itemrow">
+&gt;= 7.0
+</th>
+<th class="itemrow">
+76 × 76
+</th>
+<th class="itemrow">
+App Icon — iPad
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-76@2x.png</code>
+</th>
+<th class="itemrow">
+&gt;= 7.0
+</th>
+<th class="itemrow">
+152 × 152
+</th>
+<th class="itemrow">
+App Icon — Retina iPad
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-Small-40.png</code>
+</th>
+<th class="itemrow">
+&gt;= 7.0
+</th>
+<th class="itemrow">
+40 × 40
+</th>
+<th class="itemrow">
+Search/Settings — all devices  (recommended)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-Small-40@2x.png</code>
+</th>
+<th class="itemrow">
+&gt;= 7.0
+</th>
+<th class="itemrow">
+80 × 80
+</th>
+<th class="itemrow">
+Search/Settings — all devices  (recommended)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+57 × 57
+</th>
+<th class="itemrow">
+App Icon — iPhone
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon@2x.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+114 × 114
+</th>
+<th class="itemrow">
+App Icon — Retina iPhone
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-72.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+72 × 72
+</th>
+<th class="itemrow">
+App Icon — iPad
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-72@2x.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+144 × 144
+</th>
+<th class="itemrow">
+App Icon — Retina iPad
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-Small-50.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+50 × 50
+</th>
+<th class="itemrow">
+Search/Settings — iPad  (recommended)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-Small-50@2x.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+100 × 100
+</th>
+<th class="itemrow">
+Search/Settings — Retina iPad  (recommended)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-Small.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+29 × 29
+</th>
+<th class="itemrow">
+Search/Settings — iPhone  (recommended)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-Small@2x.png</code>
+</th>
+<th class="itemrow">
+&lt;= 6.1
+</th>
+<th class="itemrow">
+58 × 58
+</th>
+<th class="itemrow">
+Search/Settings — Retina iPhone  (recommended)
+</th>
+</tr>
+</table><div style="clear:both;">
+ 
+</div>
+
+<p>These files should be included in the project's base directory. Additionally, you must specify them in the <code>CFBundleIconFiles</code> table.</p>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">settings</span> <span class="ot">=</span>
+<span class="ot">{</span>
+    <span class="kw">iphone</span> <span class="ot">=</span>
+    <span class="ot">{</span>
+        <span class="kw">plist</span> <span class="ot">=</span>
+        <span class="ot">{</span>
+            <span class="kw">CFBundleIconFiles</span> <span class="ot">=</span> <span class="ot">{</span>
+            <span class="st">&quot;Icon.png&quot;</span>,
+            <span class="st">&quot;Icon@2x.png&quot;</span>,
+            <span class="st">&quot;Icon-Small-40.png&quot;</span>,
+            <span class="st">&quot;Icon-Small-40@2x.png&quot;</span>,
+            <span class="st">&quot;Icon-60.png&quot;</span>,
+            <span class="st">&quot;Icon-60@2x.png&quot;</span>,
+            <span class="st">&quot;Icon-72.png&quot;</span>,
+            <span class="st">&quot;Icon-72@2x.png&quot;</span>,
+            <span class="st">&quot;Icon-76.png&quot;</span>,
+            <span class="st">&quot;Icon-76@2x.png&quot;</span>,
+            <span class="st">&quot;Icon-Small-50.png&quot;</span>,
+            <span class="st">&quot;Icon-Small-50@2x.png&quot;</span>,
+            <span class="st">&quot;Icon-Small.png&quot;</span>,
+            <span class="st">&quot;Icon-Small@2x.png&quot;</span>
+            <span class="ot">}</span>,
+        <span class="ot">}</span>
+    <span class="ot">}</span>,
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level3" id="android">
+<h3><a href="#TOC">Android</a></h3>
+<p>For <strong>Android</strong>, icon files will be copied into the <strong>.apk</strong> during the build, if they are available in your project folder. These icons should adhere to the standard Android icon names and sizes listed below. For detailed information on creating icons, please refer to the <a href="http://developer.android.com/intl/de/guide/practices/ui_guidelines/icon_design.html">Android Icon Design Guidelines</a>.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width20 headerfirst headerrow notebox-title">
+File
+</th>
+<th class="width15 headerrow notebox-title">
+Size (w×h)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-xxhdpi.png</code>
+</th>
+<th class="itemrow">
+144 × 144
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-xhdpi.png</code>
+</th>
+<th class="itemrow">
+96 × 96
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-hdpi.png</code>
+</th>
+<th class="itemrow">
+72 × 72
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-mdpi.png</code>
+</th>
+<th class="itemrow">
+48 × 48
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-ldpi.png</code>
+</th>
+<th class="itemrow">
+36 × 36
+</th>
+</tr>
+</table><div style="clear:both;"></div>
+
+</div>
+<div class="section level3" id="ouya">
+<h3><a href="#TOC">Ouya</a></h3>
+<p>If your Android app is targeting Ouya, then you must add the following app icon to your project folder.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width20 headerfirst headerrow notebox-title">
+File
+</th>
+<th class="width15 headerrow notebox-title">
+Size (w×h)
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Icon-ouya.png</code>
+</th>
+<th class="itemrow">
+732 × 412
+</th>
+</tr>
+</table><div style="clear:both;"></div>
+
+
+
+
+<a id="launchimage"></a>
+</div>
+</div>
+<div class="section level2" id="launch-images">
+<h2><a href="#TOC">Launch Images</a></h2>
+<p>To enhance the user experience, you must provide at least one <strong>launch image</strong> (splash screen) to display when the app starts. It will appear until the app is fully ready to use, then your first screen/scene will appear and replace the launch image.</p>
+<p>These images should adhere to the standard names and sizes listed below. Similar to icon files, these image files should be included in the project's base directory. However, you do <strong>not</strong> need to specify them in the <code>plist</code> table or in the <code>android</code> table.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="width25 headerfirst headerrow notebox-title">
+File
+</th>
+<th class="width15 headerrow notebox-title">
+Size (w×h)
+</th>
+<th class="width15 headerrow notebox-title aligncent">
+iPhone/iPod
+</th>
+<th class="width15 headerrow notebox-title aligncent">
+iPad
+</th>
+<th class="width15 headerrow notebox-title aligncent">
+Android
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Default.png</code>
+</th>
+<th class="itemrow">
+320 × 480
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Default@2x.png</code>
+</th>
+<th class="itemrow">
+640 × 960
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+</tr>
+<tr>
+<th class="itemrow rowhl">
+<code>Default-568h@2x.png</code>
+</th>
+<th class="itemrow rowhl">
+640 × 1136
+</th>
+<th class="itemrow aligncent rowhl">
+✓
+</th>
+<th class="itemrow aligncent rowhl">
+ 
+</th>
+<th class="itemrow aligncent rowhl">
+ 
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Default-Portrait.png</code>
+</th>
+<th class="itemrow">
+768 × 1024
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Default-Portrait@2x.png</code>
+</th>
+<th class="itemrow">
+1536 × 2048
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Default-Landscape.png</code>
+</th>
+<th class="itemrow">
+1024 × 768
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+</tr>
+<tr>
+<th class="itemrow">
+<code>Default-Landscape@2x.png</code>
+</th>
+<th class="itemrow">
+2048 × 1536
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+<th class="itemrow aligncent">
+✓
+</th>
+<th class="itemrow aligncent">
+ 
+</th>
+</tr>
+</table><div style="clear:both;"></div>
+
+<div class="guide-notebox-imp">
+<div class="notebox-title-imp title-nomargin">
+Important
+</div>
+
+<ul>
+<li><p>If you're developing an app for <strong>iPhone5</strong> compatibility, you might be tempted to wait until the project is complete to create these launch images. However, you must at least include the <code>Default-568h@2x.png</code> file from the start, even if it's a blank image for testing. This activates the iPhone5 &quot;tall&quot; mode. As indicated above, this image must be exactly 640×1136 in size — do <strong>not</strong> flip it to 1136×640 for a landscape app.</p></li>
+<li><p>On Android, if the width or height of the display is greater than 480 pixels, the larger image file(s) will be used.</p></li>
+<li><p>Android displays all launch images in letterbox format, regardless of the scale setting in <code>config.lua</code>.</p></li>
+</ul>
+</div>
+
+
+
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=guide.distribution.buildSettings.index&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=guide.distribution.buildSettings.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=guide.distribution.buildSettings.index&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>

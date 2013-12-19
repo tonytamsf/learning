@@ -1,0 +1,1728 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: API > Libraries > widget > newStepper</title>
+  <meta name="revised" content="26-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  API > Libraries > widget > newStepper" />
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../index.html">SDK APIs</a></li>
+<li><a href="../../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../../../plugin/index.html">Plugins</a></li>
+<li><a href="../../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#widget.newstepper">widget.newStepper()</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#gotchas">Gotchas</a></li>
+<li><a href="#syntax">Syntax</a><ul>
+<li><a href="#id-optional">id <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#left-top-optional">left / top <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#width-height-optional">width / height <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#initialvalue-optional">initialValue <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#minimumvalue-optional">minimumValue <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#maximumvalue-optional">maximumValue <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#timerincrementspeed-optional">timerIncrementSpeed <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#changespeedatincrement-optional">changeSpeedAtIncrement <sub><sup>(optional)</sup></sub></a></li>
+<li><a href="#onpress-optional">onPress <sub><sup>(optional)</sup></sub></a></li>
+</ul></li>
+<li><a href="#properties">Properties</a><ul>
+<li><a href="#object.value"><a href="../../type/StepperWidget/value.html">object.value</a></a></li>
+<li><a href="#object.minimumvalue"><a href="../../type/StepperWidget/minimumValue.html">object.minimumValue</a></a></li>
+<li><a href="#object.maximumvalue"><a href="../../type/StepperWidget/maximumValue.html">object.maximumValue</a></a></li>
+</ul></li>
+<li><a href="#visual-customization">Visual Customization</a><ul>
+<li><a href="#sheet-required">sheet <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#defaultframe-required">defaultFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#nominusframe-required">noMinusFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#noplusframe-required">noPlusFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#minusactiveframe-required">minusActiveFrame <sub><sup>(required)</sup></sub></a></li>
+<li><a href="#plusactiveframe-required">plusActiveFrame <sub><sup>(required)</sup></sub></a></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#default">Default</a></li>
+<li><a href="#custom-image-sheet">Custom Image Sheet</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../../index.html">API</a>  ▸  <a href="../index.html">Libraries</a>  ▸  <a href="index.html">widget</a>  ▸  <a href="newStepper.html">newStepper</a>
+</div>
+<div class="section level1" id="widget.newstepper">
+<h1><a href="#TOC">widget.newStepper()</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left"><a href="../../type/Function.html">Function</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">widget.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Return value</strong></td>
+<td align="left"><a href="../../type/StepperWidget/index.html">StepperWidget</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Release (2013.2076)</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">widget, stepper, increment, decrement, control</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>See also</strong></td>
+<td align="left"><a href="../../type/StepperWidget/index.html">StepperWidget</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>Creates a <a href="../../type/StepperWidget/index.html">Stepper</a> object. The stepper consists of a minus and plus button which can be tapped or held down to decrement/increment a value, for example, the music or sound volume setting in a game.</p>
+</div>
+<div class="section level2" id="gotchas">
+<h2><a href="#TOC">Gotchas</a></h2>
+<p>To conserve texture memory, a <a href="../../type/StepperWidget/index.html">Stepper</a> can only be created from an <a href="../graphics/newImageSheet.html">image sheet</a>.</p>
+<p><a href="../../type/StepperWidget/index.html">Steppers</a> do not support <a href="../../type/DisplayObject/scale.html">scaling</a> nor changing the width/height via <a href="../../type/DisplayObject/width.html">.width</a> or <a href="../../type/DisplayObject/height.html">.height</a>.</p>
+</div>
+<div class="section level2" id="syntax">
+<h2><a href="#TOC">Syntax</a></h2>
+<pre><code>widget.newStepper( options )</code></pre>
+<p>This function takes a single argument, <code>options</code>, which is a table that accepts the following parameters:</p>
+<div class="section level5" id="id-optional">
+<h5><a href="#TOC">id <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/String.html">String</a>.</em> An optional identification to assign to the stepper. Default is <code>widget_stepper</code>.</p>
+</div>
+<div class="section level5" id="left-top-optional">
+<h5><a href="#TOC">left / top <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The left and top position where the stepper will be created. Default values are <code>0,0</code>.</p>
+</div>
+<div class="section level5" id="width-height-optional">
+<h5><a href="#TOC">width / height <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Numbers</a>.</em> The width and height of each frame from the <a href="../graphics/newImageSheet.html">image sheet</a>. Set these only if you are using a custom image sheet for the stepper. If you are using the default theme, these values are set automatically.</p>
+</div>
+<div class="section level5" id="initialvalue-optional">
+<h5><a href="#TOC">initialValue <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The initial value at which the stepper begins. Default is <code>0</code>.</p>
+</div>
+<div class="section level5" id="minimumvalue-optional">
+<h5><a href="#TOC">minimumValue <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The minimum value that the stepper can reach. Default is <code>0</code>.</p>
+</div>
+<div class="section level5" id="maximumvalue-optional">
+<h5><a href="#TOC">maximumValue <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The maximum value that the stepper can reach. Default is no limit.</p>
+</div>
+<div class="section level5" id="timerincrementspeed-optional">
+<h5><a href="#TOC">timerIncrementSpeed <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The initial speed at which each stepper increment occurs, in milliseconds. Default is <code>1000</code>. The number of increments at which the speed change occurs can be controlled via <code>changeSpeedAtIncrement</code>.</p>
+</div>
+<div class="section level5" id="changespeedatincrement-optional">
+<h5><a href="#TOC">changeSpeedAtIncrement <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The number of increments at which the increment speed changes. Default is <code>5</code>. The increment speed can be controlled via <code>timerIncrementSpeed</code>.</p>
+</div>
+<div class="section level5" id="onpress-optional">
+<h5><a href="#TOC">onPress <sub><sup>(optional)</sup></sub></a></h5>
+<p><em><a href="../../type/Listener.html">Listener</a>.</em> An optional function to be called as soon as a stepper segment is pressed and held. This callback function returns the following <code>event.phase</code> events: <code>increment</code>, <code>decrement</code>, <code>minLimit</code>, and <code>maxLimit</code>.</p>
+</div>
+</div>
+<div class="section level2" id="properties">
+<h2><a href="#TOC">Properties</a></h2>
+<div class="section level4" id="object.value">
+<h4><a href="#TOC"><a href="../../type/StepperWidget/value.html">object.value</a></a></h4>
+</div>
+<div class="section level4" id="object.minimumvalue">
+<h4><a href="#TOC"><a href="../../type/StepperWidget/minimumValue.html">object.minimumValue</a></a></h4>
+</div>
+<div class="section level4" id="object.maximumvalue">
+<h4><a href="#TOC"><a href="../../type/StepperWidget/maximumValue.html">object.maximumValue</a></a></h4>
+</div>
+</div>
+<div class="section level2" id="visual-customization">
+<h2><a href="#TOC">Visual Customization</a></h2>
+<p>The stepper widget can be visually customized using 5 frames from an <a href="../graphics/newImageSheet.html">image sheet</a>.</p>
+<div class="figure">
+<img src="../../../images/simulator/widget-stepper.png" /><p class="caption"></p>
+</div>
+<div class="section level5" id="sheet-required">
+<h5><a href="#TOC">sheet <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/ImageSheet/index.html">ImageSheet</a>.</em> The <a href="../graphics/newImageSheet.html">image sheet</a> object for the stepper.</p>
+</div>
+<div class="section level5" id="defaultframe-required">
+<h5><a href="#TOC">defaultFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The default frame used when both the minus and plus sides are active.</p>
+</div>
+<div class="section level5" id="nominusframe-required">
+<h5><a href="#TOC">noMinusFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The frame used when the stepper reaches its minimum value, indicating no apparent result from a tap on the minus side.</p>
+</div>
+<div class="section level5" id="noplusframe-required">
+<h5><a href="#TOC">noPlusFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The frame used when the stepper reaches its maximum value, indicating no apparent result from a tap on the plus side.</p>
+</div>
+<div class="section level5" id="minusactiveframe-required">
+<h5><a href="#TOC">minusActiveFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The frame used to indicate that a tap/hold occurred on the minus side.</p>
+</div>
+<div class="section level5" id="plusactiveframe-required">
+<h5><a href="#TOC">plusActiveFrame <sub><sup>(required)</sup></sub></a></h5>
+<p><em><a href="../../type/Number.html">Number</a>.</em> The frame used to indicate that a tap/hold occurred on the plus side.</p>
+</div>
+</div>
+<div class="section level2" id="examples">
+<h2><a href="#TOC">Examples</a></h2>
+<div class="section level5" id="default">
+<h5><a href="#TOC">Default</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">currentNumber</span> <span class="ot">=</span> <span class="dv">0</span>
+
+<span class="co">-- Handle stepper events</span>
+<span class="kw">local</span> <span class="kw">function</span> onStepperPress<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;increment&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">currentNumber</span> <span class="ot">=</span> <span class="kw">currentNumber</span> <span class="ot">+</span> <span class="dv">1</span>
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="st">&quot;decrement&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">currentNumber</span> <span class="ot">=</span> <span class="kw">currentNumber</span> <span class="ot">-</span> <span class="dv">1</span>
+    <span class="kw">end</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">currentNumber</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Create a default stepper</span>
+<span class="kw">local</span> <span class="kw">newStepper</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newStepper</span>
+<span class="ot">{</span>
+    <span class="kw">left</span> <span class="ot">=</span> <span class="dv">150</span>,
+    <span class="kw">top</span> <span class="ot">=</span> <span class="dv">200</span>,
+    <span class="kw">minimumValue</span> <span class="ot">=</span> <span class="dv">0</span>,
+    <span class="kw">maximumValue</span> <span class="ot">=</span> <span class="dv">50</span>,
+    <span class="kw">onPress</span> <span class="ot">=</span> <span class="kw">onStepperPress</span>
+<span class="ot">}</span></code></pre>
+</div>
+<div class="section level5" id="custom-image-sheet">
+<h5><a href="#TOC">Custom Image Sheet</a></h5>
+<pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">local</span> <span class="kw">widget</span> <span class="ot">=</span> <span class="fu">require</span><span class="ot">(</span> <span class="st">&quot;widget&quot;</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">currentNumber</span> <span class="ot">=</span> <span class="dv">0</span>
+
+<span class="co">-- Handle stepper events</span>
+<span class="kw">local</span> <span class="kw">function</span> onStepperPress<span class="ot">(</span> <span class="kw">event</span> <span class="ot">)</span>
+
+    <span class="kw">if</span> <span class="ot">(</span> <span class="st">&quot;increment&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">currentNumber</span> <span class="ot">=</span> <span class="kw">currentNumber</span> <span class="ot">+</span> <span class="dv">1</span>
+    <span class="kw">elseif</span> <span class="ot">(</span> <span class="st">&quot;decrement&quot;</span> <span class="ot">==</span> <span class="kw">event</span><span class="ot">.</span><span class="kw">phase</span> <span class="ot">)</span> <span class="kw">then</span>
+        <span class="kw">currentNumber</span> <span class="ot">=</span> <span class="kw">currentNumber</span> <span class="ot">-</span> <span class="dv">1</span>
+    <span class="kw">end</span>
+    <span class="fu">print</span><span class="ot">(</span> <span class="kw">currentNumber</span> <span class="ot">)</span>
+<span class="kw">end</span>
+
+<span class="co">-- Image sheet options and declaration</span>
+<span class="kw">local</span> <span class="kw">options</span> <span class="ot">=</span> <span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">196</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">numFrames</span> <span class="ot">=</span> <span class="dv">5</span>,
+    <span class="kw">sheetContentWidth</span> <span class="ot">=</span> <span class="dv">980</span>,
+    <span class="kw">sheetContentHeight</span> <span class="ot">=</span> <span class="dv">100</span>
+<span class="ot">}</span>
+<span class="kw">local</span> <span class="kw">stepperSheet</span> <span class="ot">=</span> <span class="kw">graphics</span><span class="ot">.</span>newImageSheet<span class="ot">(</span> <span class="st">&quot;stepperSheet.png&quot;</span>, <span class="kw">options</span> <span class="ot">)</span>
+
+<span class="kw">local</span> <span class="kw">newStepper</span> <span class="ot">=</span> <span class="kw">widget</span><span class="ot">.</span><span class="kw">newStepper</span>
+<span class="ot">{</span>
+    <span class="kw">width</span> <span class="ot">=</span> <span class="dv">196</span>,
+    <span class="kw">height</span> <span class="ot">=</span> <span class="dv">100</span>,
+    <span class="kw">sheet</span> <span class="ot">=</span> <span class="kw">stepperSheet</span>,
+    <span class="kw">defaultFrame</span> <span class="ot">=</span> <span class="dv">1</span>,
+    <span class="kw">noMinusFrame</span> <span class="ot">=</span> <span class="dv">2</span>,
+    <span class="kw">noPlusFrame</span> <span class="ot">=</span> <span class="dv">3</span>,
+    <span class="kw">minusActiveFrame</span> <span class="ot">=</span> <span class="dv">4</span>,
+    <span class="kw">plusActiveFrame</span> <span class="ot">=</span> <span class="dv">5</span>,
+    <span class="kw">onPress</span> <span class="ot">=</span> <span class="kw">onStepperPress</span>
+<span class="ot">}</span></code></pre>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 26-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=api.library.widget.newStepper&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=api.library.widget.newStepper&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=api.library.widget.newStepper&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</body>
+</html>

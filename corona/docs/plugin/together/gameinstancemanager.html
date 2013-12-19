@@ -1,0 +1,2092 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Corona Docs: Plugins > together > gameinstancemanager</title>
+  <meta name="revised" content="14-Nov-2013" />
+  <meta name="description" content="Whether you're new to Corona or want to take your app to the next level, we've got a wealth of resources for you including extensive documentation, API reference, sample code, and videos.  Plugins > together > gameinstancemanager" />
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+<script src="//www.coronalabs.com/wp-content/themes/corona-labs/js/docs.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="title">
+	<span class="titleimg" onclick="window.location='http://docs.coronalabs.com/'"></span>
+	<div id="nav">
+		<ul>
+<li><a href="../../api/index.html">SDK APIs</a></li>
+<li><a href="../../native/index.html">Enterprise APIs</a></li>
+<li><a href="../index.html">Plugins</a></li>
+<li><a href="../../guide/index.html">Guides</a></li>
+<li><a href="http://www.coronalabs.com/resources/tutorials/">Tutorials</a></li>
+</ul>
+
+
+		<div id="resources-link"><a href="http://www.coronalabs.com/resources/">Corona Resources</a> &#9657;</div>
+	</div>
+</div>
+
+<div class="SearchBar">
+  <form action="http://www.google.com/cse" id="cse-search-box">
+  <input type="hidden" name="cx" value="009283852522218786394:g40gqt2m6rq" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="text" name="q" id="q" autocomplete="off" size="40" style="width:150px;float:left" />
+  <input type="submit" name="sa" value="Search" style="float:right; font-size: 13px;" />
+  </form>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#together.gameinstancemanager">together.GameInstanceManager</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#members">Members</a><ul>
+<li><a href="#table-gameinstances"><a href="../../api/type/Table.html">table</a> GameInstances</a></li>
+</ul></li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#add"><a href="#more_add">Add()</a></a></li>
+<li><a href="#findbygameinstanceid"><a href="#more_findbygameinstanceid">FindByGameInstanceID()</a></a></li>
+<li><a href="#getcount"><a href="#more_getcount">GetCount()</a></a></li>
+<li><a href="#get"><a href="#more_get">Get()</a></a></li>
+<li><a href="#indexof"><a href="#more_indexof">IndexOf()</a></a></li>
+<li><a href="#indexofbygameinstanceid"><a href="#more_indexofbygameinstanceid">IndexOfByGameInstanceID()</a></a></li>
+<li><a href="#remove"><a href="#more_remove">Remove()</a></a></li>
+<li><a href="#create"><a href="#more_create">Create()</a></a></li>
+<li><a href="#createrematch"><a href="#more_createrematch">CreateRematch()</a></a></li>
+<li><a href="#delete"><a href="#more_delete">Delete()</a></a></li>
+<li><a href="#getall"><a href="#more_getall">GetAll()</a></a></li>
+<li><a href="#getallinduel"><a href="#more_getallinduel">GetAllInDuel()</a></a></li>
+<li><a href="#join"><a href="#more_join">Join()</a></a></li>
+<li><a href="#joinrandom"><a href="#more_joinrandom">JoinRandom()</a></a></li>
+<li><a href="#add-1">Add()</a><ul>
+<li><a href="#returns-void">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section"></i></a><ul>
+<li><a href="#findbygameinstanceid-1">FindByGameInstanceID()</a><ul>
+<li><a href="#returns-togethergameinstance">Returns <a href="togethergameinstance.html">TogetherGameInstance</a></a></li>
+<li><a href="#syntax-1">Syntax</a></li>
+<li><a href="#parameters-1">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-1"></i></a><ul>
+<li><a href="#getcount-1">GetCount()</a><ul>
+<li><a href="#returns-number">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-2">Syntax</a></li>
+</ul></li>
+<li><a href="#get-1">Get()</a><ul>
+<li><a href="#returns-togethergameinstance-1">Returns <a href="togethergameinstance.html">TogetherGameInstance</a></a></li>
+<li><a href="#syntax-3">Syntax</a></li>
+<li><a href="#parameters-2">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-2"></i></a><ul>
+<li><a href="#indexof-1">IndexOf()</a><ul>
+<li><a href="#returns-number-1">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-4">Syntax</a></li>
+<li><a href="#parameters-3">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-3"></i></a><ul>
+<li><a href="#indexofbygameinstanceid-1">IndexOfByGameInstanceID()</a><ul>
+<li><a href="#returns-number-2">Returns <a href="../../api/type/Number.html">number</a></a></li>
+<li><a href="#syntax-5">Syntax</a></li>
+<li><a href="#parameters-4">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-4"></i></a><ul>
+<li><a href="#remove-1">Remove()</a><ul>
+<li><a href="#returns-void-1">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-6">Syntax</a></li>
+<li><a href="#parameters-5">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-5"></i></a><ul>
+<li><a href="#create-1">Create()</a><ul>
+<li><a href="#returns-void-2">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-7">Syntax</a></li>
+<li><a href="#parameters-6">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-6"></i></a><ul>
+<li><a href="#createrematch-1">CreateRematch()</a><ul>
+<li><a href="#returns-void-3">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-8">Syntax</a></li>
+<li><a href="#parameters-7">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-7"></i></a><ul>
+<li><a href="#delete-1">Delete()</a><ul>
+<li><a href="#returns-void-4">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-9">Syntax</a></li>
+<li><a href="#parameters-8">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-8"></i></a><ul>
+<li><a href="#getall-1">GetAll()</a><ul>
+<li><a href="#returns-void-5">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-10">Syntax</a></li>
+<li><a href="#parameters-9">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-9"></i></a><ul>
+<li><a href="#getallinduel-1">GetAllInDuel()</a><ul>
+<li><a href="#returns-void-6">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-11">Syntax</a></li>
+<li><a href="#parameters-10">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-10"></i></a><ul>
+<li><a href="#join-1">Join()</a><ul>
+<li><a href="#returns-void-7">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-12">Syntax</a></li>
+<li><a href="#parameters-11">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-11"></i></a><ul>
+<li><a href="#joinrandom-1">JoinRandom()</a><ul>
+<li><a href="#returns-void-8">Returns <a href="void.html">void</a></a></li>
+<li><a href="#syntax-13">Syntax</a></li>
+<li><a href="#parameters-12">Parameters</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#section-12"></i></a></li>
+</ul></li>
+</ul>
+</div>
+<div id="breadcrumb">
+<a href="http://docs.coronalabs.com">Ξ</a>  ▸  <a href="../index.html">Plugins</a>  ▸  <a href="index.html">together</a>  ▸  <a href="gameinstancemanager.html">gameinstancemanager</a>
+</div>
+<div class="section level1" id="together.gameinstancemanager">
+<h1><a href="#TOC">together.GameInstanceManager</a></h1>
+<blockquote>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Type</strong></td>
+<td align="left">[class][api.type.class]</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Library</strong></td>
+<td align="left"><a href="index.html">together.*</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Revision</strong></td>
+<td align="left"><a href="http://coronalabs.com/links/docs/current-corona-sdk">Current Public Version</a></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Keywords</strong></td>
+<td align="left">GameInstanceManager</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Sample code</strong></td>
+<td align="left"><a href="https://github.com/TogetherGames/Public-Corona-Lua">github samples</a></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<div class="section level2" id="overview">
+<h2><a href="#TOC">Overview</a></h2>
+<p>The GameInstanceManager is used for fetching and finding matches that exist for the current game.</p>
+</div>
+<div class="section level2" id="members">
+<h2><a href="#TOC">Members</a></h2>
+<div class="section level4" id="table-gameinstances">
+<h4><a href="#TOC"><a href="../../api/type/Table.html">table</a> GameInstances</a></h4>
+<p>Stores all the GameInstances contained in the Manager.</p>
+<hr />
+</div>
+</div>
+<div class="section level2" id="methods">
+<h2><a href="#TOC">Methods</a></h2>
+<div class="section level5" id="add">
+<h5><a href="#TOC"><a href="#more_add">Add()</a></a></h5>
+</div>
+<div class="section level5" id="findbygameinstanceid">
+<h5><a href="#TOC"><a href="#more_findbygameinstanceid">FindByGameInstanceID()</a></a></h5>
+</div>
+<div class="section level5" id="getcount">
+<h5><a href="#TOC"><a href="#more_getcount">GetCount()</a></a></h5>
+</div>
+<div class="section level5" id="get">
+<h5><a href="#TOC"><a href="#more_get">Get()</a></a></h5>
+</div>
+<div class="section level5" id="indexof">
+<h5><a href="#TOC"><a href="#more_indexof">IndexOf()</a></a></h5>
+</div>
+<div class="section level5" id="indexofbygameinstanceid">
+<h5><a href="#TOC"><a href="#more_indexofbygameinstanceid">IndexOfByGameInstanceID()</a></a></h5>
+</div>
+<div class="section level5" id="remove">
+<h5><a href="#TOC"><a href="#more_remove">Remove()</a></a></h5>
+</div>
+<div class="section level5" id="create">
+<h5><a href="#TOC"><a href="#more_create">Create()</a></a></h5>
+</div>
+<div class="section level5" id="createrematch">
+<h5><a href="#TOC"><a href="#more_createrematch">CreateRematch()</a></a></h5>
+</div>
+<div class="section level5" id="delete">
+<h5><a href="#TOC"><a href="#more_delete">Delete()</a></a></h5>
+</div>
+<div class="section level5" id="getall">
+<h5><a href="#TOC"><a href="#more_getall">GetAll()</a></a></h5>
+</div>
+<div class="section level5" id="getallinduel">
+<h5><a href="#TOC"><a href="#more_getallinduel">GetAllInDuel()</a></a></h5>
+</div>
+<div class="section level5" id="join">
+<h5><a href="#TOC"><a href="#more_join">Join()</a></a></h5>
+</div>
+<div class="section level5" id="joinrandom">
+<h5><a href="#TOC"><a href="#more_joinrandom">JoinRandom()</a></a></h5>
+<hr />
+<div id="more_add">
+</div>
+
+</div>
+<div class="section level3" id="add-1">
+<h3><a href="#TOC">Add()</a></h3>
+<p>Adds a GameInstance to the manager internally without persistence.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:Add( gameInstance )</code></pre>
+</div>
+<div class="section level4" id="parameters">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togethergameinstance.html">TogetherGameInstance</a> gameInstance</b></p>
+<p><i>Instance of a GameInstance to add internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_findbygameinstanceid">
+</div>
+
+<div class="section level3" id="findbygameinstanceid-1">
+<h3><a href="#TOC">FindByGameInstanceID()</a></h3>
+<p>Finds the GameInstance with the specified GameInstanceID if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-togethergameinstance">
+<h4><a href="#TOC">Returns <a href="togethergameinstance.html">TogetherGameInstance</a></a></h4>
+</div>
+<div class="section level4" id="syntax-1">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:FindByGameInstanceID( gameInstanceID )</code></pre>
+</div>
+<div class="section level4" id="parameters-1">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceID</b></p>
+<p><i>The ID of the GameInstance to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-1">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getcount">
+</div>
+
+<div class="section level3" id="getcount-1">
+<h3><a href="#TOC">GetCount()</a></h3>
+<p>Gets the number of GameInstances currently managed internally.</p>
+<div class="section level4" id="returns-number">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-2">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:GetCount(  )</code></pre>
+<hr />
+<div id="more_get">
+</div>
+
+</div>
+</div>
+<div class="section level3" id="get-1">
+<h3><a href="#TOC">Get()</a></h3>
+<p>Gets the GameInstance at the specified index if it exists, otherwise return nil.</p>
+<div class="section level4" id="returns-togethergameinstance-1">
+<h4><a href="#TOC">Returns <a href="togethergameinstance.html">TogetherGameInstance</a></a></h4>
+</div>
+<div class="section level4" id="syntax-3">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:Get( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-2">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the GameInstance to find</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-2">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexof">
+</div>
+
+<div class="section level3" id="indexof-1">
+<h3><a href="#TOC">IndexOf()</a></h3>
+<p>Returns the index of the specified GameInstance if it exists, otherwise returns nil.</p>
+<div class="section level4" id="returns-number-1">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-4">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:IndexOf( gameInstance )</code></pre>
+</div>
+<div class="section level4" id="parameters-3">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="togethergameinstance.html">TogetherGameInstance</a> gameInstance</b></p>
+<p><i>Instance of the GameInstance to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-3">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_indexofbygameinstanceid">
+</div>
+
+<div class="section level3" id="indexofbygameinstanceid-1">
+<h3><a href="#TOC">IndexOfByGameInstanceID()</a></h3>
+<p>Returns the index of the GameInstance with the specified GameInstanceID if it exists, otherwise returns -1.</p>
+<div class="section level4" id="returns-number-2">
+<h4><a href="#TOC">Returns <a href="../../api/type/Number.html">number</a></a></h4>
+</div>
+<div class="section level4" id="syntax-5">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:IndexOfByGameInstanceID( gameInstanceID )</code></pre>
+</div>
+<div class="section level4" id="parameters-4">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceID</b></p>
+<p><i>The ID of the GameInstance to find the index of</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-4">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_remove">
+</div>
+
+<div class="section level3" id="remove-1">
+<h3><a href="#TOC">Remove()</a></h3>
+<p>Removes a GameInstance from the internally managed list. This does not delete the GameInstance from the Game persistently.</p>
+<blockquote>
+<p><b>Note</b> This method is deprecated</p>
+</blockquote>
+<div class="section level4" id="returns-void-1">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-6">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:Remove( index )</code></pre>
+</div>
+<div class="section level4" id="parameters-5">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> index</b></p>
+<p><i>The index of the GameInstance to be removed internally</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-5">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_create">
+</div>
+
+<div class="section level3" id="create-1">
+<h3><a href="#TOC">Create()</a></h3>
+<p>Creates a new GameInstance. Upon success, this will automatically update the internal list.</p>
+<div class="section level4" id="returns-void-2">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-7">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:Create( gameInstanceType, gameInstanceSubType, roomID, maxUsers, passTurn, gameInstanceProperties, gameInstanceUserProperties, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-6">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> gameInstanceType</b></p>
+<p><i>The type of GameInstance to create. Potentially, a Game could have several types of GameInstance types within it. Type is limited to 16 characters.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameInstanceSubType</b></p>
+<p><i>The subtype of the GameInstance that will be created. Potentially, a Game could have several sub types within it. SubType is limited to 16 characters.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> roomID</b></p>
+<p><i>The ID of the room the rematch GameInstance is created in. Pass 0 to bypass room creation.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> maxUsers</b></p>
+<p><i>The max number of users the GameInstance supports. Pass in 2 for a two player game.</p>
+<p></i> <b><a href="../../api/type/Boolean.html">boolean</a> passTurn</b></p>
+<p><i>A boolean indicating whether the turn should be passed immediately onto the next User. When true, the TurnUserID will actually be set to nil. When the next User joins the GameInstance, the TurnUserID will be set to them.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> gameInstanceProperties</b></p>
+<p><i>The properties to assign to the GameInstance. Pass nil to assign no properties to the GameInstance.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> gameInstanceUserProperties</b></p>
+<p><i>The properties to assign to your GameInstanceUser. Pass nil to assign no properties to the GameInstanceUser.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-6">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_createrematch">
+</div>
+
+<div class="section level3" id="createrematch-1">
+<h3><a href="#TOC">CreateRematch()</a></h3>
+<p>Creates a rematch of a GameInstance. Upon success, this will automatically update the internal list. If the GameInstance is not already finished, it will be finished and a leaderboard will be generated.</p>
+<div class="section level4" id="returns-void-3">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-8">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:CreateRematch( originalGameInstanceID, gameInstanceType, gameInstanceSubType, roomID, maxUsers, winningUserID, turnUserID, includeLeftGameUsers, rematchMessage, originalGameProps, origianlGameWinningUserProps, rematchGameProps, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-7">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> originalGameInstanceID</b></p>
+<p><i>The ID of the original GameInstance we're creating a rematch from.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameInstanceType</b></p>
+<p><i>The type of GameInstance to create. Potentially, a Game could have several types of GameInstance types within it. Type is limited to 16 characters.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameInstanceSubType</b></p>
+<p><i>The subtype of the GameInstance that will be created. Potentially, a Game could have several subtypes within it. SubType is limited to 16 characters.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> roomID</b></p>
+<p><i>The ID of the room the rematch GameInstance is created in. Pass in 0 for no room.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> maxUsers</b></p>
+<p><i>The max number of users the GameInstance supports. Pass in 2 for a two player game.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> winningUserID</b></p>
+<p><i>The ID of the User that has won the GameInstance.</p>
+<p></i> <b><a href="../../api/type/Number.html">number</a> turnUserID</b></p>
+<p><i>The ID of the User whose initial turn it is.</p>
+<p></i> <b><a href="../../api/type/Boolean.html">boolean</a> includeLeftGameUsers</b></p>
+<p><i>A boolean dictating whether users that have left the original game should be included in the rematched GameInstance.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> rematchMessage</b></p>
+<p><i>The notification message to send to all other users that are a member of the rematched GameInstance. Pass &quot;&quot; to have no notification message sent.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> originalGameProps</b></p>
+<p><i>The final properties of the original GameInstance.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> origianlGameWinningUserProps</b></p>
+<p><i>The properties of the winning User of the original GameInstance.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> rematchGameProps</b></p>
+<p><i>The properties of the rematch GameInstance. Pass in nil to assign no properties to the rematched GameInstance.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-7">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_delete">
+</div>
+
+<div class="section level3" id="delete-1">
+<h3><a href="#TOC">Delete()</a></h3>
+<p>Deletes a GameInstance. Upon success, this will automatically update the internal list.</p>
+<div class="section level4" id="returns-void-4">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-9">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:Delete( gameInstanceID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-8">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceID</b></p>
+<p><i>The ID of the GameInstance to delete.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-8">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getall">
+</div>
+
+<div class="section level3" id="getall-1">
+<h3><a href="#TOC">GetAll()</a></h3>
+<p>Gets all GameInstances. Upon success, this will automatically update the internal list.</p>
+<div class="section level4" id="returns-void-5">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-10">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:GetAll( userID, stateMask, maxCount, getGameInstanceProperties, friendsOnly, gameInstanceType, gameInstanceSubtype, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-9">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> userID</b></p>
+<p><i>The ID of the User who must be a member of a GameInstance retrieved. Pass 0 to fetch all games regardless of membership within them.</p>
+<p></i> <b><a href="../../api/type/Table.html">table</a> stateMask</b></p>
+<i>A table containing the GameInstance States to retrieve. The following stateMask table members are examined:
+<table>
+<tr><td>
+<small>waitingForPlayers
+</td><td>
+<small>Waiting for players to join the game.
+</td></tr>
+<tr><td>
+<small>inProgress
+</td><td>
+<small>Players are currently playing the game.
+</td></tr>
+<tr><td>
+<small>finished
+</td><td>
+<small>Game has been finished and a leaderboard was generated.
+</td></tr>
+<tr><td>
+<small>possibleRematch
+</td><td>
+<small>A rematched Game waiting for enough players to join.
+</td></tr>
+<tr><td>
+<small>forfeit
+</td><td>
+<small>Game was forfeited by a User.
+</td></tr>
+</table>
+Examples:
+<pre>
+-- To get all GameInstances that are playable.
+local stateMasks = { waitingForPlayers=true, inProgress=true };
+-- To get all GameInstances regardless of State.
+local stateMasks = { waitingForPlayers=true, inProgress=true, finished=true, possibleRematch=true, forfeit=true };
+</pre>
+
+<p></i> <b><a href="../../api/type/Number.html">number</a> maxCount</b></p>
+<p><i>The maximum number of GameInstance to retrieve.</p>
+<p></i> <b><a href="../../api/type/Boolean.html">boolean</a> getGameInstanceProperties</b></p>
+<p><i>Set TRUE to retrieve the property collections of each game instance, FALSE to retrieve the instances without properties.</p>
+<p></i> <b><a href="../../api/type/Boolean.html">boolean</a> friendsOnly</b></p>
+<p><i>Set TRUE to retrieve only gamesin which you and your friends are joined in</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameInstanceType</b></p>
+<p><i>Set to retrieve only games with this type, pass nil to ignore.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameInstanceSubtype</b></p>
+<p><i>Set to retrieve only games with this subtype, pass nil to ignore.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-9">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_getallinduel">
+</div>
+
+<div class="section level3" id="getallinduel-1">
+<h3><a href="#TOC">GetAllInDuel()</a></h3>
+<p>Gets all the GameInstances in a duel. Upon success, this will automatically update the internal list.</p>
+<div class="section level4" id="returns-void-6">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-11">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:GetAllInDuel( gameInstanceDuelID, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-10">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceDuelID</b></p>
+<p><i>The ID of the duel to retrieve all GameInstances for.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-10">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_join">
+</div>
+
+<div class="section level3" id="join-1">
+<h3><a href="#TOC">Join()</a></h3>
+<p>Joins an existing GameInstance. Upon success, this will automatically update the internal list.</p>
+<div class="section level4" id="returns-void-7">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-12">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:Join( gameInstanceID, gameInstanceUserProperties, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-11">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/Number.html">number</a> gameInstanceID</b></p>
+<p><i>The ID of the specific GameInstance to join.</p>
+<p></i> <b><a href="propertycollection.html">PropertyCollection</a> gameInstanceUserProperties</b></p>
+<p><i>The properties to assign the User joining the GameInstance.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-11">
+<h2><a href="#TOC"></i></a></h2>
+<div id="more_joinrandom">
+</div>
+
+<div class="section level3" id="joinrandom-1">
+<h3><a href="#TOC">JoinRandom()</a></h3>
+<p>Joins a random existing GameInstance. Upon success, this will automatically update the internal list.</p>
+<div class="section level4" id="returns-void-8">
+<h4><a href="#TOC">Returns <a href="void.html">void</a></a></h4>
+</div>
+<div class="section level4" id="syntax-13">
+<h4><a href="#TOC">Syntax</a></h4>
+<pre><code>GameInstanceManager:JoinRandom( gameInstanceType, gameInstanceSubType, gameInstanceUserProperties, callbackFunc )</code></pre>
+</div>
+<div class="section level4" id="parameters-12">
+<h4><a href="#TOC">Parameters</a></h4>
+<p><b><a href="../../api/type/String.html">string</a> gameInstanceType</b></p>
+<p><i>The type of GameInstance to join.</p>
+<p></i> <b><a href="../../api/type/String.html">string</a> gameInstanceSubType</b></p>
+<p><i>The sub-type (if any) of GameInstance to join.</p>
+<p></i> <b><a href="togetherpropertycollection.html">TogetherPropertyCollection</a> gameInstanceUserProperties</b></p>
+<p><i>The properties to assign the User joining the GameInstance.</p>
+<p></i> <b><a href="../../api/type/Function.html">function</a> callbackFunc</b></p>
+<p><i>The function to call upon completion.</p>
+</div>
+</div>
+</div>
+<div class="section level2" id="section-12">
+<h2><a href="#TOC"></i></a></h2>
+<div id="footer">
+<p style="font-size: 13px">
+© 2013 Corona Labs Inc. All Rights Reserved. (Last updated: 14-Nov-2013)
+</p>
+
+<br />
+<p>
+<strong>Help us help you! Give us feedback on this page:</strong>
+</p>
+
+<ul>
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9w5/def/field3=plugin.together.gameinstancemanager&field4=Current+Public+Release+%282013%2E2076%29" target="_blank">Love it</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p9m3/def/field103=plugin.together.gameinstancemanager&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Like it, but...</a>
+</li>
+
+<li>
+<a href="https://coronalabs.wufoo.com/forms/z7p8x1/def/field103=plugin.together.gameinstancemanager&field104=Current+Public+Release+%282013%2E2076%29" target="_blank">Hate it</a>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>
