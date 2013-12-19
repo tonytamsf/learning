@@ -1,0 +1,469 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D89BBEFA18634C2F003114F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89BBEF918634C2F003114F4 /* UIKit.framework */; };
+		D89BBEFC18634C2F003114F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89BBEFB18634C2F003114F4 /* Foundation.framework */; };
+		D89BBEFE18634C2F003114F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89BBEFD18634C2F003114F4 /* CoreGraphics.framework */; };
+		D89BBF0418634C2F003114F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D89BBF0218634C2F003114F4 /* InfoPlist.strings */; };
+		D89BBF0618634C2F003114F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D89BBF0518634C2F003114F4 /* main.m */; };
+		D89BBF0A18634C2F003114F4 /* HowToTipAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D89BBF0918634C2F003114F4 /* HowToTipAppDelegate.m */; };
+		D89BBF0C18634C2F003114F4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D89BBF0B18634C2F003114F4 /* Default.png */; };
+		D89BBF0E18634C2F003114F4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D89BBF0D18634C2F003114F4 /* Default@2x.png */; };
+		D89BBF1018634C2F003114F4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D89BBF0F18634C2F003114F4 /* Default-568h@2x.png */; };
+		D89BBF1318634C2F003114F4 /* HowToTipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D89BBF1218634C2F003114F4 /* HowToTipViewController.m */; };
+		D89BBF1618634C2F003114F4 /* HowToTipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D89BBF1418634C2F003114F4 /* HowToTipViewController.xib */; };
+		D89BBF1E18634C2F003114F4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89BBF1D18634C2F003114F4 /* SenTestingKit.framework */; };
+		D89BBF1F18634C2F003114F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89BBEF918634C2F003114F4 /* UIKit.framework */; };
+		D89BBF2018634C2F003114F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89BBEFB18634C2F003114F4 /* Foundation.framework */; };
+		D89BBF2818634C2F003114F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D89BBF2618634C2F003114F4 /* InfoPlist.strings */; };
+		D89BBF2B18634C2F003114F4 /* HowToTipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D89BBF2A18634C2F003114F4 /* HowToTipTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D89BBF2118634C2F003114F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D89BBEEE18634C2F003114F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D89BBEF518634C2F003114F4;
+			remoteInfo = HowToTip;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D89BBEF618634C2F003114F4 /* HowToTip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowToTip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89BBEF918634C2F003114F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D89BBEFB18634C2F003114F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D89BBEFD18634C2F003114F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D89BBF0118634C2F003114F4 /* HowToTip-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HowToTip-Info.plist"; sourceTree = "<group>"; };
+		D89BBF0318634C2F003114F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D89BBF0518634C2F003114F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D89BBF0718634C2F003114F4 /* HowToTip-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HowToTip-Prefix.pch"; sourceTree = "<group>"; };
+		D89BBF0818634C2F003114F4 /* HowToTipAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HowToTipAppDelegate.h; sourceTree = "<group>"; };
+		D89BBF0918634C2F003114F4 /* HowToTipAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HowToTipAppDelegate.m; sourceTree = "<group>"; };
+		D89BBF0B18634C2F003114F4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D89BBF0D18634C2F003114F4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D89BBF0F18634C2F003114F4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D89BBF1118634C2F003114F4 /* HowToTipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HowToTipViewController.h; sourceTree = "<group>"; };
+		D89BBF1218634C2F003114F4 /* HowToTipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HowToTipViewController.m; sourceTree = "<group>"; };
+		D89BBF1518634C2F003114F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HowToTipViewController.xib; sourceTree = "<group>"; };
+		D89BBF1C18634C2F003114F4 /* HowToTipTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowToTipTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D89BBF1D18634C2F003114F4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D89BBF2518634C2F003114F4 /* HowToTipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HowToTipTests-Info.plist"; sourceTree = "<group>"; };
+		D89BBF2718634C2F003114F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D89BBF2918634C2F003114F4 /* HowToTipTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HowToTipTests.h; sourceTree = "<group>"; };
+		D89BBF2A18634C2F003114F4 /* HowToTipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HowToTipTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D89BBEF318634C2F003114F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89BBEFA18634C2F003114F4 /* UIKit.framework in Frameworks */,
+				D89BBEFC18634C2F003114F4 /* Foundation.framework in Frameworks */,
+				D89BBEFE18634C2F003114F4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D89BBF1818634C2F003114F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89BBF1E18634C2F003114F4 /* SenTestingKit.framework in Frameworks */,
+				D89BBF1F18634C2F003114F4 /* UIKit.framework in Frameworks */,
+				D89BBF2018634C2F003114F4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D89BBEED18634C2F003114F4 = {
+			isa = PBXGroup;
+			children = (
+				D89BBEFF18634C2F003114F4 /* HowToTip */,
+				D89BBF2318634C2F003114F4 /* HowToTipTests */,
+				D89BBEF818634C2F003114F4 /* Frameworks */,
+				D89BBEF718634C2F003114F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D89BBEF718634C2F003114F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D89BBEF618634C2F003114F4 /* HowToTip.app */,
+				D89BBF1C18634C2F003114F4 /* HowToTipTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D89BBEF818634C2F003114F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D89BBEF918634C2F003114F4 /* UIKit.framework */,
+				D89BBEFB18634C2F003114F4 /* Foundation.framework */,
+				D89BBEFD18634C2F003114F4 /* CoreGraphics.framework */,
+				D89BBF1D18634C2F003114F4 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D89BBEFF18634C2F003114F4 /* HowToTip */ = {
+			isa = PBXGroup;
+			children = (
+				D89BBF0818634C2F003114F4 /* HowToTipAppDelegate.h */,
+				D89BBF0918634C2F003114F4 /* HowToTipAppDelegate.m */,
+				D89BBF1118634C2F003114F4 /* HowToTipViewController.h */,
+				D89BBF1218634C2F003114F4 /* HowToTipViewController.m */,
+				D89BBF1418634C2F003114F4 /* HowToTipViewController.xib */,
+				D89BBF0018634C2F003114F4 /* Supporting Files */,
+			);
+			path = HowToTip;
+			sourceTree = "<group>";
+		};
+		D89BBF0018634C2F003114F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D89BBF0118634C2F003114F4 /* HowToTip-Info.plist */,
+				D89BBF0218634C2F003114F4 /* InfoPlist.strings */,
+				D89BBF0518634C2F003114F4 /* main.m */,
+				D89BBF0718634C2F003114F4 /* HowToTip-Prefix.pch */,
+				D89BBF0B18634C2F003114F4 /* Default.png */,
+				D89BBF0D18634C2F003114F4 /* Default@2x.png */,
+				D89BBF0F18634C2F003114F4 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D89BBF2318634C2F003114F4 /* HowToTipTests */ = {
+			isa = PBXGroup;
+			children = (
+				D89BBF2918634C2F003114F4 /* HowToTipTests.h */,
+				D89BBF2A18634C2F003114F4 /* HowToTipTests.m */,
+				D89BBF2418634C2F003114F4 /* Supporting Files */,
+			);
+			path = HowToTipTests;
+			sourceTree = "<group>";
+		};
+		D89BBF2418634C2F003114F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D89BBF2518634C2F003114F4 /* HowToTipTests-Info.plist */,
+				D89BBF2618634C2F003114F4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D89BBEF518634C2F003114F4 /* HowToTip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D89BBF2E18634C2F003114F4 /* Build configuration list for PBXNativeTarget "HowToTip" */;
+			buildPhases = (
+				D89BBEF218634C2F003114F4 /* Sources */,
+				D89BBEF318634C2F003114F4 /* Frameworks */,
+				D89BBEF418634C2F003114F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HowToTip;
+			productName = HowToTip;
+			productReference = D89BBEF618634C2F003114F4 /* HowToTip.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D89BBF1B18634C2F003114F4 /* HowToTipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D89BBF3118634C2F003114F4 /* Build configuration list for PBXNativeTarget "HowToTipTests" */;
+			buildPhases = (
+				D89BBF1718634C2F003114F4 /* Sources */,
+				D89BBF1818634C2F003114F4 /* Frameworks */,
+				D89BBF1918634C2F003114F4 /* Resources */,
+				D89BBF1A18634C2F003114F4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D89BBF2218634C2F003114F4 /* PBXTargetDependency */,
+			);
+			name = HowToTipTests;
+			productName = HowToTipTests;
+			productReference = D89BBF1C18634C2F003114F4 /* HowToTipTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D89BBEEE18634C2F003114F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HowToTip;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Tony Tam";
+			};
+			buildConfigurationList = D89BBEF118634C2F003114F4 /* Build configuration list for PBXProject "HowToTip" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D89BBEED18634C2F003114F4;
+			productRefGroup = D89BBEF718634C2F003114F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D89BBEF518634C2F003114F4 /* HowToTip */,
+				D89BBF1B18634C2F003114F4 /* HowToTipTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D89BBEF418634C2F003114F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89BBF0418634C2F003114F4 /* InfoPlist.strings in Resources */,
+				D89BBF0C18634C2F003114F4 /* Default.png in Resources */,
+				D89BBF0E18634C2F003114F4 /* Default@2x.png in Resources */,
+				D89BBF1018634C2F003114F4 /* Default-568h@2x.png in Resources */,
+				D89BBF1618634C2F003114F4 /* HowToTipViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D89BBF1918634C2F003114F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89BBF2818634C2F003114F4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D89BBF1A18634C2F003114F4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D89BBEF218634C2F003114F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89BBF0618634C2F003114F4 /* main.m in Sources */,
+				D89BBF0A18634C2F003114F4 /* HowToTipAppDelegate.m in Sources */,
+				D89BBF1318634C2F003114F4 /* HowToTipViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D89BBF1718634C2F003114F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D89BBF2B18634C2F003114F4 /* HowToTipTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D89BBF2218634C2F003114F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D89BBEF518634C2F003114F4 /* HowToTip */;
+			targetProxy = D89BBF2118634C2F003114F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D89BBF0218634C2F003114F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D89BBF0318634C2F003114F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D89BBF1418634C2F003114F4 /* HowToTipViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D89BBF1518634C2F003114F4 /* en */,
+			);
+			name = HowToTipViewController.xib;
+			sourceTree = "<group>";
+		};
+		D89BBF2618634C2F003114F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D89BBF2718634C2F003114F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D89BBF2C18634C2F003114F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D89BBF2D18634C2F003114F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D89BBF2F18634C2F003114F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HowToTip/HowToTip-Prefix.pch";
+				INFOPLIST_FILE = "HowToTip/HowToTip-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D89BBF3018634C2F003114F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HowToTip/HowToTip-Prefix.pch";
+				INFOPLIST_FILE = "HowToTip/HowToTip-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D89BBF3218634C2F003114F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HowToTip.app/HowToTip";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HowToTip/HowToTip-Prefix.pch";
+				INFOPLIST_FILE = "HowToTipTests/HowToTipTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D89BBF3318634C2F003114F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HowToTip.app/HowToTip";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HowToTip/HowToTip-Prefix.pch";
+				INFOPLIST_FILE = "HowToTipTests/HowToTipTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D89BBEF118634C2F003114F4 /* Build configuration list for PBXProject "HowToTip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D89BBF2C18634C2F003114F4 /* Debug */,
+				D89BBF2D18634C2F003114F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D89BBF2E18634C2F003114F4 /* Build configuration list for PBXNativeTarget "HowToTip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D89BBF2F18634C2F003114F4 /* Debug */,
+				D89BBF3018634C2F003114F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D89BBF3118634C2F003114F4 /* Build configuration list for PBXNativeTarget "HowToTipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D89BBF3218634C2F003114F4 /* Debug */,
+				D89BBF3318634C2F003114F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D89BBEEE18634C2F003114F4 /* Project object */;
+}
