@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D89F17F818639D6500273951 /* tipping_hints.png in Resources */ = {isa = PBXBuildFile; fileRef = D89F17F718639D6500273951 /* tipping_hints.png */; };
 		D8D0232D186398140051EF8A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D0232C186398140051EF8A /* UIKit.framework */; };
 		D8D0232F186398140051EF8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D0232E186398140051EF8A /* Foundation.framework */; };
 		D8D02331186398140051EF8A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D02330186398140051EF8A /* CoreGraphics.framework */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D89F17F718639D6500273951 /* tipping_hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tipping_hints.png; sourceTree = "<group>"; };
 		D8D02329186398140051EF8A /* How To Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "How To Tip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D0232C186398140051EF8A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8D0232E186398140051EF8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +132,7 @@
 		D8D02333186398140051EF8A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D89F17F718639D6500273951 /* tipping_hints.png */,
 				D8D02334186398140051EF8A /* How To Tip-Info.plist */,
 				D8D02335186398140051EF8A /* InfoPlist.strings */,
 				D8D02338186398140051EF8A /* main.m */,
@@ -237,6 +240,7 @@
 				D8D02341186398140051EF8A /* Default@2x.png in Resources */,
 				D8D02343186398140051EF8A /* Default-568h@2x.png in Resources */,
 				D8D02346186398140051EF8A /* MainStoryboard.storyboard in Resources */,
+				D89F17F818639D6500273951 /* tipping_hints.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +458,7 @@
 				D8D02363186398140051EF8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8D02364186398140051EF8A /* Build configuration list for PBXNativeTarget "How To TipTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +467,7 @@
 				D8D02366186398140051EF8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

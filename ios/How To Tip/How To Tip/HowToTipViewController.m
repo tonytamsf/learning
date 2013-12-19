@@ -26,4 +26,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)tipButtonPushed:(id)sender {
+    NSLog(@"Button %ld clicked.", (long int)[sender tag]);
+}
+
+
 @end
