@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface HowToTipViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *textFieldTotalBill;
+@property (weak, nonatomic) IBOutlet UIButton *normalTipButton;
+@property (weak, nonatomic) IBOutlet UIButton *generousTipButton;
+@property (weak, nonatomic) IBOutlet UIButton *cheapTipButton;
+@property (weak, nonatomic) IBOutlet UILabel *tipAmount;
+@property (weak, nonatomic) IBOutlet UILabel *billPlusTips;
 
 @end
